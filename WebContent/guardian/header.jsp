@@ -107,7 +107,7 @@
 							<li><a href="gongji_board.jsp" class="fh5co-sub-ddown">공지사항</a></li>
 							<li><a href="qnaboard.jsp">Q&A 게시판</a></li>
 							<li><a href="maemul_upload.jsp">매물등록</a></li>
-							<li><a href="zzim.jsp">관심목록</a></li>
+							<li><a href="list.jsp">관심목록</a></li>
 							<li><a href="signIn.jsp">회원가입 및 로그인</a></li>
 						</ul>
 					</nav>

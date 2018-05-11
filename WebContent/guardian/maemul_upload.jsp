@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 
@@ -69,15 +70,33 @@
 <!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript">
 
-<!-- 매물등록 관련 bootstrap -->
+$(document).ready(function(){
+	$("#fileInput").on('change', function(){  // 값이 변경되면
+		if(window.FileReader){  // modern browser
+			var filename = $(this)[0].files[0].name;
+		} else {  // old IE
+			var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
+		}
+		// 추출한 파일명 삽입
+		$("#userfile").val(filename);
+	});
+});
+</script>
+
+
+<!-- 회원가입 관련 bootstrap -->
 <link
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
 <script
-	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!-- 매물등록 관련 bootstrap 끝 -->
+<!-- 회원가입 관련 bootstrap 끝 -->
+
+
 
 
 </head>
@@ -107,419 +126,179 @@
 			<!-- end:header-top -->
 
 			<!-- 매물 등록 폼 -->
-			<form class="form-horizontal">
-				<fieldset>
+			<div class="container">
+				<div class="row">
+					<form class="form-horizontal">
+						<fieldset>
 
-					<!-- Form Name -->
-					<legend>Sign Up</legend>
+							<!-- 매물등록 창 -->
+							<legend>매물등록</legend>
 
-					<!-- Text input-->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="firstname">보증금</label>
-						<div class="col-md-4">
-							<input id="firstname" name="firstname" type="text"
-								placeholder="first name" class="form-control input-md">
-							<span class="help-block">Enter First Name</span>
-						</div>
-					</div>
-
-
-					<!-- Multiple Radios -->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="radios">거래형태</label>
-						<div class="col-md-4">
-							<div class="radio">
-								<label for="radios-0"> <input type="radio" name="radios"
-									id="radios-0" value="1" checked="checked"> 전세
-								</label>
-							</div>
-							<div class="radio">
-								<label for="radios-1"> <input type="radio" name="radios"
-									id="radios-1" value="2"> 월세
-								</label>
-							</div>
-							<div class="radio">
-								<label for="radios-2"> <input type="radio" name="radios"
-									id="radios-2" value="3"> 기타
-								</label>
-							</div>
-						</div>
-					</div>
-
-					<!-- Multiple Radios -->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="radios">주거형태</label>
-						<div class="col-md-4">
-							<div class="radio">
-								<label for="radios-0"> <input type="radio" name="radios"
-									id="radios-0" value="1" checked="checked"> 원룸
-								</label>
-							</div>
-							<div class="radio">
-								<label for="radios-1"> <input type="radio" name="radios"
-									id="radios-1" value="2"> 투룸
-								</label>
-							</div>
-							<div class="radio">
-								<label for="radios-2"> <input type="radio" name="radios"
-									id="radios-2" value="3"> 주택
-								</label>
-							</div>
-							<div class="radio">
-								<label for="radios-3"> <input type="radio" name="radios"
-									id="radios-3" value="4"> 오피스텔
-								</label>
-							</div>
-						</div>
-					</div>
-
-
-
-					<!-- Text input-->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="mobno">관리비</label>
-						<div class="col-md-4">
-							<input id="mobno" name="mobno" type="text"
-								placeholder="mobile number" class="form-control input-md">
-							<span class="help-block">Enter Mobile Number</span>
-						</div>
-					</div>
-
-					<!-- Multiple Radios -->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="radios">엘리베이터</label>
-						<div class="col-md-4">
-							<div class="radio">
-								<label for="radios-0"> <input type="radio" name="radios"
-									id="radios-0" value="1" checked="checked"> 있음
-								</label> <label for="radios-1"> <input type="radio"
-									name="radios" id="radios-1" value="2"> 없음
-								</label>
+							<!-- 매물주소 -->
+							<div class="form-group">
+								<tr>
+									<label class="col-md-4 control-label" for="firstname">매물주소</label>
+									<div class="col-md-3">
+										<input id="firstname" name="firstname" type="text"
+											placeholder="기본주소" class="form-control input-md" size=20>
+										<input id="firstname" name="firstname" type="text"
+											placeholder="상세주소" class="form-control input-md" size=20>
+									</div>
+									<input type=button class='btn btn-sm' value='주소검색'>
+								</tr>
 							</div>
 
+
+							<!-- 거래형태 -->
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="radios">거래형태</label>
+								<div class="col-md-4">
+									<div class="radio">
+										<label for="radios-0"> <input type="radio"
+											name="radios0" id="radios-0" value="1" checked="checked">
+											전세
+										</label> <label for="radios-1"> <input type="radio"
+											name="radios0" id="radios-1" value="2"> 월세
+										</label> <label for="radios-2"> <input type="radio"
+											name="radios0" id="radios-2" value="3"> 기타
+										</label>
+									</div>
+								</div>
+							</div>
+
+							<!-- 주거형태 -->
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="radios">주거형태</label>
+								<div class="col-md-4">
+									<div class="radio">
+										<label for="radios-3"> <input type="radio"
+											name="radios1" id="radios-3" value="3" checked="checked">
+											원룸
+										</label> <label for="radios-4"> <input type="radio"
+											name="radios1" id="radios-4" value="4"> 투룸
+										</label> <label for="radios-5"> <input type="radio"
+											name="radios1" id="radios-5" value="5"> 주택
+										</label> <label for="radios-6"> <input type="radio"
+											name="radios1" id="radios-6" value="6"> 오피스텔
+										</label>
+									</div>
+								</div>
+							</div>
+
+
+
+							<!-- 관리비 -->
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="mobno">관리비</label>
+								<div class="col-md-4">
+									<select
+										class="custom-select mdb-select colorful-select dropdown-primary">
+										<option selected>관리비 포함항목</option>
+										<option>전기세</option>
+										<option>수도세</option>
+										<option>가스비</option>
+										<option>인터넷</option>
+										<option>기타</option>
+									</select>
+								</div>
+							</div>
+
+							<!-- 엘리베이터 유무  -->
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="radios">엘리베이터</label>
+								<div class="col-md-4">
+									<div class="radio">
+										<label for="radios-7"> <input type="radio"
+											name="radios2" id="radios-7" value="7" checked="checked">
+											있음
+										</label> <label for="radios-8"> <input type="radio"
+											name="radios2" id="radios-8" value="8"> 없음
+										</label>
+									</div>
+
+								</div>
+							</div>
+
+							<!-- 주차공간  -->
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="radios">주차공간</label>
+								<div class="col-md-4">
+									<div class="radio">
+										<label for="radios-9"> <input type="radio"
+											name="radios3" id="radios-9" value="9" checked="checked">
+											있음
+										</label> <label for="radios-10"> <input type="radio"
+											name="radios3" id="radios-10" value="10"> 없음
+										</label>
+									</div>
+
+								</div>
+							</div>
+
+							<!-- 건물층수  -->
+							<div class="form-group" id="건물층수">
+								<label class="col-md-4 control-label" for="mobno">건물층수</label>
+								<div class="col-md-4">
+									<select class="custom-select">
+										<option selected>건물 층수를 입력하세요</option>
+
+										<option value="1">1층</option>
+										<option value="2">2층</option>
+										<option value="3">3층</option>
+										<option value="4">4층</option>
+										<option value="5">5층</option>
+									</select>
+								</div>
+							</div>
+									
+								<!-- 파일첨부  -->
+							<div class="form-group">
+								<label for="InputSubject1">파일첨부</label>
+								 <input id="fileInput"
+									filestyle="" type="file" data-class-button="btn btn-default"
+									data-class-input="form-control" data-button-text=""
+									data-icon-name="fa fa-upload" class="form-control"
+									tabindex="-1"
+									style="position: absolute; clip: rect(0px, 0px, 0px, 0px);">
+
+								<div class="bootstrap-filestyle input-group">
+
+								<input type="text" id="userfile" class="form-control"
+										name="userfile" disabled="" > 
+										<span class="group-span-filestyle input-group-btn" tabindex="0">
+
+										<label for="fileInput" class="btn btn-default "> 
+										<span class="glyphicon fa fa-upload"></span>
+									</label>
+									</span>
+								</div>
+							</div>
 						</div>
+
+				<div class="form-group">
+					<div style="text-align: center">
+						<button id="login" name="login" class="btn">등록</button>
+						<button id="cencel" name="cencel" class="btn btn-primary">취소</button>
 					</div>
-
-					<!-- Text input-->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="emailid">Email
-							Id</label>
-						<div class="col-md-4">
-							<input id="emailid" name="emailid" type="text"
-								placeholder="email id" class="form-control input-md"> <span
-								class="help-block">Enter Email Id</span>
-						</div>
-					</div>
-
-					<!-- Text input-->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="address1">Address
-							Line 1</label>
-						<div class="col-md-4">
-							<input id="address1" name="address1" type="text"
-								placeholder="address line 1" class="form-control input-md">
-							<span class="help-block">Enter Address Line 1</span>
-						</div>
-					</div>
-
-					<!-- Text input-->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="address2">Address
-							Line 2</label>
-						<div class="col-md-4">
-							<input id="address2" name="address2" type="text"
-								placeholder="address line 2" class="form-control input-md">
-							<span class="help-block">Enter Address Line 2</span>
-						</div>
-					</div>
-
-					<!-- Select Multiple -->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="City">건물층</label>
-						<div class="col-md-4">
-							<select id="City" name="City" class="form-control"
-								multiple="multiple">
-
-								<%
-									for (int i = 0; i <= 100; i++) {
-								%>
-								<option value="<%=i%>"><%=i + "층"%></option>
-								<%
-									}
-								%>
-
-							</select>
-						</div>
-					</div>
-
-					<!-- Select Multiple -->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="state">State</label>
-						<div class="col-md-4">
-							<select id="state" name="state" class="form-control"
-								multiple="multiple">
-								<option value="1">Option one</option>
-								<option value="2">Option two</option>
-							</select>
-						</div>
-					</div>
-
-					<!-- Select Multiple -->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="postbox">Post
-							Box Number</label>
-						<div class="col-md-4">
-							<select id="postbox" name="postbox" class="form-control"
-								multiple="multiple">
-								<option value="1">Option one</option>
-								<option value="2">Option two</option>
-							</select>
-						</div>
-					</div>
-
-					<!-- Select Multiple -->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="country">Country</label>
-						<div class="col-md-4">
-							<select id="country" name="country" class="form-control"
-								multiple="multiple">
-								<option value="1">Afghanistan</option>
-								<option value="2">Albania</option>
-								<option value="3">Algeria</option>
-								<option value="4">Andorra</option>
-								<option value="5">Angola</option>
-								<option value="6">Anguilla</option>
-								<option value="7">Antigua & Barbuda</option>
-								<option value="8">Argentina</option>
-								<option value="9">Armenia</option>
-								<option value="10">Australia</option>
-								<option value="11">Austria</option>
-								<option value="12">Azerbaijan</option>
-								<option value="13">Bahamas</option>
-								<option value="14">Bahrain</option>
-								<option value="15">Bangladesh</option>
-								<option value="16">Barbados</option>
-								<option value="17">Belarus</option>
-								<option value="18">Belgium</option>
-								<option value="19">Belize</option>
-								<option value="20">Benin</option>
-								<option value="21">Bermuda</option>
-								<option value="22">Bhutan</option>
-								<option value="23">Bolivia</option>
-								<option value="24">Bosnia & Herzegovina</option>
-								<option value="25">Botswana</option>
-								<option value="26">Brazil</option>
-								<option value="27">Brunei Darussalam</option>
-								<option value="28">Bulgaria</option>
-								<option value="29">Burkina Faso</option>
-								<option value="30">Myanmar/Burma</option>
-								<option value="31">Burundi</option>
-								<option value="32">Cambodia</option>
-								<option value="33">Cameroon</option>
-								<option value="34">Canada</option>
-								<option value="35">Cape Verde</option>
-								<option value="36">Cayman Islands</option>
-								<option value="37">Central African Republic</option>
-								<option value="38">Chad</option>
-								<option value="39">Chile</option>
-								<option value="40">China</option>
-								<option value="41">Colombia</option>
-								<option value="42">Comoros</option>
-								<option value="43">Congo</option>
-								<option value="44">Costa Rica</option>
-								<option value="45">Croatia</option>
-								<option value="46">Cuba</option>
-								<option value="47">Cyprus</option>
-								<option value="48">Czech Republic</option>
-								<option value="49">Democratic Republic of the Congo</option>
-								<option value="50">Denmark</option>
-								<option value="51">Djibouti</option>
-								<option value="52">Dominican Republic</option>
-								<option value="53">Dominica</option>
-								<option value="54">Ecuador</option>
-								<option value="55">Egypt</option>
-								<option value="56">El Salvador</option>
-								<option value="57">Equatorial Guinea</option>
-								<option value="58">Eritrea</option>
-								<option value="59">Estonia</option>
-								<option value="60">Ethiopia</option>
-								<option value="61">Fiji</option>
-								<option value="62">Finland</option>
-								<option value="63">France</option>
-								<option value="64">French Guiana</option>
-								<option value="65">Gabon</option>
-								<option value="66">Gambia</option>
-								<option value="67">Georgia</option>
-								<option value="68">Germany</option>
-								<option value="69">Ghana</option>
-								<option value="70">Great Britain</option>
-								<option value="71">Greece</option>
-								<option value="72">Grenada</option>
-								<option value="73">Guadeloupe</option>
-								<option value="74">Guatemala</option>
-								<option value="75">Guinea</option>
-								<option value="76">Guinea-Bissau</option>
-								<option value="77">Guyana</option>
-								<option value="78">Haiti</option>
-								<option value="79">Honduras</option>
-								<option value="80">Hungary</option>
-								<option value="81">Iceland</option>
-								<option value="82">India</option>
-								<option value="83">Indonesia</option>
-								<option value="84">Iran</option>
-								<option value="85">Iraq</option>
-								<option value="86">Israel and the Occupied Territories</option>
-								<option value="87">Italy</option>
-								<option value="88">Ivory Coast (Cote d'Ivoire)</option>
-								<option value="89">Jamaica</option>
-								<option value="90">Japan</option>
-								<option value="91">Jordan</option>
-								<option value="92">Kazakhstan</option>
-								<option value="93">Kenya</option>
-								<option value="94">Kosovo</option>
-								<option value="95">Kuwait</option>
-								<option value="96">Kyrgyz Republic (Kyrgyzstan)</option>
-								<option value="97">Laos</option>
-								<option value="98">Latvia</option>
-								<option value="99">Lebanon</option>
-								<option value="100">Lesotho</option>
-								<option value="101">Liberia</option>
-								<option value="102">Libya</option>
-								<option value="103">Liechtenstein</option>
-								<option value="104">Lithuania</option>
-								<option value="105">Luxembourg</option>
-								<option value="106">Republic of Macedonia</option>
-								<option value="107">Madagascar</option>
-								<option value="108">Malawi</option>
-								<option value="109">Malaysia</option>
-								<option value="110">Maldives</option>
-								<option value="111">Mali</option>
-								<option value="112">Malta</option>
-								<option value="113">Martinique</option>
-								<option value="114">Mauritania</option>
-								<option value="115">Mauritius</option>
-								<option value="116">Mayotte</option>
-								<option value="117">Mexico</option>
-								<option value="118">Moldova, Republic of</option>
-								<option value="119">Monaco</option>
-								<option value="120">Mongolia</option>
-								<option value="121">Montenegro</option>
-								<option value="122">Montserrat</option>
-								<option value="123">Morocco</option>
-								<option value="124">Mozambique</option>
-								<option value="125">Namibia</option>
-								<option value="126">Nepal</option>
-								<option value="127">Netherlands</option>
-								<option value="128">New Zealand</option>
-								<option value="129">Nicaragua</option>
-								<option value="130">Niger</option>
-								<option value="131">Nigeria</option>
-								<option value="132">Korea, Democratic Republic of
-									(North Korea)</option>
-								<option value="133">Norway</option>
-								<option value="134">Oman</option>
-								<option value="135">Pacific Islands</option>
-								<option value="136">Pakistan</option>
-								<option value="137">Panama</option>
-								<option value="138">Papua New Guinea</option>
-								<option value="139">Paraguay</option>
-								<option value="140">Peru</option>
-								<option value="141">Philippines</option>
-								<option value="142">Poland</option>
-								<option value="143">Portugal</option>
-								<option value="144">Puerto Rico</option>
-								<option value="145">Qatar</option>
-								<option value="146">Reunion</option>
-								<option value="147">Romania</option>
-								<option value="148">Russian Federation</option>
-								<option value="149">Rwanda</option>
-								<option value="150">Saint Kitts and Nevis</option>
-								<option value="151">Saint Lucia</option>
-								<option value="152">Saint Vincent's & Grenadines</option>
-								<option value="153">Samoa</option>
-								<option value="154">Sao Tome and Principe</option>
-								<option value="155">Saudi Arabia</option>
-								<option value="156">Senegal</option>
-								<option value="157">Serbia</option>
-								<option value="158">Seychelles</option>
-								<option value="159">Sierra Leone</option>
-								<option value="160">Singapore</option>
-								<option value="161">Slovak Republic (Slovakia)</option>
-								<option value="162">Slovenia</option>
-								<option value="163">Solomon Islands</option>
-								<option value="164">Somalia</option>
-								<option value="165">South Africa</option>
-								<option value="166">Korea, Republic of (South Korea)</option>
-								<option value="167">South Sudan</option>
-								<option value="168">Spain</option>
-								<option value="169">Sri Lanka</option>
-								<option value="170">Sudan</option>
-								<option value="171">Suriname</option>
-								<option value="172">Swaziland</option>
-								<option value="173">Sweden</option>
-								<option value="174">Switzerland</option>
-								<option value="175">Syria</option>
-								<option value="176">Tajikistan</option>
-								<option value="177">Tanzania</option>
-								<option value="178">Thailand</option>
-								<option value="179">Timor Leste</option>
-								<option value="180">Togo</option>
-								<option value="181">Trinidad & Tobago</option>
-								<option value="182">Tunisia</option>
-								<option value="183">Turkey</option>
-								<option value="184">Turkmenistan</option>
-								<option value="185">Turks & Caicos Islands</option>
-								<option value="186">Uganda</option>
-								<option value="187">Ukraine</option>
-								<option value="188">United Arab Emirates</option>
-								<option value="189">United States of America (USA)</option>
-								<option value="190">Uruguay</option>
-								<option value="191">Uzbekistan</option>
-								<option value="192">Venezuela</option>
-								<option value="193">Vietnam</option>
-								<option value="194">Virgin Islands (UK)</option>
-								<option value="195">Virgin Islands (US)</option>
-								<option value="196">Yemen</option>
-								<option value="197">Zambia</option>
-								<option value="198">Zimbabwe</option>
-							</select>
-						</div>
-					</div>
-
-					<!-- Button -->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="otp">Generate
-							OTP</label>
-						<div class="col-md-4">
-							<button id="otp" name="otp" class="btn btn-primary">Generate
-								OTP</button>
-						</div>
-					</div>
-
-					<!-- Button -->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="login">등록 확인</label>
-						<div class="col-md-4">
-							<button id="login" name="login" class="btn btn-primary">등록</button>
-							<button id="login" name="login" class="btn btn-primary">취소</button>
-						</div>
-					</div>
-
+				</div>
 				</fieldset>
-			</form>
-			<!-- 매물 등록 폼 끝 -->
-			<!-- END fh5co-contact -->
-
-			<!-- END map -->
-
-
-			<jsp:include page="footer.jsp" />
-
-
+				</form>
+			</div>
 		</div>
-		<!-- END fh5co-page -->
+	<!-- 회원가입 및 중개사 등록 폼 끝 -->
+	<!-- END fh5co-contact -->
+
+	<!-- footer 시작 -->
+
+	<jsp:include page="footer.jsp" />
+
+	<!-- footer 끝-->
+
 
 	</div>
+	<!-- END fh5co-page -->
+
+
 	<!-- END fh5co-wrapper -->
 
 	<!-- jQuery -->

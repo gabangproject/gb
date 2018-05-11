@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -87,121 +88,41 @@
 					style="background-image: url(images/blog-2.jpg);">
 					<div class="desc animate-box">
 						<h2>테마 검색</h2>
-						<span>Lovely Crafted by <a href="http://frehtml5.co/"
-							target="_blank" class="fh5co-site-name">FREEHTML5.co</a></span>
 					</div>
 				</div>
 			</div>
 			<!-- end:header-top -->
+			
 			<div id="fh5co-work-section">
 				<div class="container">
 					<div class="row">
-						<div
-							class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+						<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
 							<h3>테마 상세 검색</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Velit est facilis maiores, perspiciatis accusamus asperiores
-								sint consequuntur debitis.</p>
 						</div>
 					</div>
 				</div>
 				<div class="container">
 					<div class="row">
+		<!-- 테마 네모 박스 부분 -->
+					<c:forEach var="i" begin="1" end="6">
 						<div class="col-md-4">
-							<div class="fh5co-grid animate-box"
-								style="background-image: url(images/work-1.jpg);">
+							<div class="fh5co-grid animate-box" style="background-image: url(images/work-1.jpg);">
 								<a class="image-popup text-center" href="list.jsp">
 									<div class="prod-title">
-										<h3>테마 1</h3>
-										<span>Illustration, Print</span>
+										<h3>테마 ${i }</h3>
+										
 									</div>
 								</a>
 							</div>
 						</div>
-						<div class="col-md-4">
-							<div class="fh5co-grid animate-box"
-								style="background-image: url(images/work-2.jpg);">
-								<a class="image-popup text-center" href="list.jsp">
-									<div class="prod-title">
-										<h3>테마 2</h3>
-										<span>Illustration, Print</span>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="fh5co-grid animate-box"
-								style="background-image: url(images/work-3.jpg);">
-								<a class="image-popup text-center" href="list.jsp">
-									<div class="prod-title">
-										<h3>테마 3</h3>
-										<span>Illustration, Print</span>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="fh5co-grid animate-box"
-								style="background-image: url(images/work-4.jpg);">
-								<a class="image-popup text-center" href="#">
-									<div class="prod-title">
-										<h3>테마 4</h3>
-										<span>Illustration, Print</span>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="fh5co-grid animate-box"
-								style="background-image: url(images/work-5.jpg);">
-								<a class="image-popup text-center" href="#">
-									<div class="prod-title">
-										<h3>테마 5</h3>
-										<span>Illustration, Print</span>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="fh5co-grid animate-box"
-								style="background-image: url(images/work-6.jpg);">
-								<a class="image-popup text-center" href="#">
-									<div class="prod-title">
-										<h3>테마 6</h3>
-										<span>Illustration, Print</span>
-									</div>
-								</a>
-							</div>
-						</div>
+					</c:forEach>
+		<!-- 테마 네모 박스 부분  끝-->
 					</div>
-
 				</div>
 			</div>
 			<!-- END fh5co-work-section -->
 
-			<footer>
-				<div id="footer">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-6 col-md-offset-3 text-center">
-								<p class="fh5co-social-icons">
-									<a href="#"><i class="icon-twitter2"></i></a> <a href="#"><i
-										class="icon-facebook2"></i></a> <a href="#"><i
-										class="icon-instagram"></i></a> <a href="#"><i
-										class="icon-dribbble2"></i></a> <a href="#"><i
-										class="icon-youtube"></i></a>
-								</p>
-								<p>
-									Copyright 2016 Free Html5 <a href="#">Guardian</a>. All Rights
-									Reserved. <br>Made with <i class="icon-heart3"></i> by <a
-										href="http://freehtml5.co/" target="_blank">Freehtml5.co</a> /
-									Demo Images: <a href="https://unsplash.com/" target="_blank">Unsplash</a>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</footer>
+			<jsp:include page="footer.jsp"/>
 		</div>
 		<!-- END fh5co-page -->
 

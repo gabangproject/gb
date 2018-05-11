@@ -79,49 +79,32 @@
 			<jsp:include page="header.jsp" />
 			<!-- header 끝 -->
 
+			<!-- header랑 이어진 하단 부분 시작 -->
 			<div class="fh5co-hero">
 				<div class="fh5co-overlay"></div>
 				<div class="fh5co-cover text-center"
 					data-stellar-background-ratio="0.5"
 					style="background-image: url(images/home-image.jpg);">
 					<div class="desc animate-box">
-						<h2>Guardian Free HTML5 Template</h2>
-						<span>Lovely Crafted by <a href="http://frehtml5.co/"
-							target="_blank" class="fh5co-site-name">FREEHTML5.co</a></span> <span><a
-							class="btn btn-primary" href="#">Get Started</a></span>
+						<h2>가방</h2>
+						<span>방 검색하기</span> 
+						<span><a class="btn btn-primary" href="#">시작</a></span>
 					</div>
 				</div>
 
 			</div>
-			<!-- end:header-top -->
-			<div id="fh5co-work-section">
-				<div class="container">
-					<div class="row">
-						<div
-							class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-							<h3>하단에는 구역별로 나눠져있는 지도가 올 예정</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Velit est facilis maiores, perspiciatis accusamus asperiores
-								sint consequuntur debitis.</p>
-						</div>
-					</div>
-				</div>
-				<!-- svg 지도 올 부분 -->
-				<div class="container">
-					<div class="row">
-						
-						<img src="images/seoulmap.png" width="500" height="500">
-						
-						
+			<!-- header랑 이어진 하단 부분 끝 -->
+
+			<!-- svg 지도 올 부분 -->
+			<div class="container">
+				<div class="row">
+
+					<img src="images/seoulmap.png" width="500" height="500">
+
 				</div>
 			</div>
-			<!-- fh5co-work-section -->
+			<!-- svg 지도 올 부분 -->
 
-			<!-- fh5co-services-section -->
-
-			<!-- fh5co-content-section -->
-
-			<!-- fh5co-blog-section -->
 
 
 			<!--footer 시작  -->

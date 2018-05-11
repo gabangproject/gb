@@ -77,7 +77,7 @@
 				<div class="nav-header">
 					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
 					<h1 id="fh5co-logo">
-						<a href="main.jsp">Guar<span>dian</span></a>
+						<a href="main.jsp">Ga<span>Bang</span></a>
 					</h1>
 					<!-- START #fh5co-menu-wrap -->
 					<nav id="fh5co-menu-wrap" role="navigation">

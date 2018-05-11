@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -87,7 +87,7 @@
 					style="background-image: url(images/home-image.jpg);">
 					<div class="desc animate-box">
 						<h2>가방</h2>
-						<span>방 검색하기</span> 
+						
 						<span><a class="btn btn-primary" href="#">시작</a></span>
 					</div>
 				</div>
@@ -95,15 +95,24 @@
 			</div>
 			<!-- header랑 이어진 하단 부분 끝 -->
 
-			<!-- svg 지도 올 부분 -->
-			<div class="container">
-				<div class="row">
-
-					<img src="images/seoulmap.png" width="500" height="500">
-
+			<div class="container" >
+					<div class="row" style="margin:10px">
+		<!-- 테마 네모 박스 부분 -->
+					<c:forEach var="i" begin="1" end="6">
+						<div class="col-md-4">
+							<div class="fh5co-grid animate-box" style="background-image: url(images/work-1.jpg);">
+								<a class="image-popup text-center" href="list.jsp">
+									<div class="prod-title">
+										<h3>테마 ${i }</h3>
+										
+									</div>
+								</a>
+							</div>
+						</div>
+					</c:forEach>
+		<!-- 테마 네모 박스 부분  끝-->
+					</div>
 				</div>
-			</div>
-			<!-- svg 지도 올 부분 -->
 
 
 

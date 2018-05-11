@@ -249,14 +249,17 @@ section .section-title {
 										<h4 class="card-title">홍길동</h4>
 										<p class="card-text">This is basic card with image on top,
 											title, description and button.</p>
+											
+									<!-- 좋아요 부분 -->
 											<div>
 												<span> 
 													<i id="like4" class="glyphicon glyphicon-thumbs-up" style="margin:10px">10</i> 
 														
-													<i id="dislike4" class="glyphicon glyphicon-thumbs-down">10</i>
-														
+													<i id="dislike4" class="glyphicon glyphicon-thumbs-down">10</i>	
 												</span>
-											</div><br>
+											</div>
+									<!-- 좋아요 부분 -->
+											<br>
 											<a href="list.jsp" class="btn btn-primary btn-sm">
 											<i class="fa fa-plus">해당 매물 보기</i>
 										</a>
@@ -265,7 +268,7 @@ section .section-title {
 							</div>
 						</div>
 				</c:forEach>
-				<!-- ./Team member -->
+				<!-- best 좋아요 업자 출력 -->
 			</div>
 		</div>
 	</section>

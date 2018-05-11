@@ -203,13 +203,13 @@
 										<div class="pull-right">
 											<div class="btn-group" data-toggle="buttons">
 												<label class="btn btn-success btn-filter active" data-target="completed"> 
-													<input type="radio"	name="options" id="option1" autocomplete="off" checked>10씩
+													<input type="radio"	name="options" id="option1" autocomplete="off" checked>10개 보기
 												</label> 
 												<label class="btn btn-warning btn-filter" data-target="pending"> 
-													<input type="radio" name="options" id="option2" autocomplete="off">20개씩
+													<input type="radio" name="options" id="option2" autocomplete="off">20개 보기
 												</label>
 												<label class="btn btn-default btn-filter" data-target="all">
-													<input type="radio" name="options" id="option3" autocomplete="off"> 30개씩
+													<input type="radio" name="options" id="option3" autocomplete="off"> 30개 보기
 												</label>
 											</div>
 										</div>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -228,8 +229,6 @@ body {
 					style="background-image: url(images/blog-2.jpg);">
 					<div class="desc animate-box">
 						<h2>매물 목록 출력 예시</h2>
-						<span>Lovely Crafted by <a href="http://frehtml5.co/"
-							target="_blank" class="fh5co-site-name">FREEHTML5.co</a></span>
 					</div>
 				</div>
 			</div>
@@ -237,9 +236,7 @@ body {
 			<section class="head">
 				<div class="container">
 					<h2 class="text-center">
-						<span>Search Result Panel in Bootstrap 4</span>Created with <i
-							class="fa fa-heart"></i> from<a href="http://grafreez.com">
-							Grafreez.com</a>
+						<span>매물 목록 출력</span>
 					</h2>
 				</div>
 			</section>
@@ -262,10 +259,12 @@ body {
 							
 							
 							<!-- 지도 크기 변환에 따라 해당 지도 안에 포함되어 있는 매물들의 리스트 출력 부분 -->
+						<c:forEach var="i" begin="1" end="5">
 							<div class="media">
 								<div class="fav-box">
 									<i class="fa fa-heart-o" aria-hidden="true"></i>
 								</div>
+								
 								<img class="d-flex align-self-start"
 									src="https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?h=350&auto=compress&cs=tinysrgb"
 									alt="Generic placeholder image">
@@ -280,10 +279,12 @@ body {
 									<div class="address">4062 Walnut Hill Drive Cincinnati</div>
 								</div>
 							</div>
-							
-							
+							</c:forEach>
+					<!-- 지도 크기 변환에 따라 해당 지도 안에 포함되어 있는 매물들의 리스트 출력 부분 -->
+					
 						</div>
-						<!-- 지도 크기 변환에 따라 해당 지도 안에 포함되어 있는 매물들의 리스트 출력 부분 -->
+					
+						
 						
 
 					</div>
@@ -294,29 +295,7 @@ body {
 			</section>
 			<!-- END fh5co-work-section -->
 
-			<footer>
-				<div id="footer">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-6 col-md-offset-3 text-center">
-								<p class="fh5co-social-icons">
-									<a href="#"><i class="icon-twitter2"></i></a> <a href="#"><i
-										class="icon-facebook2"></i></a> <a href="#"><i
-										class="icon-instagram"></i></a> <a href="#"><i
-										class="icon-dribbble2"></i></a> <a href="#"><i
-										class="icon-youtube"></i></a>
-								</p>
-								<p>
-									Copyright 2016 Free Html5 <a href="#">Guardian</a>. All Rights
-									Reserved. <br>Made with <i class="icon-heart3"></i> by <a
-										href="http://freehtml5.co/" target="_blank">Freehtml5.co</a> /
-									Demo Images: <a href="https://unsplash.com/" target="_blank">Unsplash</a>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</footer>
+			<jsp:include page="footer.jsp"/>
 		</div>
 		<!-- END fh5co-page -->
 

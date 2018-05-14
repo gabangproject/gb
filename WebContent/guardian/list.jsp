@@ -2,74 +2,12 @@
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js">
-<!--<![endif]-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Guardian &mdash; 100% Free Fully Responsive HTML5
-	Template by FREEHTML5.co</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
-<meta name="keywords"
-	content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
-<meta name="author" content="FREEHTML5.CO" />
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
 
-<!-- 
-	//////////////////////////////////////////////////////
-
-	FREE HTML5 TEMPLATE 
-	DESIGNED & DEVELOPED by FREEHTML5.CO
-		
-	Website: 		http://freehtml5.co/
-	Email: 			info@freehtml5.co
-	Twitter: 		http://twitter.com/fh5co
-	Facebook: 		https://www.facebook.com/fh5co
-
-	//////////////////////////////////////////////////////
-	 -->
-
-<!-- Facebook and Twitter integration -->
-<meta property="og:title" content="" />
-<meta property="og:image" content="" />
-<meta property="og:url" content="" />
-<meta property="og:site_name" content="" />
-<meta property="og:description" content="" />
-<meta name="twitter:title" content="" />
-<meta name="twitter:image" content="" />
-<meta name="twitter:url" content="" />
-<meta name="twitter:card" content="" />
-
-<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-<link rel="shortcut icon" href="favicon.ico">
-
-<link
-	href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300'
-	rel='stylesheet' type='text/css'>
-
-<!-- Animate.css -->
-<link rel="stylesheet" href="css/animate.css">
-<!-- Icomoon Icon Fonts-->
-<link rel="stylesheet" href="css/icomoon.css">
-<!-- Bootstrap  -->
-<link rel="stylesheet" href="css/bootstrap.css">
-<!-- Superfish -->
-<link rel="stylesheet" href="css/superfish.css">
-
-<link rel="stylesheet" href="css/style.css">
-
-
-<!-- Modernizr JS -->
-<script src="js/modernizr-2.6.2.min.js"></script>
-<!-- FOR IE9 below -->
-<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
 
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -114,13 +52,7 @@ h2 a {
 	font-weight: bold;
 }
 
-body {
-	background: #24C6DC; /* fallback for old browsers */
-	background: -webkit-linear-gradient(to bottom, #514A9D, #24C6DC);
-	/* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to bottom, #514A9D, #24C6DC);
-	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
+
 
 .head {
 	float: left;
@@ -214,34 +146,23 @@ body {
 
 </head>
 <body>
-	<div id="fh5co-wrapper">
-		<div id="fh5co-page">
-
-			<!-- header 시작 -->
-			<jsp:include page="header.jsp" />
-			<!-- header 끝 -->
+	
 
 
-			<div class="fh5co-hero fh5co-hero-2">
-				<div class="fh5co-overlay"></div>
-				<div class="fh5co-cover fh5co-cover_2 text-center"
-					data-stellar-background-ratio="0.5"
-					style="background-image: url(images/blog-2.jpg);">
-					<div class="desc animate-box">
-						<h2>매물 목록 출력 예시</h2>
+			
+			
+			
+		<div id="fh5co-work-section" style="padding:98px">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+							<h3>매물 목록</h3>
+						</div>
 					</div>
 				</div>
-			</div>
-			<!-- end:header-top -->
-			<section class="head">
-				<div class="container">
-					<h2 class="text-center">
-						<span>매물 목록 출력</span>
-					</h2>
-				</div>
-			</section>
 			
-			<div class="clearfix"></div>
+			
+			<div>
 			<section class="search-box">
 				<div class="container-fluid">
 					<div class="row">
@@ -288,39 +209,15 @@ body {
 						
 
 					</div>
-					<!-- row 끝 -->
+					
 					
 				</div>
-				<!-- container-fluid 끝 -->
+				
 			</section>
-			<!-- END fh5co-work-section -->
-
-			<jsp:include page="footer.jsp"/>
-		</div>
-		<!-- END fh5co-page -->
-
-	</div>
-	<!-- END fh5co-wrapper -->
-
-	<!-- jQuery -->
-
-
-	<script src="js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<!-- Stellar -->
-	<script src="js/jquery.stellar.min.js"></script>
-	<!-- Superfish -->
-	<script src="js/hoverIntent.js"></script>
-	<script src="js/superfish.js"></script>
-
-	<!-- Main JS (Do not remove) -->
-	<script src="js/main.js"></script>
-
+			</div>
+</div>
+		
+	
 </body>
 </html>
 

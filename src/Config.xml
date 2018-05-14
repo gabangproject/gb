@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- MyBatis : 환경 (Connection연결) -->
+<configuration>
+  <!-- VO등록  -->
+  <typeAliases>
+    <!-- type속성 : 클래스 지정  -->
+    <typeAlias type="com.sist.dao.BoardVO" alias="BoardVO"/>
+  </typeAliases>
+  <!-- Connection에 필요한 데이터 설정 -->
+  <!-- development : 개발환경 
+       여러개를 동시에 등록 : Oracle,MS_SQL,MySQL,DB2
+       ibatis = mybatis
+       opensource = google
+   -->
+  <environments default="development">
+    <environment id="development">
+      <!-- 
+          1. 트랜잭션 사용법
+          2. Connection 관련 
+       -->
+       <!-- 
+            transactionManager
+              COMMIT/ROLLBACK
+            1) JDBC : 자동 (Java에서 제공하는 JDBC)
+            2) MANAGED : DBA(관리자) 직접 처리 
+        -->
+       <transactionManager type="JDBC"/>
+       <!--  데이터베이스 정보 설정  
+             getConnection() => driver,url,username.password
+       -->
+       <!-- 
+           dataSource 
+            = UNPOOLED : 연결/해제를 처리
+            = POOLED : DBCP (**********)
+            = JNDI : 미리설정후에 사용 
+        -->
+       <dataSource type="POOLED">
+         <!-- 데이터베이스 정보를 넘겨준다  -->
+         <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+         <!-- Class.forName(value) -->
+         <property name="url" value="jdbc:oracle:thin:@localhost:1521:ORCL"/>
+         <property name="username" value="scott"/>
+         <property name="password" value="tiger"/>
+         <!-- 
+              Connection conn=DriverManager.getConnection(url,username,password)
+          -->
+          <!-- 
+               maxActive : 8개
+               maxIdle   : 8개
+               maxWait   : 20000
+           -->
+       </dataSource>
+    </environment>
+  </environments>
+  <!-- SQL문장 = Mapper.xml등록  include()-->
+  <mappers>
+    <!-- 
+        resource : 폴더안에 있는 경우
+        url : 외부에서 xml파일 읽을 경우 
+     -->
+    <mapper resource="com/sist/dao/board-mapper.xml"/>
+  </mappers>
+</configuration>

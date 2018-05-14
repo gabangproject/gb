@@ -7,63 +7,30 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.*;// XML파일 읽기 = 파싱요청 
-/*
- *    class A
- *    {
- *       private static int a;
- *       static
- *       {
- *          a=10;
- *       }
- *    }
- *    class A
- *    {
- *       private static int a=10;
- *      
- *    }
- *    class A
- *    {
- *       private static int a;
- *       static
- *       {
- *          for(int i=0;i<10;i++)
- *          {
- *             a=i;
- *          }
- *       }
- *    }
- */
+
 public class BoardDAO {
    private static SqlSessionFactory ssf;
-   // SqlSessionFactory = XML을 읽어서 파싱을 하는 클래스명 (SAX)
-   static // static 블럭 : static변수에 대한 초기화 
+   static 
    {
 	   try
 	   {
-		   // XML읽기
 		   Reader reader=Resources.getResourceAsReader("Config.xml");
-		   // Config.xml => mapper.xml
-		   // 파싱요청 
 		   ssf=new SqlSessionFactoryBuilder().build(reader);
-		   // ssf => getConnection(),disConnection()
-		   // Spring,MyBatis ==> classpath:SRC
 	   }catch(Exception ex)
 	   {
 		   System.out.println("boardDAO : " + ex.getMessage());
 	   }
    }
+   
    // 목록 읽기
-   //            리턴형  (resultType)   매개변수(parameterType)
    public static List<BoardVO> boardListData(Map map) 
    {
 	   List<BoardVO> list=new ArrayList<BoardVO>();
 	   SqlSession session=null;//connection연결=>sql문장수행 
 	   try
 	   {
-		   //session 생성 = connection생성 => getConnection()
 		   session=ssf.openSession();
-		   // openSession() => openSession(true)
-		   // autoCommit(false)   autoCommit(true)
+
 		   // 실행 결과값 받기 
 		   list=session.selectList("boardListData", map);
 	   }catch(Exception ex)
@@ -98,32 +65,7 @@ public class BoardDAO {
 	   }
 	   return total;
    }
-   // 추가 
-   /*
-    *   public void freeboardInsert(FreeBoardVO vo)
-	   {
-		   try
-		   {
-			   getConnection();
-			   String sql="INSERT INTO freeboard VALUES("
-					     +"(SELECT NVL(MAX(no)+1,1) FROM freeboard),"
-					     +"?,?,?,?,SYSDATE,0)";
-			   ps=conn.prepareStatement(sql);
-			   ps.setString(1, vo.getName());
-			   ps.setString(2, vo.getSubject());
-			   ps.setString(3, vo.getContent());
-			   ps.setString(4, vo.getPwd());
-			   ps.executeUpdate();
-		   }catch(Exception ex)
-		   {
-			   System.out.println(ex.getMessage());
-		   }
-		   finally
-		   {
-			   disConnection();
-		   }
-	   }
-    */
+
    public static void boardInsert(BoardVO vo)
    {
 	   SqlSession session=null;

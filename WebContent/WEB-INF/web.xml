@@ -7,7 +7,8 @@
     <servlet-class>com.sist.controller.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>C:\webDev\webStudy3\FinalMVCProject\WebContent\WEB-INF\applicationContext.xml</param-value>
+      <param-value>C:\Users\qkrgk\git\gb\WebContent\WEB-INF\applicationContext.xml</param-value>
+      <!-- 여기는 자기가 넣어야돼여  -->
     </init-param>
   </servlet>
   <servlet-mapping>

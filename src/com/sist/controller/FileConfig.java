@@ -22,7 +22,7 @@ public class FileConfig {
 	   List<String> list=new ArrayList<String>();
 	   try
 	   {
-		   String basePath="C:\\webDev\\webStudy3\\FinalMVCProject";//System.getProperty("user.dir");
+		   String basePath= System.getProperty("user.dir");
 		   System.out.println(basePath);
 		   String strPack=basePath+"\\src\\"+pack.replace(".", "\\");
 		   System.out.println(strPack);

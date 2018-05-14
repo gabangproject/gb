@@ -41,7 +41,7 @@
          <!-- 데이터베이스 정보를 넘겨준다  -->
          <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
          <!-- Class.forName(value) -->
-         <property name="url" value="jdbc:oracle:thin:@localhost:1521:ORCL"/>
+         <property name="url" value="jdbc:oracle:thin:@211.238.142.58:1521:ORCL"/>
          <property name="username" value="scott"/>
          <property name="password" value="tiger"/>
          <!-- 

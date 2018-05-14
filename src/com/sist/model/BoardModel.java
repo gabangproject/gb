@@ -10,7 +10,7 @@ import java.util.*;
 import com.sist.dao.*;
 @Controller
 public class BoardModel {
-   @RequestMapping("board/list.do")
+   @RequestMapping("qnaboard/qnaboard.do")
    public String boardListData(HttpServletRequest request)
    {
 	   String page=request.getParameter("page");
@@ -33,7 +33,7 @@ public class BoardModel {
 	   request.setAttribute("totalpage", totalpage);
 	   return "list.jsp";
    }
-   @RequestMapping("board/content.do")
+   @RequestMapping("qnaboard/content.do")
    public String boardContentData(HttpServletRequest request)
    {
 	   String no=request.getParameter("no");
@@ -42,12 +42,12 @@ public class BoardModel {
 	   request.setAttribute("vo", vo);
 	   return "content.jsp";
    }
-   @RequestMapping("board/insert.do")
+   @RequestMapping("qnaboard/insert.do")
    public String boardInsert(HttpServletRequest request)
    {
 	   return "insert.jsp";
    }
-   @RequestMapping("board/insert_ok.do")
+   @RequestMapping("qnaboard/insert_ok.do")
    public String boardInsertOk(HttpServletRequest request)
    throws Exception
    {
@@ -65,7 +65,7 @@ public class BoardModel {
 	   BoardDAO.boardInsert(vo);
 	   return "redirect:list.do";
    }
-   @RequestMapping("board/update.do")
+   @RequestMapping("qnaboard/update.do")
    public String boardUpdate(HttpServletRequest request)
    {
 	   String no = request.getParameter("no");
@@ -75,7 +75,7 @@ public class BoardModel {
 	   	request.setAttribute("vo", vo);
 	   return "update.jsp";
    }
-   @RequestMapping("board/update_ok.do")
+   @RequestMapping("qnaboard/update_ok.do")
    public String boardUpdateOk(HttpServletRequest request)
    throws Exception
    {	
@@ -102,13 +102,13 @@ public class BoardModel {
 	   }
 	   return "update_ok.jsp";
    }
-   @RequestMapping("board/delete.do")
+   @RequestMapping("qnaboard/delete.do")
    public String boardDelete(HttpServletRequest request) {
 	   String no = request.getParameter("no");
 	   request.setAttribute("no", no);
 	   return "delete.jsp";
    }
-   @RequestMapping("board/delete_ok.do")
+   @RequestMapping("qnaboard/delete_ok.do")
 	   public String boardDeleteOK(HttpServletRequest request) {
 		   String no = request.getParameter("no");
 		   String pwd = request.getParameter("pwd");

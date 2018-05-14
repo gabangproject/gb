@@ -37,10 +37,10 @@
  -->
 <mapper namespace="com.sist.dao.board-mapper">
    <select id="boardListData" resultType="BoardVO" parameterType="java.util.Map">
-     SELECT no,subject,name,regdate,hit,num
-     FROM (SELECT no,subject,name,regdate,hit,rownum as num
-     FROM (SELECT no,subject,name,regdate,hit 
-     FROM freeboard ORDER BY no DESC))
+     SELECT no,title,email,regdate,hit,num
+     FROM (SELECT no,title,email,regdate,hit,rownum as num
+     FROM (SELECT no,title,email,regdate,hit 
+     FROM qna ORDER BY no DESC))
      WHERE num BETWEEN #{start} AND #{end}
      <!-- 
          WHERE num BETWEEN ? AND ?

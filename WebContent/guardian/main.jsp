@@ -95,8 +95,16 @@
 			</div>
 			<!-- header랑 이어진 하단 부분 끝 -->
 
-			<div class="container" >
-					<div class="row" style="margin:10px">
+			<div id="fh5co-work-section">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+							<h3>테마 상세 검색</h3>
+						</div>
+					</div>
+				</div>
+				<div class="container">
+					<div class="row">
 		<!-- 테마 네모 박스 부분 -->
 					<c:forEach var="i" begin="1" end="6">
 						<div class="col-md-4">
@@ -113,6 +121,7 @@
 		<!-- 테마 네모 박스 부분  끝-->
 					</div>
 				</div>
+			</div>
 
 
 

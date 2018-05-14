@@ -151,13 +151,23 @@
 					data-stellar-background-ratio="0.5"
 					style="background-image: url(images/blog-3.jpg);">
 					<div class="desc animate-box">
-						<h2>Q&A 게시판</h2>
+						<h2>공지사항</h2>
 					</div>
 				</div>
 			</div>
 			<!-- header랑 연결된 하단 부분 끝 -->
-
-			<div class="container">
+			
+			<div id="fh5co-work-section">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+							<h3>Q&A 게시판</h3>
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="container">
 			
 			
 			<!-- 게시글 검색하는 부분 -->
@@ -284,6 +294,9 @@
 						</div>
 					</div>
 				</div>
+			</div>
+				
+				
 				
 			</div>
 			<!-- END fh5co-contact -->

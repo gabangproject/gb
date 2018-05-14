@@ -82,28 +82,7 @@
 					<!-- START #fh5co-menu-wrap -->
 					<nav id="fh5co-menu-wrap" role="navigation">
 						<ul class="sf-menu" id="fh5co-primary-menu">
-							<li class="active"><a href="main.jsp">Home</a></li>
-							<li><a href="themeSearch.jsp" class="fh5co-sub-ddown">테마검색</a>
-								<ul class="fh5co-sub-menu">
-									<li><a
-										href="http://freehtml5.co/preview/?item=build-free-html5-bootstrap-template"
-										target="_blank">Build</a></li>
-									<li><a
-										href="http://freehtml5.co/preview/?item=work-free-html5-template-bootstrap"
-										target="_blank">Work</a></li>
-									<li><a
-										href="http://freehtml5.co/preview/?item=light-free-html5-template-bootstrap"
-										target="_blank">Light</a></li>
-									<li><a
-										href="http://freehtml5.co/preview/?item=relic-free-html5-template-using-bootstrap"
-										target="_blank">Relic</a></li>
-									<li><a
-										href="http://freehtml5.co/preview/?item=display-free-html5-template-using-bootstrap"
-										target="_blank">Display</a></li>
-									<li><a
-										href="http://freehtml5.co/preview/?item=sprint-free-html5-template-bootstrap"
-										target="_blank">Sprint</a></li>
-								</ul></li>
+							<li><a href="main.jsp">Home</a></li>
 							<li><a href="gongji_board.jsp" class="fh5co-sub-ddown">공지사항</a></li>
 							<li><a href="qnaboard.jsp">Q&A 게시판</a></li>
 							<li><a href="maemul_upload.jsp">매물등록</a></li>

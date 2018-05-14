@@ -156,8 +156,18 @@
 				</div>
 			</div>
 			<!-- header랑 연결된 하단 부분 끝 -->
-
-			<div class="container">
+			
+			<div id="fh5co-work-section">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+							<h3>공지사항</h3>
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="container">
 			
 			
 			<!-- 게시글 검색하는 부분 -->
@@ -197,19 +207,19 @@
 								<div class="row">
 								
 									<div class="col col-xs-6">
-										<h3 class="panel-title">공지사항</h3>
+										<h3 class="panel-title">Q&A 게시판</h3>
 									</div>
 									<div class="col col-xs-6 text-right">
 										<div class="pull-right">
 											<div class="btn-group" data-toggle="buttons">
 												<label class="btn btn-success btn-filter active" data-target="completed"> 
-													<input type="radio"	name="options" id="option1" autocomplete="off" checked>내가 작성한 글 보기
+													<input type="radio"	name="options" id="option1" autocomplete="off" checked>10개 보기
 												</label> 
 												<label class="btn btn-warning btn-filter" data-target="pending"> 
-													<input type="radio" name="options" id="option2" autocomplete="off">Pending
+													<input type="radio" name="options" id="option2" autocomplete="off">20개 보기
 												</label>
 												<label class="btn btn-default btn-filter" data-target="all">
-													<input type="radio" name="options" id="option3" autocomplete="off"> All
+													<input type="radio" name="options" id="option3" autocomplete="off"> 30개 보기
 												</label>
 											</div>
 										</div>
@@ -262,7 +272,7 @@
 							<!-- 페이지 개수 표시 부분 시작 -->
 							<!-- li 태그에  class속성 active 값 주면 view에서 파란색으로 표시 -->
 											<c:forEach var="i" begin="1" end="5">
-												<li><a href="#">1</a></li>
+												<li><a href="#">${i}</a></li>
 											</c:forEach>
 							<!-- 페이지 개수 표시 부분 시작 -->
 												<li><a href="#" aria-label="Next"> 
@@ -284,6 +294,9 @@
 						</div>
 					</div>
 				</div>
+			</div>
+				
+				
 				
 			</div>
 			<!-- END fh5co-contact -->

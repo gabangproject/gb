@@ -127,7 +127,7 @@
 						<div class="panel panel-default panel-table">
 						
 						<!-- 게시글목록 테마별 보기?? 시작 -->
-<!-- 							<div class="panel-heading">
+							<div class="panel-heading">
 								<div class="row">
 								
 									<div class="col col-xs-6">
@@ -136,21 +136,13 @@
 									<div class="col col-xs-6 text-right">
 										<div class="pull-right">
 											<div class="btn-group" data-toggle="buttons">
-												<label class="btn btn-success btn-filter active" data-target="completed"> 
-													<input type="radio"	name="options" id="option1" autocomplete="off" checked>10개 보기
-												</label> 
-												<label class="btn btn-warning btn-filter" data-target="pending"> 
-													<input type="radio" name="options" id="option2" autocomplete="off">20개 보기
-												</label>
-												<label class="btn btn-default btn-filter" data-target="all">
-													<input type="radio" name="options" id="option3" autocomplete="off"> 30개 보기
-												</label>
+												${curpage} page / ${totalpage} pages
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							 -->
+
 						<!-- 게시글목록 테마별 보기?? 끝-->
 						
 							<div class="panel-body">

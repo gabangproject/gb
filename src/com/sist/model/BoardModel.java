@@ -24,10 +24,10 @@ public class BoardModel {
 		map.put("start", start);
 		map.put("end", end);
 		List<BoardVO> list = BoardDAO.boardListData(map);
-		// int totalpage=BoardDAO.boardTotalPage();
+		int totalpage=BoardDAO.boardTotalPage();
 		request.setAttribute("list", list);
 		request.setAttribute("curpage", curpage);
-		// request.setAttribute("totalpage", totalpage);
+		request.setAttribute("totalpage", totalpage);
 		request.setAttribute("main_jsp", "../qnaboard/qnaboard.jsp");
 		return "main.jsp";
 	}
@@ -47,7 +47,7 @@ public class BoardModel {
 		return "main.jsp";
 	}
 
-	@RequestMapping("qnaboard/insert_ok.do")
+	@RequestMapping("main/insert_ok.do")
    public String boardInsertOk(HttpServletRequest request)
    throws Exception
    {
@@ -61,7 +61,7 @@ public class BoardModel {
 	   vo.setTitle(title);
 	   vo.setContent(content);
 	   BoardDAO.boardInsert(vo);
-	   return "redirect:list.do";
+	   return "redirect:qnaboard.do";
    }
 /*
  * @RequestMapping("qnaboard/update.do") public String

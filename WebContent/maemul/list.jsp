@@ -1,21 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
-
-
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<meta charset=EUC-KR>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- 다음 지도 api를 사용하기 위한 부분 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0414b62e66e43f9fc50e0f6dfd64b93f"></script>
 
 <style>
 @import
@@ -52,8 +46,6 @@ h2 a {
 	font-weight: bold;
 }
 
-
-
 .head {
 	float: left;
 	width: 100%;
@@ -63,7 +55,6 @@ h2 a {
 	width: 95%;
 	margin: 0 auto 40px;
 	border: 1px solid black;
-	
 }
 
 .listing-block {
@@ -142,82 +133,72 @@ h2 a {
 	background-color: #A3CCFF;
 }
 </style>
-
-
 </head>
 <body>
-	
-
-
-			
-			
-			
-		<div id="fh5co-work-section" style="padding:98px">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-							<h3>매물 목록</h3>
-						</div>
-					</div>
+	<div id="fh5co-work-section" style="padding: 98px">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+					<h3>매물 목록</h3>
 				</div>
-			
-			
-			<div>
+			</div>
+		</div>
+
+		<div>
 			<section class="search-box">
 				<div class="container-fluid">
 					<div class="row">
-					
-					<!--지도 들어올 부분  -->
-						<div class="col-md-7 map-box mx-0 px-0">
-							<iframe width="100%" height="495" frameborder="0" scrolling="no"
-								marginheight="0" marginwidth="0"
-								src="https://maps.google.co.uk/maps?f=q&source=s_q&hl=en&geocode=&815&sspn=8.047465,13.666992&ie=UTF8&hq=&hnear=15+Springfield+Way,+Hythe+CT21+5SH,+United+Kingdom&t=m&z=14&ll=51.077429,1.121722&output=embed"></iframe>
-						</div>
-					<!-- 지도 들어올 부분 -->
-					
+						<!--지도 들어올 부분  -->
+						<div id=map style="width:70%;height:350px;"></div>
+						<script>
+							var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+							    mapOption = { 
+							        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+							        level: 3 // 지도의 확대 레벨
+							    };
+							
+							// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+							var map = new daum.maps.Map(mapContainer, mapOption); 
+						</script>
+						
+						<!-- 지도 들어올 부분 -->
+						 
 						<div class="col-md-5 listing-block">
-
-							
-							
-							<!-- 지도 크기 변환에 따라 해당 지도 안에 포함되어 있는 매물들의 리스트 출력 부분 -->
-						<c:forEach var="i" begin="1" end="5">
-							<div class="media">
-								<div class="fav-box">
-									<i class="fa fa-heart-o" aria-hidden="true"></i>
-								</div>
-								
-								<img class="d-flex align-self-start"
-									src="https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?h=350&auto=compress&cs=tinysrgb"
-									alt="Generic placeholder image">
-								<div class="media-body pl-3">
-									<div class="price">
-										$799,000<small>New York</small>
-									</div>
-									<div class="stats">
-										<span><i class="fa fa-arrows-alt"></i>1678 Sq ft</span> <span><i
-											class="fa fa-bath"></i>2 Beadrooms</span>
-									</div>
-									<div class="address">4062 Walnut Hill Drive Cincinnati</div>
-								</div>
-							</div>
-							</c:forEach>
-					<!-- 지도 크기 변환에 따라 해당 지도 안에 포함되어 있는 매물들의 리스트 출력 부분 -->
-					
-						</div>
-					
-						
-						
-
-					</div>
-					
-					
-				</div>
-				
-			</section>
-			</div>
-</div>
-		
 	
+							<!-- 지도 크기 변환에 따라 해당 지도 안에 포함되어 있는 매물들의 리스트 출력 부분 -->
+							<c:forEach var="i" begin="1" end="5">
+								<div class="media">
+									<div class="fav-box">
+										<i class="fa fa-heart-o" aria-hidden="true"></i>
+									</div>
+	
+									<img class="d-flex align-self-start"
+										src="https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?h=350&auto=compress&cs=tinysrgb"
+										alt="Generic placeholder image">
+									<div class="media-body pl-3">
+										<div class="price">
+											$799,000<small>New York</small>
+										</div>
+										<div class="stats">
+											<span>
+												<i class="fa fa-arrows-alt">183줄</i>1678 Sq ft
+											</span>
+											<span>
+												<i class="fa fa-bath">186줄</i>2 Beadrooms
+											</span>
+										</div>
+										<div class="address">4062 Walnut Hill Drive Cincinnati</div>
+									</div>
+								</div>
+							</c:forEach>
+							<!-- 지도 크기 변환에 따라 해당 지도 안에 포함되어 있는 매물들의 리스트 출력 부분 -->
+
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
 </body>
 </html>
 

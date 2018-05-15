@@ -10,7 +10,7 @@ import java.util.*;
 import com.sist.dao.*;
 @Controller
 public class BoardModel {
-   @RequestMapping("qnaboard/qnaboard.do")
+   @RequestMapping("main/qnaboard.do")
    public String boardListData(HttpServletRequest request)
    {
 	   String page=request.getParameter("page");
@@ -31,9 +31,11 @@ public class BoardModel {
 	   request.setAttribute("list", list);
 	   request.setAttribute("curpage", curpage);
 	   request.setAttribute("totalpage", totalpage);
-	   return "list.jsp";
+	   request.setAttribute("main_jsp", "../qnaboard/qnaboard.jsp");
+	   return "main.jsp";
    }
-   @RequestMapping("qnaboard/content.do")
+}
+/*   @RequestMapping("qnaboard/content.do")
    public String boardContentData(HttpServletRequest request)
    {
 	   String no=request.getParameter("no");
@@ -133,3 +135,4 @@ public class BoardModel {
 	   }
 
 }
+*/

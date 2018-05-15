@@ -1,4 +1,4 @@
-package com.sist.model;
+package com.gabang.model;
 
 import javax.servlet.http.HttpServletRequest;
 

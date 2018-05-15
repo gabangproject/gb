@@ -11,7 +11,6 @@ package com.sist.controller;
 import java.util.*;
 import java.io.*;
 public class FileConfig {
-   // C:\webDev\webStudy2\MVCXMLProject4\src\com\sist\model
    public static void main(String[] arg)
    {
 	   FileConfig fc=new FileConfig();
@@ -22,7 +21,6 @@ public class FileConfig {
 	   List<String> list=new ArrayList<String>();
 	   try
 	   {
-		   //"C:\\webDev\\webStudy3\\FinalMVCProject";
 		   String basePath= "C:\\GaBang\\gb";
 		   System.out.println(basePath);
 		   String strPack=basePath+"\\src\\"+pack.replace(".", "\\");
@@ -33,7 +31,6 @@ public class FileConfig {
 		   {
 			   //System.out.println(f.getName());
 			   String ext=f.getName().substring(f.getName().lastIndexOf(".")+1);
-			   //System.out.println("================");
 			   if(ext.equals("java"))
 			   {
 				   //System.out.println("´ë»ó:"+f.getName());

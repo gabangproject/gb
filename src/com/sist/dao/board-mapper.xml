@@ -5,7 +5,7 @@
 <!-- PreparedStatement , ResultSet -->
 <!-- 
      namespace : package
-     
+     히히
      <select> : select
         id : sql문장을 찾기 위한 구분자 = 중복이 없는 값
         resultType : 결과값 설정 

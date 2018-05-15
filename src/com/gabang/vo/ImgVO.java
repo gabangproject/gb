@@ -1,4 +1,4 @@
-package vo;
+package com.gabang.vo;
 
 public class ImgVO {
 	private String img;	// 매물 이미지 경로

@@ -1,4 +1,4 @@
-package vo;
+package com.gabang.vo;
 
 public class BuildingTypeVO {
 	private int type;	//	¹æ Á¾·ù

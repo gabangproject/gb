@@ -1,4 +1,4 @@
-package vo;
+package com.gabang.vo;
 
 public class ScoreVO {
 	private String email;		//	¾ÆÀÌµð

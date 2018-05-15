@@ -1,4 +1,4 @@
-package vo;
+package com.gabang.vo;
 
 public class RoomTypeVO {
 	private int type;	//	건물 형태

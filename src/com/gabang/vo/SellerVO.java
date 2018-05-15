@@ -1,4 +1,4 @@
-package vo;
+package com.gabang.vo;
 
 public class SellerVO {
 	private String license;		// 공인중개사 자격증 번호

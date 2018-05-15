@@ -1,4 +1,4 @@
-package vo;
+package com.gabang.vo;
 
 public class MemberVO {
 	private String email;		//	¾ÆÀÌµğ

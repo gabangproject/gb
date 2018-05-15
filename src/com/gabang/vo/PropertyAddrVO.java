@@ -1,4 +1,4 @@
-package vo;
+package com.gabang.vo;
 
 public class PropertyAddrVO {
 	private String addr;		//	매물주소

@@ -1,4 +1,4 @@
-package vo;
+package com.gabang.vo;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package vo;
+package com.gabang.vo;
 
 public class DealType {
 	private String type;	// 거래형태

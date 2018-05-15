@@ -20,7 +20,7 @@
 						<ul class="sf-menu" id="fh5co-primary-menu">
 							<li><a href="main.jsp">Home</a></li>
 							<li><a href="gongji_board.jsp" class="fh5co-sub-ddown">공지사항</a></li>
-							<li><a href="qnaboard.jsp">Q&A 게시판</a></li>
+							<li><a href="qnaboard.do">Q&A 게시판</a></li>
 							<li><a href="maemul_upload.jsp">매물등록</a></li>
 							<li><a href="list.jsp">관심목록</a></li>
 							<li><a href="signIn.jsp">회원가입 / 로그인</a></li>

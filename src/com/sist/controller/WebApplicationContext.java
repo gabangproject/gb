@@ -18,7 +18,7 @@ public class WebApplicationContext {
    public static void main(String[] arg)
    {
 	   WebApplicationContext wc=
-			   new WebApplicationContext("C:\\webDev\\webStudy3\\FinalMVCProject\\WebContent\\WEB-INF\\applicationContext.xml");
+			   new WebApplicationContext("C:\\webDev\\webStudy3\\MusicMVCProject\\WebContent\\WEB-INF\\applicationContext.xml");
    }
    public WebApplicationContext(String path)
    {

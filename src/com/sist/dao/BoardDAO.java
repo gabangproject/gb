@@ -44,7 +44,7 @@ public class BoardDAO {
 	   }
 	   return list;
    }
-   public static int boardTotalPage()
+/*   public static int boardTotalPage()
    {
 	   int total=0;
 	   SqlSession session=null;
@@ -64,7 +64,7 @@ public class BoardDAO {
 			   session.close();
 	   }
 	   return total;
-   }
+   }*/
 
    public static void boardInsert(BoardVO vo)
    {
@@ -84,6 +84,7 @@ public class BoardDAO {
 			   session.close();
 	   }
    }
+/*
    //내용보기
    public static BoardVO boardContentData(int no) {
 	   BoardVO vo = new BoardVO();
@@ -169,5 +170,5 @@ public class BoardDAO {
 			   session.close();
 		   }
 	   }
-   }
+   }*/
 }

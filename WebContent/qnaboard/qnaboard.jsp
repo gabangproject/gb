@@ -69,6 +69,9 @@
 .pagination {
 	margin: 0;
 }
+.navbar-header{
+	margin-left: 0px; 
+}
 </style>
 
 </head>
@@ -124,7 +127,7 @@
 						<div class="panel panel-default panel-table">
 						
 						<!-- 게시글목록 테마별 보기?? 시작 -->
-							<div class="panel-heading">
+<!-- 							<div class="panel-heading">
 								<div class="row">
 								
 									<div class="col col-xs-6">
@@ -147,7 +150,7 @@
 									</div>
 								</div>
 							</div>
-							
+							 -->
 						<!-- 게시글목록 테마별 보기?? 끝-->
 						
 							<div class="panel-body">
@@ -186,28 +189,25 @@
 								<div class="row">
 									<div class="col col-xs-offset-3 col-xs-6">
 										<nav aria-label="Page navigation" class="text-center">
+							<!-- 좌측 우측 넘기는거  -->
 											<ul class="pagination">
 												<li><a href="#" aria-label="Previous"> 
 												<span aria-hidden="true">«</span>
 												</a></li>
-							<!-- 페이지 개수 표시 부분 시작 -->
-							<!-- li 태그에  class속성 active 값 주면 view에서 파란색으로 표시 -->
-											<c:forEach var="i" begin="1" end="5">
-												<li><a href="#">${i}</a></li>
-											</c:forEach>
-							<!-- 페이지 개수 표시 부분 시작 -->
+												
 												<li><a href="#" aria-label="Next"> 
 												<span aria-hidden="true">»</span>
 												</a></li>
 											</ul>
+
 										</nav>
 									</div>
+							<!-- 글쓰기 -->
 									<div class="col col-xs-3">
 										<div class="pull-right">
-											<button type="button" class="btn btn-primary">
-												<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-												글쓰기
-											</button>
+												<td class="text-left">
+													<a href="insert.do" class="btn btn-sm btn-success">새글</a>		
+												</td>
 										</div>
 									</div>
 								</div>

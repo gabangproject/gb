@@ -23,7 +23,7 @@ public class FileConfig {
 	   try
 	   {
 		   //"C:\\webDev\\webStudy3\\FinalMVCProject";
-		   String basePath= "C:\\GaBang\\git\\gb";
+		   String basePath= "C:\\GaBang\\gb";
 		   System.out.println(basePath);
 		   String strPack=basePath+"\\src\\"+pack.replace(".", "\\");
 		   System.out.println(strPack);

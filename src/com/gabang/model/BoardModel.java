@@ -22,6 +22,7 @@ public class BoardModel {
 		int rowSize = 10;
 		int start = (curpage * rowSize) - (rowSize - 1);
 		int end = curpage * rowSize;
+		
 		Map map = new HashMap();
 		map.put("start", start);
 		map.put("end", end);
@@ -74,7 +75,7 @@ public class BoardModel {
 		return "main.jsp";
 	}
 
-	@RequestMapping("qnaboard/update_ok.do")
+	/*@RequestMapping("qnaboard/update_ok.do")
 	public String boardUpdateOk(HttpServletRequest request) throws Exception {
 		request.setCharacterEncoding("EUC-KR");
 		String title = request.getParameter("title");
@@ -95,7 +96,7 @@ public class BoardModel {
 		}
 		return "redirect:qnaboard.jsp";
 	}
-
+*/
 	@RequestMapping("qnaboard/delete.do")
 	public String boardDelete(HttpServletRequest request) {
 		String no = request.getParameter("no");
@@ -104,7 +105,7 @@ public class BoardModel {
 		return "main.jsp";
 	}
 
-	@RequestMapping("qnaboard/delete_ok.do")
+	/*@RequestMapping("qnaboard/delete_ok.do")
 	public String boardDeleteOK(HttpServletRequest request) {
 		String no = request.getParameter("no");
 		String pwd = request.getParameter("pwd");
@@ -124,6 +125,6 @@ public class BoardModel {
 		request.setAttribute("bCheck", bCheck);
 		return "delete_ok.jsp";
 
-	}
+	}*/
 
 }

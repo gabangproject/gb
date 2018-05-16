@@ -64,47 +64,66 @@ public class BoardModel {
 		BoardDAO.boardInsert(vo);
 		return "redirect:qnaboard.do";
 	}
-	/*
-	 * @RequestMapping("qnaboard/update.do") public String
-	 * boardUpdate(HttpServletRequest request) { String no =
-	 * request.getParameter("no"); // DB연동 BoardVO vo =
-	 * BoardDAO.boardUpdateData(Integer.parseInt(no)); // 결과값 전송
-	 * request.setAttribute("vo", vo); return "update.jsp"; }
-	 * 
-	 * @RequestMapping("qnaboard/update_ok.do") public String
-	 * boardUpdateOk(HttpServletRequest request) throws Exception {
-	 * request.setCharacterEncoding("EUC-KR"); String
-	 * name=request.getParameter("name"); String
-	 * subject=request.getParameter("subject"); String
-	 * content=request.getParameter("content"); String
-	 * pwd=request.getParameter("pwd"); String no = request.getParameter("no");
-	 * 
-	 * BoardVO vo=new BoardVO(); vo.setNo(Integer.parseInt(no)); vo.setName(name);
-	 * vo.setSubject(subject); vo.setContent(content); vo.setPwd(pwd);
-	 * 
-	 * // DB 연동 boolean bCheck= BoardDAO.boardUpdate(vo); // 결과값을 전송
-	 * request.setAttribute("bCheck", bCheck); if(bCheck==true) {
-	 * request.setAttribute("no", no); } return "update_ok.jsp"; }
-	 * 
-	 * @RequestMapping("qnaboard/delete.do") public String
-	 * boardDelete(HttpServletRequest request) { String no =
-	 * request.getParameter("no"); request.setAttribute("no", no); return
-	 * "delete.jsp"; }
-	 * 
-	 * @RequestMapping("qnaboard/delete_ok.do") public String
-	 * boardDeleteOK(HttpServletRequest request) { String no =
-	 * request.getParameter("no"); String pwd = request.getParameter("pwd"); BoardVO
-	 * vo = new BoardVO(); vo.setNo(Integer.parseInt(no)); vo.setPwd(pwd);
-	 * 
-	 * String db_pwd = BoardDAO.boardGetPwd(vo.getNo()); boolean bCheck=false;
-	 * if(db_pwd.equals(vo.getPwd())) { bCheck = true;
-	 * BoardDAO.boardDelete(vo.getNo());
-	 * 
-	 * }else { bCheck=false; } request.setAttribute("bCheck", bCheck); return
-	 * "delete_ok.jsp";
-	 * 
-	 * 
-	 * 
-	 * }
-	 */
+
+	@RequestMapping("main/update.do")
+	public String boardUpdate(HttpServletRequest request) {
+		String no = request.getParameter("no"); // DB연동
+		BoardVO vo = BoardDAO.boardUpdateData(Integer.parseInt(no)); // 결과값 전송
+		request.setAttribute("vo", vo);
+		request.setAttribute("main_jsp", "../qnaboard/update.jsp");
+		return "main.jsp";
+	}
+
+	@RequestMapping("qnaboard/update_ok.do")
+	public String boardUpdateOk(HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("EUC-KR");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		String no = request.getParameter("no");
+
+		BoardVO vo = new BoardVO();
+		vo.setNo(Integer.parseInt(no));
+		vo.setTitle(title);
+		vo.setContent(content);
+
+		// DB 연동
+		boolean bCheck = BoardDAO.boardUpdate(vo);
+		// 결과값을 전송
+		request.setAttribute("bCheck", bCheck);
+		if (bCheck == true) {
+			request.setAttribute("no", no);
+		}
+		return "redirect:qnaboard.jsp";
+	}
+
+	@RequestMapping("qnaboard/delete.do")
+	public String boardDelete(HttpServletRequest request) {
+		String no = request.getParameter("no");
+		request.setAttribute("no", no);
+		request.setAttribute("main_jsp", "../qnaboard/delete.jsp");
+		return "main.jsp";
+	}
+
+	@RequestMapping("qnaboard/delete_ok.do")
+	public String boardDeleteOK(HttpServletRequest request) {
+		String no = request.getParameter("no");
+		String pwd = request.getParameter("pwd");
+		BoardVO vo = new BoardVO();
+		vo.setNo(Integer.parseInt(no));
+		vo.setPwd(pwd);
+
+		String db_pwd = BoardDAO.boardGetPwd(vo.getNo());
+		boolean bCheck = false;
+		if (db_pwd.equals(vo.getPwd())) {
+			bCheck = true;
+			BoardDAO.boardDelete(vo.getNo());
+
+		} else {
+			bCheck = false;
+		}
+		request.setAttribute("bCheck", bCheck);
+		return "delete_ok.jsp";
+
+	}
+
 }

@@ -38,26 +38,28 @@
    
    
    <select id="boardContentData" resultType="BoardVO" parameterType="int">
-   		SELECT no, email, title, content, regdate, hit
+   		SELECT no, title, content
    		FROM qna
    		<include refid="where-no"/>
    </select>
  
 
-<!--    
-   수정하기
-   <select id="boardGetPwd" resultType="String" parameterType="int">
+
+   <!-- 수정하기 -->
+<!--    <select id="boardGetPwd" resultType="String" parameterType="int">
    	SELECT pwd FROM freeboard
    	<include refid="where-no"/>
-   </select>
+   </select> -->
    
    
-   <update id="boardUpdate" parameterType="BoardVO">
-   	UPDATE freeboard SET
-   	name =#{name},subject=#{subject}, content=#{content}
+    <update id="boardUpdate" parameterType="vo">
+   	UPDATE qna SET
+   	title=#{title}, content=#{content}
    	WHERE no = #{no}
-   </update>
-   삭제 
+   </update> 
+   
+   
+   <!-- 삭제 --> 
    <delete id="boardDelete" parameterType="int">
 		DELETE FROM freeboard
 		<include refid="where-no"/>

@@ -1,6 +1,8 @@
 package com.gabang.vo;
 import java.util.*;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -106,7 +108,7 @@ public class BoardDAO {
 	   }
 	   return vo;
    }
-/*
+
  	//수정하기
    public static BoardVO boardUpdateData(int no) {
 	   BoardVO vo = new BoardVO();
@@ -124,20 +126,24 @@ public class BoardDAO {
 	   }
 	   return vo;
    }
-   public static boolean boardUpdate(BoardVO vo) {
+   public static BoardVO boardUpdate(BoardVO vo) {
 	   boolean bCheck= false;
+	   BoardVO vos = new BoardVO();
+	   //HttpSession sessions;
 	   SqlSession session = null;
 	   try {
-		   session=ssf.openSession();
+		   session=ssf.openSession(true);
+/*		 //sessions.getAttribute(email);
+		 //sessions.getAttribute(pwd);
 		   String pwd = session.selectOne("boardGetPwd",vo.getNo());
 		   if(pwd.equals(vo.getPwd())) {
 			   bCheck=true;
 			   //UPDATE
-			   session.update("boardUpdate",vo);
-			   session.commit();
+*/			   List<BoardVO>  vod=session.update("boardUpdate",vo);
+/*			   session.commit();
 		   }else {
 			   bCheck=false;
-		   }
+		   }*/
 	   }catch (Exception e) {
 		   System.out.println("boardUpdate : " +e.getMessage());
 	   }finally {
@@ -145,9 +151,9 @@ public class BoardDAO {
 			   session.close();
 		   }
 	   }
-	   return bCheck;
+	   return vos;
    }
-   
+/*
    public static String boardGetPwd(int no) {
 	   String pwd = "";
 	   SqlSession session = null;

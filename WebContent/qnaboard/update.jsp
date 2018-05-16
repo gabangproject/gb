@@ -87,52 +87,38 @@
 			<div class="row">
 				<div
 					class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-					<h3>게시글 보기</h3>
+					<h3>게시물 수정</h3>
 				</div>
 			</div>
 		</div>
 	<div class="container">
 		<div class="row">
-			<h1>내용보기</h1>
-			<table class="table">
-				<tr>
-					<td class="success text-center" width="20%">번호</td>
-					<td class="text-center" width="30%">${vo.no }</td>
-					<td class="success text-center" width="20%">작성일</td>
-					<td class="text-center" width="30%">
-						<fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/>
-					</td>
-				</tr>
+			<h1>수정하기</h1>
+			<form method=post action="update_ok.do">
+				<table class="table table-hover">
 				
-				<tr>
-					<td class="success text-center" width="20%">이름</td>
-					<td class="text-center" width="30%">${vo.email }</td>
-					<td class="success text-center" width="20%">조회수</td>
-					<td class="text-center" width="30%">${vo.hit }</td>
-				</tr>
-				
-				<tr>
-					<td class="success text-center" width="20%">제목</td>
-					<td colspan="3" class="text-left">${vo.title }</td>
-				</tr>
-				<tr>
-					<td class="text-left" valign="top" height="200">${vo.content }</td>
-					<td></td>
-				</tr>
-			</table>
-			<table class="table">
-				<tr>
-					<td class="text-right">
-						<a href="update.do?no=${vo.no }" class="btn btn-sm btn-primary">수정</a>
-						<a href="delete.do?no=${vo.no }" class="btn btn-sm btn-danger">삭제</a>
-						<!-- 
-							delete.do?no=1
-								= BoardModel = delete.jsp
-						 -->
-						<a href="qnaboard.do" class="btn btn-sm btn-warning">목록</a>
-					</td>
-				</tr>
-			</table>
+					<tr>
+						<td width="15%" class="success text-right">제목</td>
+						<td width="85%" class="text-left">
+						<input type=text name=title size=45 required value="${vo.title }"></td>
+						<input type="hidden" name=no value="${vo.no }">
+					</tr>
+
+					<tr>
+						<td width="15%" class="success text-right">내용</td>
+						<td width="85%" class="text-left"><textarea rows="10"
+								cols="50" name=content required>${vo.content }</textarea></td>
+					</tr>
+
+					<tr>
+						<td colspan="2" class="text-center"><input type="submit"
+							class="btn btn-sm btn-primary" value="수정" id="writeBtn" disabled>
+							<input type="button" class="btn btn-sm btn-primary" value="취소"
+							onclick="javascript:history.back()"></td>
+					</tr>
+
+				</table>
+			</form>
 		</div>
 	</div>
 </body>

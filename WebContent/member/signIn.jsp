@@ -15,20 +15,7 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script type="text/javascript">
-	Shadowbox.init({
-		players : [ "iframe" ]
-	});
-	function idcheck() {
-		window.open({
-			content : '../guardian/idcheck.jsp',
-			title : '아이디중복체크',
-			player : 'iframe',
-			width : 300,
-			height : 200
-		});
-	}
-</script>
+
 <!-- 매물등록 관련 bootstrap 끝 -->
 </head>
 <body>

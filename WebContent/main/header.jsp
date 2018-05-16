@@ -5,6 +5,32 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="../member/shadow/css/shadowbox.css">
+<link rel="stylesheet" type="text/css" href="../member/shadow/css/shadowbox.css">
+<script type="text/javascript" src="../member/shadow/js/shadowbox.js"></script>
+<script>
+
+Shadowbox.init({
+	players:["iframe"]
+});
+
+
+function idcheck()
+{
+ Shadowbox.open({
+	 content:'../member/login.jsp',
+	 title:'아이디중복체크',
+	 player:'iframe',
+	 width:350,
+	 height:500
+ });	
+ 
+ 
+};
+</script>
+
+
+
 </head>
 <body>
 	<div id="fh5co-header" >
@@ -23,7 +49,7 @@
 							<li><a href="qnaboard.do">Q&A 게시판</a></li>
 							<li><a href="maemul_upload.jsp">매물등록</a></li>
 							<li><a href="list.jsp">관심목록</a></li>
-							<li><a href="signIn.jsp">회원가입 / 로그인</a></li>
+							<li><a onclick="idcheck()">회원가입 / 로그인</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -31,6 +57,10 @@
 		</header>
 
 	</div>
+	
+
+
+
 
 	
 </body>

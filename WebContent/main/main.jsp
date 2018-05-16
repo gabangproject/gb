@@ -44,7 +44,7 @@
 
 
 			<!-- content 위치 -->
-			<jsp:include page="${main_jsp}" />
+			<jsp:include page="../member/maemul_upload.jsp" />
 			<!-- content 위치 -->
 
 

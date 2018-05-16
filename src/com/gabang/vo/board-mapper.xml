@@ -64,25 +64,27 @@
    </insert>
    
    
-<!--    
-   content 상세보기
+   
+  <!--  content 상세보기-->
    <sql id = "where-no">
    		WHERE no = #{no}
    </sql>
    
 	   <update id="hitIncrement">
-	   	UPDATE freeboard SET
+	   	UPDATE qna SET
 	   	hit = hit+1
 	   	<include refid="where-no"/>
 	   </update>
    
    
    <select id="boardContentData" resultType="BoardVO" parameterType="int">
-   		SELECT no, name, subject, content, regdate, hit
-   		FROM freeboard
+   		SELECT no, email, title, content, regdate, hit
+   		FROM qna
    		<include refid="where-no"/>
    </select>
-   
+ 
+
+<!--    
    수정하기
    <select id="boardGetPwd" resultType="String" parameterType="int">
    	SELECT pwd FROM freeboard
@@ -99,18 +101,7 @@
    <delete id="boardDelete" parameterType="int">
 		DELETE FROM freeboard
 		<include refid="where-no"/>
-   </delete> -->
+   </delete>  -->
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
 
 

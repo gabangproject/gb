@@ -1,4 +1,4 @@
-package com.sist.controller;
+package com.gabang.controller;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -163,7 +163,9 @@
 									<c:forEach var="vo" items="${list }">
 										<tr data-status="completed">
 											<td>${vo.no }</td>
-											<td>${vo.title }</td>
+											<td>
+											<a href="content.do?no=${vo.no }">${vo.title }</a>
+											</td>
 											<td>${vo.email }</td>
 											<td>
 												<fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/>
@@ -183,12 +185,14 @@
 										<nav aria-label="Page navigation" class="text-center">
 							<!-- 좌측 우측 넘기는거  -->
 											<ul class="pagination">
-												<li><a href="#" aria-label="Previous"> 
-												<span aria-hidden="true">«</span>
+											<c:if test="${ curpage=1}">
+												<li><a href="${curpage-1 }" aria-label="Previous"> 
+												◀
 												</a></li>
-												
-												<li><a href="#" aria-label="Next"> 
-												<span aria-hidden="true">»</span>
+												</c:if>
+												<c:if test="${curpage<=total }"></c:if>
+												<li><a href="${curpage+1 }" aria-label="Next"> 
+												▶
 												</a></li>
 											</ul>
 

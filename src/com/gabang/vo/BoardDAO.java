@@ -86,7 +86,7 @@ public class BoardDAO {
 			   session.close();
 	   }
    }
-/*
+
    //내용보기
    public static BoardVO boardContentData(int no) {
 	   BoardVO vo = new BoardVO();
@@ -106,6 +106,8 @@ public class BoardDAO {
 	   }
 	   return vo;
    }
+/*
+ 	//수정하기
    public static BoardVO boardUpdateData(int no) {
 	   BoardVO vo = new BoardVO();
 	   SqlSession session=null;

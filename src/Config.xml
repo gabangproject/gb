@@ -8,6 +8,7 @@
   <typeAliases>
     <!-- type속성 : 클래스 지정  -->
     <typeAlias type="com.gabang.vo.BoardVO" alias="BoardVO"/>
+    <typeAlias type="com.gabang.vo.MemberVO" alias="MemberVO"/>
   </typeAliases>
   <environments default="development">
     <environment id="development">
@@ -55,6 +56,7 @@
         resource : 폴더안에 있는 경우
         url : 외부에서 xml파일 읽을 경우 
      -->
-    <mapper resource="com/gabang/vo/board-mapper.xml"/>
+    <!-- <mapper resource="com/gabang/vo/board-mapper.xml"/> -->
+    <mapper resource="com/gabang/vo/member-mapper.xml"/>
   </mappers>
 </configuration>

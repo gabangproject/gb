@@ -11,10 +11,22 @@
 	<div class="fh5co-hero" style="background-color: black;">
 
 		<div class="fh5co-cover text-center" style="background-color: black;">
+			
 			<div class="desc animate-box">
 				<h2>가방</h2>
+				
+					<div class="row" style="margin: 0px auto;">
+					
+						<input type="text" class="form-control" placeholder="방검색" style="width:1000px; margin: 0px auto;">
+						<br>
 
-				<span><a class="btn btn-primary" href="#">시작</a></span>
+					</div>
+					
+					<div class="row" style="margin: 0 auto;">
+					<a class="btn btn-primary" href="#">시작</a>
+					</div>
+					
+					
 			</div>
 		</div>
 

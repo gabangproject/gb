@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,7 +21,7 @@ function idcheck()
 {
  Shadowbox.open({
 	 content:'../member/login.jsp',
-	 title:'아이디중복체크',
+	 title:'로그인',
 	 player:'iframe',
 	 width:350,
 	 height:500
@@ -27,6 +29,9 @@ function idcheck()
  
  
 };
+
+
+
 </script>
 
 
@@ -48,8 +53,21 @@ function idcheck()
 							<li><a href="notice.do" class="fh5co-sub-ddown">공지사항</a></li>
 							<li><a href="qnaboard.do">Q&A 게시판</a></li>
 							<li><a href="maemul_upload.jsp">매물등록</a></li>
-							<li><a href="list.jsp">관심목록</a></li>
+						<c:if test="${sessionScope.id==null }">
 							<li><a onclick="idcheck()">회원가입 / 로그인</a></li>
+						</c:if>
+						
+						<c:if test="${sessionScope.id!=null }">
+							<li><a class="fh5co-sub-ddown">${sessionScope.nick }</a>
+								<ul class="fh5co-sub-menu">
+										<li><a href="list.jsp" target="_blank">찜목록 보기</a></li>
+										<li><a href="#" target="_blank">개인정보 관리</a></li>
+										<li><a href="#" target="_blank">매물등록</a></li>
+								</ul>
+							</li>
+							<li><a href="logout.do">로그아웃</a></li>
+						</c:if>
+							
 						</ul>
 					</nav>
 				</div>

@@ -108,8 +108,8 @@ function join()
 }
 function login()
 {
-	window.parent.location.href="../main/join.do";
-	//parent.Shadowbox.close();
+	
+	
 	
 }
 </script>
@@ -124,7 +124,7 @@ function login()
             <div class="account-wall">
                 <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                     alt="">
-                <form class="form-signin" method="post">
+                <form class="form-signin" method=post action="../main/login_ok.do">
                 <input type="text" class="form-control" name="email" placeholder="Email" required autofocus >
                 <input type="password" class="form-control" name="pwd" placeholder="Password" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="login()">·Î±×ÀÎ</button>

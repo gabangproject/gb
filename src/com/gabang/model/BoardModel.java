@@ -4,9 +4,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.type.IntegerTypeHandler;
 
-import com.sist.controller.Controller;
-import com.sist.controller.RequestMapping;
 import java.util.*;
+
+import com.gabang.controller.Controller;
+import com.gabang.controller.RequestMapping;
 import com.sist.dao.*;
 @Controller
 public class BoardModel {

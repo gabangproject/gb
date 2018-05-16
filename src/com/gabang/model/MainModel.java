@@ -2,8 +2,8 @@ package com.gabang.model;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.sist.controller.Controller;
-import com.sist.controller.RequestMapping;
+import com.gabang.controller.Controller;
+import com.gabang.controller.RequestMapping;
 
 @Controller
 public class MainModel {

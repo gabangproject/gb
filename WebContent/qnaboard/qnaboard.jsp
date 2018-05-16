@@ -150,11 +150,11 @@
 									class="table table-striped table-bordered table-list">
 									<thead>
 										<tr>
-											<th class="col-text">번호</th>
-											<th class="col-text">제목</th>
-											<th class="col-text">작성자</th>
-											<th class="col-text">작성일</th>
-											<th class="col-text">조회수</th>
+											<th class="col-text" width="10%">번호</th>
+											<th class="col-text" width="45%">제목</th>
+											<th class="col-text" width="15%">작성자</th>
+											<th class="col-text" width="20%">작성일</th>
+											<th class="col-text" width="10%">조회수</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -163,11 +163,13 @@
 									<c:forEach var="vo" items="${list }">
 										<tr data-status="completed">
 											<td>${vo.no }</td>
-											<td>${vo.title }</td>
+											<td>
+											<a href="content.do?no=${vo.no }">${vo.title }</a>
+											</td>
 											<td>${vo.email }</td>
 											<td>
 												<fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/>
-											</td>
+											</td> 
 											<td>${vo.hit }</td>
 										</tr>
 									</c:forEach>
@@ -183,13 +185,18 @@
 										<nav aria-label="Page navigation" class="text-center">
 							<!-- 좌측 우측 넘기는거  -->
 											<ul class="pagination">
-												<li><a href="#" aria-label="Previous"> 
-												<span aria-hidden="true">«</span>
+											<c:if test="${ curpage!=1}">
+												<li><a href="qnaboard.do?page=${curpage-1 }" aria-label="Previous"> 
+												◀
 												</a></li>
+												</c:if>
 												
-												<li><a href="#" aria-label="Next"> 
-												<span aria-hidden="true">»</span>
+												
+												<c:if test="${curpage<totalpage }">
+												<li><a href="qnaboard.do?page=${curpage+1 }" aria-label="Next"> 
+												▶
 												</a></li>
+												</c:if>
 											</ul>
 
 										</nav>

@@ -149,7 +149,7 @@ h2 a {
 				<div class="container-fluid">
 					<div class="row">
 						<!--지도 들어올 부분  -->
-						<div id=map style="width:70%;height:350px;"></div>
+						<div id=map style="width:50%;height:250px%;display:inline-block" class="col-md-7" ></div>
 						<script>
 							var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 							    mapOption = { 
@@ -160,13 +160,11 @@ h2 a {
 							// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 							var map = new daum.maps.Map(mapContainer, mapOption); 
 						</script>
-						
-						<!-- 지도 들어올 부분 -->
 						 
-						<div class="col-md-5 listing-block">
+						<!-- 매물들의 리스트 출력 부분 -->
+						<div class="col-md-5 listing-block" style="width:50%;display:inline-block">
 	
-							<!-- 지도 크기 변환에 따라 해당 지도 안에 포함되어 있는 매물들의 리스트 출력 부분 -->
-							<c:forEach var="i" begin="1" end="5">
+							<c:forEach var="i" items="${theme}">
 								<div class="media">
 									<div class="fav-box">
 										<i class="fa fa-heart-o" aria-hidden="true"></i>

@@ -84,6 +84,7 @@ public class BoardDAO {
 			   session.close();
 	   }
    }
+/*
    //내용보기
    public static BoardVO boardContentData(int no) {
 	   BoardVO vo = new BoardVO();
@@ -169,5 +170,5 @@ public class BoardDAO {
 			   session.close();
 		   }
 	   }
-   }
+   }*/
 }

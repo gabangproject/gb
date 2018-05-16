@@ -2,6 +2,7 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <!-- PreparedStatement , ResultSet -->
 <!-- 
      namespace : package
@@ -52,23 +53,19 @@
         총페이지 읽기
     -->
    <select id="boardTotalPage" resultType="int">
-     SELECT CEIL(COUNT(*)/10) FROM freeboard
+     SELECT CEIL(COUNT(*)/10) FROM qna
    </select>
-   <!-- 데이터 추가 
-     public void boardInsert(BoardVO vo)
-   -->
-   <!-- <insert id="boardInsert" parameterType="BoardVO">
-     <selectKey></selectKey>
-   </insert> -->
+   
    <insert id="boardInsert" parameterType="BoardVO">
-     INSERT INTO freeboard VALUES(
-       (SELECT NVL(MAX(no)+1,1) FROM freeboard),
-       #{name},#{subject},#{content},#{pwd},
-       SYSDATE,0
+     INSERT INTO qna(no,email,title,content,hit) VALUES(
+     (SELECT NVL(MAX(no)+1,1) FROM qna),
+     #{email},#{title},#{content},0
      )
    </insert>
    
-   <!-- content 상세보기 -->
+   
+<!--    
+   content 상세보기
    <sql id = "where-no">
    		WHERE no = #{no}
    </sql>
@@ -86,7 +83,7 @@
    		<include refid="where-no"/>
    </select>
    
-   <!-- 수정하기 -->
+   수정하기
    <select id="boardGetPwd" resultType="String" parameterType="int">
    	SELECT pwd FROM freeboard
    	<include refid="where-no"/>
@@ -98,11 +95,11 @@
    	name =#{name},subject=#{subject}, content=#{content}
    	WHERE no = #{no}
    </update>
-   <!-- 삭제  -->
+   삭제 
    <delete id="boardDelete" parameterType="int">
 		DELETE FROM freeboard
 		<include refid="where-no"/>
-   </delete>
+   </delete> -->
 </mapper>
 
 

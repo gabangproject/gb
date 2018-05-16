@@ -14,30 +14,34 @@ import java.util.*;
  *    #{subject} 
  */
 public class BoardVO {
-    private int no;
-    private String name;
-    private String subject;
-    private String content;
-    private String pwd;
-    private Date regdate;
-    private int hit;
+    private int no; //번호
+    private String email; //이메일
+    private String title; // 제목
+    private String content; //내용
+    private String hit; //조회수
+    private Date regdate; //등록일
+    private int group_id; //그룹번호
+    private int group_step; //그룹에서 번호
+    private int group_tab; // 답변 
+    private int parent; //?
+    private int degree;  //??
 	public int getNo() {
 		return no;
 	}
 	public void setNo(int no) {
 		this.no = no;
 	}
-	public String getName() {
-		return name;
+	public String getEmail() {
+		return email;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getSubject() {
-		return subject;
+	public String getTitle() {
+		return title;
 	}
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public String getContent() {
 		return content;
@@ -45,11 +49,11 @@ public class BoardVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getPwd() {
-		return pwd;
+	public String getHit() {
+		return hit;
 	}
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
+	public void setHit(String hit) {
+		this.hit = hit;
 	}
 	public Date getRegdate() {
 		return regdate;
@@ -57,11 +61,35 @@ public class BoardVO {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
-	public int getHit() {
-		return hit;
+	public int getGroup_id() {
+		return group_id;
 	}
-	public void setHit(int hit) {
-		this.hit = hit;
+	public void setGroup_id(int group_id) {
+		this.group_id = group_id;
 	}
-	   
+	public int getGroup_step() {
+		return group_step;
+	}
+	public void setGroup_step(int group_step) {
+		this.group_step = group_step;
+	}
+	public int getGroup_tab() {
+		return group_tab;
+	}
+	public void setGroup_tab(int group_tab) {
+		this.group_tab = group_tab;
+	}
+	public int getParent() {
+		return parent;
+	}
+	public void setParent(int parent) {
+		this.parent = parent;
+	}
+	public int getDegree() {
+		return degree;
+	}
+	public void setDegree(int degree) {
+		this.degree = degree;
+	}
+    
 }

@@ -1,70 +1,134 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 <style type="text/css">
-.row{
-   margin: 0px auto;
-   width: 700px;
+.btn-group .btn {
+	transition: background-color .3s ease;
 }
-h1{
-     text-align:center;
+
+.panel-table .panel-body {
+	padding: 0;
+}
+
+.table>thead>tr>th {
+	border-bottom: none;
+}
+
+.panel-footer, .panel-table .panel-body .table-bordered {
+	border-style: none;
+	margin: 0;
+}
+
+.panel-table .panel-body .table-bordered>thead>tr>th:first-of-type {
+	text-align: center;
+	width: 50px;
+}
+
+.panel-table .panel-body .table-bordered>thead>tr>th.col-tools {
+	text-align: center;
+	width: 120px;
+}
+
+.panel-table .panel-body .table-bordered>thead>tr>th:last-of-type,
+	.panel-table .panel-body .table-bordered>tbody>tr>td:last-of-type {
+	border-right: 0;
+}
+
+.panel-table .panel-body .table-bordered>thead>tr>th:first-of-type,
+	.panel-table .panel-body .table-bordered>tbody>tr>td:first-of-type {
+	border-left: 0;
+}
+
+.panel-table .panel-body .table-bordered>tbody>tr:first-of-type>td {
+	border-bottom: 0;
+}
+
+.panel-table .panel-body .table-bordered>thead>tr:first-of-type>th {
+	border-top: 0;
+}
+
+.pagination>li>a, .pagination>li>span {
+	border-radius: 50% !important;
+	margin: 0 5px;
+}
+
+.pagination {
+	margin: 0;
+}
+
+.navbar-header {
+	margin-left: 0px;
 }
 </style>
+
 </head>
 <body>
-  <div class="container">
-    <div class="row">
-      <h1>±€æ≤±‚</h1>
-      <!-- 
+
+
+
+	<!-- headerÎûë Ïó∞Í≤∞Îêú ÌïòÎã® Î∂ÄÎ∂Ñ ÎÅù -->
+
+	<div id="fh5co-work-section">
+		<div class="container">
+			<div class="row">
+				<div
+					class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+					<h3>Í≤åÏãúÍ∏Ä ÏûëÏÑ±</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="container">
+				<div class="row">
+					<h1>Í∏ÄÏì∞Í∏∞</h1>
+					<!-- 
             .do => DispatcherServlet => BoardModel
        -->
-      <form method=post action="#">
-      <table class="table table-hover">
-       <tr>
-        <td width="15%" class="success text-right">¿Ã∏ß</td>
-        <td width="85%" class="text-left">
-         <input type=text name=name size=15 required>
-        </td>
-       </tr>
-       
-       <tr>
-        <td width="15%" class="success text-right">¡¶∏Ò</td>
-        <td width="85%" class="text-left">
-         <input type=text name=subject size=45 required>
-        </td>
-       </tr>
-       
-       <tr>
-        <td width="15%" class="success text-right">≥ªøÎ</td>
-        <td width="85%" class="text-left">
-         <textarea rows="10" cols="50" name=content required></textarea>
-        </td>
-       </tr>
-       
-       <tr>
-        <td width="15%" class="success text-right">∫Òπ–π¯»£</td>
-        <td width="85%" class="text-left">
-         <input type="password" name=pwd size=10 required>
-        </td>
-       </tr>
-       
-       <tr>
-        <td colspan="2" class="text-center">
-         <input type="submit" class="btn btn-sm btn-primary"
-          value="±€æ≤±‚" id="writeBtn">
-         <input type="button" class="btn btn-sm btn-primary"
-          value="√Îº“" onclick="javascript:history.back()">
-        </td>
-       </tr>
-       
-      </table>
-      </form>
-    </div>
-  </div>
+					<form method=post action="insert_ok.do">
+						<table class="table table-hover">
+							<tr>
+								<td width="15%" class="success text-right">Ïù¥Î¶Ñ</td>
+								<td width="85%" class="text-left"><input type=text
+									name=email size=15 required></td>
+							</tr>
+
+							<tr>
+								<td width="15%" class="success text-right">Ï†úÎ™©</td>
+								<td width="85%" class="text-left"><input type=text
+									name=title size=45 required></td>
+							</tr>
+
+							<tr>
+								<td width="15%" class="success text-right">ÎÇ¥Ïö©</td>
+								<td width="85%" class="text-left"><textarea rows="10"
+										cols="50" name=content required></textarea></td>
+							</tr>
+
+							<tr>
+								<td colspan="2" class="text-center"><input type="submit"
+									class="btn btn-sm btn-primary" value="Í∏ÄÏì∞Í∏∞" id="writeBtn">
+									<input type="button" class="btn btn-sm btn-primary" value="Ï∑®ÏÜå"
+									onclick="javascript:history.back()"></td>
+							</tr>
+
+						</table>
+					</form>
+				</div>
+			</div>
 </body>
 </html>

@@ -106,7 +106,7 @@
 				
 				<tr>
 					<td class="success text-center" width="20%">이름</td>
-					<td class="text-center" width="30%">${vo.name }</td>
+					<td class="text-center" width="30%">${vo.email }</td>
 					<td class="success text-center" width="20%">조회수</td>
 					<td class="text-center" width="30%">${vo.hit }</td>
 				</tr>
@@ -129,7 +129,7 @@
 							delete.do?no=1
 								= BoardModel = delete.jsp
 						 -->
-						<a href="list.do" class="btn btn-sm btn-warning">목록</a>
+						<a href="qnaboard.do" class="btn btn-sm btn-warning">목록</a>
 					</td>
 				</tr>
 			</table>

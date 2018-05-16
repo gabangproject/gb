@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.gabang.vo.BoardVO;
+import com.gabang.vo.*;
 
 import java.io.*;// XML파일 읽기 = 파싱요청 
 

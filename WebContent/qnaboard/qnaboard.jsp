@@ -169,7 +169,7 @@
 											<td>${vo.email }</td>
 											<td>
 												<fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/>
-											</td>
+											</td> 
 											<td>${vo.hit }</td>
 										</tr>
 									</c:forEach>
@@ -185,15 +185,18 @@
 										<nav aria-label="Page navigation" class="text-center">
 							<!-- 좌측 우측 넘기는거  -->
 											<ul class="pagination">
-											<c:if test="${ curpage=1}">
-												<li><a href="${curpage-1 }" aria-label="Previous"> 
+											<c:if test="${ curpage!=1}">
+												<li><a href="qnaboard.do?page=${curpage-1 }" aria-label="Previous"> 
 												◀
 												</a></li>
 												</c:if>
-												<c:if test="${curpage<=total }"></c:if>
-												<li><a href="${curpage+1 }" aria-label="Next"> 
+												
+												
+												<c:if test="${curpage<totalpage }">
+												<li><a href="qnaboard.do?page=${curpage+1 }" aria-label="Next"> 
 												▶
 												</a></li>
+												</c:if>
 											</ul>
 
 										</nav>

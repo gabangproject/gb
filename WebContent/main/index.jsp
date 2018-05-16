@@ -8,7 +8,6 @@
 </head>
 <script type="text/javascript">
 location.href="main.do";
-//왜안되는거져 ㅠㅠ
 </script>
 <body>
 

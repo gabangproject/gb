@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- PreparedStatement , ResultSet -->
+<!-- 
+     namespace : package
+     히히
+     <select> : select
+        id : sql문장을 찾기 위한 구분자 = 중복이 없는 값
+        resultType : 결과값 설정 
+          SELECT * FROM board => BoardVO
+          SELECT pwd FROM board => String
+          SELECT COUNT(*) FROM board => int
+        parameterType
+          SELECT * FROM board WHERE no=? => int
+          SELECT * FROM board WHERE name=?,?,?,? = BoardVO
+          => resultType : 리턴형
+             parameterType : 한개만 지정 (매개변수)
+             =============
+                           전송하는 데이터 여러개 = BoardVO에 존재하지 않는 데이터
+             WHERE num BETWEEN ? AND ?
+                start,end ==> Map
+                map.put(end,10) 
+                map.put(start,1) => #{start}
+                map.put(end,10)  => #{end}
+             => ? => #{변수명,키명}
+                     ${컬럼명,테이블명} => WHERE name LIKE '%데이터%'
+                                       WHERE ${fs} LIKE '%#{ss}%'
+     <insert> : insert
+     <update> : update
+     <delete> : delete
+     <sql>    : 반복수행하는 SQL문장이 있는 경우에 사용 
+     <statement> : 혼합 
+     
+     <result name = "irum" column ="name">
+ -->
+<mapper namespace="com.gabang.vo.board-mapper">
+   <select id="boardListData" resultType="BoardVO" parameterType="java.util.Map">
+     SELECT no,title,email,regdate,hit,num
+     FROM (SELECT no,title,email,regdate,hit,rownum as num
+     FROM (SELECT no,title,email,regdate,hit 
+     FROM qna ORDER BY no DESC))
+     WHERE num BETWEEN #{start} AND #{end}
+     <!-- 
+         WHERE num BETWEEN ? AND ?
+         ps.setInt(1,map.get("start"))
+         ps.setInt(2,map.get("end"))
+      -->
+   </select>
+   <!-- 
+        총페이지 읽기
+    -->
+   <select id="boardTotalPage" resultType="int">
+     SELECT CEIL(COUNT(*)/10) FROM qna
+   </select>
+   
+   <insert id="boardInsert" parameterType="BoardVO">
+     INSERT INTO qna(no,email,title,content,hit) VALUES(
+     (SELECT NVL(MAX(no)+1,1) FROM qna),
+     #{email},#{title},#{content},0
+     )
+   </insert>
+   
+   
+<!--    
+   content 상세보기
+   <sql id = "where-no">
+   		WHERE no = #{no}
+   </sql>
+   
+	   <update id="hitIncrement">
+	   	UPDATE freeboard SET
+	   	hit = hit+1
+	   	<include refid="where-no"/>
+	   </update>
+   
+   
+   <select id="boardContentData" resultType="BoardVO" parameterType="int">
+   		SELECT no, name, subject, content, regdate, hit
+   		FROM freeboard
+   		<include refid="where-no"/>
+   </select>
+   
+   수정하기
+   <select id="boardGetPwd" resultType="String" parameterType="int">
+   	SELECT pwd FROM freeboard
+   	<include refid="where-no"/>
+   </select>
+   
+   
+   <update id="boardUpdate" parameterType="BoardVO">
+   	UPDATE freeboard SET
+   	name =#{name},subject=#{subject}, content=#{content}
+   	WHERE no = #{no}
+   </update>
+   삭제 
+   <delete id="boardDelete" parameterType="int">
+		DELETE FROM freeboard
+		<include refid="where-no"/>
+   </delete> -->
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

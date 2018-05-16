@@ -1,4 +1,4 @@
-package com.sist.dao;
+package com.gabang.vo;
 import java.util.*;
 // MyBatis => column명 = 변수명 
 // column 데이터형 = 변수의 데이터형

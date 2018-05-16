@@ -150,11 +150,11 @@
 									class="table table-striped table-bordered table-list">
 									<thead>
 										<tr>
-											<th class="col-text">번호</th>
-											<th class="col-text">제목</th>
-											<th class="col-text">작성자</th>
-											<th class="col-text">작성일</th>
-											<th class="col-text">조회수</th>
+											<th class="col-text" width="10%">번호</th>
+											<th class="col-text" width="45%">제목</th>
+											<th class="col-text" width="15%">작성자</th>
+											<th class="col-text" width="20%">작성일</th>
+											<th class="col-text" width="10%">조회수</th>
 										</tr>
 									</thead>
 									<tbody>

@@ -8,6 +8,7 @@
 </head>
 <script type="text/javascript">
 location.href="main.do";
+//»Æ¿Œ
 </script>
 <body>
 

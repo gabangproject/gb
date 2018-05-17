@@ -72,6 +72,7 @@ public class BoardModel {
 		vo.setTitle(title);
 		vo.setContent(content);
 		BoardDAO.boardInsert(vo);
+		
 		return "redirect:qnaboard.do";
 	}
 
@@ -99,7 +100,7 @@ public class BoardModel {
 		BoardDAO.boardUpdate(vo);
 		
 		request.setAttribute("no", no);
-		//request.setAttribute("main_jsp", "../qnaboard/update.jsp");
+		
 		return "redirect:content.do?no="+no;
 	}
 
@@ -111,5 +112,13 @@ public class BoardModel {
 		
 		request.setAttribute("no", no);
 		return "redirect:qnaboard.do";
+	}
+	@RequestMapping("main/reply.do")
+	public String replyInsert(HttpServletRequest request) {
+		String no = request.getParameter("no");
+		String curpage = request.getParameter("page");
+		
+		request.setAttribute("main_jsp", "../qnaboard/reply.jsp");
+		return "main.jsp";
 	}
 }

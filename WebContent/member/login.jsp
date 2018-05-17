@@ -127,7 +127,7 @@ function login()
                 <form class="form-signin" method=post action="../main/login_ok.do">
                 <input type="text" class="form-control" name="email" placeholder="Email" required autofocus >
                 <input type="password" class="form-control" name="pwd" placeholder="Password" required>
-                <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="login()">로그인</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" >로그인</button>
                 <label class="checkbox pull-left">
                     <input type="checkbox" value="remember-me">Remember me
                 </label>

@@ -19,7 +19,6 @@
 @import
 	url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700')
 	;
-
 h2 {
 	float: left;
 	width: 100%;
@@ -159,6 +158,11 @@ h2 a {
 							
 							// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 							var map = new daum.maps.Map(mapContainer, mapOption); 
+							
+							function getInfo() {
+							    // 지도의 현재 중심좌표를 얻어옵니다 
+							    var center = map.getCenter();
+							}
 						</script>
 						 
 						<!-- 매물들의 리스트 출력 부분 -->

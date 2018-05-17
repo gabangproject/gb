@@ -46,13 +46,17 @@ public class BoardModel {
 		String no = request.getParameter("no");
 		BoardVO vo = new BoardVO();
 		vo = BoardDAO.boardContentData(Integer.parseInt(no));
+		String page = request.getParameter("page");
 		request.setAttribute("vo", vo);
+		request.setAttribute("curpage", page);
 		request.setAttribute("main_jsp", "../qnaboard/content.jsp");
 		return "main.jsp";
 	}
 
 	@RequestMapping("main/insert.do")
 	public String boardInsert(HttpServletRequest request) {
+		String page = request.getParameter("page");
+		request.setAttribute("curpage", page);
 		request.setAttribute("main_jsp", "../qnaboard/insert.jsp");
 		return "main.jsp";
 	}
@@ -60,12 +64,11 @@ public class BoardModel {
 	@RequestMapping("main/insert_ok.do")
 	public String boardInsertOk(HttpServletRequest request) throws Exception {
 		request.setCharacterEncoding("EUC-KR");
-		String email = request.getParameter("email");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		// DB¿¬µ¿
 		BoardVO vo = new BoardVO();
-		vo.setEmail(email);
+
 		vo.setTitle(title);
 		vo.setContent(content);
 		BoardDAO.boardInsert(vo);

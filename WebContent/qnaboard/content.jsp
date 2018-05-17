@@ -138,7 +138,7 @@
 								<a href="update.do?no=${vo.no }" class="btn btn-sm btn-primary" id="update">수정</a>
 								<a href="#" class="btn btn-sm btn-warning" id="delBtn" >삭제</a>
 							</c:if> 
-							 <a href="qnaboard.do" class="btn btn-sm btn-warning">목록</a>
+							 <a href="qnaboard.do?page=${curpage }" class="btn btn-sm btn-warning">목록</a>
 						</td>
 					</tr>
 						<td class="text-right" id="del" style="display: none">

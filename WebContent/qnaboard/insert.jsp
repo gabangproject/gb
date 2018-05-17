@@ -102,12 +102,6 @@
 					<form method=post action="insert_ok.do">
 						<table class="table table-hover">
 							<tr>
-								<td width="15%" class="success text-right">이름</td>
-								<td width="85%" class="text-left"><input type=text
-									name=email size=15 required></td>
-							</tr>
-
-							<tr>
 								<td width="15%" class="success text-right">제목</td>
 								<td width="85%" class="text-left"><input type=text
 									name=title size=45 required></td>
@@ -120,10 +114,10 @@
 							</tr>
 
 							<tr>
-								<td colspan="2" class="text-center"><input type="submit"
-									class="btn btn-sm btn-primary" value="글쓰기" id="writeBtn">
-									<input type="button" class="btn btn-sm btn-primary" value="취소"
-									onclick="javascript:history.back()"></td>
+								<td colspan="2" class="text-center">
+								<input type="submit" class="btn btn-sm btn-primary" value="글쓰기" id="writeBtn">
+								<input type="button" class="btn btn-sm btn-primary" value="취소" onclick="javascript:history.back()"></td>
+								
 							</tr>
 
 						</table>

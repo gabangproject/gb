@@ -31,25 +31,52 @@ public class MemberModel {
 		request.setCharacterEncoding("EUC-KR");
 		String email=request.getParameter("email");
 		String pwd=request.getParameter("pwd");
+		MemberVO vo=new MemberVO();
+		String db_pwd="";
+		String nick="";
 		
-		int idCheck=MemberDAO.idCheck(email);
+		//id 존재 여부 체크
+		int loginIdCheck=MemberDAO.loginIdCheck(email);
 		
-		
-		request.setAttribute("idCheck", idCheck);
-		
-		MemberVO vo=MemberDAO.pwdCheck(email);
-		
-		String db_pwd=vo.getPwd();
-		String nick=vo.getNick();
-		request.setAttribute("pwd", pwd);
-		request.setAttribute("db_pwd",db_pwd );
-		
-		if(idCheck==1&db_pwd.equals(pwd))
+		//id가 있으면
+		if(loginIdCheck==1)
 		{
-			HttpSession session=request.getSession();
-			session.setAttribute("id", email);
-			session.setAttribute("nick", nick);
+			//비밀번호 체크
+			vo=MemberDAO.loginPwdCheck(email);
+			
+			db_pwd=vo.getPwd();
+			nick=vo.getNick();
+			
+			//비번 체크
+			if(pwd.equals(db_pwd))
+			{
+				HttpSession session=request.getSession();
+				session.setAttribute("id", email);
+				session.setAttribute("nick", nick);
+				request.setAttribute("pwd", pwd);
+				request.setAttribute("db_pwd",db_pwd );
+			}
+			else 
+			{	//비번이 다르면
+				request.setAttribute("pwd", pwd);
+				request.setAttribute("db_pwd",db_pwd );
+			}
+			
 		}
+		else 
+		{
+			//id 존재 여부를  보냄(있으면 1 없으면 0)
+			request.setAttribute("loginIdCheck", loginIdCheck);
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		return "../member/login_ok.jsp";
 	}
@@ -63,7 +90,12 @@ public class MemberModel {
 	}
 	
 	
-	
+	@RequestMapping("main/maemul_upload.do")
+	public String maemul_upload(HttpServletRequest request)
+	{
+		request.setAttribute("main_jsp", "../member/maemul_upload.jsp");
+		return "main.jsp";
+	}
 	
 	
 	@RequestMapping("main/join.do")

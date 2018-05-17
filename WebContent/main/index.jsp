@@ -8,7 +8,7 @@
 </head>
 <script type="text/javascript">
 location.href="main.do";
-//확인
+//확인하시오
 </script>
 <body>
 

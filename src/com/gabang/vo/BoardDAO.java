@@ -126,24 +126,12 @@ public class BoardDAO {
 	   }
 	   return vo;
    }
-   /*public static BoardVO boardUpdate(BoardVO vo) {
+   public static void boardUpdate(BoardVO vo) {
 	   boolean bCheck= false;
-	   BoardVO vos = new BoardVO();
-	   //HttpSession sessions;
 	   SqlSession session = null;
 	   try {
 		   session=ssf.openSession(true);
-		 //sessions.getAttribute(email);
-		 //sessions.getAttribute(pwd);
-		   String pwd = session.selectOne("boardGetPwd",vo.getNo());
-		   if(pwd.equals(vo.getPwd())) {
-			   bCheck=true;
-			   //UPDATE
-			   List<BoardVO>  vod=session.update("boardUpdate",vo);
-			   session.commit();
-		   }else {
-			   bCheck=false;
-		   }
+		   session.update("boardUpdate",vo);
 	   }catch (Exception e) {
 		   System.out.println("boardUpdate : " +e.getMessage());
 	   }finally {
@@ -151,23 +139,8 @@ public class BoardDAO {
 			   session.close();
 		   }
 	   }
-	   return vos;
-   }*/
-/*
-   public static String boardGetPwd(int no) {
-	   String pwd = "";
-	   SqlSession session = null;
-	   try {
-		   session = ssf.openSession();
-		   pwd = session.selectOne("boardGetPwd", no);
-	   }catch (Exception e) {
-		   System.out.println("boardGetPwd : " +e.getMessage());
-	   }finally {
-		   if(session!= null)
-			   session.close();
-	   }
-	   return pwd;
    }
+
    public static void boardDelete(int no) {
 	   SqlSession session = null;
 	   try {
@@ -180,5 +153,5 @@ public class BoardDAO {
 			   session.close();
 		   }
 	   }
-   }*/
+   }
 }

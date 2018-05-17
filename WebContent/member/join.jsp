@@ -15,7 +15,14 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
+<script type="text/javascript">
+function openIdChk(){
+    
+    window.name = "parentForm";
+    window.open("../member/idcheck.jsp",
+            "chkForm", "width=500, height=300, resizable = no, scrollbars = no");    
+}
+</script>
 <!-- 매물등록 관련 bootstrap 끝 -->
 </head>
 <body>
@@ -24,7 +31,6 @@
 
 	
 	<!-- end:header-top -->
-
 <div id="fh5co-work-section" style="padding:98px">
 				<div class="container">
 					<div class="row">
@@ -41,8 +47,6 @@
 			<fieldset>
 				<form class="form-horizontal">
 
-
-
 					<!-- ID입력-->
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="Name">아이디</label>
@@ -52,7 +56,7 @@
 								required="">
 						</div>
 						<input type=button class='btn btn-sm' value='중복체크'
-							onclick="idcheck()">
+							onclick="openIdChk()">
 					</div>
 
 					<!-- 비밀번호 입력-->
@@ -137,7 +141,8 @@
 								placeholder="-가 있을 경우 포함하여 입력해주세요" class="form-control input-md"
 								required="">
 						</div>
-						<input type=button class='btn btn-sm' value='등록'>
+						<input type="button" value="등록" class='btn btn-sm'>
+
 					</div>
 
 					<!-- 상호명 -->
@@ -175,27 +180,15 @@
 
 					<div class="form-group">
 						<div style="text-align: center">
-							<button id="login" name="login" class="btn">회원가입</button>
-							<button id="cencel" name="cencel" class="btn btn-primary">취소</button>
+							<input type=submit id="login" name="login" class="btn" value="가입">
+							<input type=button id="cencel" name="cencel" class="btn btn-primary" value="취소">
 						</div>
-					</div>
-					
+					</div>		
 				</form>
 			</fieldset>
-
 		</div>
-
-
 	</div>
-
 	<!-- 회원가입 및 중개사 등록 폼 끝 -->
-	
 </div>
-
-
-
-
-
 </body>
 </html>
-

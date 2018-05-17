@@ -26,9 +26,9 @@ public class MemberDAO {
 		   }
 	   }
 	   
-	   public static int idCheck(String email) 
+	   public static int loginIdCheck(String email) 
 	   {
-		   int idCheck=0;
+		   int loginIdCheck=0;
 		   SqlSession session=null;//connection연결=>sql문장수행 
 		   try
 		   {
@@ -37,7 +37,7 @@ public class MemberDAO {
 			   session=ssf.openSession();
 
 			   // 실행 결과값 받기 
-			   idCheck=session.selectOne("idCheck", email);
+			   loginIdCheck=session.selectOne("loginIdCheck", email);
 		   }catch(Exception ex)
 		   {
 			   System.out.println("boardListData : " +ex.getMessage());
@@ -47,10 +47,10 @@ public class MemberDAO {
 			   if(session!=null)
 				   session.close();
 		   }
-		   return idCheck;
+		   return loginIdCheck;
 	   }
 	   
-	   public static MemberVO pwdCheck(String email)
+	   public static MemberVO loginPwdCheck(String email)
 	   {
 		   MemberVO vo=new MemberVO();
 		   SqlSession session=null;//connection연결=>sql문장수행 
@@ -60,7 +60,7 @@ public class MemberDAO {
 			   session=ssf.openSession();
 
 			   // 실행 결과값 받기 
-			   vo=session.selectOne("pwdCheck", email);
+			   vo=session.selectOne("loginPwdCheck", email);
 		   }catch(Exception ex)
 		   {
 			   System.out.println("boardListData : " +ex.getMessage());

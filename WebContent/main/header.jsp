@@ -52,7 +52,7 @@ function idcheck()
 							<li><a href="main.jsp">Home</a></li>
 							<li><a href="notice.do" class="fh5co-sub-ddown">공지사항</a></li>
 							<li><a href="qnaboard.do">Q&A 게시판</a></li>
-							<li><a href="maemul_upload.jsp">매물등록</a></li>
+							
 						<c:if test="${sessionScope.id==null }">
 							<li><a onclick="idcheck()">회원가입 / 로그인</a></li>
 						</c:if>
@@ -62,7 +62,7 @@ function idcheck()
 								<ul class="fh5co-sub-menu">
 										<li><a href="list.jsp" target="_blank">찜목록 보기</a></li>
 										<li><a href="#" target="_blank">개인정보 관리</a></li>
-										<li><a href="#" target="_blank">매물등록</a></li>
+										<li><a href="maemul_upload.do" target="_blank">매물등록</a></li>
 								</ul>
 							</li>
 							<li><a href="logout.do">로그아웃</a></li>

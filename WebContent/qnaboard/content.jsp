@@ -123,8 +123,10 @@
 			<table class="table">
 				<tr>
 					<td class="text-right">
-						<a href="update.do?no=${vo.no }" class="btn btn-sm btn-primary">수정</a>
-						<a href="delete.do?no=${vo.no }" class="btn btn-sm btn-danger">삭제</a>
+						<c:if test="${sessionScope.id.equals(vo.email)}">
+							<a href="update.do?no=${vo.no }" class="btn btn-sm btn-primary">수정</a>
+							<a href="delete.do?no=${vo.no }" class="btn btn-sm btn-danger">삭제</a>
+						</c:if>
 						<!-- 
 							delete.do?no=1
 								= BoardModel = delete.jsp

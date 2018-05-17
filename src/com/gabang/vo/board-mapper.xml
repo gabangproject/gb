@@ -40,7 +40,7 @@
    
    
    <select id="boardContentData" resultType="BoardVO" parameterType="int">
-   		SELECT no, title, content
+   		SELECT no, title, content, email,regdate,hit
    		FROM qna
    		<include refid="where-no"/>
    </select>
@@ -53,7 +53,7 @@
    	<include refid="where-no"/>
    </select> -->
    
-   
+<!--    
     <update id="boardUpdate" parameterType="vo">
    	UPDATE qna SET
    	title=#{title}, content=#{content}
@@ -61,11 +61,11 @@
    </update> 
    
    
-   <!-- 삭제 --> 
+   삭제 
    <delete id="boardDelete" parameterType="int">
 		DELETE FROM freeboard
 		<include refid="where-no"/>
-   </delete>  
+   </delete>   -->
    
 </mapper>
 

@@ -126,7 +126,7 @@ public class BoardDAO {
 	   }
 	   return vo;
    }
-   /*public static BoardVO boardUpdate(BoardVO vo) {
+   public static BoardVO boardUpdate(BoardVO vo) {
 	   boolean bCheck= false;
 	   BoardVO vos = new BoardVO();
 	   //HttpSession sessions;
@@ -152,7 +152,7 @@ public class BoardDAO {
 		   }
 	   }
 	   return vos;
-   }*/
+   }
 /*
    public static String boardGetPwd(int no) {
 	   String pwd = "";

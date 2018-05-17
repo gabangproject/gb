@@ -4,69 +4,67 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.gabang.vo.board-mapper">
+	<!-- 게시물 -->
+	<select id="boardListData" resultType="BoardVO" parameterType="java.util.Map">
+		SELECT no,title,email,regdate,hit,num
+		FROM (SELECT
+		no,title,email,regdate,hit,rownum as num
+		FROM (SELECT
+		no,title,email,regdate,hit
+		FROM qna ORDER BY no DESC))
+		WHERE num BETWEEN
+		#{start} AND #{end}
+	</select>
 
-   <select id="boardListData" resultType="BoardVO" parameterType="java.util.Map">
-     SELECT no,title,email,regdate,hit,num
-     FROM (SELECT no,title,email,regdate,hit,rownum as num
-     FROM (SELECT no,title,email,regdate,hit 
-     FROM qna ORDER BY no DESC))
-     WHERE num BETWEEN #{start} AND #{end}
-   </select>
-   
-   <!-- 총페이지 읽기-->
-   <select id="boardTotalPage" resultType="int">
-     SELECT CEIL(COUNT(*)/10) FROM qna
-   </select>
-   
-   <insert id="boardInsert" parameterType="BoardVO">
-     INSERT INTO qna(no,email,title,content,hit) VALUES(
-     (SELECT NVL(MAX(no)+1,1) FROM qna),
-     #{email},#{title},#{content},0
-     )
-   </insert>
-   
-   
-   
-  <!--  content 상세보기-->
-   <sql id = "where-no">
-   		WHERE no = #{no}
-   </sql>
-   
-	   <update id="hitIncrement">
-	   	UPDATE qna SET
-	   	hit = hit+1
-	   	<include refid="where-no"/>
-	   </update>
-   
-   
-   <select id="boardContentData" resultType="BoardVO" parameterType="int">
-   		SELECT no, title, content, email,regdate,hit
-   		FROM qna
-   		<include refid="where-no"/>
-   </select>
- 
+	<!-- 총페이지 읽기 -->
+	<select id="boardTotalPage" resultType="int">
+		SELECT CEIL(COUNT(*)/10)
+		FROM qna
+	</select>
+	<!-- 새 게시물넣기 -->
+	<insert id="boardInsert" parameterType="BoardVO">
+		INSERT INTO
+		qna(no,email,title,content,hit) VALUES(
+		(SELECT NVL(MAX(no)+1,1) FROM
+		qna),
+		#{email},#{title},#{content},0
+		)
+	</insert>
 
 
-   <!-- 수정하기 -->
-<!--    <select id="boardGetPwd" resultType="String" parameterType="int">
-   	SELECT pwd FROM freeboard
-   	<include refid="where-no"/>
-   </select> -->
-   
-<!--    
-    <update id="boardUpdate" parameterType="vo">
-   	UPDATE qna SET
-   	title=#{title}, content=#{content}
-   	WHERE no = #{no}
-   </update> 
-   
-   
-   삭제 
-   <delete id="boardDelete" parameterType="int">
-		DELETE FROM freeboard
-		<include refid="where-no"/>
-   </delete>   -->
-   
+
+	<!-- content 상세보기 -->
+	<sql id="where-no">
+		WHERE no = #{no}
+	</sql>
+	<!-- 조회수증가 -->
+	<update id="hitIncrement">
+		UPDATE qna SET
+		hit = hit+1
+		<include refid="where-no" />
+	</update>
+
+	<!-- 상세보기 -->
+	<select id="boardContentData" resultType="BoardVO"
+		parameterType="int">
+		SELECT no, title, content, email, regdate, hit
+		FROM qna
+		<include refid="where-no" />
+	</select>
+
+	<!-- 업데이트 -->
+	<update id="boardUpdate" parameterType="BoardVO">
+		UPDATE qna SET
+		title=#{title}, content=#{content}
+		WHERE no = #{no}
+	</update>
+
+	<!-- 삭제 -->
+	<delete id="boardDelete" parameterType="int">
+		DELETE FROM qna
+		<include refid="where-no" />
+	</delete>
+
 </mapper>
 
 

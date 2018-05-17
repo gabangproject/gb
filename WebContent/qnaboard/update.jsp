@@ -111,10 +111,9 @@
 					</tr>
 
 					<tr>
-						<td colspan="2" class="text-center"><input type="submit"
-							class="btn btn-sm btn-primary" value="수정" id="writeBtn" disabled>
-							<input type="button" class="btn btn-sm btn-primary" value="취소"
-							onclick="javascript:history.back()"></td>
+						<td colspan="2" class="text-center">
+						<input type="submit" class="btn btn-sm btn-primary" value="수정" id="writeBtn">
+						<input type="button" class="btn btn-sm btn-primary" value="취소" onclick="javascript:history.back()"></td>
 					</tr>
 
 				</table>

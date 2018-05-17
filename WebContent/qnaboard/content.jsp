@@ -75,10 +75,22 @@
 }
 </style>
 
+<script type="text/javascript">
+	$(function() {
+		$('#delBtn').click(function() {
+			var txt = $('#delBtn').text();
+			if (txt == '삭제') {
+				$('#del').show();
+				$('#delBtn').text("취소");
+			} else {
+				$('#del').hide();
+				$('#delBtn').text("삭제");
+			}
+		});
+	});
+</script>
 </head>
 <body>
-
-
 
 	<!-- header랑 연결된 하단 부분 끝 -->
 
@@ -91,51 +103,53 @@
 				</div>
 			</div>
 		</div>
-	<div class="container">
-		<div class="row">
-			<h1>내용보기</h1>
-			<table class="table">
-				<tr>
-					<td class="success text-center" width="20%">번호</td>
-					<td class="text-center" width="30%">${vo.no }</td>
-					<td class="success text-center" width="20%">작성일</td>
-					<td class="text-center" width="30%">
-						<fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/>
-					</td>
-				</tr>
-				
-				<tr>
-					<td class="success text-center" width="20%">이름</td>
-					<td class="text-center" width="30%">${vo.email }</td>
-					<td class="success text-center" width="20%">조회수</td>
-					<td class="text-center" width="30%">${vo.hit }</td>
-				</tr>
-				
-				<tr>
-					<td class="success text-center" width="20%">제목</td>
-					<td colspan="3" class="text-left">${vo.title }</td>
-				</tr>
-				<tr>
-					<td class="text-left" valign="top" height="200">${vo.content }</td>
-					<td></td>
-				</tr>
-			</table>
-			<table class="table">
-				<tr>
-					<td class="text-right">
-						<c:if test="${sessionScope.id.equals(vo.email)}">
-							<a href="update.do?no=${vo.no }" class="btn btn-sm btn-primary">수정</a>
-							<a href="delete.do?no=${vo.no }" class="btn btn-sm btn-danger">삭제</a>
-						</c:if>
-						<!-- 
-							delete.do?no=1
-								= BoardModel = delete.jsp
-						 -->
-						<a href="qnaboard.do" class="btn btn-sm btn-warning">목록</a>
-					</td>
-				</tr>
-			</table>
+		<div class="container">
+			<div class="row">
+				<h1>내용보기</h1>
+				<table class="table">
+					<tr>
+						<td class="success text-center" width="20%">번호</td>
+						<td class="text-center" width="30%">${vo.no }</td>
+						<td class="success text-center" width="20%">작성일</td>
+						<td class="text-center" width="30%"><fmt:formatDate
+								value="${vo.regdate }" pattern="yyyy-MM-dd" /></td>
+					</tr>
+
+					<tr>
+						<td class="success text-center" width="20%">이름</td>
+						<td class="text-center" width="30%">${vo.email }</td>
+						<td class="success text-center" width="20%">조회수</td>
+						<td class="text-center" width="30%">${vo.hit }</td>
+					</tr>
+
+					<tr>
+						<td class="success text-center" width="20%">제목</td>
+						<td colspan="3" class="text-left">${vo.title }</td>
+					</tr>
+					<tr>
+						<td class="text-left" valign="top" height="200">${vo.content }</td>
+						<td></td>
+					</tr>
+				</table>
+ 				<table class="table">
+					<tr>
+						<td class="text-center">
+							<c:if test="${sessionScope.id.equals(vo.email)}">
+								<a href="update.do?no=${vo.no }" class="btn btn-sm btn-primary" id="update">수정</a>
+								<a href="#" class="btn btn-sm btn-warning" id="delBtn" >삭제</a>
+							</c:if> 
+							 <a href="qnaboard.do" class="btn btn-sm btn-warning">목록</a>
+						</td>
+					</tr>
+						<td class="text-right" id="del" style="display: none">
+							<form action="delete.do">
+								<input type=hidden name=no value="${vo.no}">
+								<input type=submit value="삭제" class="btn btn-sm btn-danger">
+							</form>
+						</td>
+				</table>
+
+			</div>
 		</div>
-	</div>
 </body>
 </html>

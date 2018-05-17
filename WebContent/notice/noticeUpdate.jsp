@@ -75,22 +75,10 @@
 }
 </style>
 
-<script type="text/javascript">
-	$(function() {
-		$('#delBtn').click(function() {
-			var txt = $('#delBtn').text();
-			if (txt == '삭제') {
-				$('#del').show();
-				$('#delBtn').text("취소");
-			} else {
-				$('#del').hide();
-				$('#delBtn').text("삭제");
-			}
-		});
-	});
-</script>
 </head>
 <body>
+
+
 
 	<!-- header랑 연결된 하단 부분 끝 -->
 
@@ -99,60 +87,39 @@
 			<div class="row">
 				<div
 					class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-					<h3>게시글 보기</h3>
+					<h3>게시물 수정</h3>
 				</div>
 			</div>
 		</div>
-		<div class="container">
-			<div class="row">
-				<h1>내용보기</h1>
-				<table class="table">
+	<div class="container">
+		<div class="row">
+			<h1>수정하기</h1>
+			<form method=post action="noticeUpdate_ok.do">
+				<table class="table table-hover">
+				
 					<tr>
-						<td class="success text-center" width="20%">번호</td>
-						<td class="text-center" width="30%">${vo.no }</td>
-						<td class="success text-center" width="20%">작성일</td>
-						<td class="text-center" width="30%"><fmt:formatDate
-								value="${vo.regdate }" pattern="yyyy-MM-dd" /></td>
+						<td width="15%" class="success text-right">제목</td>
+						<td width="85%" class="text-left">
+						<input type=text name=title size=45 required value="${vo.title }"></td>
+						<input type="hidden" name=no value="${vo.no }">
+						<input type="hidden" name=page value="${curpage }">
 					</tr>
 
 					<tr>
-						<td class="success text-center" width="20%">이름</td>
-						<td class="text-center" width="30%">${vo.email }</td>
-						<td class="success text-center" width="20%">조회수</td>
-						<td class="text-center" width="30%">${vo.hit }</td>
+						<td width="15%" class="success text-right">내용</td>
+						<td width="85%" class="text-left"><textarea rows="10"
+								cols="50" name=content required>${vo.content }</textarea></td>
 					</tr>
 
 					<tr>
-						<td class="success text-center" width="20%">제목</td>
-						<td colspan="3" class="text-left">${vo.title }</td>
+						<td colspan="2" class="text-center">
+						<input type="submit" class="btn btn-sm btn-primary" value="수정" id="writeBtn">
+						<input type="button" class="btn btn-sm btn-primary" value="취소" onclick="javascript:history.back()"></td>
 					</tr>
-					<tr>
-						<td class="text-left" valign="top" height="200">${vo.content }</td>
-						<td></td>
-					</tr>
+
 				</table>
- 				<table class="table">
-					<tr>
-						<td class="text-center">
-							<c:if test="${sessionScope.id.equals(vo.email)}">
-								<a href="update.do?no=${vo.no }&page=${curpage}" class="btn btn-sm btn-primary" id="update">수정</a>
-								<a href="#" class="btn btn-sm btn-warning" id="delBtn" >삭제</a>
-							</c:if> 
-							<a href="qnaboard.do?page=${curpage}" class="btn btn-sm btn-warning">목록</a>
-							<c:if test="${sessionScope.id!=null}">
-								<a href="reply.do?no=${vo.no }&page=${curpage}" class="btn btn-sm btn-info">답글달기</a>
-							</c:if>
-						</td>
-					</tr>
-						<td class="text-right" id="del" style="display: none">
-							<form action="delete.do">
-								<input type=hidden name=no value="${vo.no}">
-								<input type=submit value="삭제" class="btn btn-sm btn-danger">
-							</form>
-						</td>
-				</table>
-
-			</div>
+			</form>
 		</div>
+	</div>
 </body>
 </html>

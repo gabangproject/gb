@@ -6,14 +6,11 @@
 <mapper namespace="com.gabang.vo.board-mapper">
 	<!-- 게시물 -->
 	<select id="boardListData" resultType="BoardVO" parameterType="java.util.Map">
-		SELECT no,title,email,regdate,hit,num
-		FROM (SELECT
-		no,title,email,regdate,hit,rownum as num
-		FROM (SELECT
-		no,title,email,regdate,hit
-		FROM qna ORDER BY no DESC))
-		WHERE num BETWEEN
-		#{start} AND #{end}
+		SELECT no,title,email,regdate,hit,group_tab,num 
+		FROM (SELECT no,title,email,regdate,hit,group_tab,rownum as num
+		FROM (SELECT no,title,email,regdate,hit,group_tab
+		FROM qna ORDER BY group_id DESC, group_step ASC))
+		WHERE num BETWEEN #{start} AND #{end}
 	</select>
 
 	<!-- 총페이지 읽기 -->
@@ -23,11 +20,10 @@
 	</select>
 	<!-- 새 게시물넣기 -->
 	<insert id="boardInsert" parameterType="BoardVO">
-		INSERT INTO
-		qna(no,email,title,content,hit) VALUES(
-		(SELECT NVL(MAX(no)+1,1) FROM
-		qna),
-		#{email},#{title},#{content},0
+		INSERT INTO qna(no,email,title,content,hit,group_id) 
+		VALUES((SELECT NVL(MAX(no)+1,1) FROM qna),
+		#{email},#{title},#{content},0,
+		(SELECT NVL(MAX(GROUP_id)+1,1) FROM qna)
 		)
 	</insert>
 
@@ -64,7 +60,31 @@
 		DELETE FROM qna
 		<include refid="where-no" />
 	</delete>
-
+	
+	<!-- 답변의 답변 -->
+	<select id="boardReply1" resultType="BoardVO" parameterType="int">
+		SELECT group_id,group_step,group_tab
+		FROM qna
+		<include refid="where-no"/>
+	</select>
+	
+	<update id="boardReply2" parameterType="int">
+		UPDATE qna SET
+		group_step = #{gs+1}
+		WHERE group_id = #{gi} AND group_step>#{gs}
+	</update>
+	
+	<insert id="boardReply3" parameterType="BoardVO">
+		INSERT INTO qna(no,email,content,group_id,group_step,group_tab,parent)
+		VALUES((SELECT (MAX(no)+1,1) FROM qna),
+		#{email},#{content},#{group_id},#{group_step},#{group_tab},#{parent})
+	</insert>
+	
+	<update id="boardReply4" parameterType="BoardVO">
+		UPDATE qna SET
+		degree = (#{degree}+1)
+		WHERE no = #{no)
+	</update>
 </mapper>
 
 

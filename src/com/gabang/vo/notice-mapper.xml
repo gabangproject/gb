@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gabang.vo.notice-mapper">
+	<!-- 게시물 -->
+	<select id="noticeListData" resultType="NoticeVO" parameterType="java.util.Map">
+		SELECT no,title,email,regdate,num 
+		FROM (SELECT no,title,email,regdate,rownum as num
+		FROM (SELECT no,title,email,regdate
+		FROM notice ORDER BY no DESC))
+		WHERE num BETWEEN #{start} AND #{end}
+	</select>
+
+	<!-- 총페이지 읽기 -->
+	<select id="noticeTotalPage" resultType="int">
+		SELECT CEIL(COUNT(*)/10)
+		FROM notice
+	</select>
+	<!-- 새 게시물넣기 -->
+	<insert id="noticeInsert" parameterType="NoticeVO">
+		INSERT INTO notice(no,email,title,content) 
+		VALUES((SELECT NVL(MAX(no)+1,1) FROM notice),
+		#{email},#{title},#{content}
+		)
+	</insert>
+
+
+
+	<!-- content 상세보기 -->
+	<sql id="where-no">
+		WHERE no = #{no}
+	</sql>
+	
+	<!-- 상세보기 -->
+	<select id="noticeContentData" resultType="NoticeVO"
+		parameterType="int">
+		SELECT no, title, content, email, regdate
+		FROM notice
+		<include refid="where-no" />
+	</select>
+
+	<!-- 업데이트 -->
+	<update id="noticeUpdate" parameterType="NoticeVO">
+		UPDATE notice SET
+		title=#{title}, content=#{content}
+		WHERE no = #{no}
+	</update>
+
+	<!-- 삭제 -->
+	<delete id="noticeDelete" parameterType="int">
+		DELETE FROM notice
+		<include refid="where-no" />
+	</delete>
+</mapper>
+
+

@@ -35,8 +35,8 @@ public class BoardModel {
 		request.setAttribute("list", list);
 		request.setAttribute("curpage", curpage);
 		request.setAttribute("totalpage", totalpage);
-		session.getAttribute("id");
-		session.getAttribute("nick");
+		session.getAttribute("id"); //email
+		session.getAttribute("nick"); //nick
 		request.setAttribute("main_jsp", "../qnaboard/qnaboard.jsp");
 		return "main.jsp";
 	}
@@ -46,7 +46,10 @@ public class BoardModel {
 		String no = request.getParameter("no");
 		BoardVO vo = new BoardVO();
 		vo = BoardDAO.boardContentData(Integer.parseInt(no));
-		String page = request.getParameter("page");
+		
+		String pages = request.getParameter("page");
+		int page = Integer.parseInt(pages);
+		
 		request.setAttribute("vo", vo);
 		request.setAttribute("curpage", page);
 		request.setAttribute("main_jsp", "../qnaboard/content.jsp");
@@ -66,11 +69,14 @@ public class BoardModel {
 		request.setCharacterEncoding("EUC-KR");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
+		HttpSession session= request.getSession();
+		String email = (String) session.getAttribute("id");
 		// DB연동
 		BoardVO vo = new BoardVO();
 
 		vo.setTitle(title);
 		vo.setContent(content);
+		vo.setEmail(email);
 		BoardDAO.boardInsert(vo);
 		
 		return "redirect:qnaboard.do";
@@ -78,9 +84,11 @@ public class BoardModel {
 
 @RequestMapping("main/update.do")
 	public String boardUpdate(HttpServletRequest request) {
-		String no = request.getParameter("no"); // DB연동
+		String no = request.getParameter("no");
+		String page = request.getParameter("page");
 		BoardVO vo = BoardDAO.boardUpdateData(Integer.parseInt(no)); // 결과값 전송
 		request.setAttribute("vo", vo);
+		request.setAttribute("curpage", page);
 		request.setAttribute("main_jsp", "../qnaboard/update.jsp");
 		return "main.jsp";
 	}
@@ -91,7 +99,7 @@ public class BoardModel {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String no = request.getParameter("no");
-
+		String page = request.getParameter("page");
 		BoardVO vo = new BoardVO();
 		vo.setNo(Integer.parseInt(no));
 		vo.setTitle(title);
@@ -101,7 +109,7 @@ public class BoardModel {
 		
 		request.setAttribute("no", no);
 		
-		return "redirect:content.do?no="+no;
+		return "redirect:content.do?no="+no+"&page="+page;
 	}
 
 	@RequestMapping("main/delete.do")
@@ -118,7 +126,26 @@ public class BoardModel {
 		String no = request.getParameter("no");
 		String curpage = request.getParameter("page");
 		
+		request.setAttribute("no", no);
+		request.setAttribute("curpage", curpage);
 		request.setAttribute("main_jsp", "../qnaboard/reply.jsp");
 		return "main.jsp";
+	}
+	@RequestMapping("main/reply_ok.do")
+	public String replyInsertData(HttpServletRequest request) {
+		String no = request.getParameter("no");
+		String curpage = request.getParameter("page");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		
+		BoardVO vo = new BoardVO();
+		vo.setNo(Integer.parseInt(no));
+		vo.setTitle(title);
+		vo.setContent(content);
+		//BoardDAO.boardReply(Integer.parseInt(no),vo);
+		
+		request.setAttribute("no", no);
+		request.setAttribute("curpage", curpage);
+		return "redirect:qnaboard.do";
 	}
 }

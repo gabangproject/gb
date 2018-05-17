@@ -103,14 +103,14 @@
 						<table class="table table-hover">
 							<tr>
 								<td width="15%" class="success text-right">제목</td>
-								<td width="85%" class="text-left"><input type=text
-									name=title size=45 required></td>
+								<td width="85%" class="text-left">
+								<input type=text name=title size=45 required></td>
 							</tr>
 							
 							<tr>
 								<td width="15%" class="success text-right">내용</td>
-								<td width="85%" class="text-left"><textarea rows="10"
-										cols="50" name=content required></textarea></td>
+								<td width="85%" class="text-left">
+								<textarea rows="10" cols="50" name=content required></textarea></td>
 							</tr>
 
 							<tr>

@@ -48,6 +48,7 @@ public class BoardDAO {
 	   }
 	   return list;
    }
+   //토탈페이지
    public static int boardTotalPage()
    {
 	   int total=0;
@@ -69,7 +70,7 @@ public class BoardDAO {
 	   }
 	   return total;
    }
-
+   // 글쓰기
    public static void boardInsert(BoardVO vo)
    {
 	   SqlSession session=null;
@@ -154,4 +155,19 @@ public class BoardDAO {
 		   }
 	   }
    }
+   public static void boardReply(int no,BoardVO vo) {
+	   SqlSession session = null;
+	   try {
+		   session = ssf.openSession();
+		   session.selectOne("boardReplyList",no);
+		   
+	   }catch (Exception e) {
+		   System.out.println(e.getMessage());
+	   }finally {
+		   if(session!=null) {
+			   session.close();
+		   }
+	   }
+   }
+   
 }

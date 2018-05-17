@@ -21,10 +21,10 @@ public class BoardVO {
     private String hit; //조회수
     private Date regdate; //등록일
     private int group_id; //그룹번호
-    private int group_step; //그룹에서 번호
-    private int group_tab; // 답변 
-    private int parent; //?
-    private int degree;  //??
+    private int group_step; //그룹에서 순서
+    private int group_tab; // 답변(띄는거)
+    private int parent; // root (상위)
+    private int degree;  // depth(답글갯수)
 	public int getNo() {
 		return no;
 	}

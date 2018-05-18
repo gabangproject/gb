@@ -5,11 +5,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-</head>
-<script type="text/javascript">
-location.href="main.do";
-//안돼~123
+<script>
+
+/* var page='${cmd}';
+alert(page); */
+
+location.href=parent.document.location.href;
+
+
 </script>
+</head>
 <body>
 
 </body>

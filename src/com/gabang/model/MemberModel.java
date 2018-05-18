@@ -18,6 +18,7 @@ import com.sun.xml.internal.ws.client.SenderException;
 @Controller
 public class MemberModel {
 	
+	
 	@RequestMapping("main/login.do")
 	public String LoginData(HttpServletRequest request)
 	{
@@ -29,6 +30,10 @@ public class MemberModel {
 	public String LoginOk(HttpServletRequest request) throws Exception
 	{	
 		request.setCharacterEncoding("EUC-KR");
+		
+		String cmd=request.getRequestURI();//현재 uri를 가져옴
+		cmd="../"+cmd.substring(cmd.indexOf("/",1)+1);
+		
 		String email=request.getParameter("email");
 		String pwd=request.getParameter("pwd");
 		MemberVO vo=new MemberVO();
@@ -55,6 +60,7 @@ public class MemberModel {
 				session.setAttribute("nick", nick);
 				request.setAttribute("pwd", pwd);
 				request.setAttribute("db_pwd",db_pwd );
+				request.setAttribute("cmd", cmd);
 			}
 			else 
 			{	//비번이 다르면
@@ -71,22 +77,26 @@ public class MemberModel {
 		}
 		
 		
-		
-		
-		
-		
-		
-		
+	
 		
 		return "../member/login_ok.jsp";
 	}
+	
+	
 	@RequestMapping("main/logout.do")
 	public String logout(HttpServletRequest request)
 	{
 		HttpSession session=request.getSession();
 		session.invalidate();
+		/*String cmd=request.getRequestURI();//현재 uri를 가져옴
+		//cmd="../"+cmd.substring(cmd.indexOf("/",1)+1);
+		System.out.println(cmd);
+		String page=request.getParameter("page");
+		System.out.println(page);
+		page="../"+page.substring(page.lastIndexOf("/GaBang/")+8);
+		System.out.println(page);*/
 		request.setAttribute("main_jsp", "home.jsp");
-		return "index.jsp";
+		return "main.jsp";
 	}
 	
 	

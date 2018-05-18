@@ -68,22 +68,22 @@
 		<include refid="where-no"/>
 	</select>
 	
-	<update id="boardReply2" parameterType="int">
+	<update id="boardReply2" parameterType="BoardVO">
 		UPDATE qna SET
-		group_step = #{gs+1}
-		WHERE group_id = #{gi} AND group_step>#{gs}
+		group_step = #{group_step}
+		WHERE group_id = #{group_id} AND group_step>#{group_step}
 	</update>
 	
 	<insert id="boardReply3" parameterType="BoardVO">
-		INSERT INTO qna(no,email,content,group_id,group_step,group_tab,parent)
-		VALUES((SELECT (MAX(no)+1,1) FROM qna),
-		#{email},#{content},#{group_id},#{group_step},#{group_tab},#{parent})
+		INSERT INTO qna(no,email,title,content,group_id,group_step,group_tab,parent)
+		VALUES((SELECT (MAX(no)+1,1) FROM qna),	
+		#{email},#{title},#{content},#{group_id},#{group_step},#{group_tab},#{parent})
 	</insert>
 	
 	<update id="boardReply4" parameterType="BoardVO">
 		UPDATE qna SET
-		degree = (#{degree}+1)
-		WHERE no = #{no)
+		degree = #{degree}
+		<include refid="where-no"/>
 	</update>
 </mapper>
 

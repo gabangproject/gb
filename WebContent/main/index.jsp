@@ -8,7 +8,7 @@
 </head>
 <script type="text/javascript">
 location.href="main.do";
-//공지잘됩니다.1
+//공지잘됩니다.1~
 </script>
 <body>
 

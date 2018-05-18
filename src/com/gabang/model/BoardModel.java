@@ -123,6 +123,7 @@ public class BoardModel {
 	}
 	@RequestMapping("main/reply.do")
 	public String replyInsert(HttpServletRequest request) {
+		
 		String no = request.getParameter("no");
 		String curpage = request.getParameter("page");
 		
@@ -132,7 +133,8 @@ public class BoardModel {
 		return "main.jsp";
 	}
 	@RequestMapping("main/reply_ok.do")
-	public String replyInsertData(HttpServletRequest request) {
+	public String replyInsertData(HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("EUC-KR");
 		String pno = request.getParameter("no");
 		String curpage = request.getParameter("page");
 		String title = request.getParameter("title");
@@ -151,7 +153,6 @@ public class BoardModel {
 		BoardDAO.boardReply(Integer.parseInt(pno),vo);
 		request.setAttribute("no", pno);
 		request.setAttribute("curpage", curpage);
-		
 		
 		return "redirect:qnaboard.do";
 	}

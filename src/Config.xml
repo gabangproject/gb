@@ -9,6 +9,8 @@
     <!-- type속성 : 클래스 지정  -->
     <typeAlias type="com.gabang.vo.BoardVO" alias="BoardVO"/>
     <typeAlias type="com.gabang.vo.MemberVO" alias="MemberVO"/>
+    <typeAlias type="com.gabang.vo.PropertyAddrVO" alias="PropertyAddrVO"/>
+    <typeAlias type="com.gabang.vo.MaemoolVO" alias="MaemoolVO"/>
     <typeAlias type="com.gabang.vo.NoticeVO" alias="NoticeVO"/>
   </typeAliases>
   <environments default="development">
@@ -60,5 +62,6 @@
      <mapper resource="com/gabang/vo/notice-mapper.xml"/>
     <mapper resource="com/gabang/vo/board-mapper.xml"/>
     <mapper resource="com/gabang/vo/member-mapper.xml"/>
+    <mapper resource="com/gabang/vo/maemool-mapper.xml"/>
   </mappers>
 </configuration>

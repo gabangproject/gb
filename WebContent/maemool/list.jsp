@@ -19,7 +19,6 @@
 @import
 	url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700')
 	;
-
 h2 {
 	float: left;
 	width: 100%;
@@ -159,12 +158,17 @@ h2 a {
 							
 							// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 							var map = new daum.maps.Map(mapContainer, mapOption); 
+							
+							/* function getInfo() {
+							    // 지도의 현재 중심좌표를 얻어옵니다 
+							    var center = map.getCenter();
+							} */
 						</script>
 						 
 						<!-- 매물들의 리스트 출력 부분 -->
 						<div class="col-md-5 listing-block" style="width:50%;display:inline-block">
 	
-							<c:forEach var="i" items="${theme}">
+							<c:forEach var="i" items="${geoList}">
 								<div class="media">
 									<div class="fav-box">
 										<i class="fa fa-heart-o" aria-hidden="true"></i>
@@ -175,14 +179,14 @@ h2 a {
 										alt="Generic placeholder image">
 									<div class="media-body pl-3">
 										<div class="price">
-											$799,000<small>New York</small>
+											$799,000<small>${i.addr}</small>
 										</div>
 										<div class="stats">
 											<span>
-												<i class="fa fa-arrows-alt">183줄</i>1678 Sq ft
+												위도<i class="fa fa-arrows-alt">${i.x_position}</i>
 											</span>
 											<span>
-												<i class="fa fa-bath">186줄</i>2 Beadrooms
+												경도<i class="fa fa-bath">${i.y_position}</i>
 											</span>
 										</div>
 										<div class="address">4062 Walnut Hill Drive Cincinnati</div>

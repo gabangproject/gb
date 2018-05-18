@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gabang.vo.maemool-mapper">
+	<select id="getGeoInfo_temp" resultType="PropertyAddrVO">
+		SELECT num, x_position, y_position, addr FROM property_addr_temp
+	</select>
+	<select id="getDeposit_temp" resultType="MaemoolVO">
+		SELECT num, deposit FROM maemool_temp
+	</select>
+</mapper>

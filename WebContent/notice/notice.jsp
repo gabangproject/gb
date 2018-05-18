@@ -170,8 +170,8 @@
 										</nav>
 									</div>
 							<!-- 글쓰기 -->
-				<%-- 			${sessionScope.id.equals(${admin})}
-							<c:if test=""> --%>
+				 			
+							<c:if test="${sessionScope.id=='admin'}"> 
 									<div class="col col-xs-3">
 										<div class="pull-right">
 												<td class="text-left">
@@ -179,7 +179,7 @@
 												</td>
 										</div>
 									</div>
-							<%-- </c:if> --%>
+							</c:if> 
 								</div>
 							</div>
 						</div>

@@ -128,10 +128,10 @@
  				<table class="table">
 					<tr>
 						<td class="text-center">
-							<%-- <c:if test="${sessionScope.id.equals("admin")}"> --%>
+							<c:if test="${sessionScope.id=='admin'}"> 
 								<a href="noticeUpdate.do?no=${vo.no }&page=${curpage}" class="btn btn-sm btn-primary" id="update">수정</a>
 								<a href="#" class="btn btn-sm btn-warning" id="delBtn" >삭제</a>
-							<%-- </c:if>  --%>
+							</c:if> 
 							<a href="notice.do?page=${curpage}" class="btn btn-sm btn-warning">목록</a>
 						</td>
 					</tr>

@@ -21,8 +21,8 @@ public class PropertyAddrDAO {
 		}
 	}
 	
-	public static List<PropertyAddrVO> getGeoInfo() {
-		List<PropertyAddrVO> list = new ArrayList<PropertyAddrVO>();
+	public static List<MapVO> getGeoInfo() {
+		List<MapVO> list = new ArrayList<MapVO>();
 		SqlSession session = null;
 		
 		try {

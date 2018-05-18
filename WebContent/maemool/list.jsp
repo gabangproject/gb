@@ -10,7 +10,20 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- 다음 지도 api를 사용하기 위한 부분 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0414b62e66e43f9fc50e0f6dfd64b93f"></script>
-
+<script type="text/javascript">
+$(function() {
+	alert('첫번째 줄');
+	$('.price').click(function(){
+		/* var xp = $(this).attr('xp');
+		var yp = $(this).attr('yp'); */
+		//alert($(this).attr('num')+'x');
+		var xid = $(this).attr('num')+'x'
+		var xp = $('#'+xid).text();
+		alert(xp);
+	});
+	alert('나와랏');
+});
+</script>
 <style>
 @import
 	url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
@@ -147,12 +160,12 @@ h2 a {
 			<section class="search-box">
 				<div class="container-fluid">
 					<div class="row">
-						<!--지도 들어올 부분  -->
+						<!-- 지도 -->
 						<div id=map style="width:50%;height:250px%;display:inline-block" class="col-md-7" ></div>
 						<script>
 							var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 							    mapOption = { 
-							        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+							        center: new daum.maps.LatLng(xp, 126.570667), // 지도의 중심좌표
 							        level: 3 // 지도의 확대 레벨
 							    };
 							
@@ -163,6 +176,11 @@ h2 a {
 							    // 지도의 현재 중심좌표를 얻어옵니다 
 							    var center = map.getCenter();
 							} */
+							
+							// 마커가 표시될 위치입니다 
+							var markerPosition  = new daum.maps.LatLng(33.450701, 126.570667);
+							
+								
 						</script>
 						 
 						<!-- 매물들의 리스트 출력 부분 -->
@@ -173,20 +191,20 @@ h2 a {
 									<div class="fav-box">
 										<i class="fa fa-heart-o" aria-hidden="true"></i>
 									</div>
-	
-									<img class="d-flex align-self-start"
-										src="https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?h=350&auto=compress&cs=tinysrgb"
-										alt="Generic placeholder image">
+									<a href="#?num=${i.num}">	
+										<img class="d-flex align-self-start maemool-list-img"
+										src="https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?h=350&auto=compress&cs=tinysrgb">
+									</a>
 									<div class="media-body pl-3">
-										<div class="price">
-											$799,000<small>${i.addr}</small>
+										<div class="price" num='${i.num}'>
+											${i.deposit}<small>${i.addr}</small>
 										</div>
 										<div class="stats">
 											<span>
-												위도<i class="fa fa-arrows-alt">${i.x_position}</i>
+												위도<i class="fa fa-arrows-alt" id='${i.num}x'>${i.x_position}</i>
 											</span>
 											<span>
-												경도<i class="fa fa-bath">${i.y_position}</i>
+												경도<i class="fa fa-bath" id='${i.num}y'>${i.y_position}</i>
 											</span>
 										</div>
 										<div class="address">4062 Walnut Hill Drive Cincinnati</div>

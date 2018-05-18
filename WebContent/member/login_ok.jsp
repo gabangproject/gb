@@ -20,7 +20,13 @@
  	<c:if test="${db_pwd==pwd }">
  		
  		<script>
- 		window.parent.location.href="../main/main.do";
+ 		 			
+ 		//로그인을 시도했던 페이지로 이동
+ 		window.parent.location.href=parent.document.location.href;
+ 		 
+
+ 		
+ 		
  		</script>
  		
  	

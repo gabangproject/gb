@@ -30,7 +30,30 @@ function idcheck()
  
 };
 
-
+/* function logout()
+{
+	var page=window.location.href
+	$('#page').val(page);
+	
+	//alert=(page);
+			//this 의미는 클릭한 자신 .attr("value")는 value라는 속성의 값을 가져온다.
+	  $.ajax({
+		type:'POST',
+		url:'logout.do',//
+		data:{"page":page},//url에 보낼 값 type라는 변수의 값을 type라는 명으로 url에 보낸다.
+		 success:function(page)
+		{			
+			alert(page);
+			location.href=page;
+			//$('#print').html(res);
+			//#print id 를 가진 곳에 가져온 html을 실행해라
+		} 
+	}); 
+	 location.href="logout.do"	 
+	
+	
+	//alert(window.location.href);
+}; */
 
 </script>
 
@@ -49,7 +72,7 @@ function idcheck()
 					<!-- START #fh5co-menu-wrap -->
 					<nav id="fh5co-menu-wrap" role="navigation">
 						<ul class="sf-menu" id="fh5co-primary-menu">
-							<li><a href="main.jsp">Home</a></li>
+							<li><a href="main.do">Home</a></li>
 							<li><a href="notice.do" class="fh5co-sub-ddown">공지사항</a></li>
 							<li><a href="qnaboard.do">Q&A 게시판</a></li>
 							
@@ -65,7 +88,15 @@ function idcheck()
 										<li><a href="maemul_upload.do" target="_blank">매물등록</a></li>
 								</ul>
 							</li>
-							<li><a href="logout.do">로그아웃</a></li>
+							<!-- <form method="post" action="logout.do"> -->
+							<li><a href="logout.do">로그아웃
+								<!-- <input id="page" type="hidden" value=""> -->
+								
+								</a></li>
+							</form>
+							<%-- <c:if test="${requestScope!=null }">
+								<c:redirect url="logout.do"/>
+							</c:if> --%>
 						</c:if>
 							
 						</ul>

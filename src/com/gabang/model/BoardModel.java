@@ -133,19 +133,26 @@ public class BoardModel {
 	}
 	@RequestMapping("main/reply_ok.do")
 	public String replyInsertData(HttpServletRequest request) {
-		String no = request.getParameter("no");
+		String pno = request.getParameter("no");
 		String curpage = request.getParameter("page");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
+		HttpSession session = request.getSession();
+		
 		
 		BoardVO vo = new BoardVO();
-		vo.setNo(Integer.parseInt(no));
+		vo.setParent(Integer.parseInt(pno));
 		vo.setTitle(title);
 		vo.setContent(content);
-		//BoardDAO.boardReply(Integer.parseInt(no),vo);
+		String email = (String)session.getAttribute("id");
+		vo.setEmail(email); //email
 		
-		request.setAttribute("no", no);
+		
+		BoardDAO.boardReply(Integer.parseInt(pno),vo);
+		request.setAttribute("no", pno);
 		request.setAttribute("curpage", curpage);
+		
+		
 		return "redirect:qnaboard.do";
 	}
 }

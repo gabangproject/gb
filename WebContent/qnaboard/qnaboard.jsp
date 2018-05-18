@@ -163,9 +163,25 @@
 									<c:forEach var="vo" items="${list }">
 										<tr data-status="completed">
 											<td>${vo.no }</td>
+											
+											
+											
+											
+
 											<td>
+											<c:if test="${vo.group_tab >0}">
+												<c:forEach var="i" begin="0" end="${vo.group_tab }" step="1">
+														&nbsp;&nbsp;&nbsp;
+												</c:forEach>
+												<img src="icon_reply.gif">
+											</c:if>
+											
 											<a href="content.do?no=${vo.no }&page=${curpage}">${vo.title }</a>
 											</td>
+											
+										
+										
+										
 											<td>${vo.email }</td>
 											<td>
 												<fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/>

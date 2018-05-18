@@ -179,6 +179,12 @@ h2 a {
 									var marker = new daum.maps.Marker({
 									    position: markerPosition
 									});
+									
+									var positions = [
+									    {
+									        title: '카카오', 
+									        latlng: new daum.maps.LatLng(33.450705, 126.570677)
+									    }
 		
 									// 마커가 지도 위에 표시되도록 설정합니다
 									marker.setMap(map)

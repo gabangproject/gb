@@ -12,6 +12,7 @@
     <typeAlias type="com.gabang.vo.PropertyAddrVO" alias="PropertyAddrVO"/>
     <typeAlias type="com.gabang.vo.MaemoolVO" alias="MaemoolVO"/>
     <typeAlias type="com.gabang.vo.NoticeVO" alias="NoticeVO"/>
+    <typeAlias type="com.gabang.vo.MapVO" alias="MapVO"/>
   </typeAliases>
   <environments default="development">
     <environment id="development">

@@ -159,21 +159,20 @@ public class BoardDAO {
 	   SqlSession session = null;
 	   try {
 		   session = ssf.openSession();
-		   vo = session.selectOne("boardReply1",no);
+		   
+		   BoardVO pvo = session.selectOne("boardReply1",no);
 		   
 		   
-		   vo.setGroup_step(vo.getGroup_step()+1);
-		   session.update("boardReply2",vo);
+		   //vo.setGroup_step(pvo.getGroup_step()+1);
+		   session.update("boardReply2",pvo);
 		   
-		   
-		   vo.setGroup_step(vo.getGroup_step()+1);
-		   vo.setGroup_tab(vo.getGroup_tab()+1);
+		   vo.setGroup_id(pvo.getGroup_id());
+		   vo.setGroup_step(pvo.getGroup_step()+1);
+		   vo.setGroup_tab(pvo.getGroup_tab()+1);
 		   session.insert("boardReply3", vo);
 		   
-		   
-		   
-		   vo.setDegree(vo.getDegree()+1);
-		   session.update("boardReply4", vo);
+		   session.update("boardReply4",no);
+		   session.commit();
 	   }catch (Exception e) {
 		   System.out.println(e.getMessage());
 	   }finally {

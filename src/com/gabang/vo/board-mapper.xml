@@ -70,19 +70,19 @@
 	
 	<update id="boardReply2" parameterType="BoardVO">
 		UPDATE qna SET
-		group_step = #{group_step}
+		group_step = group_step+1
 		WHERE group_id = #{group_id} AND group_step>#{group_step}
 	</update>
 	
 	<insert id="boardReply3" parameterType="BoardVO">
 		INSERT INTO qna(no,email,title,content,group_id,group_step,group_tab,parent)
-		VALUES((SELECT (MAX(no)+1,1) FROM qna),	
+		VALUES((SELECT NVL(MAX(no)+1,1) FROM qna),	
 		#{email},#{title},#{content},#{group_id},#{group_step},#{group_tab},#{parent})
 	</insert>
 	
-	<update id="boardReply4" parameterType="BoardVO">
+	<update id="boardReply4" parameterType="int">
 		UPDATE qna SET
-		degree = #{degree}
+		degree = degree+1
 		<include refid="where-no"/>
 	</update>
 </mapper>

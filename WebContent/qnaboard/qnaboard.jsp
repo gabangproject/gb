@@ -173,7 +173,7 @@
 												<c:forEach var="i" begin="0" end="${vo.group_tab }" step="1">
 														&nbsp;&nbsp;&nbsp;
 												</c:forEach>
-												<img src="icon_reply.gif">
+												<img src="../qnaboard/icon_reply.gif">
 											</c:if>
 											
 											<a href="content.do?no=${vo.no }&page=${curpage}">${vo.title }</a>

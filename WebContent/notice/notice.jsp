@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -69,28 +69,132 @@
 .pagination {
 	margin: 0;
 }
-
-.navbar-header {
-	margin-left: 0px;
+.navbar-header{
+	margin-left: 0px; 
 }
 </style>
 
 </head>
 <body>
+	
 
 
+			<!-- header랑 연결된 하단 부분 끝 -->
+			
+			<div id="fh5co-work-section">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+							<h3>공지사항</h3>
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="container">
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1">
+						<div class="panel panel-default panel-table">
+						
+						<!-- 게시글목록 테마별 보기?? 시작 -->
+							<div class="panel-heading">
+								<div class="row">
+								
+									<div class="col col-xs-6">
+										<h3 class="panel-title">공지사항</h3>
+									</div>
+									<div class="col col-xs-6 text-right">
+										<div class="pull-right">
+											<div class="btn-group" data-toggle="buttons">
+												${curpage} page / ${totalpage} pages
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 
-	<!-- header랑 연결된 하단 부분 끝 -->
+						<!-- 게시글목록 테마별 보기?? 끝-->
+						
+							<div class="panel-body">
+								<table id="mytable"
+									class="table table-striped table-bordered table-list">
+									<thead>
+										<tr>
+											<th class="col-text" width="10%">번호</th>
+											<th class="col-text" width="45%">제목</th>
+											<th class="col-text" width="20%">작성일</th>
+										</tr>
+									</thead>
+									<tbody>
+									
+									<!-- table 게시글 리스트 출력 시작-->
+									<c:forEach var="vo" items="${list }">
+										<tr data-status="completed">
+											<td>${vo.no }</td>
+											<td>
+											<a href="noticeContent.do?no=${vo.no }&page=${curpage}">${vo.title }</a>
+											</td>
+											<td>${vo.email }</td>
+											<td>
+												<fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/>
+											</td> 
 
-	<div id="fh5co-work-section">
-		<div class="container">
-			<div class="row">
-				<div
-					class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-					<h3>건들지마시오</h3>
+										</tr>
+									</c:forEach>
+							<!-- table 게시글 리스트 출력 끝-->
+									</tbody>
+								</table>
+
+							</div>
+					<!-- 게시글 페이지 나눠지는 표시  -->
+							<div class="panel-footer">
+								<div class="row">
+									<div class="col col-xs-offset-3 col-xs-6">
+										<nav aria-label="Page navigation" class="text-center">
+							<!-- 좌측 우측 넘기는거  -->
+											<ul class="pagination">
+											<c:if test="${ curpage!=1}">
+												<li><a href="notice.do?page=${curpage-1 }" aria-label="Previous"> 
+												◀
+												</a></li>
+												</c:if>
+												
+												
+												<c:if test="${curpage<totalpage }">
+												<li><a href="notice.do?page=${curpage+1 }" aria-label="Next"> 
+												▶
+												</a></li>
+												</c:if>
+											</ul>
+
+										</nav>
+									</div>
+							<!-- 글쓰기 -->
+				<%-- 			${sessionScope.id.equals(${admin})}
+							<c:if test=""> --%>
+									<div class="col col-xs-3">
+										<div class="pull-right">
+												<td class="text-left">
+													<a href="noticeInsert.do?page=${curpage }" class="btn btn-sm btn-success">새글</a>		
+												</td>
+										</div>
+									</div>
+							<%-- </c:if> --%>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>
+				
+				
+				
+			</div>
+			
+
+			
+	
+
 </body>
 </html>
+

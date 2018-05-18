@@ -1,14 +1,10 @@
-
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-
 <!-- 우편번호 검색창  -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script type="text/javascript">
@@ -93,7 +89,6 @@
 </script>
 </head>
 <body>
-
 	<div id="fh5co-work-section">
 		<div class="container">
 			<div class="row">
@@ -192,7 +187,6 @@
 										name="radios2" id="radios-8" value="8"> 없음
 									</label>
 								</div>
-
 							</div>
 						</div>
 
@@ -211,24 +205,47 @@
 
 							</div>
 						</div>
-
-						<!-- 건물층수  -->
-						<div class="form-group" id="건물층수">
-							<label class="col-md-4 control-label" for="mobno">건물층수</label>
-							<div class="col-md-4">
-							
-								<select class="form-control" id="exampleFormControlSelect1">
-									<option selected>건물 층수를 입력하세요</option>
-
-									<option value="1">1층</option>
-									<option value="2">2층</option>
-									<option value="3">3층</option>
-									<option value="4">4층</option>
-									<option value="5">5층</option>
-								</select>
+						
+						<!-- 해당층  -->
+						<div class="form-group" id="해당층">
+							<label class="col-md-4 control-label" for="mobno">전체/해당층</label>
+							<div class="col-md-1">
+								<input type="text" id="floor" class="form-control input-md">
 							</div>
+							<div style="float: left; width: 4%;">전체층</div>
+							<div class="col-md-1">
+								<input type="text" id="floor2" class="form-control input-md">
+							</div>
+							<div style="float: left; width: 4%;">해당층</div>
 						</div>
-
+						
+						<!-- 보증금  -->
+						<div class="form-group row" id="보증금" >
+							<label class="col-md-4 control-label" for="mobno">보증금</label>
+								<div class="col-md-1">
+								<input type="text" id="million" class="form-control input-md">
+								</div>
+								<div style="float: left; width: 2%;">억</div>
+								<div class="col-md-1">
+								<input type="text" id="won" class="form-control input-md">
+								</div>
+								<div style="float: left; width: 4%;">만원</div>
+								
+						</div>
+						
+						<!-- 전용면적 --> 
+						<div class="form-group row" id="전용면적" >
+							<label class="col-md-4 control-label" for="mobno">전용/공급면적</label>
+								<div class="col-md-1">
+								<input type="text" id="" class="form-control input-md" placeholder="전용면적">
+								</div>
+								<div style="float: left; width: 2%;">m^2</div>
+								<div class="col-md-1">
+								<input type="text" id="" class="form-control input-md" placeholder="공급면적">
+								</div>
+								<div style="float: left; width: 4%;">m^2</div>
+						</div>
+						
 						<!-- 파일첨부  -->
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="file">파일첨부</label>
@@ -251,8 +268,6 @@
 								</span>
 							</div>
 						</div>
-						
-
 
 						<div class="form-group">
 							<div style="text-align: center">

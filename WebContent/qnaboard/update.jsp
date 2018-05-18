@@ -102,6 +102,7 @@
 						<td width="85%" class="text-left">
 						<input type=text name=title size=45 required value="${vo.title }"></td>
 						<input type="hidden" name=no value="${vo.no }">
+						<input type="hidden" name=page value="${curpage }">
 					</tr>
 
 					<tr>

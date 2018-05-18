@@ -114,17 +114,11 @@
 						<td class="text-center" width="30%"><fmt:formatDate
 								value="${vo.regdate }" pattern="yyyy-MM-dd" /></td>
 					</tr>
-
 					<tr>
 						<td class="success text-center" width="20%">이름</td>
 						<td class="text-center" width="30%">${vo.email }</td>
-						<td class="success text-center" width="20%">조회수</td>
-						<td class="text-center" width="30%">${vo.hit }</td>
-					</tr>
-
-					<tr>
 						<td class="success text-center" width="20%">제목</td>
-						<td colspan="3" class="text-left">${vo.title }</td>
+						<td class="text-left">${vo.title }</td>
 					</tr>
 					<tr>
 						<td class="text-left" valign="top" height="200">${vo.content }</td>
@@ -134,18 +128,15 @@
  				<table class="table">
 					<tr>
 						<td class="text-center">
-							<c:if test="${sessionScope.id.equals(vo.email)}">
-								<a href="update.do?no=${vo.no }&page=${curpage}" class="btn btn-sm btn-primary" id="update">수정</a>
+							<%-- <c:if test="${sessionScope.id.equals("admin")}"> --%>
+								<a href="noticeUpdate.do?no=${vo.no }&page=${curpage}" class="btn btn-sm btn-primary" id="update">수정</a>
 								<a href="#" class="btn btn-sm btn-warning" id="delBtn" >삭제</a>
-							</c:if> 
-							<a href="qnaboard.do?page=${curpage}" class="btn btn-sm btn-warning">목록</a>
-							<c:if test="${sessionScope.id!=null}">
-								<a href="reply.do?no=${vo.no }&page=${curpage}" class="btn btn-sm btn-info">답글달기</a>
-							</c:if>
+							<%-- </c:if>  --%>
+							<a href="notice.do?page=${curpage}" class="btn btn-sm btn-warning">목록</a>
 						</td>
 					</tr>
 						<td class="text-right" id="del" style="display: none">
-							<form action="delete.do">
+							<form action="noticeDelete.do">
 								<input type=hidden name=no value="${vo.no}">
 								<input type=submit value="삭제" class="btn btn-sm btn-danger">
 							</form>

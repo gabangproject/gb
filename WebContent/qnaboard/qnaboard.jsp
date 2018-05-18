@@ -164,7 +164,7 @@
 										<tr data-status="completed">
 											<td>${vo.no }</td>
 											<td>
-											<a href="content.do?no=${vo.no }">${vo.title }</a>
+											<a href="content.do?no=${vo.no }&page=${curpage}">${vo.title }</a>
 											</td>
 											<td>${vo.email }</td>
 											<td>
@@ -202,13 +202,16 @@
 										</nav>
 									</div>
 							<!-- 글쓰기 -->
+							
+							<c:if test="${sessionScope.id!=null}">
 									<div class="col col-xs-3">
 										<div class="pull-right">
 												<td class="text-left">
-													<a href="insert.do" class="btn btn-sm btn-success">새글</a>		
+													<a href="insert.do?page=${curpage }" class="btn btn-sm btn-success">새글</a>		
 												</td>
 										</div>
 									</div>
+							</c:if>
 								</div>
 							</div>
 						</div>

@@ -63,7 +63,7 @@ public class MemberDAO {
 			   vo=session.selectOne("loginPwdCheck", email);
 		   }catch(Exception ex)
 		   {
-			   System.out.println("boardListData : " +ex.getMessage());
+			   System.out.println(ex.getMessage());
 		   }
 		   finally
 		   {
@@ -71,6 +71,30 @@ public class MemberDAO {
 				   session.close();
 		   }
 		   return vo;
+	   }
+	   
+	   public static int nickCheck(String nick) 
+	   {
+		   int nickCheck=0;
+		   SqlSession session=null;//connection연결=>sql문장수행 
+		   try
+		   {
+			   
+			   
+			   session=ssf.openSession();
+
+			   // 실행 결과값 받기 
+			   nickCheck=session.selectOne("nickCheck", nick);
+		   }catch(Exception ex)
+		   {
+			   System.out.println(ex.getMessage());
+		   }
+		   finally
+		   {
+			   if(session!=null)
+				   session.close();
+		   }
+		   return nickCheck;
 	   }
 	
 	

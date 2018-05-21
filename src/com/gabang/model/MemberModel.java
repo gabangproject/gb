@@ -99,6 +99,25 @@ public class MemberModel {
 		return "main.jsp";
 	}
 	
+	@RequestMapping("main/idcheck_ok.do")
+	public String idCheck(HttpServletRequest request)
+	{
+		String id=request.getParameter("id");
+		int count=MemberDAO.loginIdCheck(id);
+		System.out.println(count);
+		request.setAttribute("count", count);
+		return "../member/idcheck_ok.jsp";
+	}
+	
+	@RequestMapping("main/nick_ok.do")
+	public String nickCheck(HttpServletRequest request)
+	{
+		String nick=request.getParameter("nick");
+		int count=MemberDAO.nickCheck(nick);
+		System.out.println(count);
+		request.setAttribute("count", count);
+		return "../member/nick_ok.jsp";
+	}
 	
 	@RequestMapping("main/maemul_upload.do")
 	public String maemul_upload(HttpServletRequest request)

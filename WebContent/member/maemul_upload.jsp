@@ -9,6 +9,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(
+			
+			
 			function() {
 				$("#fileInput").on(
 						'change',
@@ -66,9 +68,9 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('sample4_roadAddress').value = fullRoadAddr;
-                document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
+                document.getElementById('postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('Address').value = fullRoadAddr;
+                document.getElementById('jibunAddress').value = data.jibunAddress;
 
                 // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
                 if(data.autoRoadAddress) {
@@ -91,35 +93,41 @@
 <body>
 	<div id="fh5co-work-section">
 		<div class="container">
+		
+		
 			<div class="row">
-				<div
-					class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
 					<h3>매물등록</h3>
 				</div>
 			</div>
-		</div>
+		
 
 		<!-- 매물 등록 폼 -->
-		<div class="container">
+		
 			<div class="row">
-				<form class="form-horizontal">
-					<fieldset>
-
-
+			
+				<!-- <div class="col-md-12" style="magrin:0px auto;"> -->
+				
+				<form id="maemul_upload" class="form-horizontal" enctype="multipart/form-data" action="../main/">
+					
+					<fieldset form="maemul_upload">
 
 						<!-- 매물주소 -->
 						<div class="form-group">
-							<tr>
+							
 								<label class="col-md-4 control-label" for="firstname">매물주소</label>
-								<div class="col-md-3">
-								<input type="text" id="sample4_postcode" class="form-control input-md" placeholder="우편번호">
-								<input type="text" id="sample4_roadAddress" class="form-control input-md" placeholder="도로명주소">
-								<input type="text" id="sample4_jibunAddress" class="form-control input-md" placeholder="지번주소">
-								<input type="text" class="form-control input-md" placeholder="상세주소">
+								<div class="col-md-4">
+								<input type="text" id="postcode" class="form-control input-md" placeholder="우편번호">
+								
+								<input type="text" id="Address" class="form-control input-md" placeholder="주소" style="margin-top:5px;margin-bottom:5px;">
+								
+								<input type="text" id="jibunAddress" class="form-control input-md" placeholder="지번주소" style="margin-bottom:5px;">
+								
+								<input type="text" id="detailAddress" class="form-control input-md" placeholder="상세주소">
 								<span id="guide" style="color:#999"></span> <!-- 주소를 클릭하면 창이 사라진다 -->
 								</div>
 								<input type=button class='btn btn-sm' onclick="sample4_execDaumPostcode()" value="주소검색">
-							</tr>
+							
 						</div>
 
 
@@ -129,159 +137,222 @@
 							<div class="col-md-4">
 								<div class="radio">
 									<label for="radios-0"> 
-									<input type="radio" name="radios0" id="radios-0" value="1" checked="checked">
-									전세
+										<input type="radio" name="radios0" id="radios-0" value="1" checked="checked"> 전세
 									</label> 
 									<label for="radios-1"> 
-									<input type="radio" name="radios0" id="radios-1" value="2">
-									 월세
+										<input type="radio" name="radios0" id="radios-1" value="2"> 월세
 									</label> 
 									<label for="radios-2"> 
-									<input type="radio" name="radios0" id="radios-2" value="3"> 
-									기타
+									<input type="radio" name="radios0" id="radios-2" value="3"> 매매
 									</label>
 								</div>
 							</div>
 						</div>
+
 
 						<!-- 주거형태 -->
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="radios">주거형태</label>
 							<div class="col-md-4">
 								<div class="radio">
-									<label for="radios-3"> <input type="radio"
-										name="radios1" id="radios-3" value="3" checked="checked">
-										원룸
-									</label> <label for="radios-4"> <input type="radio"
-										name="radios1" id="radios-4" value="4"> 투룸
-									</label> <label for="radios-5"> <input type="radio"
-										name="radios1" id="radios-5" value="5"> 주택
-									</label> <label for="radios-6"> <input type="radio"
-										name="radios1" id="radios-6" value="6"> 오피스텔
+									<label for="radios-3">
+									<input type="radio"	name="room_type" id="radios-3" value="0" checked="checked">원룸 
+									</label> 
+									
+									<label for="radios-4">
+									<input type="radio" name="room_type" id="radios-4" value="1">투룸	
+									</label> 
+									
+									<label for="radios-5"> 
+									<input type="radio" name="room_type" id="radios-5" value="2">오피스텔
 									</label>
+									
+									<label for="radios-6">
+									<input type="radio" name="room_type" id="radios-6" value="3">다세대/다가구
+									</label> 
 								</div>
 							</div>
 						</div>
 						
-						<!-- 관리비 -->
+						
+						<!-- 관리비  -->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="mobno">관리비 포함항목</label>
+							<label class="col-md-4 control-label" for="manage_fee">관리비</label>
+								<div class="col-md-4">
+									<input type="text" id="manage_fee" class="form-control">
+								</div>
+								<div style="float: left; width: 4%;">만원</div>
+						</div>
+						
+						
+						<!-- 관리비 포함항목 -->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="opts">관리비 포함항목</label>
+
 							<div class="col-md-4">
-								<input type="checkbox" name="chk_info" value="전기세">전기세
-								<input type="checkbox" name="chk_info" value="수도세">수도세<br>
-								<input type="checkbox" name="chk_info" value="가스비">가스비
-								<input type="checkbox" name="chk_info" value="인터넷">인터넷
-								<input type="checkbox" name="chk_info" value="기타">기타
+							<div class="check">
+								<label for="opt-0">
+								<input type="checkbox" id="opt-0" name="opt" value="0">전기세
+								</label>
+								<label for="opt-1">
+								<input type="checkbox" id="opt-1" name="opt" value="1">수도세
+								</label>
+								<label for="opt-2">
+								<input type="checkbox" id="opt-2" name="opt" value="2">가스비
+								</label>
+								<label for="opt-3">
+								<input type="checkbox" id="opt-3" name="opt" value="3">인터넷
+								</label>
+								<label for="opt-4">
+								<input type="checkbox" id="opt-4" name="opt" value="4">기타
+								</label>
+							</div>
 							</div>
 						</div>	
+
 
 						<!-- 엘리베이터 유무  -->
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="radios">엘리베이터</label>
 							<div class="col-md-4">
 								<div class="radio">
-									<label for="radios-7"> <input type="radio"
-										name="radios2" id="radios-7" value="7" checked="checked">
-										있음
-									</label> <label for="radios-8"> <input type="radio"
-										name="radios2" id="radios-8" value="8"> 없음
+									<label for="radios-7">
+									<input type="radio"	name="elev" id="radios-7" value="1" checked="checked">있음
+									</label>
+									<label for="radios-8">
+									<input type="radio"	name="elev" id="radios-8" value="0">없음
 									</label>
 								</div>
 							</div>
 						</div>
+
 
 						<!-- 주차공간  -->
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="radios">주차공간</label>
 							<div class="col-md-4">
 								<div class="radio">
-									<label for="radios-9"> <input type="radio"
-										name="radios3" id="radios-9" value="9" checked="checked">
-										있음
-									</label> <label for="radios-10"> <input type="radio"
-										name="radios3" id="radios-10" value="10"> 없음
+									<label for="radios-9"> 
+									<input type="radio"	name="parking_lot" id="radios-9" value="1" checked="checked">가능
+									</label>
+									
+									<label for="radios-10">
+									<input type="radio" name="parking_lot" id="radios-10" value="0">불가능
 									</label>
 								</div>
 
 							</div>
 						</div>
 						
+						
 						<!-- 해당층  -->
-						<div class="form-group" id="해당층">
-							<label class="col-md-4 control-label" for="mobno">전체/해당층</label>
+						<div class="form-group">
+						
+							<label class="col-md-4 control-label" for="mobno">해당층/전체층</label>
 							<div class="col-md-1">
-								<input type="text" id="floor" class="form-control input-md">
+								<input type="text" id="floor1" class="form-control">
+							</div>
+							<div style="float: left; width: 4%;">/</div>
+							
+							<div class="col-md-1">
+								<input type="text" id="floor2" class="form-control">
 							</div>
 							<div style="float: left; width: 4%;">전체층</div>
-							<div class="col-md-1">
-								<input type="text" id="floor2" class="form-control input-md">
-							</div>
-							<div style="float: left; width: 4%;">해당층</div>
 						</div>
 						
+						
 						<!-- 보증금  -->
-						<div class="form-group row" id="보증금" >
-							<label class="col-md-4 control-label" for="mobno">보증금</label>
+						<div class="form-group">
+							<label class="col-md-4 control-label">보증금</label>
 								<div class="col-md-1">
-								<input type="text" id="million" class="form-control input-md">
+								<input type="text" id="deposit1" class="form-control">
 								</div>
 								<div style="float: left; width: 2%;">억</div>
+								
 								<div class="col-md-1">
-								<input type="text" id="won" class="form-control input-md">
+								<input type="text" id="deposit2" class="form-control">
 								</div>
 								<div style="float: left; width: 4%;">만원</div>
 								
 						</div>
 						
-						<!-- 전용면적 --> 
-						<div class="form-group row" id="전용면적" >
-							<label class="col-md-4 control-label" for="mobno">전용/공급면적</label>
+						
+						<!-- 월세  -->
+						<div class="form-group">
+							<label class="col-md-4 control-label" >월세</label>
 								<div class="col-md-1">
-								<input type="text" id="" class="form-control input-md" placeholder="전용면적">
+								<input type="text" id="monthly_lent1" class="form-control">
+								</div>
+								<div style="float: left; width: 2%;">억</div>
+								
+								<div class="col-md-1">
+								<input type="text" id="monthly_lent2" class="form-control">
+								</div>
+								<div style="float: left; width: 4%;">만원</div>
+								
+						</div>
+						
+						
+						<!-- 전용면적 --> 
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="gross_area">전용면적</label>
+								<div class="col-md-1">
+								<input type="text" id="gross_area" class="form-control" placeholder="전용면적">
 								</div>
 								<div style="float: left; width: 2%;">m^2</div>
-								<div class="col-md-1">
-								<input type="text" id="" class="form-control input-md" placeholder="공급면적">
-								</div>
-								<div style="float: left; width: 4%;">m^2</div>
+								
 						</div>
+						
 						
 						<!-- 파일첨부  -->
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="file">파일첨부</label>
 							<div class="col-md-4">
-							<input id="fileInput"
-								filestyle="" type="file" data-class-button="btn btn-default"
-								data-class-input="form-control" data-button-text=""
-								data-icon-name="fa fa-upload" class="form-control" tabindex="-1"
-								style="position: absolute; clip: rect(0px, 0px, 0px, 0px);">
-
-							<div class="bootstrap-filestyle input-group">
-
-								<input type="text" id="userfile" class="form-control"
-									name="userfile" disabled="">
-									<span class="group-span-filestyle input-group-btn" tabindex="0">
-									<label for="fileInput" class="btn btn-default "> 
-									<span class="glyphicon fa fa-upload"></span>
-										</div>
-								</label>
-								</span>
+								<input type="file" name="filename[]" multiple="multiple" maxlength="2" style="apperance: none;
+  									-webkit-apperance: none;" required> 
+										
 							</div>
 						</div>
-
+						
+						
+						<!-- 입주가능일  -->
 						<div class="form-group">
-							<div style="text-align: center">
-								<button id="login" name="login" class="btn">등록</button>
-								<button id="cencel" name="cencel" class="btn btn-primary">취소</button>
-							</div>
-
+							<label class="col-md-4 control-label" for="moving_date">입주가능일</label>
+							<div class="col-md-1">
+								<input type="text" id="moving_date" class="form-control">
+							</div>								
 						</div>
+						
+						
+						<!-- 입주가능일  -->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="description">매물설명</label>
+							<div class="col-md-5">
+								<textarea class="form-control" rows="5" id="description"></textarea>
+							</div>								
+						</div>
+
+						<div class="form-group" style="text-align: center">
+							
+							<input type=submit id="upload" name="upload" class="btn" value="등록">
+						    <input type=button id="cencel" name="cencel" class="btn btn-primary" value="취소">
+						</div>
+						
 					</fieldset>
+					
 				</form>
+				<!-- 등록 폼 전체 사이즈 조정 -->
+				
 			</div>
+			<!--  row 끝-->
+				
 		</div>
+		<!-- container 끝 -->
+		
 	</div>
-	</div>
+	<!-- work section 끝 -->
+		
+	
 </body>
 </html>
 

@@ -122,6 +122,7 @@ function join()
                     
                 <form class="form-signin" method=post action="../main/login_ok.do">
                 <input type="text" class="form-control" name="email" placeholder="Email" required autofocus >
+    			
                 <input type="password" class="form-control" name="pwd" placeholder="Password" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit"  >·Î±×ÀÎ</button>
                 <label class="checkbox pull-left">

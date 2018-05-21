@@ -35,12 +35,12 @@ $(function(){
 		    	
 		    	 if(res.trim()==0)
 		    	{
-		    		html="<tr><td>"+nick+"는(은) 사용 가능한 아이디입니다</td></tr>"
+		    		html="<tr><td>"+nick+"는(은) 사용 가능한 닉네임입니다</td></tr>"
 		    		    +"<tr><td class='text-center'><input type='button' class='btn btn-sm btn-success' onclick=ok() value=확인></td></tr>";
 		    	}
 		    	else
 		    	{
-		    		html="<tr><td>"+nick+"는(은) 사용중인 아이디입니다</td></tr>";
+		    		html="<tr><td>"+nick+"는(은) 사용중인 닉네임입니다</td></tr>";
 		    	}
 		    	$('#result').html(html); 
 		    }

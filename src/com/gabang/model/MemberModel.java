@@ -1,5 +1,6 @@
 package com.gabang.model;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -131,6 +132,43 @@ public class MemberModel {
 	public String JoinData(HttpServletRequest request)
 	{
 		request.setAttribute("main_jsp", "../member/join.jsp");
+		return "main.jsp";
+	}
+	
+	@RequestMapping("main/join_ok.do")
+	public String insertMemberData (HttpServletRequest request) throws UnsupportedEncodingException 
+	{
+		request.setCharacterEncoding("EUC-KR");
+		MemberVO vo=new MemberVO();
+		vo.setEmail(request.getParameter("email"));
+		vo.setPwd(request.getParameter("password"));
+		vo.setName(request.getParameter("name"));
+		vo.setNick(request.getParameter("nick"));
+		vo.setPhone(request.getParameter("phone1")+request.getParameter("phone2"));
+		vo.setGender(request.getParameter("gender"));
+		String grade=request.getParameter("seller");
+		
+		if(grade==null)
+		{
+			grade="1";
+		}
+		else
+		{
+			grade="2";
+		}
+		vo.setGrade(Integer.parseInt(grade));
+		
+		System.out.println(vo.getEmail());
+		System.out.println(vo.getPwd());
+		System.out.println(vo.getName());
+		System.out.println(vo.getNick());
+		System.out.println(vo.getPhone());
+		System.out.println(vo.getGender());
+		System.out.println(vo.getGrade());
+		
+		MemberDAO.insertMember(vo);
+		
+		request.setAttribute("main_jsp", "home.jsp");
 		return "main.jsp";
 	}
 

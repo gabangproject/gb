@@ -114,15 +114,13 @@ function join()
 <body>
 <div class="container" >
     <div class="row">
+    
         <div class="col-sm-6 col-md-4 col-md-offset-4">
             <h1 class="text-center login-title">Sign in to GaBang</h1>
             <div class="account-wall">
-                <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
-                    alt="">
-                    
+                <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120">
                 <form class="form-signin" method=post action="../main/login_ok.do">
-                <input type="text" class="form-control" name="email" placeholder="Email" required autofocus >
-    			
+                <input type="text" class="form-control" name="email" placeholder="Email" required autofocus>
                 <input type="password" class="form-control" name="pwd" placeholder="Password" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit"  >로그인</button>
                 <label class="checkbox pull-left">
@@ -135,6 +133,7 @@ function join()
             
             <a class="text-center new-account" onclick="join()">회원가입 </a>
         </div>
+        
     </div>
 </div>
 

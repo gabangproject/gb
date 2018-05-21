@@ -96,6 +96,23 @@ public class MemberDAO {
 		   }
 		   return nickCheck;
 	   }
+	   
+	   public static void insertMember(MemberVO vo)
+	   {
+		   SqlSession session=null;
+		   try {
+			   session=ssf.openSession(true);
+			   session.insert("insertMember",vo);
+		   }catch(Exception ex)
+		   {
+			   System.out.println(ex.getMessage());
+		   }
+		   finally
+		   {
+			   if(session!=null)
+				   session.close();
+		   }
+	   }
 	
 	
 }

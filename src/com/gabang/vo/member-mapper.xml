@@ -16,4 +16,7 @@
 		SELECT COUNT(*) FROM member WHERE nick=#{nick}
 	</select>
 
+	<insert id="insertMember" parameterType="MemberVO">
+		INSERT INTO member VALUES(#{email},#{pwd},#{gender},#{name},#{nick},#{grade},#{phone})
+	</insert>
 </mapper>

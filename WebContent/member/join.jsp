@@ -67,6 +67,7 @@ $(function(){
 		if(check==true)
 			{
 			$('#sellerform input').attr("required",true);
+			
 			}
 		else
 			{
@@ -78,6 +79,7 @@ $(function(){
 	})
 });
 </script>
+
 <!-- 매물등록 관련 bootstrap 끝 -->
 </head>
 <body>
@@ -97,7 +99,7 @@ $(function(){
 		
 			<div class="row">
 
-				<form class="form-horizontal" id="join" name="frm" method="post" action="../member/join_ok.jsp">
+				<form class="form-horizontal" id="join" name="frm" method="post" action="../main/join_ok.do">
 					
 					<fieldset form="join">
 					
@@ -111,7 +113,8 @@ $(function(){
 						<span class="text-danger">*</span>
 						</label>
 						<div class="col-md-2">
-							<input id="id" name="id" type="text" placeholder="UserID (Email)" class="form-control" required>
+							<input id="id" name="email" type="text" placeholder="UserID (Email)" class="form-control" readonly required 
+							onclick="idcheck()" style="background-color:white;">
 						</div>
 						<input type=button class='btn btn-sm' value='중복체크' onclick="idcheck()">
 					</div>
@@ -146,7 +149,8 @@ $(function(){
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="nick">별명</label>
 						<div class="col-md-2">
-							<input id="nick" name="nick" type="text" placeholder="닉네임" class="form-control" required>
+							<input id="nick" name="nick" type="text" placeholder="닉네임" class="form-control" readonly required 
+							onclick="nickcheck()" style="background-color:white;">
 						</div>
 						<input type=button class='btn btn-sm' value='중복체크'	onclick="nickcheck()">
 					</div>
@@ -167,7 +171,7 @@ $(function(){
 								</select>
 							</div>
 							<div class="col-xs-2">
-								<input id="phone2" name="phone2" type="text" class="form-control" required>
+								<input id="phone2" name="phone2" minlength="6" maxlength="8" type="text" class="form-control" required>
 							</div>
 						</div>
 					</div>
@@ -178,11 +182,11 @@ $(function(){
 						<div class="col-md-4">
 							<div class="radio">
 								<label class="radios-0" for="gender-0">
-									<input type="radio" name="gender" id="gender-0" value="0" checked="checked"> 남자
+									<input type="radio" name="gender" id="gender-0" value="남자" checked="checked"> 남자
 								</label>
 								
 								<label class="radios-1" for="gender-1">
-									<input type="radio" name="gender" id="gender-1" value="1">여자
+									<input type="radio" name="gender" id="gender-1" value="여자">여자
 								</label>
 							</div>
 						</div>
@@ -193,7 +197,7 @@ $(function(){
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="seller">공인중개사 등록여부</label>
 						<div class="col-md-4" style="padding-top: 7px">
-							<input type="checkbox" class="form-check-input" id="seller" name="seller" value="">
+							<input type="checkbox" class="form-check-input" id="seller" name="seller">
 							<label class="form-check-label" for="seller">등록을 원하시면 체크해	주세요</label>
 						</div>
 					</div>

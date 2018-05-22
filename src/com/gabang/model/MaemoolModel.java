@@ -20,4 +20,11 @@ public class MaemoolModel{
 		req.setAttribute("main_jsp", "../maemool/list.jsp");
 		return "main.jsp";
 	}
+	
+	@RequestMapping("main/upload.do")
+	public String maemoolInsert(HttpServletRequest request)
+	{
+		request.setAttribute("main_jsp", "../maemool/list.jsp");
+		return "main.jsp";
+	}
 }

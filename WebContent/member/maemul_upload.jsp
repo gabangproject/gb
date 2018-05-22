@@ -33,60 +33,7 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!-- 회원가입 관련 bootstrap 끝 -->
 
-<!-- 주소검색 버튼 누르면 다음에 있는 주소검색창으로 이동 -->
-<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-<script>
-    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-    function sample4_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-
-                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                    extraRoadAddr += data.bname;
-                }
-                // 건물명이 있고, 공동주택일 경우 추가한다.
-                if(data.buildingName !== '' && data.apartment === 'Y'){
-                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                }
-                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                if(extraRoadAddr !== ''){
-                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-                }
-                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-                if(fullRoadAddr !== ''){
-                    fullRoadAddr += extraRoadAddr;
-                }
-
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('postcode').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('Address').value = fullRoadAddr;
-                document.getElementById('jibunAddress').value = data.jibunAddress;
-
-                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-                if(data.autoRoadAddress) {
-                    //예상되는 도로명 주소에 조합형 주소를 추가한다.
-                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-                    document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-
-                } else if(data.autoJibunAddress) {
-                    var expJibunAddr = data.autoJibunAddress;
-                    document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-
-                } else {
-                    document.getElementById('guide').innerHTML = '';
-                }
-            }
-        }).open();
-    }
-</script>
 </head>
 <body>
 	<div id="fh5co-work-section">
@@ -102,36 +49,43 @@
 
 		<!-- 매물 등록 폼 -->
 		
-			<div class="row">
-			
-				<!-- <div class="col-md-12" style="magrin:0px auto;"> -->
+			<div class="row" >
 				
-				<form id="maemul_upload" class="form-horizontal" enctype="multipart/form-data" action="../main/">
+				<form id="maemul_upload" class="form-horizontal" enctype="multipart/form-data" action="../main/upload.do">
 					
 					<fieldset form="maemul_upload">
 
 						<!-- 매물주소 -->
 						<div class="form-group">
 							
-								<label class="col-md-4 control-label" for="firstname">매물주소</label>
+								<label class="col-md-2 control-label" for="firstname">매물주소</label>
 								<div class="col-md-4">
-								<input type="text" id="postcode" class="form-control" placeholder="우편번호">
+								<input type="text" id="postcode" class="form-control" placeholder="우편번호" readonly>
 								
-								<input type="text" id="Address" class="form-control" placeholder="주소" style="margin-top:5px;margin-bottom:5px;">
-								
-								<input type="text" id="jibunAddress" class="form-control" placeholder="지번주소" style="margin-bottom:5px;">
+								<input type="text" id="address" class="form-control" placeholder="주소" style="margin-top:5px;margin-bottom:5px;" readonly>
 								
 								<input type="text" id="detailAddress" class="form-control" placeholder="상세주소">
-								<span id="guide" style="color:#999"></span> <!-- 주소를 클릭하면 창이 사라진다 -->
+								
 								</div>
-								<input type=button class='btn btn-sm' onclick="sample4_execDaumPostcode()" value="주소검색">
+								<input type=button class='btn btn-sm' onclick="searchPostcode()" value="주소검색">
 							
+						</div>
+
+
+						<!-- 파일첨부  -->
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="file">매물사진 등록</label>
+							<div class="col-md-4">
+								<input type="file" name="filename[]" multiple="multiple" maxlength="2" style="apperance: none;
+  									-webkit-apperance: none;" required> 
+										
+							</div>
 						</div>
 
 
 						<!-- 거래형태 -->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="radios">거래형태</label>
+							<label class="col-md-2 control-label" for="radios">거래형태</label>
 							<div class="col-md-4">
 								<div class="radio">
 									<label for="radios-0"> 
@@ -150,7 +104,7 @@
 
 						<!-- 주거형태 -->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="radios">주거형태</label>
+							<label class="col-md-2 control-label" for="radios">주거형태</label>
 							<div class="col-md-4">
 								<div class="radio">
 									<label for="radios-3">
@@ -175,17 +129,18 @@
 						
 						<!-- 관리비  -->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="manage_fee">관리비</label>
-								<div class="col-md-4">
-									<input type="text" id="manage_fee" class="form-control">
+							<label class="col-md-2 control-label" for="manage_fee">관리비</label>
+								<div class="col-md-2">
+									<input type="text" id="manage_fee" class="form-control" style="width:45%; display:inline;">
+									<label for="manage_fee">만원</label>
 								</div>
-								<div style="float: left; width: 4%;">만원</div>
+								
 						</div>
 						
 						
 						<!-- 관리비 포함항목 -->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="opts">관리비 포함항목</label>
+							<label class="col-md-2 control-label" for="opts">관리비 포함항목</label>
 
 							<div class="col-md-4">
 							<div class="check">
@@ -211,7 +166,7 @@
 
 						<!-- 엘리베이터 유무  -->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="radios">엘리베이터</label>
+							<label class="col-md-2 control-label" for="radios">엘리베이터</label>
 							<div class="col-md-4">
 								<div class="radio">
 									<label for="radios-7">
@@ -227,7 +182,7 @@
 
 						<!-- 주차공간  -->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="radios">주차공간</label>
+							<label class="col-md-2 control-label" for="radios">주차공간</label>
 							<div class="col-md-4">
 								<div class="radio">
 									<label for="radios-9"> 
@@ -246,91 +201,81 @@
 						<!-- 해당층  -->
 						<div class="form-group">
 						
-							<label class="col-md-4 control-label" for="mobno">해당층/전체층</label>
+							<label class="col-md-2 control-label" for="mobno">해당층</label>
 							<div class="col-md-1">
 								<input type="text" id="floor1" class="form-control">
 							</div>
-							<div style="float: left; width: 4%;">/</div>
 							
+							<label class="col-md-1 control-label" for="mobno">전체층</label>
 							<div class="col-md-1">
 								<input type="text" id="floor2" class="form-control">
 							</div>
-							<div style="float: left; width: 4%;">전체층</div>
+							
 						</div>
 						
 						
 						<!-- 보증금  -->
 						<div class="form-group">
-							<label class="col-md-4 control-label">보증금</label>
-								<div class="col-md-1">
-								<input type="text" id="deposit1" class="form-control">
+							<label class="col-md-2 control-label">보증금</label>
+								<div class="col-md-2">
+								<input type="text" id="deposit1" class="form-control" style="width:45%; display:inline;">
+								<label for="deposit1">억</label>
 								</div>
-								<div style="float: left; width: 2%;">억</div>
 								
-								<div class="col-md-1">
-								<input type="text" id="deposit2" class="form-control">
+								
+								<div class="col-md-2">
+								<input type="text" id="deposit2" class="form-control" style="width:45%; display:inline;">
+								<label for="deposit2">만원</label>
 								</div>
-								<div style="float: left; width: 4%;">만원</div>
-								
+
 						</div>
 						
 						
 						<!-- 월세  -->
 						<div class="form-group">
-							<label class="col-md-4 control-label" >월세</label>
-								<div class="col-md-1">
-								<input type="text" id="monthly_lent1" class="form-control">
+							<label class="col-md-2 control-label" >월세</label>
+								<div class="col-md-2">
+								<input type="text" id="monthly_lent1" class="form-control" style="width:45%; display:inline;" >
+								<label for="monthly_lent1">억</label>
 								</div>
-								<div style="float: left; width: 2%;">억</div>
 								
-								<div class="col-md-1">
-								<input type="text" id="monthly_lent2" class="form-control">
+								<div class="col-md-2">
+								<input type="text" id="monthly_lent2" class="form-control" style="width:45%; display:inline;" >
+								<label for="monthly_lent2">만원</label>
 								</div>
-								<div style="float: left; width: 4%;">만원</div>
 								
 						</div>
 						
 						
 						<!-- 전용면적 --> 
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="gross_area">전용면적</label>
-								<div class="col-md-1">
-								<input type="text" id="gross_area" class="form-control" placeholder="전용면적">
-								</div>
-								<div style="float: left; width: 2%;">m^2</div>
+							<label class="col-md-2 control-label" for="gross_area">전용면적</label>
+								<div class="col-md-2">
+								<input type="text" id="gross_area" class="form-control" style="width:45%; display:inline;" >
+								<label for="gross_area">m<sup>2</sup></label>
 								
-						</div>
-						
-						
-						<!-- 파일첨부  -->
-						<div class="form-group">
-							<label class="col-md-4 control-label" for="file">파일첨부</label>
-							<div class="col-md-4">
-								<input type="file" name="filename[]" multiple="multiple" maxlength="2" style="apperance: none;
-  									-webkit-apperance: none;" required> 
-										
-							</div>
+								</div>		
 						</div>
 						
 						
 						<!-- 입주가능일  -->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="moving_date">입주가능일</label>
-							<div class="col-md-1">
+							<label class="col-md-2 control-label" for="moving_date">입주가능일</label>
+							<div class="col-md-4">
 								<input type="text" id="moving_date" class="form-control">
 							</div>								
 						</div>
 						
 						
-						<!-- 입주가능일  -->
+						<!-- 매물 설명  -->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="description">매물설명</label>
+							<label class="col-md-2 control-label" for="description">매물설명</label>
 							<div class="col-md-5">
 								<textarea class="form-control" rows="5" id="description"></textarea>
 							</div>								
 						</div>
 
-						<div class="form-group" style="text-align: center">
+						<div class="form-group col-md-10" style="text-align: center">
 							
 							<input type=submit id="upload" name="upload" class="btn" value="등록">
 						    <input type=button id="cencel" name="cencel" class="btn btn-primary" value="취소">
@@ -349,7 +294,57 @@
 		
 	</div>
 	<!-- work section 끝 -->
-		
+	
+	
+<!-- 주소검색 관련 다음 api -->
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+<script>
+    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+    function searchPostcode() {
+    	//daum 객체에 Postcode라는 메소드 선언
+        new daum.Postcode({
+        		//oncomplete라는 이름으로 function(data) 함수 실행
+            oncomplete: function(data) {
+            	 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullAddr = ''; // 최종 주소 변수
+                var extraAddr = ''; // 조합형 주소 변수
+
+                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    fullAddr = data.roadAddress;
+
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    fullAddr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+                if(data.userSelectedType === 'R'){
+                    //법정동명이 있을 경우 추가한다.
+                    if(data.bname !== ''){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있을 경우 추가한다.
+                    if(data.buildingName !== ''){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('address').value = fullAddr;
+
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById('detailAddress').focus();
+            	}
+            
+        }).open();
+    }
+</script>
 	
 </body>
 </html>

@@ -231,9 +231,7 @@ public class MemberModel {
 			
 		}
 		
-		
-		
-		
+
 		/*System.out.println(vo.getEmail());
 		System.out.println(vo.getPwd());
 		System.out.println(vo.getName());
@@ -241,8 +239,7 @@ public class MemberModel {
 		System.out.println(vo.getPhone());
 		System.out.println(vo.getGender());
 		System.out.println(vo.getGrade());*/
-		
-		
+
 		
 		request.setAttribute("main_jsp", "home.jsp");
 		return "main.jsp";

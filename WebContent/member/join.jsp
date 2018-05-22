@@ -233,11 +233,11 @@ $(function(){
 <body>
 
 	<!-- end:header-top -->
-	<div id="fh5co-work-section" style="padding: 98px">
-		<div class="container">
+	<div id="fh5co-work-section">
+		<div class="container" >
 			
-			<div class="row">
-				 <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+			<div class="row" >
+				 <div class=" text-center heading-section animate-box" > 
 					<h3>회원가입</h3>
 				</div>
 			</div>
@@ -254,12 +254,13 @@ $(function(){
 					
 					<!-- ID입력-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="id">아이디
+						<label class="col-md-2 control-label" for="id">아이디
 						<span class="text-danger">*</span>
 						</label>
 						<div class="col-md-2">
 							<input id="id" name="email" type="text" placeholder="UserID (Email)" class="form-control"   
-							oninput="Check(this),pCheck(this)" style="background-color:white;" required> 
+							oninput="Check(this),pCheck(this)" style="background-color:white;" required>
+							 
 						</div>
 						<input type=button class='btn btn-sm' name="email" value='중복체크' onclick="sCheck(this)">
 					</div>
@@ -267,12 +268,15 @@ $(function(){
 
 					<!-- 비밀번호 입력-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="password">비밀번호
-							<font size="2" color=red> (비밀번호 8~12자 입력)</font>
+						<label class="col-md-2 control-label" for="password">비밀번호
+						<span class="text-danger">*</span>
 						</label>
 						<div class="col-md-3">
 							<input id="password" minlength="8" maxlength="12" name="password" type="password" placeholder="password"
 								class="form-control" >
+								<small id="passwordHelpInline" class="text-muted">
+      							비밀번호 8~12자 입력
+    							</small>
 						</div>
 						<div class="col-md-3">
 							<input id="confirm_password" name="confirm_password" type="password" placeholder="Re-type password"
@@ -283,7 +287,9 @@ $(function(){
 
 					<!-- 이름-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="name">이름</label>
+						<label class="col-md-2 control-label" for="name">이름
+						<span class="text-danger">*</span>
+						</label>
 						<div class="col-md-2">
 							<input id="name" name="name" type="text" placeholder="이름" class="form-control" >
 						</div>
@@ -292,7 +298,9 @@ $(function(){
 
 					<!-- 닉네임-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="nick">별명</label>
+						<label class="col-md-2 control-label" for="nick">별명
+						<span class="text-danger">*</span>
+						</label>
 						<div class="col-md-2">
 							<input id="nick" name="nick" type="text" placeholder="닉네임" class="form-control" 
 							oninput="Check(this)" style="background-color:white;">
@@ -303,7 +311,9 @@ $(function(){
 
 					<!-- 전화번호 -->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="phone">전화번호</label>
+						<label class="col-md-2 control-label" for="phone">전화번호
+						<span class="text-danger">*</span>
+						</label>
 							<div class="col-md-3">
 								<input id="phone" name="phone" type="text" class="form-control" oninput="Check(this),pCheck(this)"
 								required placeholder="-를 포함하여 입력해주세요." title="-를 포함하여 입력해주세요.">
@@ -314,7 +324,9 @@ $(function(){
 
 					<!-- 성별 -->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="radios">성별</label>
+						<label class="col-md-2 control-label" for="radios">성별
+						<span class="text-danger">*</span>
+						</label>
 						<div class="col-md-4">
 							<div class="radio">
 								<label class="radios-0" for="gender-0">
@@ -331,7 +343,7 @@ $(function(){
 					 <!-- 공인중개사 등록여부 -->
 
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="seller">공인중개사 등록여부</label>
+						<label class="col-md-2 control-label" for="seller">공인중개사 등록여부</label>
 						<div class="col-md-4" style="padding-top: 7px">
 							<input type="checkbox" class="form-check-input" id="seller" name="seller">
 							<label class="form-check-label" for="seller">등록을 원하시면 체크해	주세요</label>
@@ -349,7 +361,9 @@ $(function(){
 
 						<!-- 공인중개사 번호입력 -->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="license">공인중개사 자격증번호</label>
+							<label class="col-md-2 control-label" for="license">공인중개사 자격증번호
+							<span class="text-danger">*</span>
+							</label>
 							<div class="col-md-3">
 								<input id="license" name="license" type="text" placeholder="-가 있을 경우 포함하여 입력해주세요" class="form-control" 
 								oninput="Check(this),pCheck(this)">
@@ -370,7 +384,9 @@ $(function(){
 
 						<!-- 상호명 -->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="comp_name">상호명</label>
+							<label class="col-md-2 control-label" for="comp_name">상호명
+							<span class="text-danger">*</span>
+							</label>
 							<div class="col-md-3">
 								<input id="comp_name" name="comp_name" type="text" class="form-control">
 							</div>
@@ -380,7 +396,9 @@ $(function(){
 						<!-- 상호주소 -->
 						<div class="form-group" >
 							
-								<label class="col-md-4 control-label" for="firstname">상호주소</label>
+								<label class="col-md-2 control-label" for="firstname">상호주소
+								<span class="text-danger">*</span>
+								</label>
 								<div class="col-md-3">
 								<input type="text" id="postcode" name="postcode" class="form-control" placeholder="우편번호" onclick="searchPostcode()" readonly>
 								
@@ -388,7 +406,7 @@ $(function(){
 								onclick="searchPostcode()" readonly>
 								
 								<input type="text" id="detailAddress" name="detailAddress" class="form-control" placeholder="상세주소">
-								<span id="guide" style="color:#999"></span> <!-- 주소를 클릭하면 창이 사라진다 -->
+								<!-- <span id="guide" style="color:#999"></span> 주소를 클릭하면 창이 사라진다 -->
 								</div>
 								<input type=button class='btn btn-sm' onclick="searchPostcode()" value="주소검색" >
 							
@@ -397,7 +415,9 @@ $(function(){
 
 						<!-- 상호 전화번호-->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="compTel">상호 전화번호</label>
+							<label class="col-md-2 control-label" for="compTel">상호 전화번호
+							<span class="text-danger">*</span>
+							</label>
 								
 								<div class="col-md-3">
 									<input id="compTel" name="compTel" type="text" class="form-control" onblur="pCheck(this)" oninput="Check(this),pCheck(this)" 
@@ -413,12 +433,12 @@ $(function(){
 					
 					<!-- seller form 끝 -->
 					
-					
-					<div class="form-group" style="text-align: center">
+					<fieldset id="butt" form="join">
+					<div class="form-group" >
 						<input type=submit id="join" name="join" class="btn" value="가입">
 						<input type=button id="cencel" name="cencel" class="btn btn-primary" value="취소">
 					</div>
-				
+					</fieldset>
 					
 				</form>
 				<!-- 회원가입 및 중개사 등록 폼 끝 -->

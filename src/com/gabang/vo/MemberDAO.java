@@ -97,12 +97,99 @@ public class MemberDAO {
 		   return nickCheck;
 	   }
 	   
+	   public static int licenseCheck(String license) 
+	   {
+		   int licenseCheck=0;
+		   SqlSession session=null;//connection연결=>sql문장수행 
+		   try
+		   {
+			   
+			   
+			   session=ssf.openSession();
+
+			   // 실행 결과값 받기 
+			   licenseCheck=session.selectOne("licenseCheck", license);
+		   }catch(Exception ex)
+		   {
+			   System.out.println(ex.getMessage());
+		   }
+		   finally
+		   {
+			   if(session!=null)
+				   session.close();
+		   }
+		   return licenseCheck;
+	   }
+	   
+	   public static int compTelCheck(String compTel) 
+	   {
+		   int compTelCheck=0;
+		   SqlSession session=null;//connection연결=>sql문장수행 
+		   try
+		   {
+			   session=ssf.openSession();
+
+			   // 실행 결과값 받기 
+			   compTelCheck=session.selectOne("compTelCheck", compTel);
+		   }catch(Exception ex)
+		   {
+			   System.out.println(ex.getMessage());
+		   }
+		   finally
+		   {
+			   if(session!=null)
+				   session.close();
+		   }
+		   return compTelCheck;
+	   }
+	   
+	   public static int phoneCheck(String phone) 
+	   {
+		   int phoneCheck=0;
+		   SqlSession session=null;//connection연결=>sql문장수행 
+		   try
+		   {
+			   session=ssf.openSession();
+
+			   // 실행 결과값 받기 
+			   phoneCheck=session.selectOne("phoneCheck", phone);
+		   }catch(Exception ex)
+		   {
+			   System.out.println(ex.getMessage());
+		   }
+		   finally
+		   {
+			   if(session!=null)
+				   session.close();
+		   }
+		   return phoneCheck;
+	   }
+	   
+	   
+	   
 	   public static void insertMember(MemberVO vo)
 	   {
 		   SqlSession session=null;
 		   try {
 			   session=ssf.openSession(true);
 			   session.insert("insertMember",vo);
+		   }catch(Exception ex)
+		   {
+			   System.out.println(ex.getMessage());
+		   }
+		   finally
+		   {
+			   if(session!=null)
+				   session.close();
+		   }
+	   }
+	   
+	   public static void insertSeller(SellerVO vo)
+	   {
+		   SqlSession session=null;
+		   try {
+			   session=ssf.openSession(true);
+			   session.insert("insertSeller",vo);
 		   }catch(Exception ex)
 		   {
 			   System.out.println(ex.getMessage());

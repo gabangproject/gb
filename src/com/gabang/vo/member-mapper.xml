@@ -15,8 +15,24 @@
 	<select id="nickCheck" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM member WHERE nick=#{nick}
 	</select>
+	
+	<select id="licenseCheck" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM seller WHERE license=#{license}
+	</select>
+	
+	<select id="compTelCheck" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM seller WHERE comp_tel=#{comp_tel}
+	</select>
+	
+	<select id="phoneCheck" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM member WHERE phone=#{phone}
+	</select>
 
 	<insert id="insertMember" parameterType="MemberVO">
 		INSERT INTO member VALUES(#{email},#{pwd},#{gender},#{name},#{nick},#{grade},#{phone})
+	</insert>
+	
+	<insert id="insertSeller" parameterType="SellerVO">
+		INSERT INTO seller(license,email,comp_tel,comp_name,addr) VALUES(#{license},#{email},#{comp_tel},#{comp_name},#{addr})
 	</insert>
 </mapper>

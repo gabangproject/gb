@@ -6,8 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 <!-- 우편번호 검색창  -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script type="text/javascript">
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+<!-- <script type="text/javascript">
 	$(document).ready(
 			
 			
@@ -25,13 +25,11 @@
 							$("#userfile").val(filename);
 						});
 			});
-</script>
+</script> -->
+
 <!-- 회원가입 관련 bootstrap -->
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!-- 회원가입 관련 bootstrap 끝 -->
 
@@ -117,13 +115,13 @@
 							
 								<label class="col-md-4 control-label" for="firstname">매물주소</label>
 								<div class="col-md-4">
-								<input type="text" id="postcode" class="form-control input-md" placeholder="우편번호">
+								<input type="text" id="postcode" class="form-control" placeholder="우편번호">
 								
-								<input type="text" id="Address" class="form-control input-md" placeholder="주소" style="margin-top:5px;margin-bottom:5px;">
+								<input type="text" id="Address" class="form-control" placeholder="주소" style="margin-top:5px;margin-bottom:5px;">
 								
-								<input type="text" id="jibunAddress" class="form-control input-md" placeholder="지번주소" style="margin-bottom:5px;">
+								<input type="text" id="jibunAddress" class="form-control" placeholder="지번주소" style="margin-bottom:5px;">
 								
-								<input type="text" id="detailAddress" class="form-control input-md" placeholder="상세주소">
+								<input type="text" id="detailAddress" class="form-control" placeholder="상세주소">
 								<span id="guide" style="color:#999"></span> <!-- 주소를 클릭하면 창이 사라진다 -->
 								</div>
 								<input type=button class='btn btn-sm' onclick="sample4_execDaumPostcode()" value="주소검색">

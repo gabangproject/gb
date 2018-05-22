@@ -9,6 +9,7 @@ public class SellerVO {
 	private String addr;			// аж╪р
 	private String intro;
 	private String pic;
+	
 	public String getIntro() {
 		return intro;
 	}

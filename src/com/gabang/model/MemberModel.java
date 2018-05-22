@@ -11,6 +11,7 @@ import com.gabang.controller.Controller;
 import com.gabang.controller.RequestMapping;
 import com.gabang.vo.MemberDAO;
 import com.gabang.vo.MemberVO;
+import com.gabang.vo.SellerVO;
 import com.sun.xml.internal.ws.client.SenderException;
 
 
@@ -100,14 +101,36 @@ public class MemberModel {
 		return "main.jsp";
 	}
 	
-	@RequestMapping("main/idcheck_ok.do")
+	@RequestMapping("main/check_ok.do")
 	public String idCheck(HttpServletRequest request)
 	{
-		String id=request.getParameter("id");
-		int count=MemberDAO.loginIdCheck(id);
-		System.out.println(count);
+		String param=request.getParameter("param");
+		String checker=request.getParameter("checker");
+		int count=0;
+		System.out.println(param);
+		System.out.println(checker);
+		switch(checker)
+		{
+		case "email":    count=MemberDAO.loginIdCheck(param);
+					     break;
+		
+		case "nick":     count=MemberDAO.nickCheck(param);
+					     break;
+					 
+		case "license":  count=MemberDAO.licenseCheck(param);
+		 			     break;
+		 
+		case "comp_tel": count=MemberDAO.compTelCheck(param);
+						 break;
+		 
+		case "phone":    count=MemberDAO.phoneCheck(param);
+		 			     break;
+		}
+		
+		
+		
 		request.setAttribute("count", count);
-		return "../member/idcheck_ok.jsp";
+		return "../member/check.jsp";
 	}
 	
 	@RequestMapping("main/nick_ok.do")
@@ -115,9 +138,39 @@ public class MemberModel {
 	{
 		String nick=request.getParameter("nick");
 		int count=MemberDAO.nickCheck(nick);
-		System.out.println(count);
+		
 		request.setAttribute("count", count);
-		return "../member/nick_ok.jsp";
+		return "../member/check.jsp";
+	}
+	
+	@RequestMapping("main/license_ok.do")
+	public String licenseCheck(HttpServletRequest request)
+	{
+		String license=request.getParameter("license");
+		int count=MemberDAO.licenseCheck(license);
+		
+		request.setAttribute("count", count);
+		return "../member/check.jsp";
+	}
+	
+	@RequestMapping("main/compTel_ok.do")
+	public String compTelCheck(HttpServletRequest request)
+	{
+		String compTel=request.getParameter("compTel");
+		int count=MemberDAO.compTelCheck(compTel);
+		
+		request.setAttribute("count", count);
+		return "../member/check.jsp";
+	}
+	
+	@RequestMapping("main/phone_ok.do")
+	public String phoneCheck(HttpServletRequest request)
+	{
+		String phone=request.getParameter("phone");
+		int count=MemberDAO.phoneCheck(phone);
+		
+		request.setAttribute("count", count);
+		return "../member/check.jsp";
 	}
 	
 	@RequestMapping("main/maemul_upload.do")
@@ -144,29 +197,52 @@ public class MemberModel {
 		vo.setPwd(request.getParameter("password"));
 		vo.setName(request.getParameter("name"));
 		vo.setNick(request.getParameter("nick"));
-		vo.setPhone(request.getParameter("phone1")+request.getParameter("phone2"));
+		vo.setPhone(request.getParameter("phone"));
 		vo.setGender(request.getParameter("gender"));
 		String grade=request.getParameter("seller");
 		
 		if(grade==null)
 		{
 			grade="1";
+			
+			vo.setGrade(Integer.parseInt(grade));
+			MemberDAO.insertMember(vo);
 		}
 		else
 		{
 			grade="2";
+			
+			vo.setGrade(Integer.parseInt(grade));
+			MemberDAO.insertMember(vo);
+			
+			SellerVO vo1=new SellerVO();
+			vo1.setLicense(request.getParameter("license"));
+			vo1.setEmail(request.getParameter("email"));
+			vo1.setComp_name(request.getParameter("comp_name"));
+			vo1.setComp_tel(request.getParameter("compTel"));
+			vo1.setAddr(request.getParameter("address")+request.getParameter("detailAddress"));
+			MemberDAO.insertSeller(vo1);
+			
+			/*System.out.println(vo1.getLicense());
+			System.out.println(vo1.getComp_name());
+			System.out.println(vo1.getComp_tel());
+			System.out.println(vo1.getAddr());*/
+			
+			
 		}
-		vo.setGrade(Integer.parseInt(grade));
 		
-		System.out.println(vo.getEmail());
+		
+		
+		
+		/*System.out.println(vo.getEmail());
 		System.out.println(vo.getPwd());
 		System.out.println(vo.getName());
 		System.out.println(vo.getNick());
 		System.out.println(vo.getPhone());
 		System.out.println(vo.getGender());
-		System.out.println(vo.getGrade());
+		System.out.println(vo.getGrade());*/
 		
-		MemberDAO.insertMember(vo);
+		
 		
 		request.setAttribute("main_jsp", "home.jsp");
 		return "main.jsp";

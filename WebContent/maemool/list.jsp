@@ -8,8 +8,11 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <!-- 다음 지도 api를 사용하기 위한 부분 -->
+<!-- 해당 키는 권한 키 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0414b62e66e43f9fc50e0f6dfd64b93f"></script>
+
 <style>
 @import
 	url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
@@ -149,23 +152,19 @@ h2 a {
 						<!-- 지도 -->
 						<div id=map style="width:50%;height:250px%;display:inline-block" class="col-md-7" ></div>
 						<script>
-							// 클릭시 위도 얻기
+							// 클릭시 위,경도 얻기
 							var xp;
 							var yp;
 
 							var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 							mapOption = {
 								center : new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-								level : 3 // 지도의 확대 레벨
+								level : 5 // 지도의 확대 레벨
 							};
 
 							// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 							var map = new daum.maps.Map(mapContainer, mapOption);
 
-
-							// 마커가 표시될 위치입니다 
-							//var markerPosition = new daum.maps.LatLng(33.450701, 126.570667);
-							
 							$(function() {
 								$('.price').click(function() {
 									var xid = $(this).attr('num') + 'x'
@@ -174,20 +173,19 @@ h2 a {
 									xp = $('#' + xid).text();
 									yp = $('#' + yid).text();
 									
-									var markerPosition = new daum.maps.LatLng(xp, yp);
 									// 마커를 생성합니다
 									var marker = new daum.maps.Marker({
-									    position: markerPosition
+									    position: new daum.maps.LatLng(xp, yp)
 									});
 									
-									var positions = [
+									/* var positions = [
 									    {
 									        title: '카카오', 
 									        latlng: new daum.maps.LatLng(33.450705, 126.570677)
-									    }
+									    }]; */
 		
 									// 마커가 지도 위에 표시되도록 설정합니다
-									marker.setMap(map)
+									marker.setMap(map);
 									
 									
 									// 지도 이동

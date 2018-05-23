@@ -38,4 +38,23 @@ public class PropertyAddrDAO {
 		
 		return list;
 	}
+	
+	public static List<MapVO> guMaemool(String search) {
+		List<MapVO> list = new ArrayList<MapVO>();
+		SqlSession session = null;
+		
+		try {
+			session = ssf.openSession();
+			list = session.selectList("guMaemool_temp", search);
+//			list = session.selectList("guMaemool_temp");
+		} catch (Exception e) {
+			System.out.println("PropertyAddrDAO - guMaemool : " + e.getMessage());
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		
+		return list;
+	}
 }

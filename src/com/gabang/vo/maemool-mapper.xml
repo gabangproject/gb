@@ -7,4 +7,7 @@
 	<select id="getDeposit_temp" resultType="MaemoolVO">
 		SELECT num, deposit FROM maemool_temp
 	</select>
+	<select id="guMaemool_temp" parameterType="String" resultType="MapVO">
+		select * from map_temp where addr like '%'||#{search}||'%'
+	</select>
 </mapper>

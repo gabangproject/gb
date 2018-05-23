@@ -14,19 +14,16 @@
 			
 			<div class="desc animate-box">
 				<h2>가방</h2>
-				
-					<div class="row" style="margin: 0px auto;">
-					
-						<input type="text" class="form-control" placeholder="방검색" style="width:1000px; margin: 0px auto;">
-						<br>
-
-					</div>
-					
-					<div class="row" style="margin: 0 auto;">
-					<a class="btn btn-primary" href="#">시작</a>
-					</div>
-					
-					
+					<form action="maemool_search.do">
+						<div class="row" style="margin: 0px auto;">
+							<input type="text" class="form-control" placeholder="지역을 입력하세요. ^오^" style="width:1000px; margin: 0px auto;"
+							name=search>
+							<br>
+						</div>
+						<div class="row" style="margin: 0 auto;">
+							<input type=submit class="btn btn-primary" value=검색>
+						</div>
+					</form>
 			</div>
 		</div>
 

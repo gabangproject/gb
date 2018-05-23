@@ -9,7 +9,7 @@
 	</select>
 	
 	<select id="loginPwdCheck" parameterType="String" resultType="MemberVO">
-		SELECT pwd,nick FROM member WHERE email=#{email}
+		SELECT pwd,nick,grade FROM member WHERE email=#{email}
 	</select>
 	
 	<select id="nickCheck" parameterType="String" resultType="int">

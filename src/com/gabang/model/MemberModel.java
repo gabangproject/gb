@@ -32,27 +32,29 @@ public class MemberModel {
 	public String LoginOk(HttpServletRequest request) throws Exception
 	{	
 		request.setCharacterEncoding("EUC-KR");
-		
-		String cmd=request.getRequestURI();//현재 uri를 가져옴
-		cmd="../"+cmd.substring(cmd.indexOf("/",1)+1);
-		
+
 		String email=request.getParameter("email");
 		String pwd=request.getParameter("pwd");
-		MemberVO vo=new MemberVO();
-		String db_pwd="";
-		String nick="";
 		
+
 		//id 존재 여부 체크
 		int loginIdCheck=MemberDAO.loginIdCheck(email);
+		
+		String state="";
 		
 		//id가 있으면
 		if(loginIdCheck==1)
 		{
 			//비밀번호 체크
+			MemberVO vo=new MemberVO();
 			vo=MemberDAO.loginPwdCheck(email);
 			
-			db_pwd=vo.getPwd();
-			nick=vo.getNick();
+			String db_pwd=vo.getPwd();
+			String nick=vo.getNick();
+			int grade=vo.getGrade();
+			
+			System.out.println(pwd);
+			System.out.println(db_pwd);
 			
 			//비번 체크
 			if(pwd.equals(db_pwd))
@@ -60,26 +62,27 @@ public class MemberModel {
 				HttpSession session=request.getSession();
 				session.setAttribute("id", email);
 				session.setAttribute("nick", nick);
-				request.setAttribute("pwd", pwd);
-				request.setAttribute("db_pwd",db_pwd );
-				request.setAttribute("cmd", cmd);
+				session.setAttribute("grade", grade);
+				
+				state="OK";
+				request.setAttribute("state", state);
+				
 			}
 			else 
-			{	//비번이 다르면
-				request.setAttribute("pwd", pwd);
-				request.setAttribute("db_pwd",db_pwd );
+			{	
+				state="NOPWD";
+				request.setAttribute("state", state);
+				
 			}
 			
 		}
 		else 
 		{
-			//id 존재 여부를  보냄(있으면 1 없으면 0)
-			request.setAttribute("loginIdCheck", loginIdCheck);
-			
+			state="NOID";
+			request.setAttribute("state", state);
 		}
 		
 		
-	
 		
 		return "../member/login_ok.jsp";
 	}
@@ -90,13 +93,7 @@ public class MemberModel {
 	{
 		HttpSession session=request.getSession();
 		session.invalidate();
-		/*String cmd=request.getRequestURI();//현재 uri를 가져옴
-		//cmd="../"+cmd.substring(cmd.indexOf("/",1)+1);
-		System.out.println(cmd);
-		String page=request.getParameter("page");
-		System.out.println(page);
-		page="../"+page.substring(page.lastIndexOf("/GaBang/")+8);
-		System.out.println(page);*/
+		
 		request.setAttribute("main_jsp", "home.jsp");
 		return "main.jsp";
 	}

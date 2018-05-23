@@ -85,6 +85,41 @@
 		degree = degree+1
 		<include refid="where-no"/>
 	</update>
+	<!-- 여기까지 답변의 답변 -->
+	
+	<!-- 검색 -->
+	<select id="titleSearch" resultType="BoardVO" parameterType="String">
+		SELECT * FROM qna
+		WHERE title LIKE '%'||#{keyword}||'%'
+	</select>
+	
+	<select id="emailSearch" resultType="BoardVO" parameterType="String">
+		SELECT * FROM qna
+		WHERE email LIKE '%'||#{keyword}||'%'
+	</select>
+	
+	<select id="contentSearch" resultType="BoardVO" parameterType="String">
+		SELECT * FROM qna
+		WHERE content LIKE '%'||#{keyword}||'%'
+	</select>
+	
+	<select id="boardTotalPage2" resultType="int" parameterType="String">
+	SELECT CEIL(COUNT(*)/10)
+	FROM qna
+	WHERE title LIKE '%'||#{keyword}||'%'
+	</select>
+	
+	<select id="boardTotalPage3" resultType="int" parameterType="String">
+	SELECT CEIL(COUNT(*)/10)
+	FROM qna
+	WHERE email LIKE '%'||#{keyword}||'%'
+	</select>
+	
+	<select id="boardTotalPage4" resultType="int" parameterType="String">
+	SELECT CEIL(COUNT(*)/10)
+	FROM qna
+	WHERE content LIKE '%'||#{keyword}||'%'
+	</select>
 </mapper>
 
 

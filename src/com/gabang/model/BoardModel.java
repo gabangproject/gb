@@ -9,13 +9,17 @@ import java.util.*;
 
 import com.gabang.controller.Controller;
 import com.gabang.controller.RequestMapping;
-import com.gabang.vo.BoardVO;
 import com.gabang.vo.*;
 
 @Controller
 public class BoardModel {
+
 	@RequestMapping("main/qnaboard.do")
 	public String boardListData(HttpServletRequest request) {
+
+		String search = request.getParameter("search");
+		String keyword = request.getParameter("keyword");
+
 		String page = request.getParameter("page");
 		if (page == null)
 			page = "1";
@@ -27,14 +31,40 @@ public class BoardModel {
 		Map map = new HashMap();
 		map.put("start", start);
 		map.put("end", end);
-		List<BoardVO> list = BoardDAO.boardListData(map);
-		
+		if(keyword==null) {
+			List<BoardVO> list = BoardDAO.boardListData(map);
+			request.setAttribute("list", list);
+			int totalpage = BoardDAO.boardTotalPage();
+			request.setAttribute("totalpage", totalpage);
+			keyword="";
+		}else if(search.equals("title")) { 
+			List<BoardVO> list = BoardDAO.titleSearch(keyword);
+			request.setAttribute("list", list);
+			int totalpage = BoardDAO.titleCount(keyword);
+			request.setAttribute("totalpage", totalpage);
+			String a = "1";
+			request.setAttribute("a", a);
+		}else if(search.equals("email")) {
+			List<BoardVO> list = BoardDAO.emailSearch(keyword);
+			request.setAttribute("list", list);
+			int totalpage = BoardDAO.emailCount(keyword);
+			request.setAttribute("totalpage", totalpage);
+			String a = "1";
+			request.setAttribute("a", a);
+		}else {
+			List<BoardVO> list = BoardDAO.contentSearch(keyword);
+			request.setAttribute("list", list);
+			int totalpage = BoardDAO.contentCount(keyword);
+			request.setAttribute("totalpage", totalpage);
+			String a = "1";
+			request.setAttribute("a", a);
+		}
 		HttpSession session=request.getSession();
 		
-		int totalpage = BoardDAO.boardTotalPage();
-		request.setAttribute("list", list);
+		
+
 		request.setAttribute("curpage", curpage);
-		request.setAttribute("totalpage", totalpage);
+		
 		session.getAttribute("id"); //email
 		session.getAttribute("nick"); //nick
 		request.setAttribute("main_jsp", "../qnaboard/qnaboard.jsp");

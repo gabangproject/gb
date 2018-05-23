@@ -2,10 +2,10 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta charset="EUC-KR">
 <title>Insert title here</title>
 
 <link
@@ -92,33 +92,29 @@
 				
 				
 				<div class="container">
-			
-			
-			<!-- 게시글 검색하는 부분 -->
-				<div class="row">
-					<nav class="navbar navbar-default">
-						<div class="container">
-							<div class="navbar-header">
-								<span class="navbar-brand">작성자 및 제목별 게시물 검색</span>
-							</div>
-							<div class="col-xs-12 col-md-4">
+					
+				
 
-								<div class="form-group">
-
-									<div class="input-group">
-										<input type="text" class="form-control input-md" name="search">
-										<div class="input-group-btn">
-											<button type="button" class="btn btn-md btn-warning">
-												<span class=" glyphicon glyphicon-search"></span>
-											</button>
-										</div>
-									</div>
-									
+						<div class="col-md-10 col-md-offset-1">
+							<div class="panel panel-default panel-table">
+								<div class="panel-heading">
+									<div class="row">
+									<span class="navbar-brand">
+										<form method="post" action="qnaboard.do">
+											<select name="search">
+												<option value="title">제목</option>
+												<option value="email">작성자</option>
+												<option value="content">내용</option>
+											</select>
+											<input type="text" name="keyword" required>
+											<input type="submit" class="btn btn-sm" value="검색">
+										</form>
+									</span>
 								</div>
 							</div>
 						</div>
-					</nav>
-				</div>
+					</div>
+
 			<!-- 게시글 검색하는 부분 -->
 				
 				
@@ -163,24 +159,18 @@
 									<c:forEach var="vo" items="${list }">
 										<tr data-status="completed">
 											<td>${vo.no }</td>
-											
-											
-											
-											
-
 											<td>
-											<c:if test="${vo.group_tab >0}">
-												<c:forEach var="i" begin="0" end="${vo.group_tab }" step="1">
-														&nbsp;&nbsp;&nbsp;
-												</c:forEach>
-												<img src="../qnaboard/icon_reply.gif">
+											<c:if test!="${a }">
+												<c:if test="${vo.group_tab >0}">
+													<c:forEach var="i" begin="0" end="${vo.group_tab }" step="1">
+															&nbsp;&nbsp;&nbsp;
+													</c:forEach>
+													<img src="../qnaboard/icon_reply.gif">
+												</c:if>
 											</c:if>
-											
 											<a href="content.do?no=${vo.no }&page=${curpage}">${vo.title }</a>
 											</td>
 											
-										
-										
 										
 											<td>${vo.email }</td>
 											<td>
@@ -223,7 +213,7 @@
 									<div class="col col-xs-3">
 										<div class="pull-right">
 												<td class="text-left">
-													<a href="insert.do?page=${curpage }" class="btn btn-sm btn-success">새글</a>		
+													<a href="insert.do?page=${curpage }" class="btn btn-sm btn-success">새글</a>
 												</td>
 										</div>
 									</div>
@@ -246,3 +236,4 @@
 </body>
 </html>
 
+											

@@ -158,7 +158,7 @@
 									<!-- table 게시글 리스트 출력 시작-->
 									<c:forEach var="vo" items="${list }">
 										<tr data-status="completed">
-											<td>${vo.no }</td>
+											<td>${vo.num }</td>
 											<td>
 											<c:if test="${a!=1 }">
 												<c:if test="${vo.group_tab >0}">

@@ -15,7 +15,8 @@ import java.util.*;
  */
 public class BoardVO {
     private int no; //번호
-    private String email; //이메일
+    private int num;
+	private String email; //이메일
     private String title; // 제목
     private String content; //내용
     private String hit; //조회수
@@ -25,6 +26,13 @@ public class BoardVO {
     private int group_tab; // 답변(띄는거)
     private int parent; // root (상위)
     private int degree;  // depth(답글갯수)
+    
+    public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public int getNo() {
 		return no;
 	}

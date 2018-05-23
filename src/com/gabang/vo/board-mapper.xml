@@ -8,7 +8,7 @@
 	<select id="boardListData" resultType="BoardVO" parameterType="java.util.Map">
 		SELECT no,title,email,regdate,hit,group_tab,num 
 		FROM (SELECT no,title,email,regdate,hit,group_tab,rownum as num
-		FROM (SELECT no,title,email,regdate,hit,group_tab
+		FROM (SELECT no,title,email,regdate,hit,group_tab 
 		FROM qna ORDER BY group_id DESC, group_step ASC))
 		WHERE num BETWEEN #{start} AND #{end}
 	</select>

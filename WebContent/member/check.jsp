@@ -2,7 +2,4 @@
     pageEncoding="EUC-KR"%>
 
 ${requestScope.count }
-<script>
-var i=${requestScope.count };
-alert(i);
-</script>
+

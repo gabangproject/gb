@@ -98,14 +98,18 @@ public class MemberModel {
 		return "main.jsp";
 	}
 	
+	
+	
 	@RequestMapping("main/check_ok.do")
-	public String idCheck(HttpServletRequest request)
+	public String idCheck(HttpServletRequest request) throws UnsupportedEncodingException
 	{
+		request.setCharacterEncoding("UTF-8");
 		String param=request.getParameter("param");
 		String checker=request.getParameter("checker");
 		int count=0;
 		System.out.println(param);
 		System.out.println(checker);
+		
 		switch(checker)
 		{
 		case "email":    count=MemberDAO.loginIdCheck(param);
@@ -113,6 +117,9 @@ public class MemberModel {
 		
 		case "nick":     count=MemberDAO.nickCheck(param);
 					     break;
+					     
+		case "phone":    count=MemberDAO.phoneCheck(param);
+						 break;
 					 
 		case "license":  count=MemberDAO.licenseCheck(param);
 		 			     break;
@@ -120,12 +127,9 @@ public class MemberModel {
 		case "comp_tel": count=MemberDAO.compTelCheck(param);
 						 break;
 		 
-		case "phone":    count=MemberDAO.phoneCheck(param);
-		 			     break;
 		}
 		
-		
-		
+
 		request.setAttribute("count", count);
 		return "../member/check.jsp";
 	}
@@ -215,9 +219,12 @@ public class MemberModel {
 			SellerVO vo1=new SellerVO();
 			vo1.setLicense(request.getParameter("license"));
 			vo1.setEmail(request.getParameter("email"));
-			vo1.setComp_name(request.getParameter("comp_name"));
 			vo1.setComp_tel(request.getParameter("compTel"));
+			vo1.setComp_name(request.getParameter("comp_name"));
 			vo1.setAddr(request.getParameter("address")+request.getParameter("detailAddress"));
+			vo1.setIntro(request.getParameter("intro"));
+			vo1.setPic(request.getParameter("pic"));
+			
 			MemberDAO.insertSeller(vo1);
 			
 			/*System.out.println(vo1.getLicense());

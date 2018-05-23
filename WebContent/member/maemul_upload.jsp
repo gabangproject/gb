@@ -43,6 +43,10 @@
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
 					<h3>매물등록</h3>
+					<small class="text-muted">
+					<span class="text-danger">*</span>
+      				은 필수입력
+    				</small>
 				</div>
 			</div>
 		

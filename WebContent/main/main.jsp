@@ -1,22 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%-- <%
-   // 화면 변경  main.jsp?mode=1
-   /*
-        ~main.jsp
-        => mode=null
-           if(mode==null)
-        ~main.jsp?mode=
-        => mode=""
-           if(mode=="")(X)
-           if(mode.equals(""))(O)
-   */
-   
-   String mode=request.getParameter("mode");
-   if(mode==null)
-	   mode="0";
-   int no=Integer.parseInt(mode);
-   String jsp=JspChange.change(no);
-%> --%>
+
 <!DOCTYPE html>
 <html class="no-js">
 <!--<![endif]-->

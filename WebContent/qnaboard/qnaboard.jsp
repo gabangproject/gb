@@ -160,7 +160,7 @@
 										<tr data-status="completed">
 											<td>${vo.num }</td>
 											<td>
-											<c:if test="${a!=1 }">
+											<c:if test="${bDisplay == true }">
 												<c:if test="${vo.group_tab >0}">
 													<c:forEach var="i" begin="0" end="${vo.group_tab }" step="1">
 															&nbsp;&nbsp;&nbsp;

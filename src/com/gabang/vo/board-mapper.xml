@@ -6,11 +6,17 @@
 <mapper namespace="com.gabang.vo.board-mapper">
 	<!-- 게시물 -->
 	<select id="boardListData" resultType="BoardVO" parameterType="java.util.Map">
-		SELECT no,title,email,regdate,hit,group_tab,num 
+		<!-- SELECT x.no, x.title, x.email, x.regdate, x.hit, x.group_tab, x.num 
 		FROM (SELECT no,title,email,regdate,hit,group_tab,rownum as num
 		FROM (SELECT no,title,email,regdate,hit,group_tab 
-		FROM qna ORDER BY group_id DESC, group_step ASC))
-		WHERE num BETWEEN #{start} AND #{end}
+		FROM qna ORDER BY group_id DESC, group_step ASC)) x
+		WHERE num BETWEEN #{start} AND #{end} -->
+		
+		SELECT X.no, X.title, X.email, X.regdate, X.hit, X.group_tab, X.num 
+		FROM (SELECT A.no, A.title, A.email, A.regdate, A.hit, A.group_tab, rownum as num FROM 
+		(SELECT no,title,email,regdate,hit,group_tab FROM qna ORDER BY group_id DESC, group_step ASC) A 
+		WHERE rownum <![CDATA[<=]]> #{end}) X 
+		WHERE X.num >= #{start}	
 	</select>
 
 	<!-- 총페이지 읽기 -->

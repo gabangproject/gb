@@ -27,6 +27,7 @@ public class BoardModel {
 		int rowSize = 10;
 		int start = (curpage * rowSize) - (rowSize - 1);
 		int end = curpage * rowSize;
+		boolean bDisplay = true;
 		
 		Map map = new HashMap();
 		map.put("start", start);
@@ -42,29 +43,26 @@ public class BoardModel {
 			request.setAttribute("list", list);
 			int totalpage = BoardDAO.titleCount(keyword);
 			request.setAttribute("totalpage", totalpage);
-			String a = "1";
-			request.setAttribute("a", a);
+			bDisplay = false;			
 		}else if(search.equals("email")) {
 			List<BoardVO> list = BoardDAO.emailSearch(keyword);
 			request.setAttribute("list", list);
 			int totalpage = BoardDAO.emailCount(keyword);
 			request.setAttribute("totalpage", totalpage);
-			String a = "1";
-			request.setAttribute("a", a);
+			bDisplay = false;			
 		}else {
 			List<BoardVO> list = BoardDAO.contentSearch(keyword);
 			request.setAttribute("list", list);
 			int totalpage = BoardDAO.contentCount(keyword);
 			request.setAttribute("totalpage", totalpage);
-			String a = "1";
-			request.setAttribute("a", a);
+			bDisplay = false;			
 		}
 		HttpSession session=request.getSession();
 		
 		
 
 		request.setAttribute("curpage", curpage);
-		
+		request.setAttribute("bDisplay", bDisplay);
 		session.getAttribute("id"); //email
 		session.getAttribute("nick"); //nick
 		request.setAttribute("main_jsp", "../qnaboard/qnaboard.jsp");

@@ -6,22 +6,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <!-- 매물등록 관련 bootstrap -->
-
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="../main/js/bootstrap.min.js"></script>
-
-
 <script type="text/javascript" src="../member/shadow/js/shadowbox.js"></script>
 <script type="text/javascript">
 
-//입력값 중복검사 실시간 체크
 
 
+//입력값 중복검사 체크
+/*
+ * 	입력창에 자동완성 기능을 활용해서 입력을 할때에
+ * 	입력값이 기존 디비에 들어있는 값이더라도 배경색이 빨간색으로 변경하지 않는 문제점이 발생
+ */
 function Check(input)
 {
 	
@@ -38,7 +37,7 @@ function Check(input)
         	 
              if(inputed=="") 
              {
-            	 $("#join").prop("disabled", false);
+            	 $("#join").prop("disabled", true);
                  $(input).css("background-color", "#FFCECE");
               	 //$(".signupbtn").css("background-color", "#aaaaaa");
                  //idCheck = 0;
@@ -46,7 +45,9 @@ function Check(input)
              else if (count == '0') 
              {
                  $(input).css("background-color", "#B0F6AC");
+
                  $("#join").prop("disabled", false);
+            
                  //idCheck = 1;
                  /* if(idCheck==1 && pwdCheck == 1) {
                      $(".signupbtn").prop("disabled", false);
@@ -56,8 +57,9 @@ function Check(input)
              }  
              else if (count == '1') 
              {	
+            	 
+            	 $(input).css("background-color", "#FFCECE");
             	 $("#join").prop("disabled", true);
-                 $(input).css("background-color", "#FFCECE");
                  
                  //$(input).setCustomValidity("등록된 "+checker+"입니다.");
                	 //$(".signupbtn").prop("disabled", true);
@@ -102,16 +104,21 @@ function pCheck(input)
 	if(numberCheck.test(inputed)==false)
 		{
 		input.setCustomValidity(checker+" 형식이 잘못되었습니다.");
+		$("#join").prop("disabled", true);
 		}
 	else{
 		input.setCustomValidity("");
+		$("#join").prop("disabled", false);
 		}
 }
 
 
-
+//JSP문서가 메모리에 로드 되었을때
 $(function(){
 
+	//가입버튼 비활성화
+	$('#join').prop("disabled",true);
+	//$('.ncs').attr("required",true);
 	
 	//비밀번호 재입력시 일치여부 확인
 	var password = document.getElementById("password");
@@ -132,7 +139,7 @@ $(function(){
 	confirm_password.onkeyup = validatePassword; 
 	
 	
-	//중개사 가입 체크하면 중개사 정보 입력 폼 생성
+	//중개사 가입 체크박스에 표시하면 중개사 정보 입력 폼 생성
 	$('#sellerform').hide();
 	$('#seller').click(function(){
 		$('#sellerform').toggle();
@@ -147,15 +154,8 @@ $(function(){
 			{
 			$('#sellerform input').attr("required",false);
 			}
-		
-			
-		
 	});
-	
-	
-	
-	
-	
+
 	
 });
 </script>
@@ -171,7 +171,7 @@ $(function(){
 		<div class="container" >
 			
 			<div class="row" >
-				 <div class=" text-center heading-section animate-box" > 
+				 <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box" > 
 					<h3>회원가입</h3>
 					<small class="text-muted">
 					<span class="text-danger">*</span>
@@ -179,6 +179,7 @@ $(function(){
     				</small>
 				</div>
 			</div>
+		
 
 
 		<!-- 회원가입 및 중개사 등록 폼 -->
@@ -192,12 +193,12 @@ $(function(){
 					
 					<!-- ID입력-->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="id">아이디
+						<label class="col-sm-4 control-label" for="id">아이디
 						<span class="text-danger">*</span>
 						</label>
-						<div class="col-md-2">
-							<input id="id" name="email" type="text" placeholder="UserID (Email)" class="form-control"   
-							oninput="Check(this),pCheck(this)" onblur="Check(this)" style="background-color:white;" required>
+						<div class="col-sm-2">
+							<input id="id" name="email" type="text" placeholder="UserID (Email)" class="form-control ncs"   
+							oninput="Check(this)" onfocusout="pCheck(this),Check(this)" style="background-color:white;" required>
 							 
 						</div>
 					</div>
@@ -205,17 +206,17 @@ $(function(){
 
 					<!-- 비밀번호 입력-->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="password">비밀번호
+						<label class="col-sm-4 control-label" for="password">비밀번호
 						<span class="text-danger">*</span>
 						</label>
-						<div class="col-md-3">
+						<div class="col-sm-3">
 							<input id="password" minlength="8" maxlength="12" name="password" type="password" placeholder="password"
 								class="form-control" required>
 								<small id="passwordHelpInline" class="text-muted">
-      							비밀번호 8~12자 입력
+      							비밀번호 8~12자 입력(영어 대소문자 구분)
     							</small>
 						</div>
-						<div class="col-md-3">
+						<div class="col-sm-3">
 							<input id="confirm_password" name="confirm_password" type="password" placeholder="Re-type password"
 								class="form-control" required>
 						</div>
@@ -224,10 +225,10 @@ $(function(){
 
 					<!-- 이름-->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="name">이름
+						<label class="col-sm-4 control-label" for="name">이름
 						<span class="text-danger">*</span>
 						</label>
-						<div class="col-md-2">
+						<div class="col-sm-2">
 							<input id="name" name="name" type="text" placeholder="이름" class="form-control" required>
 						</div>
 					</div>
@@ -235,36 +236,34 @@ $(function(){
 
 					<!-- 닉네임-->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="nick">별명
+						<label class="col-sm-4 control-label" for="nick">별명
 						<span class="text-danger">*</span>
 						</label>
-						<div class="col-md-2">
+						<div class="col-sm-2">
 							<input id="nick" name="nick" type="text" placeholder="닉네임" class="form-control" 
-							oninput="Check(this)" style="background-color:white;" required>
+							oninput="Check(this)" onblur="Check(this)" style="background-color:white;" required>
 						</div>
-						<input type=button class='btn btn-sm' name="nick" value='중복체크'	onclick="sCheck(this)" >
+						<!-- <input type=button class='btn btn-sm' name="nick" value='중복체크'	onclick="sCheck(this)" > -->
 					</div>
 
 
 					<!-- 전화번호 -->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="phone">전화번호
+						<label class="col-sm-4 control-label" for="phone">전화번호
 						<span class="text-danger">*</span>
 						</label>
-							<div class="col-md-3">
-								<input id="phone" name="phone" type="text" class="form-control" oninput="Check(this),pCheck(this)"
+							<div class="col-sm-3">
+								<input id="phone" name="phone" type="text" class="form-control" oninput="Check(this)" onblur="Check(this),pCheck(this)"
 								required placeholder="-를 포함하여 입력해주세요." title="-를 포함하여 입력해주세요.">
 							</div>
-							<input type=button class='btn btn-sm' name="phone" value='중복체크'	onclick="sCheck(this)">
-						
 					</div>
 
 					<!-- 성별 -->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="radios">성별
+						<label class="col-sm-4 control-label" for="radios">성별
 						<span class="text-danger">*</span>
 						</label>
-						<div class="col-md-4" required>
+						<div class="col-sm-4" required>
 							<div class="radio">
 								<label class="radios-0" for="gender-0">
 									<input type="radio" name="gender" id="gender-0" value="남자" checked="checked"> 남자
@@ -280,8 +279,8 @@ $(function(){
 					 <!-- 공인중개사 등록여부 -->
 
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="seller">공인중개사 등록여부</label>
-						<div class="col-md-4" style="padding-top: 7px">
+						<label class="col-sm-4 control-label" for="seller">공인중개사 등록여부</label>
+						<div class="col-sm-4" style="padding-top: 7px">
 							<input type="checkbox" class="form-check-input" id="seller" name="seller">
 							<label class="form-check-label" for="seller">등록을 원하시면 체크해주세요</label>
 						</div>
@@ -299,12 +298,12 @@ $(function(){
 
 						<!-- 공인중개사 번호입력 -->
 						<div class="form-group">
-							<label class="col-md-2 control-label" for="license">공인중개사 자격증번호
+							<label class="col-sm-4 control-label" for="license">공인중개사 자격증번호
 							<span class="text-danger">*</span>
 							</label>
-							<div class="col-md-3">
+							<div class="col-sm-3">
 								<input id="license" name="license" type="text" placeholder="-가 있을 경우 포함하여 입력해주세요" title="-를 포함하여 입력해주세요." 
-								class="form-control sri" oninput="Check(this),pCheck(this)">
+								class="form-control sri" oninput="Check(this)" onblur="Check(this),pCheck(this)">
 							</div>
 							<!-- <input type="file" value="중개등록증 첨부"> -->
 						</div>
@@ -312,8 +311,8 @@ $(function(){
 						
 						 <!-- 중개인 사진 -->
 						<div class="form-group">
-							<label class="col-md-2 control-label" for="pic">중개소 및 중개인 사진 등록</label>
-							<div class="col-md-3">
+							<label class="col-sm-4 control-label" for="pic">중개소 및 중개인 사진 등록</label>
+							<div class="col-sm-3">
 								<input id="pic" name="pic" type="file">
 							</div>
 						</div>  
@@ -321,10 +320,10 @@ $(function(){
 
 						<!-- 상호명 -->
 						<div class="form-group">
-							<label class="col-md-2 control-label" for="comp_name">상호명
+							<label class="col-sm-4 control-label" for="comp_name">상호명
 							<span class="text-danger">*</span>
 							</label>
-							<div class="col-md-3">
+							<div class="col-sm-3">
 								<input id="comp_name" name="comp_name" type="text" class="form-control sri">
 							</div>
 						</div>
@@ -333,10 +332,10 @@ $(function(){
 						<!-- 상호주소 -->
 						<div class="form-group" >
 							
-								<label class="col-md-2 control-label" for="firstname">상호주소
+								<label class="col-sm-4 control-label" for="firstname">상호주소
 								<span class="text-danger">*</span>
 								</label>
-								<div class="col-md-3">
+								<div class="col-sm-4">
 								<input type="text" id="postcode" name="postcode" class="form-control sri" placeholder="우편번호" onclick="searchPostcode()" readonly>
 								
 								<input type="text" id="address" name="address" class="form-control sri" placeholder="주소" style="margin-top:5px;margin-bottom:5px;" 
@@ -352,20 +351,20 @@ $(function(){
 
 						<!-- 상호 전화번호-->
 						<div class="form-group">
-							<label class="col-md-2 control-label" for="compTel">상호 전화번호
+							<label class="col-sm-4 control-label" for="compTel">상호 전화번호
 							<span class="text-danger">*</span>
 							</label>
 								
-								<div class="col-md-3">
-									<input id="compTel" name="compTel" type="text" class="form-control sri" oninput="Check(this),pCheck(this)" 
+								<div class="col-sm-3">
+									<input id="compTel" name="compTel" type="text" class="form-control sri" oninput="Check(this)" onblur="Check(this),pCheck(this)" 
 									placeholder="-를 포함하여 입력해주세요." title="-를 포함하여 입력해주세요.">
 								</div>
 						</div>
 						
 						<!-- 중개사 소개  -->
 						<div class="form-group">
-							<label class="col-md-2 control-label" for="intro">중개사 소개</label>
-							<div class="col-md-5">
+							<label class="col-sm-4 control-label" for="intro">중개사 소개</label>
+							<div class="col-sm-5">
 								<textarea class="form-control" rows="5" id="intro" name="intro"></textarea>
 							</div>								
 						</div>
@@ -376,8 +375,9 @@ $(function(){
 					
 					<!-- seller form 끝 -->
 					
-					<fieldset id="butt" form="join">
-					<div class="form-group" >
+					<fieldset id="butt" form="join" >
+					<div class="form-group text-center" >
+						<!-- 가입 버튼은 기본적으로 비활성화(disabled) 시켜놓고 입력값 중복체크를 처리하면 활성화 시킴  -->
 						<input type=submit id="join" name="join" class="btn" value="가입">
 						<input type=button id="cencel" name="cencel" class="btn btn-primary" value="취소">
 					</div>

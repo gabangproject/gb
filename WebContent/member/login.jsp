@@ -173,7 +173,6 @@ function loginCheck()
                 
                 <input type="text" class="form-control" id="email" name="email" placeholder="Email"  required autofocus>
                 <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password" required>
-                <!-- <input type="submit" class="btn-lg btn-primary btn-block" onclick="loginCheck()" value="로그인"> -->
                 <button class="btn btn-lg btn-primary btn-block" type="submit" >로그인</button>
                 <label class="checkbox pull-left">
                     <input type="checkbox" value="remember-me">Remember me

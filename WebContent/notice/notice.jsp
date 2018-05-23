@@ -84,7 +84,7 @@
 			<div id="fh5co-work-section">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+						<div class="col-md-8 text-center heading-section animate-box">
 							<h3>공지사항</h3>
 						</div>
 					</div>

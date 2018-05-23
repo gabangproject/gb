@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
  <c:if test="${state=='NOID' }">
@@ -24,4 +25,4 @@
  		window.parent.location.href=parent.document.location.href;
  		</script>
  </c:if>
-
+ 

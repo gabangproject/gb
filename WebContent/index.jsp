@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <script type="text/javascript">
-location.href="main.do";
+location.href="main/main.do";
 //¾ÈµÅ~123
 </script>
 <body>

@@ -33,7 +33,7 @@ public class MemberModel {
 	{	
 		request.setCharacterEncoding("EUC-KR");
 
-		String email=request.getParameter("email");
+		String email=request.getParameter("email").toLowerCase();
 		String pwd=request.getParameter("pwd");
 		
 

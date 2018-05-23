@@ -106,8 +106,8 @@ function join()
 	
 }
 
-/*
-ajax로그인 처리 코드상 문제 없는거 같으나 오류남
+
+/* ajax 로그인 처리 코드상 문제 없는거 같으나 오류남
 function loginCheck()
 {
 	//이메일 값
@@ -116,6 +116,7 @@ function loginCheck()
 	
 	
 	 $.ajax({
+		 type:'post',
          data : {"email" : email,"pwd" : pwd},
          url : "../main/login_ok.do",
          success : function(data) {
@@ -151,7 +152,7 @@ function loginCheck()
          	}
      		});
 	
-}  */
+}   */
 
 
 
@@ -173,7 +174,7 @@ function loginCheck()
                 <input type="text" class="form-control" id="email" name="email" placeholder="Email"  required autofocus>
                 <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password" required>
                 <!-- <input type="submit" class="btn-lg btn-primary btn-block" onclick="loginCheck()" value="로그인"> -->
-                <button class="btn btn-lg btn-primary btn-block" onclick="loginCheck()" >로그인</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" >로그인</button>
                 <label class="checkbox pull-left">
                     <input type="checkbox" value="remember-me">Remember me
                 </label>

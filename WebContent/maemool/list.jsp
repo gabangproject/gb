@@ -214,11 +214,12 @@ h2 a {
 									</div>
 									<a href="#?num=${i.num}">	
 										<img class="d-flex align-self-start maemool-list-img"
-										src="${oneImg.get(i.num)}">
+										src="${oneImg.get(i.num)}" alt=이미지>
 									</a>
 									<div class="media-body pl-3">
 										<div class="price" num='${i.num}'>
-											${i.deposit}<small>${i.addr}</small>
+											${i.deposit}
+											<div class=address>${i.addr}</div>
 										</div>
 										<div class="stats">
 											<span>
@@ -228,7 +229,7 @@ h2 a {
 												경도<i class="fa fa-bath" id='${i.num}y'>${i.y_position}</i>
 											</span>
 										</div>
-										<div class="address">4062 Walnut Hill Drive Cincinnati</div>
+										<!-- <div class="address">4062 Walnut Hill Drive Cincinnati</div> -->
 									</div>
 								</div>
 							</c:forEach>

@@ -1,5 +1,7 @@
 package com.gabang.model;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -12,6 +14,8 @@ import com.gabang.controller.RequestMapping;
 import com.gabang.vo.MemberDAO;
 import com.gabang.vo.MemberVO;
 import com.gabang.vo.SellerVO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sun.xml.internal.ws.client.SenderException;
 
 
@@ -53,8 +57,8 @@ public class MemberModel {
 			String nick=vo.getNick();
 			int grade=vo.getGrade();
 			
-			System.out.println(pwd);
-			System.out.println(db_pwd);
+			/*System.out.println(pwd);
+			System.out.println(db_pwd);*/
 			
 			//비번 체크
 			if(pwd.equals(db_pwd))
@@ -107,8 +111,8 @@ public class MemberModel {
 		String param=request.getParameter("param");
 		String checker=request.getParameter("checker");
 		int count=0;
-		System.out.println(param);
-		System.out.println(checker);
+		/*System.out.println(param);
+		System.out.println(checker);*/
 		
 		switch(checker)
 		{
@@ -190,17 +194,28 @@ public class MemberModel {
 	}
 	
 	@RequestMapping("main/join_ok.do")
-	public String insertMemberData (HttpServletRequest request) throws UnsupportedEncodingException 
+	public String insertMemberData (HttpServletRequest request) throws IOException 
 	{
 		request.setCharacterEncoding("EUC-KR");
+		
+		String path="c:\\download";
+		int size=1024*1024*100;
+		String enctype="EUC-KR";
+		
+		MultipartRequest mr=new MultipartRequest(request,path,size,enctype,new DefaultFileRenamePolicy());
+		
 		MemberVO vo=new MemberVO();
-		vo.setEmail(request.getParameter("email"));
-		vo.setPwd(request.getParameter("password"));
-		vo.setName(request.getParameter("name"));
-		vo.setNick(request.getParameter("nick"));
-		vo.setPhone(request.getParameter("phone"));
-		vo.setGender(request.getParameter("gender"));
-		String grade=request.getParameter("seller");
+		
+		String email=mr.getParameter("email");
+		email=email.substring(0,email.indexOf("@"))+"\\"+email.substring(email.indexOf("@"));
+		
+		vo.setEmail(email);
+		vo.setPwd(mr.getParameter("password"));
+		vo.setName(mr.getParameter("name"));
+		vo.setNick(mr.getParameter("nick"));
+		vo.setPhone(mr.getParameter("phone"));
+		vo.setGender(mr.getParameter("gender"));
+		String grade=mr.getParameter("seller");
 		
 		if(grade==null)
 		{
@@ -212,18 +227,38 @@ public class MemberModel {
 		else
 		{
 			grade="2";
-			
 			vo.setGrade(Integer.parseInt(grade));
 			MemberDAO.insertMember(vo);
 			
+			//DefaultFileRenamePolicy() => 파일명 바꿔주는 것
+			
+			
+			
 			SellerVO vo1=new SellerVO();
-			vo1.setLicense(request.getParameter("license"));
-			vo1.setEmail(request.getParameter("email"));
-			vo1.setComp_tel(request.getParameter("compTel"));
-			vo1.setComp_name(request.getParameter("comp_name"));
-			vo1.setAddr(request.getParameter("address")+request.getParameter("detailAddress"));
-			vo1.setIntro(request.getParameter("intro"));
-			vo1.setPic(request.getParameter("pic"));
+			vo1.setLicense(mr.getParameter("license"));
+			vo1.setEmail(email);
+			vo1.setComp_tel(mr.getParameter("compTel"));
+			vo1.setComp_name(mr.getParameter("comp_name"));
+			vo1.setAddr(mr.getParameter("address")+mr.getParameter("detailAddress"));
+			vo1.setIntro(mr.getParameter("intro"));
+			String fileName=mr.getOriginalFileName("pic");
+			// 업로드가 없는 경우
+		    if(fileName==null)
+		    {
+		    	vo1.setPic("");
+		    	vo1.setPic_size(0);
+		    }
+		    // 업로드된 상태 
+		    else
+		    {
+		    	//file의 크기를 저장할 때는 file의 길이를 인트로 변환해서 사이즈를 측정
+		    	vo1.setPic(fileName);
+		    	File f=new File(path+"\\"+fileName);
+		    	vo1.setPic_size((int)f.length());
+		    }
+			
+			
+	
 			
 			MemberDAO.insertSeller(vo1);
 			

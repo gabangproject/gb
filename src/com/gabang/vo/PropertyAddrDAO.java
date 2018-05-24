@@ -39,16 +39,33 @@ public class PropertyAddrDAO {
 		return list;
 	}
 	
-	public static List<MapVO> guMaemool(String search) {
+	public static List<MapVO> searchMaemool(String keyword) {
 		List<MapVO> list = new ArrayList<MapVO>();
 		SqlSession session = null;
 		
 		try {
 			session = ssf.openSession();
-			list = session.selectList("guMaemool_temp", search);
-//			list = session.selectList("guMaemool_temp");
+			list = session.selectList("searchMaemool_temp", keyword);
 		} catch (Exception e) {
 			System.out.println("PropertyAddrDAO - guMaemool : " + e.getMessage());
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		
+		return list;
+	}
+	
+	public static List<ImgVO> imgFind(int num) {
+		List<ImgVO> list = new ArrayList<ImgVO>();
+		SqlSession session = null;
+		
+		try {
+			session = ssf.openSession();
+			list = session.selectList("imgFind", num);
+		} catch (Exception e) {
+			System.out.println("PropertyAddrDAO - imgFind : " + e.getMessage());
 		} finally {
 			if (session != null) {
 				session.close();

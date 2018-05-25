@@ -103,7 +103,13 @@
 				</div>
 			</div>
 		</div>
-		<div class="container">
+	</div>
+		
+		<div class="container" style="width: 80%;">
+			<table class="table">
+				<tr>
+					<td class="col-md-2"><img src="../qnaboard/icon1.jpg" width="278" height="623" /></td>
+					<td class="col-md-8" style="margin: auto;">
 			<div class="row">
 				<h1>내용보기</h1>
 				<table class="table">
@@ -144,6 +150,10 @@
 				</table>
 
 			</div>
+			</td>
+			<td class="col-md-2"><img src="../qnaboard/icon1.jpg" width="278" height="623" /></td>
+			</tr>
+			</table>
 		</div>
 </body>
 </html>

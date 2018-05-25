@@ -264,5 +264,69 @@ public class BoardDAO {
 		}
 		return total;
 	}
-
+	
+	//count 얻어오기
+	public static int countQnA() {
+		int total = 0;
+		SqlSession session = null;
+		try {
+			session = ssf.openSession(true);
+			total = session.selectOne("countQnA");
+		} catch (Exception e) {
+			System.out.println("titlecount : " + e.getMessage());
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return total;
+	}
+	
+	public static int countQnATitle(String keyword) {
+		int total = 0;
+		SqlSession session = null;
+		try {
+			session = ssf.openSession(true);
+			total = session.selectOne("countQnATitle",keyword);
+		} catch (Exception e) {
+			System.out.println("titlecount : " + e.getMessage());
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return total;
+	}
+	
+	public static int countQnAEmail(String keyword) {
+		int total = 0;
+		SqlSession session = null;
+		try {
+			session = ssf.openSession(true);
+			total = session.selectOne("countQnAEmail",keyword);
+		} catch (Exception e) {
+			System.out.println("titlecount : " + e.getMessage());
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return total;
+	}
+	
+	public static int countQnAContent(String keyword) {
+		int total = 0;
+		SqlSession session = null;
+		try {
+			session = ssf.openSession(true);
+			total = session.selectOne("countQnAContent",keyword);
+		} catch (Exception e) {
+			System.out.println("titlecount : " + e.getMessage());
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return total;
+	}
 }

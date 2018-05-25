@@ -150,9 +150,9 @@
 									<tbody>
 
 										<!-- table 게시글 리스트 출력 시작-->
-										<c:forEach var="vo" items="${list }">
+										<c:forEach var="vo" items="${list }" varStatus="status">
 											<tr data-status="completed">
-												<td id="d" >${vo.num }</td>
+												<td id="d" >${count - status.index - ((curpage-1)*rowSize)}</td>
 												<td><c:if test="${bDisplay == true }">
 														<c:if test="${vo.group_tab >0}">
 															<c:forEach var="i" begin="0" end="${vo.group_tab }" step="1">

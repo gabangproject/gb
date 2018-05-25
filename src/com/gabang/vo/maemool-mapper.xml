@@ -13,4 +13,7 @@
 	<select id="imgFind" parameterType="int" resultType="ImgVO">
 		SELECT * FROM img WHERE num = #{num}
 	</select>
+	<insert id="insertImg">
+		Insert into img VALUES(#{img},#[num])
+	</insert>
 </mapper>

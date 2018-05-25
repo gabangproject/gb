@@ -72,7 +72,7 @@ $(function(){
 		
 			<div class="row" >
 				
-				<form id="maemul_upload" class="form-horizontal" enctype="multipart/form-data" action="../main/upload.do">
+				<form id="maemul_upload" class="form-horizontal" enctype="multipart/form-data" method="post" action="../main/upload.do">
 					
 					<fieldset form="maemul_upload">
 
@@ -109,9 +109,8 @@ $(function(){
 							<span class="text-danger">*</span>
 							</label>
 							<div class="col-md-4">
-								<input type="file" name="filename[]" multiple="multiple" maxlength="2" style="apperance: none;
-  									-webkit-apperance: none;"> 
-										
+								<input type="file" name="img" multiple="multiple"
+									style="apperance: none;	-webkit-apperance: none;">		
 							</div>
 						</div>
 

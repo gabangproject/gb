@@ -67,8 +67,9 @@ function idcheck()
 				<div class="nav-header">
 					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
 					<h1 id="fh5co-logo">
-						<a href="main.jsp">Ga<span>Bang</span></a>
+						<a href="main.do">Ga<span>Bang</span></a>
 					</h1>
+					
 					<!-- START #fh5co-menu-wrap -->
 					<nav id="fh5co-menu-wrap" role="navigation">
 						<ul class="sf-menu" id="fh5co-primary-menu">
@@ -77,7 +78,7 @@ function idcheck()
 							<li><a href="qnaboard.do">Q&A 게시판</a></li>
 							
 						<c:if test="${sessionScope.id==null }">
-							<li><a onclick="idcheck()">회원가입 / 로그인</a></li>
+							<li><a onclick="idcheck()" style='cursor:pointer'>회원가입 / 로그인</a></li>
 						</c:if>
 						
 						<c:if test="${sessionScope.id!=null }">
@@ -103,6 +104,7 @@ function idcheck()
 							
 						</ul>
 					</nav>
+					
 				</div>
 			</div>
 		</header>

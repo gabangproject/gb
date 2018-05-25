@@ -33,7 +33,7 @@
 	</insert>
 	
 	<insert id="insertSeller" parameterType="SellerVO">
-		INSERT INTO seller(license,email,comp_tel,comp_name,addr,intro,pic) 
-		VALUES(#{license},#{email},#{comp_tel},#{comp_name},#{addr},#{intro},#{pic})
+		INSERT INTO seller(license,email,comp_tel,comp_name,addr,intro,pic,pic_size) 
+		VALUES(#{license},#{email},#{comp_tel},#{comp_name},#{addr},#{intro},#{pic},#{pic_size})
 	</insert>
 </mapper>

@@ -28,39 +28,45 @@ public class BoardModel {
 		int start = (curpage * rowSize) - (rowSize - 1);
 		int end = curpage * rowSize;
 		boolean bDisplay = true;
+		int count = 0;
 		
 		Map map = new HashMap();
 		map.put("start", start);
 		map.put("end", end);
+		List<BoardVO> list;
 		if(keyword==null) {
-			List<BoardVO> list = BoardDAO.boardListData(map);
+			list = BoardDAO.boardListData(map);
 			request.setAttribute("list", list);
 			int totalpage = BoardDAO.boardTotalPage();
+			count = BoardDAO.countQnA();
 			request.setAttribute("totalpage", totalpage);
 			keyword="";
 		}else if(search.equals("title")) { 
-			List<BoardVO> list = BoardDAO.titleSearch(keyword);
+			list = BoardDAO.titleSearch(keyword);
 			request.setAttribute("list", list);
 			int totalpage = BoardDAO.titleCount(keyword);
+			count = BoardDAO.countQnATitle(keyword);
 			request.setAttribute("totalpage", totalpage);
 			bDisplay = false;			
 		}else if(search.equals("email")) {
-			List<BoardVO> list = BoardDAO.emailSearch(keyword);
+			list = BoardDAO.emailSearch(keyword);
 			request.setAttribute("list", list);
 			int totalpage = BoardDAO.emailCount(keyword);
+			count = BoardDAO.countQnAEmail(keyword);
 			request.setAttribute("totalpage", totalpage);
 			bDisplay = false;			
 		}else {
-			List<BoardVO> list = BoardDAO.contentSearch(keyword);
+			list = BoardDAO.contentSearch(keyword);
 			request.setAttribute("list", list);
 			int totalpage = BoardDAO.contentCount(keyword);
+			count = BoardDAO.countQnAContent(keyword);
 			request.setAttribute("totalpage", totalpage);
 			bDisplay = false;			
 		}
+		
 		HttpSession session=request.getSession();
-		
-		
-
+		request.setAttribute("count", count);
+		request.setAttribute("rowSize", rowSize);		
 		request.setAttribute("curpage", curpage);
 		request.setAttribute("bDisplay", bDisplay);
 		session.getAttribute("id"); //email

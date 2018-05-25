@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -8,11 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <style type="text/css">
@@ -85,44 +81,48 @@
 	<div id="fh5co-work-section">
 		<div class="container">
 			<div class="row">
-				<div
-					class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
 					<h3>게시글 작성</h3>
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<div class="container">
-			<div class="container">
-				<div class="row">
-					<h1>글쓰기</h1>
-					<!-- 
+	<div class="container" style="width: 80%;">
+		<table class="table">
+			<tr>
+				<td class="col-md-2"><img src="../qnaboard/icon1.jpg" width="278" height="623" /></td>
+				<td class="col-md-8" style="margin: auto;">
+					<div class="row">
+						<h1>글쓰기</h1>
+						<!-- 
             .do => DispatcherServlet => BoardModel
        -->
-					<form method=post action="noticeInsert_ok.do">
-						<table class="table table-hover">
-							<tr>
-								<td width="15%" class="success text-right">제목</td>
-								<td width="85%" class="text-left"><input type=text
-									name=title size=45 required></td>
-							</tr>
+						<form method=post action="noticeInsert_ok.do">
+							<table class="table table-hover">
+								<tr>
+									<td width="15%" class="success text-right">제목</td>
+									<td width="85%" class="text-left"><input type=text name=title size=45 required></td>
+								</tr>
 
-							<tr>
-								<td width="15%" class="success text-right">내용</td>
-								<td width="85%" class="text-left"><textarea rows="10"
-										cols="50" name=content required></textarea></td>
-							</tr>
+								<tr>
+									<td width="15%" class="success text-right">내용</td>
+									<td width="85%" class="text-left"><textarea rows="10" cols="50" name=content required></textarea></td>
+								</tr>
 
-							<tr>
-								<td colspan="2" class="text-center">
-								<input type="submit" class="btn btn-sm btn-primary" value="글쓰기" id="writeBtn">
-								<input type="button" class="btn btn-sm btn-primary" value="취소" onclick="javascript:history.back()"></td>
-								
-							</tr>
+								<tr>
+									<td colspan="2" class="text-center"><input type="submit" class="btn btn-sm btn-primary" value="글쓰기" id="writeBtn"> <input type="button" class="btn btn-sm btn-primary" value="취소"
+										onclick="javascript:history.back()"></td>
 
-						</table>
-					</form>
-				</div>
-			</div>
+								</tr>
+
+							</table>
+						</form>
+					</div>
+				</td>
+<td class="col-md-2"><img src="../qnaboard/icon1.jpg" width="278" height="623" /></td>
+			</tr>
+		</table>
+	</div>
 </body>
 </html>

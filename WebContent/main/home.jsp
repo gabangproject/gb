@@ -16,7 +16,7 @@
 				<h2>가방</h2>
 					<form action="maemool_search.do">
 						<div class="row" style="margin: 0px auto;">
-							<input type="text" class="form-control" placeholder="지역을 입력하세요. ^오^" style="width:1000px; margin: 0px auto;"
+							<input type="text" class="form-control" placeholder="지역을 입력하세요" style="width:1000px; margin: 0px auto;"
 							name=keyword>
 							<br>
 						</div>

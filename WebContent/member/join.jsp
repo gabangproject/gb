@@ -68,8 +68,6 @@ function Check(input)
              }  
          }
      });
-	
-	
 }
 
 
@@ -186,7 +184,8 @@ $(function(){
 		
 			<div class="row">
 
-				<form class="form-horizontal" id="join" name="frm" method="post" action="../main/join_ok.do">
+				<form class="form-horizontal" id="join" name="frm" method="post" action="../main/join_ok.do" 
+				enctype="multipart/form-data">
 					
 					<fieldset form="join">
 					
@@ -313,7 +312,7 @@ $(function(){
 						<div class="form-group">
 							<label class="col-sm-4 control-label" for="pic">중개소 및 중개인 사진 등록</label>
 							<div class="col-sm-3">
-								<input id="pic" name="pic" type="file">
+								<input id="pic" type="file" name="pic">
 							</div>
 						</div>  
 						

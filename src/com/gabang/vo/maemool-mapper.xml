@@ -16,4 +16,7 @@
 	<insert id="jjimActive" parameterType="hashmap">
 		INSERT INTO jjim (email, num) values (#{id}, #{num})
 	</insert>
+	<insert id="insertImg">
+		Insert into img VALUES(#{img},#[num])
+	</insert>
 </mapper>

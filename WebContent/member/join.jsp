@@ -68,8 +68,6 @@ function Check(input)
              }  
          }
      });
-	
-	
 }
 
 

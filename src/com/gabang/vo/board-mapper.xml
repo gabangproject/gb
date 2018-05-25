@@ -93,7 +93,7 @@
 	</update>
 	<!-- 여기까지 답변의 답변 -->
 	
-	<!-- 검색 -->
+	<!-- 검색 --> 
 	<select id="titleSearch" resultType="BoardVO" parameterType="String">
 		SELECT * FROM qna
 		WHERE title LIKE '%'||#{keyword}||'%'
@@ -123,6 +123,30 @@
 	
 	<select id="boardTotalPage4" resultType="int" parameterType="String">
 	SELECT CEIL(COUNT(*)/10)
+	FROM qna
+	WHERE content LIKE '%'||#{keyword}||'%'
+	</select>
+	
+	<!-- 카운트 얻기 -->
+	<select id="countQnA" resultType="int" parameterType="String">
+	SELECT COUNT(*) 
+	FROM qna	
+	</select>
+	
+		<select id="countQnATitle" resultType="int" parameterType="String">
+	SELECT COUNT(*)	
+	FROM qna
+	WHERE title LIKE '%'||#{keyword}||'%'
+	</select>
+	
+		<select id="countQnAEmail" resultType="int" parameterType="String">
+	SELECT COUNT(*) 
+	FROM qna
+	WHERE email LIKE '%'||#{keyword}||'%'
+	</select>
+	
+		<select id="countQnAContent" resultType="int" parameterType="String">
+	SELECT COUNT(*) 
 	FROM qna
 	WHERE content LIKE '%'||#{keyword}||'%'
 	</select>

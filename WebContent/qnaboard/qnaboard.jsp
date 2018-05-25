@@ -211,11 +211,7 @@
 					<td class="col-md-2"><img src="../qnaboard/icon1.jpg" width="278" height="623" /></td>
 				</tr>
 			</table>
-
 		</div>
-
-
-
 	</div>
 
 

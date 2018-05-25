@@ -241,6 +241,8 @@ public class MemberModel {
 			vo1.setComp_name(mr.getParameter("comp_name"));
 			vo1.setAddr(mr.getParameter("address")+mr.getParameter("detailAddress"));
 			vo1.setIntro(mr.getParameter("intro"));
+			
+			//pic라는 name으로 넘어온 input(file)태그의 속성값(file)의 원래 이름을 filename로 받는다.
 			String fileName=mr.getOriginalFileName("pic");
 			// 업로드가 없는 경우
 		    if(fileName==null)
@@ -253,8 +255,6 @@ public class MemberModel {
 		    {
 		    	//file의 크기를 저장할 때는 file의 길이를 인트로 변환해서 사이즈를 측정
 		    	vo1.setPic(fileName);
-		    	File f=new File(path+"\\"+fileName);
-		    	vo1.setPic_size((int)f.length());
 		    }
 			
 			

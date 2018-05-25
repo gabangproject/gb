@@ -5,10 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.Session;
 
 import com.gabang.controller.Controller;
 import com.gabang.controller.RequestMapping;
 import com.gabang.vo.ImgVO;
+import com.gabang.vo.JjimDAO;
 import com.gabang.vo.MapVO;
 import com.gabang.vo.PropertyAddrDAO;
 
@@ -33,7 +37,6 @@ public class MaemoolModel {
 		}
 
 		req.setAttribute("oneImg", oneImg);
-
 		req.setAttribute("geoList", geoList);
 		req.setAttribute("main_jsp", "../maemool/list.jsp");
 		return "main.jsp";
@@ -71,11 +74,36 @@ public class MaemoolModel {
 
 		req.setAttribute("oneImg", oneImg);
 		req.setAttribute("geoList", geoList);
-		req.setAttribute("main_jsp", "../maemool/list.jsp");
+//		req.setAttribute("main_jsp", "../maemool/list.jsp");
 
 		// 테스트 페이지로 이동하게끔
-		// req.setAttribute("main_jsp", "../maemool/testList.jsp");
+		 req.setAttribute("main_jsp", "../maemool/testList.jsp");
 
+		return "main.jsp";
+	}
+	
+	// ajax로 해당페이지를 부른다.
+	@RequestMapping("main/sideList.do")
+	public String sideList(HttpServletRequest req) {
+		
+		return "../maemool/sideList.jsp";
+	}
+	
+	@RequestMapping("main/jjim.do")
+	public String jjim(HttpServletRequest req) {
+		// id는 session에 저장되어있다.
+		HttpSession session = req.getSession();
+		Map map = new HashMap();
+		String id = (String) session.getAttribute("id");
+		int num = (int) req.getAttribute("num");
+		
+		// 찜 활성화의 parameterType이 map이므로 map에 넣어준다.
+		map.put("id", id);
+		map.put("num", num);
+		
+		// 찜 활성화 실행.
+		JjimDAO.jjimActive(map);
+		
 		return "main.jsp";
 	}
 }

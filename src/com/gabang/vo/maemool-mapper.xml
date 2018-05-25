@@ -13,4 +13,7 @@
 	<select id="imgFind" parameterType="int" resultType="ImgVO">
 		SELECT * FROM img WHERE num = #{num}
 	</select>
+	<insert id="jjimActive" parameterType="hashmap">
+		INSERT INTO jjim (email, num) values (#{id}, #{num})
+	</insert>
 </mapper>

@@ -78,7 +78,7 @@ function idcheck()
 							<li><a href="qnaboard.do">Q&A 게시판</a></li>
 							
 						<c:if test="${sessionScope.id==null }">
-							<li><a onclick="idcheck()">회원가입 / 로그인</a></li>
+							<li><a onclick="idcheck()" style='cursor:pointer'>회원가입 / 로그인</a></li>
 						</c:if>
 						
 						<c:if test="${sessionScope.id!=null }">

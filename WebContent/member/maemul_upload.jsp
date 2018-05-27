@@ -72,7 +72,7 @@ $(function(){
 		
 			<div class="row" >
 				
-				<form id="maemul_upload" class="form-horizontal" method="post" action="../main/upload.do">
+				<form id="maemul_upload" class="form-horizontal" method="post" enctype="multipart/form-data" action="../main/upload.do">
 					
 					<fieldset form="maemul_upload">
 						

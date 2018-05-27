@@ -72,23 +72,26 @@ $(function(){
 		
 			<div class="row" >
 				
-				<form id="maemul_upload" class="form-horizontal" enctype="multipart/form-data" method="post" action="../main/upload.do">
+				<form id="maemul_upload" class="form-horizontal" method="post" action="../main/upload.do">
 					
 					<fieldset form="maemul_upload">
-
+						
+						
+						
+						
 						<!-- 概拱林家 -->
 						<div class="form-group">
 							
 								<label class="col-md-4 control-label" for="firstname">概拱林家
 								<span class="text-danger">*</span>
 								</label>
-								<div class="col-md-4">
-								<input type="text" id="postcode" class="form-control" placeholder="快祈锅龋" readonly onclick="searchPostcode()">
+								<div class="col-sm-4">
+								<input type="text" id="postcode" name="postcode" class="form-control sri" placeholder="快祈锅龋" onclick="searchPostcode()" readonly>
 								
-								<input type="text" id="address" class="form-control" placeholder="林家" onclick="searchPostcode()"
-								style="margin-top:5px; margin-bottom:5px;" readonly>
+								<input type="text" id="address" name="address" class="form-control sri" placeholder="林家" style="margin-top:5px;margin-bottom:5px;" 
+								onclick="searchPostcode()" readonly>
 								
-								<input type="text" id="detailAddress" class="form-control" placeholder="惑技林家">
+								<input type="text" id="detailAddress" name="detailAddress" class="form-control sri" placeholder="惑技林家">
 								<!-- x,y谅钎蔼 掘绢咳 -->
 								<input type="hidden" id="x_position" name="x_position">
 								<input type="hidden" id="y_position" name="y_position">
@@ -128,7 +131,7 @@ $(function(){
 									<label for="radios-1"> 
 										<input type="radio" name="deal_type" id="radios-1" value="1"> 岿技
 									</label> 
-									</label>
+									
 								</div>
 							</div>
 						</div>

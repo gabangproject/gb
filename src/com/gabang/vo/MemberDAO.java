@@ -19,29 +19,29 @@ public class MemberDAO {
 			Reader reader = Resources.getResourceAsReader("Config.xml");
 			ssf = new SqlSessionFactoryBuilder().build(reader);
 		} catch (Exception ex) {
-			System.out.println("boardDAO : " + ex.getMessage());
+			System.out.println(ex.getMessage());
 		}
 	}
 
-	public static int loginIdCheck(String email) {
-		int loginIdCheck = 0;
+	public static int emailCheck(String email) {
+		int idCheck = 0;
 		SqlSession session = null;// connection연결=>sql문장수행
 		try {
 
 			session = ssf.openSession();
 
 			// 실행 결과값 받기
-			loginIdCheck = session.selectOne("loginIdCheck", email);
+			idCheck = session.selectOne("emailCheck", email);
 		} catch (Exception ex) {
-			System.out.println("boardListData : " + ex.getMessage());
+			System.out.println(ex.getMessage());
 		} finally {
 			if (session != null)
 				session.close();
 		}
-		return loginIdCheck;
+		return idCheck;
 	}
 
-	public static MemberVO loginPwdCheck(String email) {
+	public static MemberVO pwdCheck(String email) {
 		MemberVO vo = new MemberVO();
 		SqlSession session = null;// connection연결=>sql문장수행
 		try {
@@ -49,7 +49,7 @@ public class MemberDAO {
 			session = ssf.openSession();
 
 			// 실행 결과값 받기
-			vo = session.selectOne("loginPwdCheck", email);
+			vo = session.selectOne("pwdCheck", email);
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		} finally {
@@ -128,6 +128,29 @@ public class MemberDAO {
 		return phoneCheck;
 	}
 
+	public static void loginState(MemberVO vo)
+	{
+		SqlSession session=null;
+		
+		try {
+				session=ssf.openSession(true);
+				session.insert("loginState",vo);
+				
+		}catch(Exception ex)
+		{
+			System.out.println(ex.getMessage());
+		}
+		finally
+		{
+			if(session!=null)
+			{
+				session.close();
+			}
+		}
+		
+	}
+	
+	
 	public static void insertMember(MemberVO vo) {
 		SqlSession session = null;
 		try {

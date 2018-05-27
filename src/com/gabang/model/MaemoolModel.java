@@ -1,17 +1,24 @@
 package com.gabang.model;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.Session;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.gabang.controller.Controller;
 import com.gabang.controller.RequestMapping;
@@ -60,15 +67,23 @@ public class MaemoolModel {
 		MultipartRequest mr=new MultipartRequest(request,path,size,enctype,new DefaultFileRenamePolicy());
 		//捞固 颇老 积己篮 场!
 		
-		Enumeration img=mr.getFileNames();
-		
-		while(img.hasMoreElements())
+		String[] list= mr.getParameterValues("img");
+		for(int i=0;i<list.length;i++)
+		{
+			System.out.println(list+"[i]");
+		}
+		System.out.println(list);
+		/*for(String pName:list)
+		{
+			System.out.println(pName);
+		}*/
+		/*while(img.hasMoreElements())
 		{
 			String img1=(String)img.nextElement();
 			String originalName=mr.getOriginalFileName(img1);
 			System.out.println(img1);
 			System.out.println(originalName);
-		}
+		}*/
 		/*String fileName=mr.getOriginalFileName("img[]");
 		System.out.println(fileName);*/
 		/*ImgVO vo=new ImgVO();
@@ -96,6 +111,54 @@ public class MaemoolModel {
 		
 		//request.setAttribute("main_jsp", "../maemool/list.jsp");
 		//return "main.jsp";
+		
+		
+		
+		final int KILOBYTE = 1024 * 1024;
+		final int MEMORY_THRESHOLD = 3 * KILOBYTE;
+		final int MAX_FILE_SIZE = 40 * KILOBYTE;
+		final int MAZ_REQUEST_SIZE = 50 * KILOBYTE;
+		final String TEMP_PATH = "c:\\download";
+		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+		if (isMultipart) {
+			// Create a factory for disk-based file items
+			DiskFileItemFactory factory = new DiskFileItemFactory();
+
+			// Set factory constraints
+			factory.setSizeThreshold(MEMORY_THRESHOLD);			
+
+			// Create a new file upload handler
+			ServletFileUpload upload = new ServletFileUpload(factory);
+
+			// Set overall request size constraint
+			upload.setSizeMax(MAZ_REQUEST_SIZE);
+			upload.setFileSizeMax(MAX_FILE_SIZE);
+
+			// Parse the request			
+			try { 
+				List<FileItem> items = new ServletFileUpload(factory).parseRequest(request);
+				for (FileItem item : items) {
+					if (item.isFormField()) {
+						// Process regular form field (input type="text|radio|checkbox|etc", select,
+						// etc).
+						String fieldName = item.getFieldName();
+						String fieldValue = item.getString();
+						// ... (do your job here)
+					} else {
+						// Process form file field (input type="file").
+						String fieldName = item.getFieldName();
+						String fileName = item.getName();
+						System.out.println("fieldName:" + fieldName + ", fileName:" + fileName);
+						InputStream fileContent = item.getInputStream();
+						BufferedImage image = ImageIO.read(fileContent);
+						ImageIO.write(image, "jpg", new File(TEMP_PATH + "/" + fileName));
+					}
+				}
+			} catch (FileUploadException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@RequestMapping("main/maemool_search.do")

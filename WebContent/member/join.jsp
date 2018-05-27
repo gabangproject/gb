@@ -39,32 +39,20 @@ function Check(input)
              {
             	 $("#join").prop("disabled", true);
                  $(input).css("background-color", "#FFCECE");
-              	 //$(".signupbtn").css("background-color", "#aaaaaa");
-                 //idCheck = 0;
+              	 
              } 
              else if (count == '0') 
              {
+            	 $("#join").prop("disabled", false);
                  $(input).css("background-color", "#B0F6AC");
-
-                 $("#join").prop("disabled", false);
-            
-                 //idCheck = 1;
-                 /* if(idCheck==1 && pwdCheck == 1) {
-                     $(".signupbtn").prop("disabled", false);
-                     $(".signupbtn").css("background-color", "#4CAF50");
-                     signupCheck();
-                 */
+       			           
              }  
              else if (count == '1') 
              {	
-            	 
+       
             	 $(input).css("background-color", "#FFCECE");
             	 $("#join").prop("disabled", true);
-                 
-                 //$(input).setCustomValidity("등록된 "+checker+"입니다.");
-               	 //$(".signupbtn").prop("disabled", true);
-                 //$(".signupbtn").css("background-color", "#aaaaaa");
-                 
+   
              }  
          }
      });
@@ -106,7 +94,7 @@ function pCheck(input)
 		}
 	else{
 		input.setCustomValidity("");
-		$("#join").prop("disabled", false);
+		
 		}
 }
 
@@ -115,7 +103,7 @@ function pCheck(input)
 $(function(){
 
 	//가입버튼 비활성화
-	$('#join').prop("disabled",true);
+	//$('#join').prop("disabled",true);
 	//$('.ncs').attr("required",true);
 	
 	//비밀번호 재입력시 일치여부 확인
@@ -124,12 +112,13 @@ $(function(){
 
 	function validatePassword(){
 		
-	if(password.value != confirm_password.value) {
-		
-	  confirm_password.setCustomValidity("비밀번호가 일치하지 않습니다.");
-	} else {
-	  confirm_password.setCustomValidity('');
-	}
+	if(password.value != confirm_password.value) 
+		{
+	  		confirm_password.setCustomValidity("비밀번호가 일치하지 않습니다.");
+		} 
+	else{
+	  		confirm_password.setCustomValidity('');
+		}
 
 	}
 
@@ -137,20 +126,38 @@ $(function(){
 	confirm_password.onkeyup = validatePassword; 
 	
 	
+
 	//중개사 가입 체크박스에 표시하면 중개사 정보 입력 폼 생성
 	$('#sellerform').hide();
 	$('#seller').click(function(){
 		$('#sellerform').toggle();
 		
+		//alert($("#id").css("background-color"));
+		//alert($("input[style='background-color:rgb(176, 246, 172)']").length);
+		
 		var check=$('#seller').prop( "checked" );
 		if(check==true)
 			{
 			$('#sellerform .sri').attr("required",true);
-			
+				
+				/* if($("input[background-color='#B0F6AC']")>=5)
+				{
+				$("#join").prop("disabled", false);
+				} */
 			}
 		else
 			{
 			$('#sellerform input').attr("required",false);
+				
+				
+						
+					
+					/* 	$("input").css("background-color")=='')
+					{
+					
+					} */
+			
+				
 			}
 	});
 
@@ -337,8 +344,8 @@ $(function(){
 								<div class="col-sm-4">
 								<input type="text" id="postcode" name="postcode" class="form-control sri" placeholder="우편번호" onclick="searchPostcode()" readonly>
 								
-								<input type="text" id="address" name="address" class="form-control sri" placeholder="주소" style="margin-top:5px;margin-bottom:5px;" 
-								onclick="searchPostcode()" readonly>
+								<input type="text" id="address" name="address" class="form-control sri" placeholder="주소" 
+								style="margin-top:5px;margin-bottom:5px;" onclick="searchPostcode()" readonly>
 								
 								<input type="text" id="detailAddress" name="detailAddress" class="form-control sri" placeholder="상세주소">
 								<!-- <span id="guide" style="color:#999"></span> 주소를 클릭하면 창이 사라진다 -->

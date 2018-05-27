@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="../member/shadow/css/shadowbox.css">
 <link rel="stylesheet" type="text/css" href="../member/shadow/css/shadowbox.css">
 <script type="text/javascript" src="../member/shadow/js/shadowbox.js"></script>
+
 <script>
 
 Shadowbox.init({
@@ -77,11 +78,11 @@ function idcheck()
 							<li><a href="notice.do" class="fh5co-sub-ddown">공지사항</a></li>
 							<li><a href="qnaboard.do">Q&A 게시판</a></li>
 							
-						<c:if test="${sessionScope.id==null }">
+						<c:if test="${sessionScope.nick==null }">
 							<li><a onclick="idcheck()" style='cursor:pointer'>회원가입 / 로그인</a></li>
 						</c:if>
 						
-						<c:if test="${sessionScope.id!=null }">
+						<c:if test="${sessionScope.nick!=null }">
 							<li><a class="fh5co-sub-ddown">마이페이지</a>
 								<ul class="fh5co-sub-menu">
 										<li><a href="list.jsp" target="_blank">찜목록 보기</a></li>

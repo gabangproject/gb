@@ -4,12 +4,12 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.gabang.vo.member-mapper">
-	<select id="loginIdCheck" parameterType="String" resultType="int">
+	<select id="emailCheck" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM member WHERE email=#{email}
 	</select>
 	
-	<select id="loginPwdCheck" parameterType="String" resultType="MemberVO">
-		SELECT pwd,nick,grade FROM member WHERE email=#{email}
+	<select id="pwdCheck" parameterType="String" resultType="MemberVO">
+		SELECT pwd,nick,grade,login FROM member WHERE email=#{email}
 	</select>
 	
 	<select id="nickCheck" parameterType="String" resultType="int">
@@ -27,13 +27,17 @@
 	<select id="phoneCheck" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM member WHERE phone=#{phone}
 	</select>
+	
+	<insert id="loginState" parameterType="MemberVO">
+		UPDATE member SET login=#{login} WHERE email=#{email}
+	</insert>
 
 	<insert id="insertMember" parameterType="MemberVO">
 		INSERT INTO member VALUES(#{email},#{pwd},#{gender},#{name},#{nick},#{grade},#{phone})
 	</insert>
 	
 	<insert id="insertSeller" parameterType="SellerVO">
-		INSERT INTO seller(license,email,comp_tel,comp_name,addr,intro,pic,pic_size) 
-		VALUES(#{license},#{email},#{comp_tel},#{comp_name},#{addr},#{intro},#{pic},#{pic_size})
+		INSERT INTO seller(license,email,comp_tel,comp_name,addr,intro,pic) 
+		VALUES(#{license},#{email},#{comp_tel},#{comp_name},#{addr},#{intro},#{pic})
 	</insert>
 </mapper>

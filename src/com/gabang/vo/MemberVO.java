@@ -8,7 +8,14 @@ public class MemberVO {
 	private String nick;		//	별명
 	private int	grade;		//	등급
 	private String phone;		//	전화번호
+	private int login;
 	
+	public int getLogin() {
+		return login;
+	}
+	public void setLogin(int login) {
+		this.login = login;
+	}
 	public String getEmail() {
 		return email;
 	}

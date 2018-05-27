@@ -1,9 +1,12 @@
 package com.gabang.model;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -42,34 +45,47 @@ public class MemberModel {
 		
 
 		//id 존재 여부 체크
-		int loginIdCheck=MemberDAO.loginIdCheck(email);
+		int emailCheck=MemberDAO.emailCheck(email);
 		
 		String state="";
 		
 		//id가 있으면
-		if(loginIdCheck==1)
+		if(emailCheck==1)
 		{
 			//비밀번호 체크
 			MemberVO vo=new MemberVO();
-			vo=MemberDAO.loginPwdCheck(email);
+			vo=MemberDAO.pwdCheck(email);
 			
 			String db_pwd=vo.getPwd();
 			String nick=vo.getNick();
 			int grade=vo.getGrade();
-			
+			int login=vo.getLogin();
 			/*System.out.println(pwd);
 			System.out.println(db_pwd);*/
-			
+			HttpSession session=request.getSession();
+			session.setAttribute("email", email);
 			//비번 체크
 			if(pwd.equals(db_pwd))
 			{
-				HttpSession session=request.getSession();
-				session.setAttribute("id", email);
+				if(login==0)
+				{
+				
+				
 				session.setAttribute("nick", nick);
 				session.setAttribute("grade", grade);
+				//로그인 상태 변환
+				vo.setEmail(email);
+				vo.setLogin(1);
+				MemberDAO.loginState(vo);
 				
 				state="OK";
 				request.setAttribute("state", state);
+				}
+				else
+				{
+					state="ALREADY";
+					request.setAttribute("state", state);
+				}
 				
 			}
 			else 
@@ -91,15 +107,44 @@ public class MemberModel {
 		return "../member/login_ok.jsp";
 	}
 	
+	@RequestMapping("main/reLogin.do")
+	public String reLogin(HttpServletRequest request)
+	{
+		HttpSession session=request.getSession();
+		String email=(String) session.getAttribute("email");
+		MemberVO vo=new MemberVO();
+		System.out.println(email);
+		vo.setLogin(0);
+		vo.setEmail(email);
+		MemberDAO.loginState(vo);
+		//request.setAttribute("main_jsp", "home.jsp");
+		return "main.do";
+	}
+	
 	
 	@RequestMapping("main/logout.do")
 	public String logout(HttpServletRequest request)
 	{
 		HttpSession session=request.getSession();
-		session.invalidate();
+		
+		String email=(String) session.getAttribute("email");
+		System.out.println("email:"+email);
+		
+		
+		MemberVO vo=new MemberVO();
+		vo.setEmail(email);
+		vo.setLogin(0);
+		MemberDAO.loginState(vo);
+		
+		session.removeAttribute("email");
+		session.removeAttribute("nick");
+		session.removeAttribute("grade");
+		
+		//session.invalidate();
+		
 		
 		request.setAttribute("main_jsp", "home.jsp");
-		return "main.jsp";
+		return "main.do";
 	}
 	
 	
@@ -116,7 +161,7 @@ public class MemberModel {
 		
 		switch(checker)
 		{
-		case "email":    count=MemberDAO.loginIdCheck(param);
+		case "email":    count=MemberDAO.emailCheck(param);
 					     break;
 		
 		case "nick":     count=MemberDAO.nickCheck(param);
@@ -207,7 +252,7 @@ public class MemberModel {
 		MemberVO vo=new MemberVO();
 		
 		String email=mr.getParameter("email");
-		email=email.substring(0,email.indexOf("@"))+"\\"+email.substring(email.indexOf("@"));
+		//email=email.substring(0,email.indexOf("@"))+"\\"+email.substring(email.indexOf("@"));
 		
 		vo.setEmail(email);
 		vo.setPwd(mr.getParameter("password"));
@@ -242,19 +287,43 @@ public class MemberModel {
 			vo1.setAddr(mr.getParameter("address")+mr.getParameter("detailAddress"));
 			vo1.setIntro(mr.getParameter("intro"));
 			
-			//pic라는 name으로 넘어온 input(file)태그의 속성값(file)의 원래 이름을 filename로 받는다.
+			//파일 원본 이름 저장
 			String fileName=mr.getOriginalFileName("pic");
+						
+			/*File folder=new File("c:\\download");
+			String[] listFiles=folder.list(new FilenameFilter() {
+				
+				@Override
+				public boolean accept(File dir, String name) {
+					
+					return name.startsWith(fileName);
+				}
+			});*/
+			
+			
+			//확장자 저장
+			String ext=fileName.substring(fileName.indexOf("."));
+			
+			
+			System.out.println(ext);
+			
 			// 업로드가 없는 경우
 		    if(fileName==null)
 		    {
 		    	vo1.setPic("");
-		    	vo1.setPic_size(0);
+		    	
 		    }
 		    // 업로드된 상태 
 		    else
 		    {
-		    	//file의 크기를 저장할 때는 file의 길이를 인트로 변환해서 사이즈를 측정
-		    	vo1.setPic(fileName);
+		    	
+		    	File f=new File("c:\\download\\"+fileName);
+		    	//닉네임으로 파일명 변경
+		    	File newFile=new File("c:\\download\\"+email+ext);
+		    	f.renameTo(newFile);
+		    	
+		    	System.out.println(f.getName());
+		    	vo1.setPic(email+ext);
 		    }
 			
 			

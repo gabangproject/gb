@@ -107,16 +107,15 @@
 
 									<tr>
 										<td width="15%" class="success text-right">내용</td>
-										<td width="85%" class="text-left"><textarea rows="10" cols="50" name=content required></textarea></td>
+										<td width="85%" class="text-left">
+										<textarea rows="10" cols="50" name=content required></textarea></td>
 									</tr>
 
 									<tr>
 										<td colspan="2" class="text-center">
 										<input type="submit" class="btn btn-sm btn-info" value="글쓰기" id="writeBtn"> 
 										<input type="button" class="btn btn-sm btn-danger" value="취소" onclick="javascript:history.back()"></td>
-
 									</tr>
-
 								</table>
 							</form>
 						</div>

@@ -114,7 +114,8 @@
 									<td class="success text-center" width="20%">번호</td>
 									<td class="text-center" width="30%">${vo.no }</td>
 									<td class="success text-center" width="20%">작성일</td>
-									<td class="text-center" width="30%"><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd" /></td>
+									<td class="text-center" width="30%">
+									<fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd" /></td>
 								</tr>
 
 								<tr>
@@ -144,7 +145,8 @@
 								</tr>
 								<td class="text-right" id="del" style="display: none">
 									<form action="delete.do">
-										<input type=hidden name=no value="${vo.no}"> <input type=submit value="삭제" class="btn btn-sm btn-danger">
+										<input type=hidden name=no value="${vo.no}"> 
+										<input type=submit value="삭제" class="btn btn-sm btn-danger">
 									</form>
 								</td>
 							</table>
@@ -153,7 +155,6 @@
 					<td class="col-md-2"><img src="../qnaboard/icon1.jpg" width="278" height="623" /></td>
 				</tr>
 			</table>
-
 		</div>
 	</div>
 </body>

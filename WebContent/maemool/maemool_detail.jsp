@@ -84,8 +84,6 @@
 				</table>
 			</div>
 
-
-
 			<div class="col-md-6">
 							<h3 class="section-title">Our Address</h3>
 							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>

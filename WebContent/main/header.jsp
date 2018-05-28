@@ -77,6 +77,7 @@ function idcheck()
 							<li><a href="main.do">Home</a></li>
 							<li><a href="notice.do" class="fh5co-sub-ddown">공지사항</a></li>
 							<li><a href="qnaboard.do">Q&A 게시판</a></li>
+							<li><a href="like.do">관심목록</a></li>
 							
 						<c:if test="${sessionScope.nick==null }">
 							<li><a onclick="idcheck()" style='cursor:pointer'>회원가입 / 로그인</a></li>

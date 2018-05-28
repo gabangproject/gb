@@ -66,7 +66,6 @@ public class MaemoolDAO {
 		}
 		return list;
 	}
-	
 	// 매물 상세정보
 	public static MaemoolVO infoMaemool(MaemoolVO vo)
 	{
@@ -88,5 +87,19 @@ public class MaemoolDAO {
 		}
 		return vo1;
 	}
-	
+	public MaemoolVO cookie(int num) {
+		MaemoolVO vo = new MaemoolVO();
+		SqlSession session=null;
+		try {
+			session = ssf.openSession();
+			session.selectList("cookie",num);
+			
+		}catch (Exception e) {
+			
+		}finally {
+			if(session!=null)
+				session.close();
+		}
+		return vo;
+	}
 }

@@ -25,6 +25,7 @@ import com.gabang.controller.RequestMapping;
 import com.gabang.vo.ImgVO;
 import com.gabang.vo.JjimDAO;
 import com.gabang.vo.MaemoolDAO;
+import com.gabang.vo.MaemoolVO;
 import com.gabang.vo.MapVO;
 import com.gabang.vo.PropertyAddrDAO;
 import com.oreilly.servlet.MultipartRequest;
@@ -55,11 +56,29 @@ public class MaemoolModel {
 		req.setAttribute("main_jsp", "../maemool/list.jsp");
 		return "main.jsp";
 	}
+	
+	@RequestMapping("main/maemool_detail.do")
+	public String maemoolDetail(HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("euc-kr");
+	
+		String num=request.getParameter("num");
+		
+		MaemoolVO vo1=new MaemoolVO();
+		vo1.setNum(Integer.parseInt(num));
+		
+		List<ImgVO> imgList = MaemoolDAO.detailMaemool(Integer.parseInt("50"));
+		MaemoolVO vo = MaemoolDAO.infoMaemool(vo1);
+		
+		request.setAttribute("imgList", imgList);
+		request.setAttribute("infoMaemool", vo);
+		request.setAttribute("main_jsp", "../maemool/maemool_detail.jsp");
+		return "main.jsp";
+	}
+	
 
 	@RequestMapping("main/upload.do")
 	public void maemoolInsert(HttpServletRequest request) throws IOException {
-		
-		
+
 		String path="c:\\download";
 		int size=1024*1024*100;
 		String enctype="EUC-KR";

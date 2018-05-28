@@ -1,6 +1,8 @@
 package com.gabang.vo;
 
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -44,4 +46,47 @@ public class MaemoolDAO {
 				session.close();
 		}
 	}
+	public static List<ImgVO> detailMaemool(int num)
+	{
+		SqlSession session=null;
+		List<ImgVO> list=new ArrayList<ImgVO>();
+		try {
+			
+			session=ssf.openSession();
+			list=session.selectList("imgFind", num);
+			
+		}catch(Exception ex)
+		{
+			System.out.println(ex.getMessage());
+		}
+		finally
+		{
+			if(session!=null)
+				session.close();
+		}
+		return list;
+	}
+	
+	// 매물 상세정보
+	public static MaemoolVO infoMaemool(MaemoolVO vo)
+	{
+		MaemoolVO vo1 = new MaemoolVO();
+		SqlSession session = null;
+		try
+		{
+			session=ssf.openSession();
+			vo1=session.selectOne("infoFind",vo);
+		}
+		catch (Exception ex)
+		{
+			System.out.println(ex.getMessage());
+		}
+		finally
+		{
+			if(session!=null)
+				session.close();
+		}
+		return vo1;
+	}
+	
 }

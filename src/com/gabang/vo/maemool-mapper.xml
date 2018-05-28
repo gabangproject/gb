@@ -19,4 +19,8 @@
 	<insert id="insertImg">
 		Insert into img VALUES(#{img},#[num])
 	</insert>
+	<select id="cookie" resultType="MaemoolVO">
+		SELECT * FROM maemool_temp
+		WHERE num = #{num}
+	</select>
 </mapper>

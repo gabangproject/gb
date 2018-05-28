@@ -11,10 +11,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.*;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.Response;
 
 import org.apache.catalina.Session;
+import org.apache.catalina.connector.Request;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -25,6 +28,7 @@ import com.gabang.controller.RequestMapping;
 import com.gabang.vo.ImgVO;
 import com.gabang.vo.JjimDAO;
 import com.gabang.vo.MaemoolDAO;
+import com.gabang.vo.MaemoolVO;
 import com.gabang.vo.MapVO;
 import com.gabang.vo.PropertyAddrDAO;
 import com.oreilly.servlet.MultipartRequest;
@@ -33,7 +37,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 @Controller
 public class MaemoolModel {
 	@RequestMapping("main/maemool_list.do")
-	public String maemoolList(HttpServletRequest req) throws Exception {
+	public String maemoolList(HttpServletRequest req,HttpServletResponse response) throws Exception {
 		req.setCharacterEncoding("euc-kr");
 		List<MapVO> geoList = PropertyAddrDAO.getGeoInfo();
 		List<ImgVO> imgList = null;
@@ -45,11 +49,22 @@ public class MaemoolModel {
 				imgList = PropertyAddrDAO.imgFind(vo.getNum()); // 해당 매물번호로 이미지 검색
 				// System.out.println(imgList.get(0).getImg());
 				oneImg.put(vo.getNum(), imgList.get(0).getImg()); // 매물번호 : 이미지 주소
+				
 			} catch (Exception e) {
 				System.out.println("매물번호 : " +vo.getNum() + e.getMessage());
 			}
 		}
+		
 
+		String num = req.getParameter("num");
+		if(num ==null) {
+			num ="";
+		}
+		Cookie cookie = new Cookie("cookie", num);
+		cookie.setMaxAge(365*24*60*60); //쿠기 유효기간 365일 설정
+		cookie.setPath("C:\\GaBang\\gb");
+		response.addCookie(cookie);
+		
 		req.setAttribute("oneImg", oneImg);
 		req.setAttribute("geoList", geoList);
 		req.setAttribute("main_jsp", "../maemool/list.jsp");
@@ -217,6 +232,30 @@ public class MaemoolModel {
 		// 찜 활성화 실행.
 		JjimDAO.jjimActive(map);
 		
+		return "main.jsp";
+	}
+	@RequestMapping("main/like.do")
+	public String like(HttpServletRequest req) {
+		String nums = "";
+		Cookie[] cookies = req.getCookies();
+		System.out.println("현재 저장된 관심목록 갯수 : " + cookies.length);
+		if(cookies!=null) {
+			for(int i=0; i<cookies.length; i++) {
+					nums=cookies[i].getValue();
+			}
+		}
+		MaemoolDAO dao = new MaemoolDAO();
+		
+		int num = Integer.parseInt(nums);
+		MaemoolVO vo = dao.cookie(num);
+		
+		req.setAttribute("vo", vo);
+		for(int i = 0; i<cookies.length; i++) {
+			
+		}
+		
+		
+		req.setAttribute("main_jsp", "../like/like.jsp");
 		return "main.jsp";
 	}
 }

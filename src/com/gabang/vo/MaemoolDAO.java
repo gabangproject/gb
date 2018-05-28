@@ -44,4 +44,19 @@ public class MaemoolDAO {
 				session.close();
 		}
 	}
+	public MaemoolVO cookie(int num) {
+		MaemoolVO vo = new MaemoolVO();
+		SqlSession session=null;
+		try {
+			session = ssf.openSession();
+			session.selectList("cookie",num);
+			
+		}catch (Exception e) {
+			
+		}finally {
+			if(session!=null)
+				session.close();
+		}
+		return vo;
+	}
 }

@@ -5,6 +5,7 @@ public class PropertyAddrVO {
 	private String x_position;	//	매물 x좌표
 	private String y_position;	//	매물 y좌표
 	private int num;			//	매물 번호
+	
 	public String getAddr() {
 		return addr;
 	}

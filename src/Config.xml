@@ -15,6 +15,10 @@
     <typeAlias type="com.gabang.vo.MapVO" alias="MapVO"/>
     <typeAlias type="com.gabang.vo.SellerVO" alias="SellerVO"/>
     <typeAlias type="com.gabang.vo.ImgVO" alias="ImgVO"/>
+    <typeAlias type="com.gabang.vo.BuildingTypeVO" alias="BuildingTypeVO"/>
+    <typeAlias type="com.gabang.vo.DealTypeVO" alias="DealTypeVO"/>
+    <typeAlias type="com.gabang.vo.ImgVO" alias="ImgVO"/>
+    <typeAlias type="com.gabang.vo.RoomTypeVO" alias="RoomTypeVO"/>
   </typeAliases>
   <environments default="development">
     <environment id="development">

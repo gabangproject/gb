@@ -72,7 +72,7 @@ $(function(){
 		
 			<div class="row" >
 				
-				<form id="maemul_upload" class="form-horizontal" method="post" action="../main/upload.do">
+				<form id="maemul_upload" class="form-horizontal" enctype="multipart/form-data" method="post" action="../main/upload.do">
 					
 					<fieldset form="maemul_upload">
 						
@@ -168,7 +168,7 @@ $(function(){
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="manage_fee">관리비</label>
 								<div class="col-md-2 sub">
-									<input type="text" id="manage_fee" class="form-control" style="width:45%; display:inline;">
+									<input type="text" id="manage_fee" name="manage_fee" class="form-control" style="width:45%; display:inline;">
 									<label for="manage_fee">만원</label>
 								</div>
 								
@@ -243,14 +243,14 @@ $(function(){
 							<span class="text-danger">*</span>
 							</label>
 							<div class="col-md-1">
-								<input type="text" id="floor1" class="form-control">
+								<input type="text" name="floor1" class="form-control">
 							</div>
 							
 							<label class="col-md-1 control-label" for="mobno">전체층
 							<span class="text-danger">*</span>
 							</label>
 							<div class="col-md-1">
-								<input type="text" id="floor2" class="form-control">
+								<input type="text" name="floor2" class="form-control">
 							</div>
 							
 						</div>
@@ -262,13 +262,13 @@ $(function(){
 							<span class="text-danger">*</span>
 							</label>
 								<div class="col-md-2 sub">
-								<input type="text" id="deposit1" class="form-control" style="width:45%; display:inline;">
+								<input type="text" name="deposit1" class="form-control" style="width:45%; display:inline;">
 								<label for="deposit1">억</label>
 								</div>
 								
 								
 								<div class="col-md-2 sub">
-								<input type="text" id="deposit2" class="form-control" style="width:45%; display:inline;">
+								<input type="text" name="deposit2" class="form-control" style="width:45%; display:inline;">
 								<label for="deposit2">만원</label>
 								</div>
 
@@ -279,12 +279,12 @@ $(function(){
 						<div class="form-group">
 							<label class="col-md-4 control-label" >월세</label>
 								<div class="col-md-2 sub">
-								<input type="text" id="monthly_lent1" class="form-control" style="width:45%; display:inline;" >
+								<input type="text" id="monthly_rent1" name="monthly_rent1" class="form-control" style="width:45%; display:inline;" >
 								<label for="monthly_lent1">억</label>
 								</div>
 								
 								<div class="col-md-2 sub">
-								<input type="text" id="monthly_lent2" class="form-control" style="width:45%; display:inline;" >
+								<input type="text" id="monthly_rent2" name="monthly_rent2" class="form-control" style="width:45%; display:inline;" >
 								<label for="monthly_lent2">만원</label>
 								</div>
 								
@@ -297,7 +297,7 @@ $(function(){
 							<span class="text-danger">*</span>
 							</label>
 								<div class="col-md-2 sub">
-								<input type="text" id="gross_area" class="form-control" style="width:45%; display:inline;" >
+								<input type="text" id="gross_area" name="gross_area" class="form-control" style="width:45%; display:inline;" >
 								<label for="gross_area">m<sup>2</sup></label>
 								
 								</div>		
@@ -310,7 +310,7 @@ $(function(){
 							<span class="text-danger">*</span>
 							</label>
 							<div class="col-md-5">
-								<input type="text" id="moving_date" class="form-control">
+								<input type="text" id="moving_date" name="moving_date" class="form-control">
 							</div>								
 						</div>
 						
@@ -318,7 +318,7 @@ $(function(){
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="detail_title">매물 한줄 표현</label>
 							<div class="col-md-5">
-								<input type="text" id="detail_title" class="form-control" placeholder="매물에 대한 한줄 설명을 작성해 주세요.">
+								<input type="text" id="detail_title" name="detail_title" class="form-control" placeholder="매물에 대한 한줄 설명을 작성해 주세요.">
 							</div>								
 						</div>
 						
@@ -327,7 +327,7 @@ $(function(){
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="description">매물설명</label>
 							<div class="col-md-5">
-								<textarea class="form-control" rows="5" id="description"></textarea>
+								<textarea class="form-control" rows="5" id="description" name="description"></textarea>
 							</div>								
 						</div>
 

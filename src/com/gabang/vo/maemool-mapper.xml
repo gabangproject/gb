@@ -16,7 +16,29 @@
 	<insert id="jjimActive" parameterType="hashmap">
 		INSERT INTO jjim (email, num) values (#{id}, #{num})
 	</insert>
-	<insert id="insertImg">
-		Insert into img VALUES(#{img},#[num])
+	<insert id="insertBuildingType">
+		Insert into building_type VALUES(#{type},#{num})
 	</insert>
+	<insert id="insertDealType">
+		Insert into deal_type VALUES(#{type},#{num})
+	</insert>
+	<insert id="insertImg">
+		Insert into img VALUES(#{img},#{num})
+	</insert>
+	<insert id="insertMaemool">
+		Insert into img VALUES(#{num},#{email},#{deposit},#{monthly_rent},#{floor},#{manage_fee},#{elev},#{parking_lot},
+							   #{gross_area},#{moving_date},#{regdate},#{avg_score},#{opt},#{description},#{near_subway},
+							   #{detail_title})
+	</insert>
+	<insert id="insertPropertyAddr">
+		Insert into img VALUES(#{addr},#{x_position},#{y_position},#{num})
+	</insert>
+	<insert id="insertRoomType">
+		Insert into img VALUES(#{type},#{num})
+	</insert>
+	
+	<select id="maemoolNum" resultType="int">
+		SELECT * FROM NVL(MAX(num),1) FROM maemool
+	</select>
+	
 </mapper>

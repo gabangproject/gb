@@ -55,16 +55,16 @@ public class MaemoolModel {
 			}
 		}
 		
-
+		// 관심목록 by.한솔
 		String num = req.getParameter("num");
-		if(num ==null) {
-			num ="";
+		if (num == null) {
+			num = "";
 		}
 		Cookie cookie = new Cookie("cookie", num);
-		cookie.setMaxAge(365*24*60*60); //쿠기 유효기간 365일 설정1
+		cookie.setMaxAge(365 * 24 * 60 * 60); // 쿠기 유효기간 365일 설정1
 		cookie.setPath("C:\\GaBang\\gb");
 		response.addCookie(cookie);
-		
+
 		req.setAttribute("oneImg", oneImg);
 		req.setAttribute("geoList", geoList);
 		req.setAttribute("main_jsp", "../maemool/list.jsp");

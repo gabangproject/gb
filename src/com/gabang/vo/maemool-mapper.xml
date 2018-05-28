@@ -29,9 +29,6 @@
 	<insert id="insertBuildingType">
 		Insert into building_type VALUES(#{type},#{num})
 	</insert>
-	<insert id="insertImg">
-		Insert into img VALUES(#{img},#[num])
-	</insert>
 	<insert id="insertDealType">
 		Insert into deal_type VALUES(#{type},#{num})
 	</insert>

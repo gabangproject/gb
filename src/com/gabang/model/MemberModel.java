@@ -156,6 +156,7 @@ public class MemberModel {
 		String param=request.getParameter("param");
 		String checker=request.getParameter("checker");
 		int count=0;
+		
 		/*System.out.println(param);
 		System.out.println(checker);*/
 		
@@ -226,6 +227,17 @@ public class MemberModel {
 	@RequestMapping("main/maemul_upload.do")
 	public String maemul_upload(HttpServletRequest request)
 	{
+		
+		
+		String[] deal_type= {"전세","월세"};
+		String[] room_type= {"원룸","투룸","복층형","분리형원룸","쓰리룸"};
+		String[] building_type= {"다세대/다가구","오피스텔"};
+		String[] opt= {"에어컨","냉장고","세탁기","침대","책상","옷장","TV","신발장","냉장고","가스레인지","인덕션","전자레인지","전자도어락","비데"};
+		
+		request.setAttribute("deal_type", deal_type);
+		request.setAttribute("room_type", room_type);
+		request.setAttribute("building_type", building_type);
+		request.setAttribute("opt", opt);
 		request.setAttribute("main_jsp", "../member/maemul_upload.jsp");
 		return "main.jsp";
 	}

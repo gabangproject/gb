@@ -76,9 +76,7 @@ public class MaemoolModel {
 		return "main.jsp";
 	}
 	
-<<<<<<< HEAD
-	
-=======
+
 	@RequestMapping("main/maemool_detail.do")
 	public String maemoolDetail(HttpServletRequest request) throws Exception {
 		request.setCharacterEncoding("euc-kr");
@@ -151,7 +149,7 @@ public class MaemoolModel {
 			// Set overall request size constraint
 			upload.setSizeMax(MAZ_REQUEST_SIZE);
 			upload.setFileSizeMax(MAX_FILE_SIZE);
-
+			
 			// Parse the request			
 			try { 
 				List<FileItem> items = new ServletFileUpload(factory).parseRequest(request);
@@ -165,13 +163,21 @@ public class MaemoolModel {
 					} else {
 						// Process form file field (input type="file").
 						String fieldName = item.getFieldName();
-						String fileName = session.getAttribute("email")+"//"+item.getName();
+						String fileName = item.getName();
+								//session.getAttribute("email")+"//"+item.getName();
 						//System.out.println("fieldName:" + fieldName + ", fileName:" + fileName);
 						InputStream fileContent = item.getInputStream();
 						BufferedImage image = ImageIO.read(fileContent);
 						ImageIO.write(image, "jpg", new File(TEMP_PATH + "/" + fileName));
-						vo2.setImg(fileName);
+						
+						File f=new File(path+"\\"+fileName);
+						File file=new File(path+"\\"+email+"-"+fileName);
+						f.renameTo(file);
+						
+						System.out.println(file.getName());
+						vo2.setImg(file.getName());
 						vo2.setNum(maemoolNum);
+						
 					}
 				}
 			} catch (FileUploadException e) {
@@ -185,10 +191,15 @@ public class MaemoolModel {
 		vo1.setType("deal_type");
 		vo1.setNum(maemoolNum);
 		
-		//주거 형태
+		//방구조
 		String room_type=request.getParameter("room_type");
 		vo5.setType(Integer.parseInt(room_type));
 		vo5.setNum(maemoolNum);
+		
+		//건물형태
+		String building_type=request.getParameter("building_type");
+		vo.setType(Integer.parseInt(building_type));
+		vo.setNum(maemoolNum);
 		
 		//관리비
 		String manage_fee=request.getParameter("manage_fee");

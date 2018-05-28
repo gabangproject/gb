@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -126,40 +129,52 @@ $(function(){
 							</label>
 							<div class="col-md-4">
 								<div class="radio">
-									<label for="radios-0"> 
-										<input type="radio" name="deal_type" id="radios-0" value="0" checked="checked"> 전세
-									</label> 
-									<label for="radios-1"> 
-										<input type="radio" name="deal_type" id="radios-1" value="1"> 월세
-									</label> 
+								
+									<c:forEach var="deal" items="${deal_type }" varStatus="n">
+										<label for="radios-d${n.index }"> 
+											<input type="radio" name="deal_type" id="radios-d${n.index }" value="${n.index }"> ${deal}
+										</label> 
+									</c:forEach>
 									
 								</div>
 							</div>
 						</div>
 
 
-						<!-- 주거형태 -->
+						<!-- 방구조 -->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="radios">주거형태
+							<label class="col-md-4 control-label" for="radios">방구조
 							<span class="text-danger">*</span>
 							</label>
 							<div class="col-md-4">
 								<div class="radio">
-									<label for="radios-3">
-									<input type="radio"	name="room_type" id="radios-3" value="0" checked="checked">원룸 
-									</label> 
+								
+									<c:forEach var="room" items="${room_type }" varStatus="n">
+										<label for="radios-r${n.index }">
+										<input type="radio"	name="room_type" id="radios-r${n.index }" value="${n.index }">${room } 
+										</label> 
+									</c:forEach>
 									
-									<label for="radios-4">
-									<input type="radio" name="room_type" id="radios-4" value="1">투룸	
-									</label> 
+								</div>
+							</div>
+						</div>
+						
+						<!-- 건물형태 -->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="radios">건물형태
+							<span class="text-danger">*</span>
+							</label>
+							<div class="col-md-4">
+								<div class="radio">
+								
+									<c:forEach var="building" items="${building_type }" varStatus="n">
+										<label for="radios-b${building }">
+											<input type="radio"	name="building_type" id="radios-b${building }" 
+											value="${n.index }" >${building } 
+										</label> 
+									</c:forEach>
 									
-									<label for="radios-5"> 
-									<input type="radio" name="room_type" id="radios-5" value="2">오피스텔
-									</label>
-									
-									<label for="radios-6">
-									<input type="radio" name="room_type" id="radios-6" value="3">다세대/다가구
-									</label> 
+
 								</div>
 							</div>
 						</div>
@@ -182,21 +197,13 @@ $(function(){
 
 							<div class="col-md-4" style="margin-top:7px">
 								<div class="check">
-									<label for="opt-0" class="form-check-label">
-									<input type="checkbox" id="opt-0" name="opt" value="0">전기세
-									</label>
-									<label for="opt-1" class="form-check-label">
-									<input type="checkbox" id="opt-1" name="opt" value="1">수도세
-									</label>
-									<label for="opt-2" class="form-check-label">
-									<input type="checkbox" id="opt-2" name="opt" value="2">가스비
-									</label>
-									<label for="opt-3" class="form-check-label">
-									<input type="checkbox" id="opt-3" name="opt" value="3">인터넷
-									</label>
-									<label for="opt-4" class="form-check-label">
-									<input type="checkbox" id="opt-4" name="opt" value="4">기타
-									</label>
+									
+									<c:forEach var="option" items="${opt }" varStatus="n">
+										<label for="opt-${n.index }" class="form-check-label">
+										<input type="checkbox" id="opt-${n.index }" name="opt" value="${n.index }">${option }
+										</label>
+									</c:forEach>
+									
 								</div>
 								<div id="for-opt-4"></div>
 							</div>
@@ -266,7 +273,6 @@ $(function(){
 								<input type="text" name="deposit1" class="form-control" style="width:45%; display:inline;">
 								<label for="deposit1">억</label>
 								</div>
-								
 								
 								<div class="col-md-2 sub">
 								<input type="text" name="deposit2" class="form-control" style="width:45%; display:inline;">
@@ -354,54 +360,6 @@ $(function(){
 	
 	
 <!-- 주소검색 관련 다음 api -->
-<!-- <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-<script>
-    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-    function searchPostcode() {
-    	//daum 객체에 Postcode라는 메소드 선언
-        new daum.Postcode({
-        		//oncomplete라는 이름으로 function(data) 함수 실행
-            oncomplete: function(data) {
-            	 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var fullAddr = ''; // 최종 주소 변수
-                var extraAddr = ''; // 조합형 주소 변수
-
-                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    fullAddr = data.roadAddress;
-
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    fullAddr = data.jibunAddress;
-                }
-
-                // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
-                if(data.userSelectedType === 'R'){
-                    //법정동명이 있을 경우 추가한다.
-                    if(data.bname !== ''){
-                        extraAddr += data.bname;
-                    }
-                    // 건물명이 있을 경우 추가한다.
-                    if(data.buildingName !== ''){
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
-                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
-                }
-
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('postcode').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('address').value = fullAddr;
-
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById('detailAddress').focus();
-            	}
-            
-        }).open();
-    }
-</script> -->
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0414b62e66e43f9fc50e0f6dfd64b93f&libraries=services"></script>

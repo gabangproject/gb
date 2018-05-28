@@ -8,7 +8,7 @@
 </head>
 <script type="text/javascript">
 location.href="main.do";
-//¾ÈµÅ~123
+//¾ÈµÅ~1231234
 </script>
 <body>
 

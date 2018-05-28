@@ -61,7 +61,7 @@ public class MaemoolModel {
 			num ="";
 		}
 		Cookie cookie = new Cookie("cookie", num);
-		cookie.setMaxAge(365*24*60*60); //쿠기 유효기간 365일 설정
+		cookie.setMaxAge(365*24*60*60); //쿠기 유효기간 365일 설정1
 		cookie.setPath("C:\\GaBang\\gb");
 		response.addCookie(cookie);
 		

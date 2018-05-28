@@ -48,7 +48,7 @@ $(function(){
 		}
 	
 	$('#for-opt-4').html(html);
-	
+	¤©
 	
 	} */
 	

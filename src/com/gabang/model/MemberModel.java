@@ -111,7 +111,7 @@ public class MemberModel {
 	public String reLogin(HttpServletRequest request)
 	{
 		HttpSession session=request.getSession();
-		String email=(String) session.getAttribute("email");
+		String email=(String) session.getAttribute("id");
 		MemberVO vo=new MemberVO();
 		System.out.println(email);
 		vo.setLogin(0);
@@ -127,7 +127,7 @@ public class MemberModel {
 	{
 		HttpSession session=request.getSession();
 		
-		String email=(String) session.getAttribute("email");
+		String email=(String) session.getAttribute("id");
 		System.out.println("email:"+email);
 		
 		
@@ -136,7 +136,7 @@ public class MemberModel {
 		vo.setLogin(0);
 		MemberDAO.loginState(vo);
 		
-		session.removeAttribute("email");
+		session.removeAttribute("id");
 		session.removeAttribute("nick");
 		session.removeAttribute("grade");
 		

@@ -113,7 +113,7 @@ public class MaemoolModel {
 		RoomTypeVO vo5=new RoomTypeVO();
 		
 		HttpSession session=request.getSession();
-		String email=(String) session.getAttribute("email");
+		String email=(String) session.getAttribute("id");
 		int maemoolNum=MaemoolDAO.maemoolNum();
 
 

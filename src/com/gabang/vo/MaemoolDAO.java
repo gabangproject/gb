@@ -67,14 +67,15 @@ public class MaemoolDAO {
 		return list;
 	}
 	// 매물 상세정보
-	public static MaemoolVO infoMaemool(MaemoolVO vo)
+	public static MaemoolVO infoMaemool(int num)
 	{
 		MaemoolVO vo1 = new MaemoolVO();
 		SqlSession session = null;
 		try
-		{
+		{	
+			//int num = vo.getNum();
 			session=ssf.openSession();
-			vo1=session.selectOne("infoFind",vo);
+			vo1=session.selectOne("infoFind",num);
 		}
 		catch (Exception ex)
 		{

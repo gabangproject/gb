@@ -73,20 +73,23 @@ public class MaemoolModel {
 	}
 	
 	@RequestMapping("main/maemool_detail.do")
-	public String maemoolDetail(HttpServletRequest request) throws Exception {
+	public String maemoolDetail(HttpServletRequest request)
+	throws Exception {
 		request.setCharacterEncoding("euc-kr");
 	
-		String num=request.getParameter("num");
-		
+		String num=request.getParameter("num"); // 이미지랑 이미지에 해당하는 상세정보를 매물번호에 맞게 출력
+		if(num == null)
+			num = "1";
 		MaemoolVO vo1=new MaemoolVO();
-		vo1.setNum(Integer.parseInt(num));
-		
-		List<ImgVO> imgList = MaemoolDAO.detailMaemool(Integer.parseInt("50"));
-		MaemoolVO vo = MaemoolDAO.infoMaemool(vo1);
+	//	vo1.setNum(Integer.parseInt(num));
+		 
+		List<ImgVO> imgList = MaemoolDAO.detailMaemool(Integer.parseInt("50")); // 임시로 50번의 매물번호의 이미지를 출력
+		MaemoolVO vo = MaemoolDAO.infoMaemool(Integer.parseInt(num));
 		
 		request.setAttribute("imgList", imgList);
 		request.setAttribute("infoMaemool", vo);
 		request.setAttribute("main_jsp", "../maemool/maemool_detail.jsp");
+	//	CommonModel.commonSendData(request);
 		return "main.jsp";
 	}
 	

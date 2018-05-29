@@ -8,9 +8,6 @@
 <title>Insert title here</title>
 
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	
-	
-
 
 </head>
 <body>
@@ -61,25 +58,25 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>Firstname</th>
-							<th>Lastname</th>
+							<th></th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
-					
+					<c:forEach var="vo" items="${infoMaemool }">
 						<tr>
-							<td>John</td>
-							<td>Doe</td>
+							<td>${vo.deposit }</td>
+							<td>${vo.monthly_rent }</td>
 						</tr>
 						<tr>
-							<td>Mary</td>
-							<td>Moe</td>
+							<td></td>
+							<td></td>
 						</tr>
 						<tr>
-							<td>July</td>
-							<td>Dooley</td>
+							<td></td>
+							<td></td>
 						</tr>
-
+					</c:forEach>
 					</tbody>
 				</table>
 			</div>

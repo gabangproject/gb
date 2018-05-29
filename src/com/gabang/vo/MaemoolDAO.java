@@ -132,4 +132,80 @@ public class MaemoolDAO {
 		}
 		return vo;
 	}
+	
+	/*
+	 *	day: 2018.05.29
+	 *	who: t
+	 */
+	// 저보증금
+	public static List<MapVO> getDepositInfo() {
+		List<MapVO> list = new ArrayList<MapVO>();
+		SqlSession session = null;
+		
+		try {
+			session = ssf.openSession();
+			list = session.selectList("getDepositInfo");
+		} catch (Exception e) {
+			System.out.println("PropertyAddrDAO - getDepositInfo : " + e.getMessage());
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}		
+		return list;
+	}
+	
+	// 주차 가능
+	public static List<MaemoolVO> getParkingInfo(String theme) {
+		List<MaemoolVO> list = new ArrayList<MaemoolVO>();
+		SqlSession session = null;
+		
+		try {
+			session = ssf.openSession();
+			list = session.selectList("getThemeInfo");
+		} catch (Exception e) {
+			System.out.println("PropertyAddrDAO - getThemeInfo : " + e.getMessage());
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}		
+		return list;
+	}
+	
+	// 원룸
+	public static List<MaemoolVO> getOneRoomInfo(String theme) {
+		List<MaemoolVO> list = new ArrayList<MaemoolVO>();
+		SqlSession session = null;
+		
+		try {
+			session = ssf.openSession();
+			list = session.selectList("getThemeInfo");
+		} catch (Exception e) {
+			System.out.println("PropertyAddrDAO - getThemeInfo : " + e.getMessage());
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}		
+		return list;
+	}
+	
+	// 오피스텔
+	public static List<MaemoolVO> getOfficetelInfo(String theme) {
+		List<MaemoolVO> list = new ArrayList<MaemoolVO>();
+		SqlSession session = null;
+		
+		try {
+			session = ssf.openSession();
+			list = session.selectList("getThemeInfo");
+		} catch (Exception e) {
+			System.out.println("PropertyAddrDAO - getThemeInfo : " + e.getMessage());
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}		
+		return list;
+	}
 }

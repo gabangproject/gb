@@ -20,24 +20,24 @@ public class PropertyAddrDAO {
 			System.out.println("PropertyAddrDAO 초기화 : " + e.getMessage());
 		}
 	}
+/*	>> 호출 안 되는 메소드
+ 	public static List<MapVO> getGeoInfo() {
+	List<MapVO> list = new ArrayList<MapVO>();
+	SqlSession session = null;
 	
-	public static List<MapVO> getGeoInfo() {
-		List<MapVO> list = new ArrayList<MapVO>();
-		SqlSession session = null;
-		
-		try {
-			session = ssf.openSession();
-			list = session.selectList("getGeoInfo_temp");
-		} catch (Exception e) {
-			System.out.println("PropertyAddrDAO - getGeoInfo : " + e.getMessage());
-		} finally {
-			if (session != null) {
-				session.close();
-			}
+	try {
+		session = ssf.openSession();
+		list = session.selectList("getGeoInfo_temp");
+	} catch (Exception e) {
+		System.out.println("PropertyAddrDAO - getGeoInfo : " + e.getMessage());
+	} finally {
+		if (session != null) {
+			session.close();
 		}
-		
-		return list;
 	}
+	
+	return list;
+}*/		
 	
 	public static List<MapVO> searchMaemool(String keyword) {
 		List<MapVO> list = new ArrayList<MapVO>();

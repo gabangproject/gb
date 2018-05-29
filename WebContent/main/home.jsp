@@ -47,7 +47,7 @@
 				<c:forEach var="i" items="${theme}" varStatus="s">
 					<div class="col-md-4">
 						<div class="fh5co-grid animate-box" style="background-image: url(images/work-${s.index+1}.jpg);">
-							<a class="image-popup text-center" href="maemool_list.do">
+							<a class="image-popup text-center" href="maemool_theme_list.do?theme=${i}">
 								<div class="prod-title">
 									<h3>${i}</h3>
 								</div>

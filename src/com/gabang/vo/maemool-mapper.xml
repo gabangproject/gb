@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gabang.vo.maemool-mapper">
+	<!-- 매물 테마 검색 -->	
+	<select id="getDepositInfo" resultType="MapVO">
+		SELECT * FROM maemool 
+	</select>
+	
 	<!-- 매물 목록 출력 관련 by.한 -->
 	<select id="getGeoInfo_temp" resultType="MapVO">
 		SELECT * FROM map_temp

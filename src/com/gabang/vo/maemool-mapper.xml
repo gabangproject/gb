@@ -20,7 +20,7 @@
 	</select>
 	
 	<select id="imgFind" parameterType="int" resultType="ImgVO">
-		SELECT * FROM img_temp WHERE num = #{num}
+		SELECT * FROM img WHERE num = #{num}
 	</select>
 	
 	<!-- 지도 이동시 보여지는 영역 내 매물을 검색 by.한 -->

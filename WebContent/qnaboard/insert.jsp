@@ -101,13 +101,15 @@
 								<form method=post action="insert_ok.do">
 									<table class="table table-hover">
 										<tr>
-											<td width="15%" class="success text-right">제목</td>
-											<td width="85%" class="text-left"><input type=text name=title size=45 required></td>
+											<td width="15%" height="10%" class="text-right" style="background-color: #8BBDFF">제목</td>
+											<td width="85%" height="10%" class="text-left"><input type=text name=title size=45 required></td>
 										</tr>
 
 										<tr>
-											<td width="15%" class="success text-right">내용</td>
-											<td width="85%" class="text-left"><textarea rows="10" cols="50" name=content required></textarea></td>
+											<td width="15%" height="500px" class="success text-right" style="background-color: #8BBDFF">내용</td>
+											<td width="85%" height="500px" class="text-left">
+											<textarea rows="10" cols="50" name=content required style="height: 470px; width: 850px;"></textarea>
+											</td>
 										</tr>
 
 										<tr>

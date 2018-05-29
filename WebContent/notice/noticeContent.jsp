@@ -122,7 +122,7 @@
 										<td class="text-left">${vo.title }</td>
 									</tr>
 									<tr>
-										<td class="text-left" valign="top" height="200">${vo.content }</td>
+										<td class="text-left" valign="top" height="400">${vo.content }</td>
 										<td></td>
 									</tr>
 								</table>

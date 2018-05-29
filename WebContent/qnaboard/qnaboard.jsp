@@ -101,7 +101,7 @@
 
 						<div class="col-md-10 col-md-offset-1" style="padding-left: 0px; padding-right: 0px;">
 							<div class="panel panel-default panel-table">
-								<div class="panel-heading">
+								<div class="panel-heading" style="background-color: #8BBDFF">
 									<div class="row">
 										<span class="navbar-brand">
 											<form method="post" action="qnaboard.do">
@@ -124,8 +124,8 @@
 								<div class="panel panel-default panel-table">
 
 									<!-- 게시글목록 테마별 보기?? 시작 -->
-									<div class="panel-heading">
-										<div class="row">
+									<div class="panel-heading" style="background-color: #8BBDFF">
+										<div class="row" >
 											<div class="col col-xs-6">
 												<h3 class="panel-title">Q&A 게시판</h3>
 											</div>
@@ -144,11 +144,11 @@
 											class="table table-striped table-bordered table-list">
 											<thead>
 												<tr>
-													<th class="col-text" width="10%">번호</th>
-													<th class="col-text" width="45%">제목</th>
-													<th class="col-text" width="15%">작성자</th>
-													<th class="col-text" width="20%">작성일</th>
-													<th class="col-text" width="10%">조회수</th>
+													<th class="col-text" width="10%" style="background-color: #8BBDFF">번호</th>
+													<th class="col-text" width="45%" style="background-color: #8BBDFF">제목</th>
+													<th class="col-text" width="15%" style="background-color: #8BBDFF">작성자</th>
+													<th class="col-text" width="20%" style="background-color: #8BBDFF">작성일</th>
+													<th class="col-text" width="10%" style="background-color: #8BBDFF">조회수</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -180,7 +180,7 @@
 
 									</div>
 									<!-- 게시글 페이지 나눠지는 표시  -->
-									<div class="panel-footer">
+									<div class="panel-footer" style="background-color: #8BBDFF">
 										<div class="row">
 											<div class="col col-xs-offset-3 col-xs-6">
 												<nav aria-label="Page navigation" class="text-center">

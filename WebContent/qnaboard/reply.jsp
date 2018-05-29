@@ -102,13 +102,15 @@
 								<form method=post action="reply_ok.do?no=${no }&page=${curpage}">
 									<table class="table table-hover">
 										<tr>
-											<td width="15%" class="success text-right">제목</td>
+											<td width="15%" class="text-right" style="background-color: #8BBDFF">제목</td>
 											<td width="85%" class="text-left"><input type=text name=title size=45 required></td>
 										</tr>
 
 										<tr>
-											<td width="15%" class="success text-right">내용</td>
-											<td width="85%" class="text-left"><textarea rows="10" cols="50" name=content required></textarea></td>
+											<td width="15%" class="text-right" style="background-color: #8BBDFF">내용</td>
+											<td width="85%" class="text-left" height="500px">
+											<textarea rows="10" cols="50" name=content required style="height: 470px; width: 850px;"></textarea>
+											</td>
 										</tr>
 
 										<tr>

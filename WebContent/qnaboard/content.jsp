@@ -102,7 +102,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="container" style="width: 80%;">
+		<div class="container" style="width: 80%; height: 100%">
 			<table class="table">
 				<tr>
 					<td class="col-md-2"><img src="../qnaboard/icon1.jpg" width="278" height="623" /></td>
@@ -110,27 +110,26 @@
 						<div class="row">
 							<div class="col-md-10 col-md-offset-1">
 								<h1 id="1">내용보기</h1>
-								<br />
 								<table class="table">
-									<tr>
-										<td class="success text-center" width="20%">번호</td>
+									<tr height="10%">
+										<td class="text-center" width="20%" style="background-color: #8BBDFF">번호</td>
 										<td class="text-center" width="30%">${vo.no }</td>
-										<td class="success text-center" width="20%">작성일</td>
+										<td class="text-center" width="20%" style="background-color: #8BBDFF">작성일</td>
 										<td class="text-center" width="30%"><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd" /></td>
 									</tr>
 
-									<tr>
-										<td class="success text-center" width="20%">이름</td>
+									<tr height="10%">
+										<td class="text-center" width="20%" style="background-color: #8BBDFF">아이디</td>
 										<td class="text-center" width="30%">${vo.email }</td>
-										<td class="success text-center" width="20%">조회수</td>
+										<td class="text-center" width="20%" style="background-color: #8BBDFF">조회수</td>
 										<td class="text-center" width="30%">${vo.hit }</td>
 									</tr>
 
-									<tr>
-										<td class="success text-center" width="20%">제목</td>
+									<tr height="10%">
+										<td class="text-center" width="20%" style="background-color: #8BBDFF">제목</td>
 										<td colspan="3" class="text-left">${vo.title }</td>
 									</tr>
-									<tr>
+									<tr height="400px">
 										<td class="text-left" valign="top" height="200">${vo.content }</td>
 										<td></td>
 									</tr>

@@ -101,14 +101,17 @@
 
 										<tr>
 											<td width="15%" class="success text-right">제목</td>
-											<td width="85%" class="text-left"><input type=text name=title size=45 required value="${vo.title }"></td>
+											<td width="85%" class="text-left">
+											<input type=text name=title size=45 required value="${vo.title }"></td>
 											<input type="hidden" name=no value="${vo.no }">
 											<input type="hidden" name=page value="${curpage }">
 										</tr>
 
 										<tr>
 											<td width="15%" class="success text-right">내용</td>
-											<td width="85%" class="text-left"><textarea rows="10" cols="50" name=content required>${vo.content }</textarea></td>
+											<td width="85%" height="500px" class="text-left">
+											<textarea rows="10" cols="50" name=content required style="height: 470px; width: 850px;">${vo.content }</textarea>
+											</td>
 										</tr>
 
 										<tr>

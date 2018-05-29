@@ -23,7 +23,7 @@ $(function() {
 	
 	$.ajax({
 		type:'post',
-		url:'testSideList.do',
+		url:'sideList.do',
 		data:{'keyword': keyword},
 		success:function(res) {
 			$('#list').html(res);

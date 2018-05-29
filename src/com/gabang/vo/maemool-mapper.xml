@@ -15,7 +15,7 @@
 	</select>
 	
 	<select id="imgFind" parameterType="int" resultType="ImgVO">
-		SELECT * FROM img WHERE num = #{num}
+		SELECT * FROM img_temp WHERE num = #{num}
 	</select>
 	
 	<!-- 매물 상세정보  -->

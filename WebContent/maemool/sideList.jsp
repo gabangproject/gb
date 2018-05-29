@@ -6,7 +6,7 @@
 <meta charset=EUC-KR>
 </head>
 <body>
-	<c:forEach var="i" items="${geoList}">
+	<c:forEach var="i" items="${geoList}" varStatus="s">
 		<div class="media">
 			<div class="fav-box">
 				<i class="fa fa-heart-o" aria-hidden="true"></i>

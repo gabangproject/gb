@@ -69,7 +69,7 @@ function pCheck(input)
      /*  if(!checked) {
        
         $('#opt-0').setCustomValidity("최소 1개 옵션을 선택해 주세요.");
-        return false;
+        return false;ㅇ
       } */
       if(checked)
     	{

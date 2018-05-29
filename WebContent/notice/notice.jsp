@@ -122,10 +122,10 @@
 									<table id="mytable" class="table table-striped table-bordered table-list">
 										<thead>
 											<tr>
-												<th id="d" class="col-text" width="5%">번호</th>
-												<th id="d" class="col-text" width="75%">제목</th>
+												<th id="d" class="col-text" width="7%">번호</th>
+												<th id="d" class="col-text" width="70%">제목</th>
 												<th id="d" class="col-text" width="10%">작성자</th>
-												<th id="d" class="col-text" width="10%">작성일</th>
+												<th id="d" class="col-text" width="13%">작성일</th>
 											</tr>
 										</thead>
 										<tbody>

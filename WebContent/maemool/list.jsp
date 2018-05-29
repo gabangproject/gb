@@ -15,14 +15,59 @@
 <!-- 해당 키는 권한 키 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0414b62e66e43f9fc50e0f6dfd64b93f&libraries=clusterer"></script>
 
+<script type="text/javascript">
+$(function() {
+	var keyword = '<%=request.getParameter("keyword")%>';
+	var swLatlng;
+	var neLatlng;
+	
+	$.ajax({
+		type:'post',
+		url:'testSideList.do',
+		data:{'keyword': keyword},
+		success:function(res) {
+			$('#list').html(res);
+		}
+	});
+	
+	daum.maps.event.addListener(map,'center_changed', function() {
+		// 지도 영역정보를 얻어옵니다 
+		var bounds = map.getBounds();
+		
+		// 주어진 좌표가 영역에 포함되는지 확인
+		//bounds.contain();
+		
+		// 영역정보의 남서쪽 정보를 얻어옵니다 
+	    swLatlng = bounds.getSouthWest().toString();
+	    // 영역정보의 북동쪽 정보를 얻어옵니다 
+	    neLatlng = bounds.getNorthEast().toString();
+	    
+	    // 지도 하단에 위도와 경도를 출력
+	    $('#info').text(swLatlng + '    ' + neLatlng);
+	});
+	
+	// 맵 내부에서 마우스 버튼을 놓을 경우 작동
+	// 이동한 좌표에 맞는 매물 목록을 불러온다.
+	/* $('#map').mouseup(function() {
+		$.ajax({
+			type:'post',
+			url:'testSideList.do',
+			data:{
+				'keyword':keyword,
+				'swLatlng':swLatlng,
+				'neLatlng':neLatlng
+			},
+			success:function(res) {
+				$('#list').html(res);
+			}
+		});
+	}); */
+});
+</script>
 <style>
-@import
-	url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
-	;
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700');
 
-@import
-	url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700')
-	;
 h2 {
 	float: left;
 	width: 100%;
@@ -152,12 +197,14 @@ h2 a {
 				<div class="container-fluid">
 					<div class="row">
 						<!-- 지도 -->
-						<div id=map style="width:50%;height:250px%;display:inline-block" class="col-md-7" ></div>
+						<div id=map style="width: 50%; height: 250px%; display: inline-block" class="col-md-7"></div>
 						<script>
 							var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 							mapOption = {
-								center : new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-								level : 5 // 지도의 확대 레벨
+								center : new daum.maps.LatLng(33.450701,
+										126.570667), // 지도의 중심좌표
+								level : 5
+							// 지도의 확대 레벨
 							};
 
 							// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
@@ -165,79 +212,52 @@ h2 a {
 
 							// 마커 클러스터러
 							var clusterer = new daum.maps.MarkerClusterer({
-						        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-						        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-						        minLevel: 2, // 클러스터 할 최소 지도 레벨 
-						        gridSize: 150,
-						        clickable:false
-						    });
-							
+								map : map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+								averageCenter : true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+								gridSize : 100,
+								clickable : false
+							});
+
 							var markers = new Array();
 							var x;
 							var y;
-							<%
+							var lb = map.getBounds();
+						<%
 							List<MapVO> list = (List<MapVO>) request.getAttribute("geoList");
 							String x, y;
-							for(int i = 0; i < list.size(); i++) {
-							%>	
+							for (int i = 0; i < list.size(); i++) {
+						%>
 								x = <%=list.get(i).getX_position()%>
 								y = <%=list.get(i).getY_position()%>
-								markers.push(new daum.maps.Marker({
-								    position: new daum.maps.LatLng(x, y)
-								}));
-								//marker.setMap(map);
-							<%
-							}
-							%>
-							panTo(x,y); // 가장 마지막 매물의 위치로 이동
-							clusterer.addMarkers(markers);
 							
+								markers.push(new daum.maps.Marker({
+									position : new daum.maps.LatLng(x, y)
+								}));
+						<%
+							}
+						%>
+							panTo(x, y); // 가장 마지막 매물의 위치로 이동
+							clusterer.addMarkers(markers);
+
 							// 지도 이동 함수
 							function panTo(x, y) {
-							    // 이동할 위도 경도 위치를 생성합니다 
-							    var moveLatLon = new daum.maps.LatLng(x, y);
-							    
-							    // 지도 중심을 부드럽게 이동시킵니다
-							    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-							    map.panTo(moveLatLon);
+								// 이동할 위도 경도 위치를 생성합니다 
+								var moveLatLon = new daum.maps.LatLng(x, y);
+
+								// 지도 중심을 부드럽게 이동시킵니다
+								// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+								map.panTo(moveLatLon);
 							};
 							alert(markers.length + '개 매물');
 						</script>
-						 
-						<!-- 매물들의 리스트 출력 부분 -->
-						<div class="col-md-5 listing-block" style="width:50%;display:inline-block">
-	
-							<c:forEach var="i" items="${geoList}">
-								<div class="media">
-									<div class="fav-box">
-										<i class="fa fa-heart-o" aria-hidden="true"></i>
-									</div>
-									<a href="#?num=${i.num}">	
-										<img class="d-flex align-self-start maemool-list-img"
-										src="${oneImg.get(i.num)}" alt=이미지>
-									</a>
-									<div class="media-body pl-3">
-										<div class="price" num='${i.num}'>
-											${i.deposit}
-											<div class=address>${i.addr}</div>
-										</div>
-										<div class="stats">
-											<span>
-												위도<i class="fa fa-arrows-alt" id='${i.num}x'>${i.x_position}</i>
-											</span>
-											<span>
-												경도<i class="fa fa-bath" id='${i.num}y'>${i.y_position}</i>
-											</span>
-										</div>
-										<!-- <div class="address">4062 Walnut Hill Drive Cincinnati</div> -->
-									</div>
-								</div>
-							</c:forEach>
 
+						<!-- 매물들의 리스트 출력 부분 -->
+						<div class="col-md-5 listing-block" id=list style="width: 50%; display: inline-block">
 						</div>
 					</div>
 				</div>
 			</section>
+			<div id=info></div>
 		</div>
 	</div>
 </body>

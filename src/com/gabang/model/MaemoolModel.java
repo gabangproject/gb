@@ -309,10 +309,10 @@ public class MaemoolModel {
 
 		req.setAttribute("oneImg", oneImg);
 		req.setAttribute("geoList", geoList);
-//		req.setAttribute("main_jsp", "../maemool/list.jsp");
+		req.setAttribute("main_jsp", "../maemool/list.jsp");
 
 		// 테스트 페이지로 이동하게끔
-		 req.setAttribute("main_jsp", "../maemool/testList.jsp");
+		//req.setAttribute("main_jsp", "../maemool/testList.jsp");
 
 		return "main.jsp";
 	}
@@ -385,6 +385,7 @@ public class MaemoolModel {
 		
 		return "main.jsp";
 	}
+	
 	@RequestMapping("main/like.do")
 	public String like(HttpServletRequest req) {
 		String nums = "";
@@ -401,11 +402,7 @@ public class MaemoolModel {
 		MaemoolVO vo = dao.cookie(num);
 		
 		req.setAttribute("vo", vo);
-		for(int i = 0; i<cookies.length; i++) {
-			
-		}
-		
-		
+
 		req.setAttribute("main_jsp", "../like/like.jsp");
 		return "main.jsp";
 	}

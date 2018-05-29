@@ -96,14 +96,12 @@
 		<div class="container" style="width: 80%;">
 			<table class="table">
 				<tr>
-					<td class="col-md-2"><img src="../qnaboard/icon1.jpg"
-						width="278" height="623" /></td>
+					<td class="col-md-2"><img src="../qnaboard/icon1.jpg" width="278" height="623" /></td>
 					<td class="col-md-8" style="margin: auto;">
 
-						<div class="col-md-10 col-md-offset-1"
-							style="padding-left: 0px; padding-right: 0px;">
+						<div class="col-md-10 col-md-offset-1" style="padding-left: 0px; padding-right: 0px;">
 							<div class="panel panel-default panel-table">
-								<div class="panel-heading">
+								<div class="panel-heading" style="background-color: #8BBDFF">
 									<div class="row">
 										<span class="navbar-brand">
 											<form method="post" action="qnaboard.do">
@@ -126,9 +124,8 @@
 								<div class="panel panel-default panel-table">
 
 									<!-- 게시글목록 테마별 보기?? 시작 -->
-									<div class="panel-heading">
-										<div class="row">
-
+									<div class="panel-heading" style="background-color: #8BBDFF">
+										<div class="row" >
 											<div class="col col-xs-6">
 												<h3 class="panel-title">Q&A 게시판</h3>
 											</div>
@@ -147,19 +144,19 @@
 											class="table table-striped table-bordered table-list">
 											<thead>
 												<tr>
-													<th class="col-text" width="10%">번호</th>
-													<th class="col-text" width="45%">제목</th>
-													<th class="col-text" width="15%">작성자</th>
-													<th class="col-text" width="20%">작성일</th>
-													<th class="col-text" width="10%">조회수</th>
+													<th class="col-text" width="10%" style="background-color: #8BBDFF">번호</th>
+													<th class="col-text" width="45%" style="background-color: #8BBDFF">제목</th>
+													<th class="col-text" width="15%" style="background-color: #8BBDFF">작성자</th>
+													<th class="col-text" width="20%" style="background-color: #8BBDFF">작성일</th>
+													<th class="col-text" width="10%" style="background-color: #8BBDFF">조회수</th>
 												</tr>
 											</thead>
 											<tbody>
 
 												<!-- table 게시글 리스트 출력 시작-->
-												<c:forEach var="vo" items="${list }">
+												<c:forEach var="vo" items="${list }" varStatus="status">
 													<tr data-status="completed">
-														<td>${vo.num }</td>
+														<td>${count-(curpage-1)*10 - (status.index)}</td>
 														<td><c:if test="${bDisplay == true }">
 																<c:if test="${vo.group_tab >0}">
 																	<c:forEach var="i" begin="0" end="${vo.group_tab }"
@@ -183,7 +180,7 @@
 
 									</div>
 									<!-- 게시글 페이지 나눠지는 표시  -->
-									<div class="panel-footer">
+									<div class="panel-footer" style="background-color: #8BBDFF">
 										<div class="row">
 											<div class="col col-xs-offset-3 col-xs-6">
 												<nav aria-label="Page navigation" class="text-center">
@@ -204,7 +201,7 @@
 
 											<!-- 글쓰기 -->
 
-											<c:if test="${sessionScope.email!=null}">
+											<c:if test="${sessionScope.id!=null}">
 												<div class="col col-xs-3">
 													<div class="pull-right">
 														<a href="insert.do?page=${curpage }"
@@ -218,8 +215,7 @@
 							</div>
 						</div>
 					</td>
-					<td class="col-md-2"><img src="../qnaboard/icon1.jpg"
-						width="278" height="623" /></td>
+					<td class="col-md-2"><img src="../qnaboard/icon2.jpg" width="278" height="623" /></td>
 				</tr>
 			</table>
 		</div>

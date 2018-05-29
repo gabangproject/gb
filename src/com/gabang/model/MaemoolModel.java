@@ -408,7 +408,8 @@ public class MaemoolModel {
 		*/
 
 		// 위도경도를 저장하기 위한 map
-		Map<String, Double> bound = null;
+		//Map<String, Double> bound = null;
+		Map<String, Object> bound = null;
 		
 		// 리스트 출력을 위한 변수
 		List<MapVO> geoList = null;
@@ -434,7 +435,8 @@ public class MaemoolModel {
 			System.out.println("◈ testSideList로 전송됨\nne_x : " + ne_x + " ne_y : " + ne_y);
 			System.out.println("sw_x : " + sw_x + " sw_y : " + sw_y);
 			// 받은 모서리 위경도를 맵에 저장
-			bound = new HashMap<String, Double>();
+			//bound = new HashMap<String, Double>();
+			bound = new HashMap<String, Object>();
 			bound.put("sw_x", sw_x);
 			bound.put("sw_y", sw_y);
 			bound.put("ne_x", ne_x);

@@ -23,7 +23,7 @@
 		SELECT * FROM img_temp WHERE num = #{num}
 	</select>
 	
-	<!-- 지도 이동시 보여지는 영역 내 매물을 검색 -->
+	<!-- 지도 이동시 보여지는 영역 내 매물을 검색 by.한 -->
 	<select id="findMaemoolInBound" parameterType="hashmap" resultType="MapVO">
 		SELECT * FROM map_temp 
 		WHERE (TO_NUMBER(x_position) BETWEEN #{sw_x} AND #{ne_x}) AND (TO_NUMBER(y_position) BETWEEN #{sw_y} AND #{ne_y})

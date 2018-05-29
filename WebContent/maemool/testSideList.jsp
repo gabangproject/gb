@@ -1,11 +1,23 @@
+<%@page import="com.gabang.vo.MapVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset=EUC-KR>
+<script type="text/javascript">
+$(function() {
+	<%
+	List<MapVO> list = (List<MapVO>) request.getAttribute("geoList");
+	System.out.println(list.size());
+	%>
+	alert('testSideList.jsp에서 출력\n매물 개수 : ' + <%=list.size()%> + '개');
+})
+</script>
 </head>
 <body>
+	<input type="hidden" id='listNum' value='${list.size}'>
 	<c:forEach var="i" items="${geoList}" varStatus="s">
 		<div class="media">
 			<div class="fav-box">

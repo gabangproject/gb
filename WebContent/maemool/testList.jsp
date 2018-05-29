@@ -50,7 +50,7 @@ $(function() {
 		var sw_y = sw.getLng();
 		
 		// 값이 정상적으로 들어오는지 확인
-		alert(ne_x + "  " + ne_y + "\n" + sw_x + "   " + sw_y);
+		//alert(ne_x + "  " + ne_y + "\n" + sw_x + "   " + sw_y);
 		
 		// ajax로 sideList에 값을 전달하고 결과를 받는다.
 		$.ajax({
@@ -59,10 +59,12 @@ $(function() {
 			data:{'ne_x':ne_x, 'ne_y':ne_y, 'sw_x':sw_x, 'sw_y':sw_y},
 			success:function(res) {
 				$('#list').html(res);
+				var listNum = $(res).$('#listNum').text();
+				alert('testList.jsp에서 출력 : ' + listNum);
 			}
 		});
 		
-		alert("ajax 이후");
+		//alert("ajax 이후");
 	});
 		
 	// 맵 내부에서 마우스 버튼을 놓을 경우 작동
@@ -248,17 +250,7 @@ h2 a {
 							var markers = new Array();
 							var x;
 							var y;
-							var lb = map.getBounds();
 							
-							/* var geocoder = new daum.maps.services.Geocoder();
-
-							var callback = function(result, status) {
-							    if (status === daum.maps.services.Status.OK) {
-							        $('#info').text(result);
-							    }
-							};
-
-							geocoder.addressSearch('해남군 송지면', callback); */
 						<%
 							List<MapVO> list = (List<MapVO>) request.getAttribute("geoList");
 							System.out.println(list.size());
@@ -275,8 +267,6 @@ h2 a {
 							}
 						%>
 							panTo(x, y); // 가장 마지막 매물의 위치로 이동
-							// lb.contain()이 정상작동하나 확인하기 위한 부분
-							alert(lb.contain(new daum.maps.LatLng(x,y)));
 							clusterer.addMarkers(markers);
 
 							// 지도 이동 함수

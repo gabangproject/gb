@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class MaemoolVO {
 	private int num;				//매물번호
-	private String id_email; 		//매물 등록자
+	private String email; 		    //매물 등록자
 	private String deposit; 		//보증금
 	private String monthly_rent;	//월세	
 	private String floor;			//층/건물층수
@@ -19,7 +19,16 @@ public class MaemoolVO {
 	private String near_subway;		//인근 전철역
 	private Date regdate; 			//매물 등록일
 	private int	avg_score;			//평균 점수	
+	private String detail_title;    //매물 간단 설명
 	
+	public String getDetail_title() {
+		return detail_title;
+	}
+
+	public void setDetail_title(String detail_title) {
+		this.detail_title = detail_title;
+	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -132,12 +141,12 @@ public class MaemoolVO {
 		this.num = num;
 	}
 
-	public String getId_email() {
-		return id_email;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setId_email(String id_email) {
-		this.id_email = id_email;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getDeposit() {

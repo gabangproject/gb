@@ -69,7 +69,7 @@ public class BoardModel {
 		request.setAttribute("rowSize", rowSize);		
 		request.setAttribute("curpage", curpage);
 		request.setAttribute("bDisplay", bDisplay);
-		session.getAttribute("id"); //email
+		session.getAttribute("email"); //email
 		session.getAttribute("nick"); //nick
 		request.setAttribute("main_jsp", "../qnaboard/qnaboard.jsp");
 		return "main.jsp";

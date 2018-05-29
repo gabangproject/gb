@@ -26,12 +26,16 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.gabang.controller.Controller;
 import com.gabang.controller.RequestMapping;
+import com.gabang.vo.BuildingTypeVO;
+import com.gabang.vo.DealTypeVO;
 import com.gabang.vo.ImgVO;
 import com.gabang.vo.JjimDAO;
 import com.gabang.vo.MaemoolDAO;
 import com.gabang.vo.MaemoolVO;
 import com.gabang.vo.MapVO;
 import com.gabang.vo.PropertyAddrDAO;
+import com.gabang.vo.PropertyAddrVO;
+import com.gabang.vo.RoomTypeVO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -72,6 +76,7 @@ public class MaemoolModel {
 		return "main.jsp";
 	}
 	
+
 	@RequestMapping("main/maemool_detail.do")
 	public String maemoolDetail(HttpServletRequest request)
 	throws Exception {
@@ -94,63 +99,40 @@ public class MaemoolModel {
 	}
 	
 
+
 	@RequestMapping("main/upload.do")
 	public void maemoolInsert(HttpServletRequest request) throws IOException {
+
+		
+		BuildingTypeVO vo=new BuildingTypeVO();
+		DealTypeVO vo1=new DealTypeVO();
+		ImgVO vo2=new ImgVO();
+		MaemoolVO vo3=new MaemoolVO();
+		PropertyAddrVO vo4=new PropertyAddrVO();
+		RoomTypeVO vo5=new RoomTypeVO();
+		
+		HttpSession session=request.getSession();
+		String email=(String) session.getAttribute("email");
+		int maemoolNum=MaemoolDAO.maemoolNum();
+
 
 		String path="c:\\download";
 		int size=1024*1024*100;
 		String enctype="EUC-KR";
+
 		
-		MultipartRequest mr=new MultipartRequest(request,path,size,enctype,new DefaultFileRenamePolicy());
-		//이미 파일 생성은 끝!
+		vo3.setNum(maemoolNum);
+		vo3.setEmail(email);
 		
-		String[] list= mr.getParameterValues("img");
-		for(int i=0;i<list.length;i++)
-		{
-			System.out.println(list+"[i]");
-		}
-		System.out.println(list);
-		/*for(String pName:list)
-		{
-			System.out.println(pName);
-		}*/
-		/*while(img.hasMoreElements())
-		{
-			String img1=(String)img.nextElement();
-			String originalName=mr.getOriginalFileName(img1);
-			System.out.println(img1);
-			System.out.println(originalName);
-		}*/
-		/*String fileName=mr.getOriginalFileName("img[]");
-		System.out.println(fileName);*/
-		/*ImgVO vo=new ImgVO();
-		if(img==null)
-	    {
-	    	vo.setImg("");
-	    }
-	    // 업로드된 상태 
-	    else
-	    {
-	    	for(int i=0;i<img.length;i++)
-	    	{	
-	    		System.out.println(img[i]);
-	    		vo.setNum(1);
-		    	//file의 크기를 저장할 때는 file의 길이를 인트로 변환해서 사이즈를 측정
-		    	vo.setImg(img[i]);
-		    	File f=new File(path+"\\"+img[i]);
-		    	
-	    	}
-	    }
-				*/
-		//MaemoolDAO.insertMaemool(vo);
+		String addr=request.getParameter("address")+" "+request.getParameter("datailAddress");
+		String x_position=request.getParameter("x_position");
+		String y_position=request.getParameter("y_position");
+		vo4.setAddr(addr);
+		vo4.setX_position(x_position);
+		vo4.setY_position(y_position);
+		vo4.setNum(maemoolNum);
 		
-		
-		
-		//request.setAttribute("main_jsp", "../maemool/list.jsp");
-		//return "main.jsp";
-		
-		
-		
+		//매물 이미지 정보 받아오는 라이브러리
 		final int KILOBYTE = 1024 * 1024;
 		final int MEMORY_THRESHOLD = 3 * KILOBYTE;
 		final int MAX_FILE_SIZE = 40 * KILOBYTE;
@@ -170,7 +152,7 @@ public class MaemoolModel {
 			// Set overall request size constraint
 			upload.setSizeMax(MAZ_REQUEST_SIZE);
 			upload.setFileSizeMax(MAX_FILE_SIZE);
-
+			
 			// Parse the request			
 			try { 
 				List<FileItem> items = new ServletFileUpload(factory).parseRequest(request);
@@ -185,10 +167,20 @@ public class MaemoolModel {
 						// Process form file field (input type="file").
 						String fieldName = item.getFieldName();
 						String fileName = item.getName();
-						System.out.println("fieldName:" + fieldName + ", fileName:" + fileName);
+								//session.getAttribute("email")+"//"+item.getName();
+						//System.out.println("fieldName:" + fieldName + ", fileName:" + fileName);
 						InputStream fileContent = item.getInputStream();
 						BufferedImage image = ImageIO.read(fileContent);
 						ImageIO.write(image, "jpg", new File(TEMP_PATH + "/" + fileName));
+						
+						File f=new File(path+"\\"+fileName);
+						File file=new File(path+"\\"+email+"-"+fileName);
+						f.renameTo(file);
+						
+						System.out.println(file.getName());
+						vo2.setImg(file.getName());
+						vo2.setNum(maemoolNum);
+						
 					}
 				}
 			} catch (FileUploadException e) {
@@ -196,6 +188,97 @@ public class MaemoolModel {
 				e.printStackTrace();
 			}
 		}
+		
+		//거래 형태
+		String deal_type=request.getParameter("deal_type");
+		vo1.setType("deal_type");
+		vo1.setNum(maemoolNum);
+		
+		//방구조
+		String room_type=request.getParameter("room_type");
+		vo5.setType(Integer.parseInt(room_type));
+		vo5.setNum(maemoolNum);
+		
+		//건물형태
+		String building_type=request.getParameter("building_type");
+		vo.setType(Integer.parseInt(building_type));
+		vo.setNum(maemoolNum);
+		
+		//관리비
+		String manage_fee=request.getParameter("manage_fee");
+		if(manage_fee!=null)
+		{
+			manage_fee=manage_fee+" 만원";
+		}
+		vo3.setManage_fee(manage_fee);
+		
+		//관리비 포함항목
+		String[] opt=request.getParameterValues("opt");
+		String option="";
+		for(String opt1:opt)
+		{
+			option=opt+", ";
+		}
+		option=option.substring(0,option.lastIndexOf(",")-1);
+		vo3.setOpt(option);
+		
+		//엘리베이터 유무
+		String elev=request.getParameter("elev");
+		vo3.setElev(Integer.parseInt(elev));
+		
+		//주차공간 유무
+		String parking_lot=request.getParameter("parking_lot");
+		
+		//해당층
+		String floor1=request.getParameter("floor1");
+		//전체층
+		String floor2=request.getParameter("floor2")+"층";
+		if((floor1.startsWith("지")||floor1.startsWith("반")));
+		{
+			floor1=floor1+"층";
+		}
+		String floor=floor1+"//"+floor2;
+		vo3.setFloor(floor);
+		
+		//보증금
+		String deposit1=request.getParameter("deposit1");
+		String deposit2=request.getParameter("deposit2");
+		String deposit=deposit1+" 억"+deposit2+" 만원";
+		vo3.setDeposit(deposit);
+		
+		//월세
+		String monthly_rent1=request.getParameter("monthly_rent1");
+		if(monthly_rent1!=null)
+			{
+			monthly_rent1=monthly_rent1 + " 억";
+			}
+		String monthly_rent2=request.getParameter("monthly_rent2");
+		String monthly_rent=monthly_rent1+monthly_rent2+" 만원";
+		vo3.setMonthly_rent(monthly_rent);
+		
+		//전용면적
+		String gross_area=request.getParameter("gorss_area");
+		int pyeong=(int) Math.round(((Integer.parseInt(gross_area)/3.3)*10)/10);
+		
+		gross_area=request.getParameter("gorss_area")+"㎡"+" ("+pyeong+"P)";
+		vo3.setGross_area(gross_area);
+		
+		//입주가능일
+		String moving_date=request.getParameter("moving_date");
+		vo3.setMoving_date(moving_date);
+		
+		//매물 한줄 표현
+		String detail_title=request.getParameter("detail_title");
+		vo3.setDetail_title(detail_title);
+		//매물 상세설명
+		String description=request.getParameter("description");
+		vo3.setDescription(description);
+		
+		
+		MaemoolDAO.insertMaemool(vo, vo1, vo2, vo3, vo4, vo5);
+		
+		
+		
 	}
 
 	// home.jsp에서 검색할 경우 작동

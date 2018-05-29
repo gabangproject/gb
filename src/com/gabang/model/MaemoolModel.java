@@ -234,6 +234,7 @@ public class MaemoolModel {
 		
 		return "main.jsp";
 	}
+	
 	@RequestMapping("main/like.do")
 	public String like(HttpServletRequest req) {
 		String nums = "";
@@ -250,11 +251,7 @@ public class MaemoolModel {
 		MaemoolVO vo = dao.cookie(num);
 		
 		req.setAttribute("vo", vo);
-		for(int i = 0; i<cookies.length; i++) {
-			
-		}
-		
-		
+
 		req.setAttribute("main_jsp", "../like/like.jsp");
 		return "main.jsp";
 	}

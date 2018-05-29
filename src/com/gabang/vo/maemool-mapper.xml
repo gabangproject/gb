@@ -3,7 +3,7 @@
 <mapper namespace="com.gabang.vo.maemool-mapper">
 	<!-- 매물 테마 검색 -->	
 	<select id="getDepositInfo" resultType="MapVO">
-		SELECT * FROM maemool 
+		SELECT * FROM map 
 	</select>
 	
 	<!-- 매물 목록 출력 관련 by.한 -->

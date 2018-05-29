@@ -15,7 +15,6 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.*;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.Response;
 
 import org.apache.catalina.Session;
 import org.apache.catalina.connector.Request;
@@ -42,8 +41,11 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 @Controller
 public class MaemoolModel {
 	@RequestMapping("main/maemool_list.do")
-	public String maemoolList(HttpServletRequest req,HttpServletResponse response) throws Exception {
+	public String maemoolList(HttpServletRequest req) throws Exception {
 		req.setCharacterEncoding("euc-kr");
+		String theme = req.getParameter("theme");
+		System.out.println(theme);
+		
 		List<MapVO> geoList = PropertyAddrDAO.getGeoInfo();
 		List<ImgVO> imgList = null;
 		Map oneImg = new HashMap();
@@ -65,10 +67,10 @@ public class MaemoolModel {
 		if (num == null) {
 			num = "";
 		}
-		Cookie cookie = new Cookie("likeNum", num);
-		cookie.setMaxAge(365 * 24 * 60 * 60); // 쿠기 유효기간 365일 설정1
-		cookie.setPath("C:\\GaBang\\gb");
-		response.addCookie(cookie);
+//		Cookie cookie = new Cookie("likeNum", num);
+//		cookie.setMaxAge(365 * 24 * 60 * 60); // 쿠기 유효기간 365일 설정1
+//		cookie.setPath("C:\\GaBang\\gb");
+//		response.addCookie(cookie);
 
 		req.setAttribute("oneImg", oneImg);
 		req.setAttribute("geoList", geoList);
@@ -115,12 +117,6 @@ public class MaemoolModel {
 		HttpSession session=request.getSession();
 		String email=(String) session.getAttribute("id");
 		int maemoolNum=MaemoolDAO.maemoolNum();
-
-
-		String path="c:\\download";
-		int size=1024*1024*100;
-		String enctype="EUC-KR";
-
 		
 		vo3.setNum(maemoolNum);
 		vo3.setEmail(email);
@@ -138,7 +134,7 @@ public class MaemoolModel {
 		final int MEMORY_THRESHOLD = 3 * KILOBYTE;
 		final int MAX_FILE_SIZE = 40 * KILOBYTE;
 		final int MAZ_REQUEST_SIZE = 50 * KILOBYTE;
-		final String TEMP_PATH = "c:\\download";
+		final String PATH = "c:\\download";
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		if (isMultipart) {
 			// Create a factory for disk-based file items
@@ -172,10 +168,10 @@ public class MaemoolModel {
 						//System.out.println("fieldName:" + fieldName + ", fileName:" + fileName);
 						InputStream fileContent = item.getInputStream();
 						BufferedImage image = ImageIO.read(fileContent);
-						ImageIO.write(image, "jpg", new File(TEMP_PATH + "/" + fileName));
+						ImageIO.write(image, "jpg", new File(PATH + "/" + fileName));
 						
-						File f=new File(path+"\\"+fileName);
-						File file=new File(path+"\\"+email+"-"+fileName);
+						File f=new File(PATH+"\\"+fileName);
+						File file=new File(PATH+"\\"+email+"-"+fileName);
 						f.renameTo(file);
 						
 						System.out.println(file.getName());

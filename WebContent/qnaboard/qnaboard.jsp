@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -7,8 +8,11 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <style type="text/css">
@@ -81,7 +85,8 @@
 	<div id="fh5co-work-section">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+				<div
+					class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
 					<h3>Q&A 게시판</h3>
 				</div>
 			</div>
@@ -91,10 +96,12 @@
 		<div class="container" style="width: 80%;">
 			<table class="table">
 				<tr>
-					<td class="col-md-2"><img src="../qnaboard/icon1.jpg" width="278" height="623" /></td>
+					<td class="col-md-2"><img src="../qnaboard/icon1.jpg"
+						width="278" height="623" /></td>
 					<td class="col-md-8" style="margin: auto;">
 
-						<div class="col-md-10 col-md-offset-1" style="padding-left: 0px; padding-right: 0px;">
+						<div class="col-md-10 col-md-offset-1"
+							style="padding-left: 0px; padding-right: 0px;">
 							<div class="panel panel-default panel-table">
 								<div class="panel-heading">
 									<div class="row">
@@ -104,7 +111,8 @@
 													<option value="title">제목</option>
 													<option value="email">작성자</option>
 													<option value="content">내용</option>
-												</select> <input type="text" name="keyword" required> <input type="submit" class="btn btn-sm" value="검색">
+												</select> <input type="text" name="keyword" required> <input
+													type="submit" class="btn btn-sm" value="검색">
 											</form>
 										</span>
 									</div>
@@ -135,7 +143,8 @@
 									<!-- 게시글목록 테마별 보기?? 끝-->
 
 									<div class="panel-body">
-										<table id="mytable" class="table table-striped table-bordered table-list">
+										<table id="mytable"
+											class="table table-striped table-bordered table-list">
 											<thead>
 												<tr>
 													<th class="col-text" width="10%">번호</th>
@@ -153,8 +162,9 @@
 														<td>${vo.num }</td>
 														<td><c:if test="${bDisplay == true }">
 																<c:if test="${vo.group_tab >0}">
-																	<c:forEach var="i" begin="0" end="${vo.group_tab }" step="1">
-                                             &nbsp;&nbsp;&nbsp;
+																	<c:forEach var="i" begin="0" end="${vo.group_tab }"
+																		step="1">
+                                          							   &nbsp;&nbsp;&nbsp;
                                        </c:forEach>
 																	<img src="../qnaboard/icon_reply.gif">
 																</c:if>
@@ -162,7 +172,8 @@
 
 
 														<td>${vo.email }</td>
-														<td><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd" /></td>
+														<td><fmt:formatDate value="${vo.regdate }"
+																pattern="yyyy-MM-dd" /></td>
 														<td>${vo.hit }</td>
 													</tr>
 												</c:forEach>
@@ -179,11 +190,13 @@
 													<!-- 좌측 우측 넘기는거  -->
 													<ul class="pagination">
 														<c:if test="${ curpage!=1}">
-															<li><a href="qnaboard.do?page=${curpage-1 }" aria-label="Previous"> ◀ </a></li>
+															<li><a href="qnaboard.do?page=${curpage-1 }"
+																aria-label="Previous"> ◀ </a></li>
 														</c:if>
-														
+
 														<c:if test="${curpage<totalpage }">
-															<li><a href="qnaboard.do?page=${curpage+1 }" aria-label="Next"> ▶ </a></li>
+															<li><a href="qnaboard.do?page=${curpage+1 }"
+																aria-label="Next"> ▶ </a></li>
 														</c:if>
 													</ul>
 												</nav>
@@ -191,10 +204,11 @@
 
 											<!-- 글쓰기 -->
 
-											<c:if test="${sessionScope.id!=null}">
+											<c:if test="${sessionScope.email!=null}">
 												<div class="col col-xs-3">
 													<div class="pull-right">
-														<a href="insert.do?page=${curpage }" class="btn btn-sm btn-success">새글</a>
+														<a href="insert.do?page=${curpage }"
+															class="btn btn-sm btn-success">새글</a>
 													</div>
 												</div>
 											</c:if>
@@ -204,7 +218,8 @@
 							</div>
 						</div>
 					</td>
-					<td class="col-md-2"><img src="../qnaboard/icon1.jpg" width="278" height="623" /></td>
+					<td class="col-md-2"><img src="../qnaboard/icon1.jpg"
+						width="278" height="623" /></td>
 				</tr>
 			</table>
 		</div>

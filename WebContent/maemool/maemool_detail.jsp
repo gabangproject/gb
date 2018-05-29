@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,9 +8,6 @@
 <title>Insert title here</title>
 
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	
-	
-
 
 </head>
 <body>
@@ -24,9 +22,6 @@
 				</div>
 			</div>
 
-
-		<!-- 회원가입 및 중개사 등록 폼 -->
-
 			<div class="row" style="width:60%">
 
 				<!-- 매물 사진 출력 -->
@@ -34,30 +29,26 @@
 				<div id="carouselExampleIndicators" class="carousel slide"
 					data-ride="carousel">
 					<ol class="carousel-indicators">
-						<li data-target="#carouselExampleIndicators" data-slide-to="0"
-							class="active"></li>
+						<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
 						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 						<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 					</ol>
+			<!-- 매물 이미지 출력 -->
 					<div class="carousel-inner">
-						<div class="carousel-item active">
-							<img class="d-block w-100" src="..." alt="First slide">
-						</div>
-						<div class="carousel-item">
-							<img class="d-block w-100" src="..." alt="Second slide">
-						</div>
-						<div class="carousel-item">
-							<img class="d-block w-100" src="..." alt="Third slide">
-						</div>
+						<c:forEach var="vo" items="${imgList }" >
+							<div class="carousel-item active">
+								<img class="d-block w-100" src="${vo.img }" >
+							</div>
+						</c:forEach>
 					</div>
 					<a class="carousel-control-prev" href="#carouselExampleIndicators"
 						role="button" data-slide="prev"> <span
-						class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-						class="sr-only">Previous</span>
+						class="carousel-control-prev-icon" aria-hidden="true"></span>
+						 <span class="sr-only">Previous</span>
 					</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
-						role="button" data-slide="next"> <span
-						class="carousel-control-next-icon" aria-hidden="true"></span> <span
-						class="sr-only">Next</span>
+						role="button" data-slide="next">
+						 <span class="carousel-control-next-icon" aria-hidden="true"></span>
+						  <span class="sr-only">Next</span>
 					</a>
 				</div>
 
@@ -67,23 +58,25 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>Firstname</th>
-							<th>Lastname</th>
+							<th></th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach var="vo" items="${infoMaemool }">
 						<tr>
-							<td>John</td>
-							<td>Doe</td>
+							<td>${vo.deposit }</td>
+							<td>${vo.monthly_rent }</td>
+						</tr>
+						<tr>ㅇ
+							<td></td>
+							<td></td>
 						</tr>
 						<tr>
-							<td>Mary</td>
-							<td>Moe</td>
+							<td></td>
+							<td></td>
 						</tr>
-						<tr>
-							<td>July</td>
-							<td>Dooley</td>
-						</tr>
+					</c:forEach>
 					</tbody>
 				</table>
 			</div>

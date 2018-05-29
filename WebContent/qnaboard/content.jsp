@@ -136,10 +136,12 @@
 							</table>
 							<table class="table">
 								<tr>
-									<td class="text-center"><c:if test="${sessionScope.id.equals(vo.email)}">
+									<td class="text-center">
+										<c:if test="${sessionScope.email.equals(vo.email)}">
 											<a href="update.do?no=${vo.no }&page=${curpage}" class="btn btn-sm btn-primary" id="update">수정</a>
 											<a href="#" class="btn btn-sm btn-warning" id="delBtn">삭제</a>
-										</c:if> <a href="qnaboard.do?page=${curpage}" class="btn btn-sm btn-warning">목록</a> <c:if test="${sessionScope.id!=null}">
+										</c:if> <a href="qnaboard.do?page=${curpage}" class="btn btn-sm btn-warning">목록</a> 
+										<c:if test="${sessionScope.email!=null}">
 											<a href="reply.do?no=${vo.no }&page=${curpage}" class="btn btn-sm btn-info">답글달기</a>
 										</c:if></td>
 								</tr>

@@ -1,6 +1,6 @@
 package com.gabang.vo;
 
-public class DealType {
+public class DealTypeVO {
 	private String type;	// 거래형태
 	private int num;		// 매물번호
 	public String getType() {

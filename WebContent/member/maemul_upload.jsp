@@ -25,34 +25,76 @@ font-weight: 500;
 
 <script>
 
-
-
-//기타 항목을 체크하면 기타사항을 입력할 수 있는 칸이 생기게 하는 이벤트
-$(function(){
+//input 입력값 유효성 체크 함수(eamil이면 eamil형식 전화번호면 전화번호 형식에 맞는지 확인하는 함수) 
+function pCheck(input)
+{
 	
-	$('.ncs').attr("required",true);
+	var inputed=input.value;
 	
-	/* $('#opt-4').click(function(){
-		
-		
-	var check=$('#opt-4').prop( "checked" );
-	var html="";
-	if(check==true)
+	var checker=$(input).attr('name');
+	
+	var numberCheck="";
+	
+	switch(checker)
+	{
+	
+	case 'deposit1':
+	case 'deposit2':
+	case 'manage_fee':
+	case 'monthly_rent1':
+	case 'monthly_rent1':
+	case 'gross_area':
+					numberCheck=/^[0-9.]*$/;
+				    break;
+	
+	};
+	
+	if(numberCheck.test(inputed)==false)
 		{
-		$('#opt-4').attr("required",true);
-		html="<input id='opt-4-detail' name='opt-4' type='text' placeholder='이름' class='form-control' required>";
+		input.setCustomValidity("숫자 또는 .만 입력해주세요.");
+		//$("#upload").prop("disabled", true);
 		}
-	else
-		{
-		$('#opt-4').attr("required",false);
+	else{
+		input.setCustomValidity("");
+		
 		}
+}
+
+//체크박스 최소 한개 이상 체크 옵션
+ $(document).ready(function () {
+	 $('#upload').click(function() {
+      var checked = $("input[type=checkbox]:checked").length;
 	
-	$('#for-opt-4').html(html);
-	ㄹ
-	
-	} */
-	
+     
+     /*  if(!checked) {
+       
+        $('#opt-0').setCustomValidity("최소 1개 옵션을 선택해 주세요.");
+        return false;
+      } */
+      if(checked)
+    	{
+    	  $('[type="checkbox"]').attr("required",false);
+    	}
+      /* else
+    	{
+    	  $('#opt-0').attr("onblur", "setCustomValidity('최소 1개 옵션을 선택해 주세요')");
+    	  
+    	} */
+
+    });
 }); 
+
+/* $(function(){
+    var requiredCheckboxes = $('.options :checkbox[required]');
+    requiredCheckboxes.change(function(){
+        if(requiredCheckboxes.is(':checked')) {
+            requiredCheckboxes.removeAttr('required');
+        } else {
+            requiredCheckboxes.attr('required', 'required');
+        }
+    });
+}); */
+
 </script>
 </head>
 <body>
@@ -89,19 +131,21 @@ $(function(){
 								<label class="col-md-4 control-label" for="firstname">매물주소
 								<span class="text-danger">*</span>
 								</label>
-								<div class="col-sm-4">
-								<input type="text" id="postcode" name="postcode" class="form-control sri" placeholder="우편번호" onclick="searchPostcode()" readonly>
 								
-								<input type="text" id="address" name="address" class="form-control sri" placeholder="주소" style="margin-top:5px;margin-bottom:5px;" 
-								onclick="searchPostcode()" readonly>
+								<div class="col-sm-4" required>
+								<input type="text" id="postcode" name="postcode" class="form-control sri" placeholder="우편번호" 
+								style="background-color:white" onclick="searchPostcode()" readonly required>
 								
-								<input type="text" id="detailAddress" name="detailAddress" class="form-control sri" placeholder="상세주소">
+								<input type="text" id="address" name="address" class="form-control sri" placeholder="주소" 
+								style="margin-top:5px;margin-bottom:5px; background-color:white" onclick="searchPostcode()" readonly required>
+								
+								<input type="text" id="detailAddress" name="detailAddress" class="form-control sri" placeholder="상세주소" required>
+								
+								</div>
+								<input type=button class='btn btn-sm' onclick="searchPostcode()" value="주소검색">
 								<!-- x,y좌표값 얻어옴 -->
 								<input type="hidden" id="x_position" name="x_position">
 								<input type="hidden" id="y_position" name="y_position">
-								</div>
-								<input type=button class='btn btn-sm' onclick="searchPostcode()" value="주소검색">
-								
 						</div>
 						
 						<!-- 매물 위치 표시할 지도 -->
@@ -117,7 +161,7 @@ $(function(){
 							</label>
 							<div class="col-md-4">
 								<input type="file" name="img" multiple="multiple"
-									style="apperance: none;	-webkit-apperance: none;">		
+									style="apperance: none;	-webkit-apperance: none;" required>		
 							</div>
 						</div>
 
@@ -130,9 +174,9 @@ $(function(){
 							<div class="col-md-4">
 								<div class="radio">
 								
-									<c:forEach var="deal" items="${deal_type }" varStatus="n">
-										<label for="radios-d${n.index }"> 
-											<input type="radio" name="deal_type" id="radios-d${n.index }" value="${n.index }"> ${deal}
+									<c:forEach var="deal" items="${deal_type }" varStatus="d">
+										<label for="radios-d${d.index }"> 
+											<input type="radio" name="deal_type" id="radios-d${d.index }" value="${d.index }" required> ${deal}
 										</label> 
 									</c:forEach>
 									
@@ -149,9 +193,9 @@ $(function(){
 							<div class="col-md-4">
 								<div class="radio">
 								
-									<c:forEach var="room" items="${room_type }" varStatus="n">
-										<label for="radios-r${n.index }">
-										<input type="radio"	name="room_type" id="radios-r${n.index }" value="${n.index }">${room } 
+									<c:forEach var="room" items="${room_type }" varStatus="r">
+										<label for="radios-r${r.index }">
+										<input type="radio"	name="room_type" id="radios-r${r.index }" value="${r.index }" required>${room } 
 										</label> 
 									</c:forEach>
 									
@@ -167,10 +211,10 @@ $(function(){
 							<div class="col-md-4">
 								<div class="radio">
 								
-									<c:forEach var="building" items="${building_type }" varStatus="n">
-										<label for="radios-b${building }">
-											<input type="radio"	name="building_type" id="radios-b${building }" 
-											value="${n.index }" >${building } 
+									<c:forEach var="building" items="${building_type }" varStatus="b">
+										<label for="radios-b${b.index }">
+											<input type="radio"	name="building_type" id="radios-b${b.index }" 
+											value="${b.index }" required>${building } 
 										</label> 
 									</c:forEach>
 									
@@ -184,23 +228,27 @@ $(function(){
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="manage_fee">관리비</label>
 								<div class="col-md-2 sub">
-									<input type="text" id="manage_fee" name="manage_fee" class="form-control" style="width:45%; display:inline;">
+									<input type="text" id="manage_fee" name="manage_fee" class="form-control" 
+									style="width:45%; display:inline;" onblur="pCheck(this)">
 									<label for="manage_fee">만원</label>
 								</div>
 								
 						</div>
 						
 						
-						<!-- 관리비 포함항목 -->
-						<div class="form-group">
-							<label class="col-md-4 control-label" for="opts">관리비 포함항목</label>
+						<!-- 옵션 -->
+						<div class="form-group ">
+							<label class="col-md-4 control-label" for="opts">옵션
+							<span class="text-danger">*</span>
+							</label>
 
-							<div class="col-md-4" style="margin-top:7px">
-								<div class="check">
+							<div class="col-md-4 options" style="margin-top:7px">
+								<div class="checkbox-group">
 									
 									<c:forEach var="option" items="${opt }" varStatus="n">
 										<label for="opt-${n.index }" class="form-check-label">
-										<input type="checkbox" id="opt-${n.index }" name="opt" value="${n.index }">${option }
+										<input type="checkbox" id="opt-${n.index }" name="opt" value="${n.index }" 
+										required>${option }
 										</label>
 									</c:forEach>
 									
@@ -212,14 +260,16 @@ $(function(){
 
 						<!-- 엘리베이터 유무  -->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="radios">엘리베이터</label>
+							<label class="col-md-4 control-label" for="radios">엘리베이터
+							<span class="text-danger">*</span>
+							</label>
 							<div class="col-md-4">
-								<div class="radio">
+								<div class="radio" >
 									<label for="radios-7">
-									<input type="radio"	name="elev" id="radios-7" value="1" checked="checked">있음
+									<input type="radio"	name="elev" id="radios-7" value="1" checked="checked" required >있음
 									</label>
 									<label for="radios-8">
-									<input type="radio"	name="elev" id="radios-8" value="0">없음
+									<input type="radio"	name="elev" id="radios-8" value="0" required>없음
 									</label>
 								</div>
 							</div>
@@ -228,15 +278,17 @@ $(function(){
 
 						<!-- 주차공간  -->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="radios">주차공간</label>
+							<label class="col-md-4 control-label" for="radios">주차공간
+							<span class="text-danger">*</span>
+							</label>							
 							<div class="col-md-4">
 								<div class="radio">
 									<label for="radios-9"> 
-									<input type="radio"	name="parking_lot" id="radios-9" value="1" checked="checked">가능
+									<input type="radio"	name="parking_lot" id="radios-9" value="1" checked="checked" required>가능
 									</label>
 									
 									<label for="radios-10">
-									<input type="radio" name="parking_lot" id="radios-10" value="0">불가능
+									<input type="radio" name="parking_lot" id="radios-10" value="0" required>불가능
 									</label>
 								</div>
 
@@ -251,14 +303,14 @@ $(function(){
 							<span class="text-danger">*</span>
 							</label>
 							<div class="col-md-1">
-								<input type="text" name="floor1" class="form-control">
+								<input type="text" name="floor1" class="form-control" required>
 							</div>
 							
 							<label class="col-md-1 control-label" for="mobno">전체층
 							<span class="text-danger">*</span>
 							</label>
 							<div class="col-md-1">
-								<input type="text" name="floor2" class="form-control">
+								<input type="text" name="floor2" class="form-control" required>
 							</div>
 							
 						</div>
@@ -270,12 +322,14 @@ $(function(){
 							<span class="text-danger">*</span>
 							</label>
 								<div class="col-md-2 sub">
-								<input type="text" name="deposit1" class="form-control" style="width:45%; display:inline;">
+								<input type="text" name="deposit1" class="form-control" style="width:45%; display:inline;"
+								onblur="pCheck(this)">
 								<label for="deposit1">억</label>
 								</div>
 								
 								<div class="col-md-2 sub">
-								<input type="text" name="deposit2" class="form-control" style="width:45%; display:inline;">
+								<input type="text" name="deposit2" class="form-control" style="width:45%; display:inline;"
+								onblur="pCheck(this)" required>
 								<label for="deposit2">만원</label>
 								</div>
 
@@ -286,12 +340,14 @@ $(function(){
 						<div class="form-group">
 							<label class="col-md-4 control-label" >월세</label>
 								<div class="col-md-2 sub">
-								<input type="text" id="monthly_rent1" name="monthly_rent1" class="form-control" style="width:45%; display:inline;" >
+								<input type="text" id="monthly_rent1" name="monthly_rent1" class="form-control" 
+								style="width:45%; display:inline;" onblur="pCheck(this)">
 								<label for="monthly_lent1">억</label>
 								</div>
 								
 								<div class="col-md-2 sub">
-								<input type="text" id="monthly_rent2" name="monthly_rent2" class="form-control" style="width:45%; display:inline;" >
+								<input type="text" id="monthly_rent2" name="monthly_rent2" class="form-control" 
+								style="width:45%; display:inline;" onblur="pCheck(this)">
 								<label for="monthly_lent2">만원</label>
 								</div>
 								
@@ -304,7 +360,8 @@ $(function(){
 							<span class="text-danger">*</span>
 							</label>
 								<div class="col-md-2 sub">
-								<input type="text" id="gross_area" name="gross_area" class="form-control" style="width:45%; display:inline;" >
+								<input type="text" id="gross_area" name="gross_area" class="form-control" 
+								style="width:45%; display:inline;" onblur="pCheck(this)" required>
 								<label for="gross_area">m<sup>2</sup></label>
 								
 								</div>		
@@ -317,7 +374,7 @@ $(function(){
 							<span class="text-danger">*</span>
 							</label>
 							<div class="col-md-5">
-								<input type="text" id="moving_date" name="moving_date" class="form-control">
+								<input type="text" id="moving_date" name="moving_date" class="form-control" required>
 							</div>								
 						</div>
 						
@@ -329,12 +386,25 @@ $(function(){
 							</div>								
 						</div>
 						
+						<!-- 인근전철역  -->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="near_subway">인근전철역
+							<span class="text-danger">*</span>
+							</label>
+							<div class="col-md-5">
+								<input type="text" id="near_subway" name="near_subway" class="form-control" 
+								placeholder="인근 전철역을 작성해 주세요." required>
+							</div>								
+						</div>
+						
 						
 						<!-- 매물 설명  -->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="description">매물설명</label>
+							<label class="col-md-4 control-label" for="description">매물설명
+							<span class="text-danger">*</span>
+							</label>
 							<div class="col-md-5">
-								<textarea class="form-control" rows="5" id="description" name="description"></textarea>
+								<textarea class="form-control" rows="5" id="description" name="description" required></textarea>
 							</div>								
 						</div>
 

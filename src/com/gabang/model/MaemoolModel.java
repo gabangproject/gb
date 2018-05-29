@@ -90,9 +90,10 @@ public class MaemoolModel {
 		 
 		List<ImgVO> imgList = MaemoolDAO.detailMaemool(Integer.parseInt("50")); // 임시로 50번의 매물번호의 이미지를 출력
 		MaemoolVO vo = MaemoolDAO.infoMaemool(Integer.parseInt(num));
+		System.out.println(vo.getDeposit());
 		
 		request.setAttribute("imgList", imgList);
-		request.setAttribute("infoMaemool", vo);
+		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../maemool/maemool_detail.jsp");
 	//	CommonModel.commonSendData(request);
 		return "main.jsp";

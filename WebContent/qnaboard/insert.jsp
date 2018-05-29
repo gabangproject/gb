@@ -93,35 +93,40 @@
 					<td class="col-md-2"><img src="../qnaboard/icon1.jpg" width="278" height="623" /></td>
 					<td class="col-md-8" style="margin: auto;">
 						<div class="row">
-							<h1>글쓰기</h1>
-							<!-- 
+							<div class="col-md-10 col-md-offset-1">
+								<h1>글쓰기</h1>
+								<!-- 
             .do => DispatcherServlet => BoardModel
        -->
-							<form method=post action="insert_ok.do">
-								<table class="table table-hover">
-									<tr>
-										<td width="15%" class="success text-right">제목</td>
-										<td width="85%" class="text-left"><input type=text name=title size=45 required></td>
-									</tr>
+								<form method=post action="insert_ok.do">
+									<table class="table table-hover">
+										<tr>
+											<td width="15%" height="10%" class="text-right" style="background-color: #8BBDFF">제목</td>
+											<td width="85%" height="10%" class="text-left"><input type=text name=title size=45 required></td>
+										</tr>
 
-									<tr>
-										<td width="15%" class="success text-right">내용</td>
-										<td width="85%" class="text-left"><textarea rows="10" cols="50" name=content required></textarea></td>
-									</tr>
+										<tr>
+											<td width="15%" height="500px" class="success text-right" style="background-color: #8BBDFF">내용</td>
+											<td width="85%" height="500px" class="text-left">
+											<textarea rows="10" cols="50" name=content required style="height: 470px; width: 850px;"></textarea>
+											</td>
+										</tr>
 
-									<tr>
-										<td colspan="2" class="text-center"><input type="submit" class="btn btn-sm btn-info" value="글쓰기" id="writeBtn"> 
-										<input type="button" class="btn btn-sm btn-danger" value="취소"
-											onclick="javascript:history.back()"></td>
+										<tr>
+											<td colspan="2" class="text-center">
+											<input type="submit" class="btn btn-sm btn-info" value="글쓰기" id="writeBtn"> 
+											<input type="button" class="btn btn-sm btn-danger" value="취소"
+												onclick="javascript:history.back()"></td>
 
-									</tr>
+										</tr>
 
-								</table>
+									</table>
 
-							</form>
+								</form>
+							</div>
 						</div>
 					</td>
-					<td class="col-md-2"><img src="../qnaboard/icon1.jpg" width="278" height="623" /></td>
+					<td class="col-md-2"><img src="../qnaboard/icon2.jpg" width="278" height="623" /></td>
 				</tr>
 			</table>
 		</div>

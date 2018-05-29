@@ -65,10 +65,9 @@
 					<tbody>
 					<c:forEach var="vo" items="${infoMaemool }">
 						<tr>
-							<td>${vo.deposit }</td>
-							<td>${vo.monthly_rent }</td>
+							 
 						</tr>
-						<tr>¤·
+						<tr>
 							<td></td>
 							<td></td>
 						</tr>

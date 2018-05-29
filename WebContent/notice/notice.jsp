@@ -97,91 +97,89 @@
 		<table class="table">
 			<tr>
 				<td class="col-md-2"><img src="../qnaboard/icon1.jpg" width="278" height="623" /></td>
-				<td class="col-md-8" style="margin: auto;">
+				<td class="col-md-8-md-offset-1" style="margin: auto;">
 					<div class="row">
-						<div class="row">
-							<div class="col-md-12" style="padding-left: 0px; padding-right: 0px;">
-								<div class="panel panel-default panel-table" style="width: 100%;">
+						<div class="col-md-10 col-md-offset-1">
+							<div class="panel panel-default panel-table">
 
-									<!-- 게시글목록 테마별 보기?? 시작 -->
-									<div class="panel-heading">
-										<div class="row">
-
-											<div class="col col-xs-6">
-												<h3 class="panel-title">공지사항</h3>
-											</div>
-											<div class="col col-xs-6 text-right">
-												<div class="pull-right">
-													<div class="btn-group" data-toggle="buttons">${curpage}page/${totalpage}pages</div>
-												</div>
+								<!-- 게시글목록 테마별 보기?? 시작 -->
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col col-xs-6">
+											<h3 class="panel-title">공 지 사 항</h3>
+										</div>
+										<div class="col col-xs-6 text-right">
+											<div class="pull-right">
+												<div class="btn-group" data-toggle="buttons">${curpage}page/${totalpage}pages</div>
 											</div>
 										</div>
 									</div>
+								</div>
 
-									<!-- 게시글목록 테마별 보기?? 끝-->
+								<!-- 게시글목록 테마별 보기?? 끝-->
 
-									<div class="panel-body">
-										<table id="mytable" class="table table-striped table-bordered table-list">
-											<thead>
-												<tr>
-													<th id="d" class="col-text" width="5%">번호</th>
-													<th id="d" class="col-text" width="77%">제목</th>
-													<th id="d" class="col-text" width="10%">작성자</th>
-													<th id="d" class="col-text" width="8%">작성일</th>
+								<div class="panel-body">
+									<table id="mytable" class="table table-striped table-bordered table-list">
+										<thead>
+											<tr>
+												<th id="d" class="col-text" width="5%">번호</th>
+												<th id="d" class="col-text" width="75%">제목</th>
+												<th id="d" class="col-text" width="10%">작성자</th>
+												<th id="d" class="col-text" width="10%">작성일</th>
+											</tr>
+										</thead>
+										<tbody>
+
+											<!-- table 게시글 리스트 출력 시작-->
+											<c:forEach var="vo" items="${list }">
+												<tr data-status="completed">
+													<td id="d">${vo.no }</td>
+													<td style="text-align: left;"><a href="noticeContent.do?no=${vo.no }&page=${curpage}">${vo.title }</a></td>
+													<td id="d">${vo.email }</td>
+													<td id="d"><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd" /></td>
+
 												</tr>
-											</thead>
-											<tbody>
+											</c:forEach>
+											<!-- table 게시글 리스트 출력 끝-->
+										</tbody>
+									</table>
+								</div>
 
-												<!-- table 게시글 리스트 출력 시작-->
-												<c:forEach var="vo" items="${list }">
-													<tr data-status="completed">
-														<td id="d">${vo.no }</td>
-														<td style="text-align: left;"><a href="noticeContent.do?no=${vo.no }&page=${curpage}">${vo.title }</a></td>
-														<td id="d">${vo.email }</td>
-														<td id="d"><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd" /></td>
-
-													</tr>
-												</c:forEach>
-												<!-- table 게시글 리스트 출력 끝-->
-											</tbody>
-										</table>
-
-									</div>
-									<!-- 게시글 페이지 나눠지는 표시  -->
-									<div class="panel-footer">
-										<div class="row">
-											<div class="col col-xs-offset-3 col-xs-6">
-												<nav aria-label="Page navigation" class="text-center"> <!-- 좌측 우측 넘기는거  -->
-												<ul class="pagination">
-													<c:if test="${ curpage!=1}">
-														<li><a href="notice.do?page=${curpage-1 }" aria-label="Previous"> ◀ </a></li>
-													</c:if>
+								<!-- 게시글 페이지 나눠지는 표시  -->
+								<div class="panel-footer">
+									<div class="row">
+										<div class="col col-xs-offset-3 col-xs-6">
+											<nav aria-label="Page navigation" class="text-center"> <!-- 좌측 우측 넘기는거  -->
+											<ul class="pagination">
+												<c:if test="${ curpage!=1}">
+													<li><a href="notice.do?page=${curpage-1 }" aria-label="Previous"> ◀ </a></li>
+												</c:if>
 
 
-													<c:if test="${curpage<totalpage }">
-														<li><a href="notice.do?page=${curpage+1 }" aria-label="Next"> ▶ </a></li>
-													</c:if>
-												</ul>
+												<c:if test="${curpage<totalpage }">
+													<li><a href="notice.do?page=${curpage+1 }" aria-label="Next"> ▶ </a></li>
+												</c:if>
+											</ul>
 
-												</nav>
-											</div>
-											<!-- 글쓰기 -->
-
-											<c:if test="${sessionScope.id=='admin'}">
-												<div class="col col-xs-3">
-													<div class="pull-right">
-														<a href="noticeInsert.do?page=${curpage }" class="btn btn-sm btn-success">새글</a>
-													</div>
-												</div>
-											</c:if>
+											</nav>
 										</div>
+										<!-- 글쓰기 -->
+
+										<c:if test="${sessionScope.id=='admin'}">
+											<div class="col col-xs-3">
+												<div class="pull-right">
+													<a href="noticeInsert.do?page=${curpage }" class="btn btn-sm btn-success">새글</a>
+												</div>
+											</div>
+										</c:if>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+					</div>
 				</td>
-				<td class="col-md-2"><img src="../qnaboard/icon1.jpg" width="278" height="623" /></td>
+				<td class="col-md-2"><img src="../qnaboard/icon2.jpg" width="278" height="623" /></td>
 			</tr>
 		</table>
 	</div>

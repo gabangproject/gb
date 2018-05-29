@@ -63,7 +63,7 @@ public class MemberModel {
 			/*System.out.println(pwd);
 			System.out.println(db_pwd);*/
 			HttpSession session=request.getSession();
-			session.setAttribute("email", email);
+			session.setAttribute("id", email);
 			//비번 체크
 			if(pwd.equals(db_pwd))
 			{
@@ -231,7 +231,7 @@ public class MemberModel {
 		String[] deal_type= {"전세","월세"};
 		String[] room_type= {"원룸","투룸","복층형","분리형원룸","쓰리룸"};
 		String[] building_type= {"다세대/다가구","오피스텔"};
-		String[] opt= {"에어컨","냉장고","세탁기","침대","책상","옷장","TV","신발장","냉장고","가스레인지","인덕션","전자레인지","전자도어락","비데"};
+		String[] opt= {"에어컨","냉장고","세탁기","침대","책상","옷장","TV","신발장","냉장고","가스레인지","인덕션","전자레인지","전자도어락","비데","옵션없음"};
 		
 		request.setAttribute("deal_type", deal_type);
 		request.setAttribute("room_type", room_type);

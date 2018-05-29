@@ -123,7 +123,7 @@
 											<tbody>
 
 												<!-- table 게시글 리스트 출력 시작-->
-												<c:forEach var="vo" items="${list }">
+												<c:forEach var="vo" items="${vo }">
 													<tr data-status="completed">
 														<td>${vo.num}</td>
 														<td></td>

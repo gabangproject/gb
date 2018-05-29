@@ -74,11 +74,11 @@ function pCheck(input)
 	{
 	case 'phone': 
 	case 'compTel':
-					numberCheck=/^\d{2,3}-\d{3,4}-\d{4}$/g;
+					numberCheck=/^\d{2,3}-\d{3,4}-\d{4}$/;
 				    break;
 	
 	case 'license': 
-					numberCheck=/^\d{5}-\d{4}-\d{5}$/g;
+					numberCheck=/^\d{5}-\d{4}-\d{5}$/;
 				    break;
 	
 	case 'email': 
@@ -341,14 +341,16 @@ $(function(){
 								<label class="col-sm-4 control-label" for="firstname">상호주소
 								<span class="text-danger">*</span>
 								</label>
+								
 								<div class="col-sm-4">
-								<input type="text" id="postcode" name="postcode" class="form-control sri" placeholder="우편번호" onclick="searchPostcode()" readonly>
+								<input type="text" id="postcode" name="postcode" class="form-control sri" placeholder="우편번호" 
+								style="background-color:white" onclick="searchPostcode()" readonly>
 								
 								<input type="text" id="address" name="address" class="form-control sri" placeholder="주소" 
-								style="margin-top:5px;margin-bottom:5px;" onclick="searchPostcode()" readonly>
+								style="margin-top:5px; margin-bottom:5px; background-color:white" onclick="searchPostcode()" readonly>
 								
 								<input type="text" id="detailAddress" name="detailAddress" class="form-control sri" placeholder="상세주소">
-								<!-- <span id="guide" style="color:#999"></span> 주소를 클릭하면 창이 사라진다 -->
+								
 								</div>
 								<input type=button class='btn btn-sm' onclick="searchPostcode()" value="주소검색" >
 							
@@ -384,7 +386,7 @@ $(function(){
 					<fieldset id="butt" form="join" >
 					<div class="form-group text-center" >
 						<!-- 가입 버튼은 기본적으로 비활성화(disabled) 시켜놓고 입력값 중복체크를 처리하면 활성화 시킴  -->
-						<input type=submit id="join" name="join" class="btn" value="가입">
+						<input type=submit id="join" name="join" class="btn" value="가입" disabled>
 						<input type=button id="cencel" name="cencel" class="btn btn-primary" value="취소">
 					</div>
 					</fieldset>

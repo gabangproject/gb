@@ -90,9 +90,10 @@ public class MaemoolModel {
 		 
 		List<ImgVO> imgList = MaemoolDAO.detailMaemool(Integer.parseInt("50")); // 임시로 50번의 매물번호의 이미지를 출력
 		MaemoolVO vo = MaemoolDAO.infoMaemool(Integer.parseInt(num));
+		System.out.println(vo.getDeposit());
 		
 		request.setAttribute("imgList", imgList);
-		request.setAttribute("infoMaemool", vo);
+		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../maemool/maemool_detail.jsp");
 	//	CommonModel.commonSendData(request);
 		return "main.jsp";
@@ -423,6 +424,7 @@ public class MaemoolModel {
 		
 		return "main.jsp";
 	}
+	
 	@RequestMapping("main/like.do")
 	public String like(HttpServletRequest req) {
 		String nums = "";
@@ -439,11 +441,7 @@ public class MaemoolModel {
 		MaemoolVO vo = dao.cookie(num);
 		
 		req.setAttribute("vo", vo);
-		for(int i = 0; i<cookies.length; i++) {
-			
-		}
-		
-		
+
 		req.setAttribute("main_jsp", "../like/like.jsp");
 		return "main.jsp";
 	}

@@ -140,11 +140,10 @@ public class MemberModel {
 		session.removeAttribute("nick");
 		session.removeAttribute("grade");
 		
-		//session.invalidate();
-		
+		//session.invalidate();		
 		
 		request.setAttribute("main_jsp", "home.jsp");
-		return "main.do";
+		return "redirect:main.do";
 	}
 	
 	

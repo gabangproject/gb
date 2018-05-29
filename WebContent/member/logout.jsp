@@ -12,7 +12,6 @@ alert(page); */
 
 location.href=parent.document.location.href;
 
-
 </script>
 </head>
 <body>

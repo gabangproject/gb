@@ -96,12 +96,10 @@
 		<div class="container" style="width: 80%;">
 			<table class="table">
 				<tr>
-					<td class="col-md-2"><img src="../qnaboard/icon1.jpg"
-						width="278" height="623" /></td>
+					<td class="col-md-2"><img src="../qnaboard/icon1.jpg" width="278" height="623" /></td>
 					<td class="col-md-8" style="margin: auto;">
 
-						<div class="col-md-10 col-md-offset-1"
-							style="padding-left: 0px; padding-right: 0px;">
+						<div class="col-md-10 col-md-offset-1" style="padding-left: 0px; padding-right: 0px;">
 							<div class="panel panel-default panel-table">
 								<div class="panel-heading">
 									<div class="row">
@@ -128,7 +126,6 @@
 									<!-- 게시글목록 테마별 보기?? 시작 -->
 									<div class="panel-heading">
 										<div class="row">
-
 											<div class="col col-xs-6">
 												<h3 class="panel-title">Q&A 게시판</h3>
 											</div>
@@ -204,7 +201,7 @@
 
 											<!-- 글쓰기 -->
 
-											<c:if test="${sessionScope.email!=null}">
+											<c:if test="${sessionScope.id!=null}">
 												<div class="col col-xs-3">
 													<div class="pull-right">
 														<a href="insert.do?page=${curpage }"
@@ -218,8 +215,7 @@
 							</div>
 						</div>
 					</td>
-					<td class="col-md-2"><img src="../qnaboard/icon1.jpg"
-						width="278" height="623" /></td>
+					<td class="col-md-2"><img src="../qnaboard/icon2.jpg" width="278" height="623" /></td>
 				</tr>
 			</table>
 		</div>

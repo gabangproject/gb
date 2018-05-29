@@ -94,33 +94,35 @@
 				<td class="col-md-2"><img src="../qnaboard/icon1.jpg" width="278" height="623" /></td>
 				<td class="col-md-8" style="margin: auto;">
 					<div class="row">
-						<h1>글쓰기</h1>
-						<!-- 
+						<div class="col-md-10 col-md-offset-1">
+							<h1>글쓰기</h1>
+							<!-- 
             .do => DispatcherServlet => BoardModel
        -->
-						<form method=post action="noticeInsert_ok.do">
-							<table class="table table-hover">
-								<tr>
-									<td width="15%" class="success text-right">제목</td>
-									<td width="85%" class="text-left"><input type=text name=title size=45 required></td>
-								</tr>
+							<form method=post action="noticeInsert_ok.do">
+								<table class="table table-hover">
+									<tr>
+										<td width="15%" class="success text-right">제목</td>
+										<td width="85%" class="text-left"><input type=text name=title size=45 required></td>
+									</tr>
 
-								<tr>
-									<td width="15%" class="success text-right">내용</td>
-									<td width="85%" class="text-left"><textarea rows="10" cols="50" name=content required></textarea></td>
-								</tr>
+									<tr>
+										<td width="15%" class="success text-right">내용</td>
+										<td width="85%" class="text-left"><textarea rows="10" cols="50" name=content required></textarea></td>
+									</tr>
 
-								<tr>
-									<td colspan="2" class="text-center"><input type="submit" class="btn btn-sm btn-primary" value="글쓰기" id="writeBtn"> <input type="button" class="btn btn-sm btn-primary" value="취소"
-										onclick="javascript:history.back()"></td>
+									<tr>
+										<td colspan="2" class="text-center"><input type="submit" class="btn btn-sm btn-warning" value="글쓰기" id="writeBtn"> <input type="button" class="btn btn-sm btn-danger" value="취소"
+											onclick="javascript:history.back()"></td>
 
-								</tr>
+									</tr>
 
-							</table>
-						</form>
+								</table>
+							</form>
+						</div>
 					</div>
 				</td>
-<td class="col-md-2"><img src="../qnaboard/icon1.jpg" width="278" height="623" /></td>
+				<td class="col-md-2"><img src="../qnaboard/icon2.jpg" width="278" height="623" /></td>
 			</tr>
 		</table>
 	</div>

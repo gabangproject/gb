@@ -63,7 +63,7 @@ public class MemberModel {
 			/*System.out.println(pwd);
 			System.out.println(db_pwd);*/
 			HttpSession session=request.getSession();
-			session.setAttribute("email", email);
+			session.setAttribute("id", email);
 			//비번 체크
 			if(pwd.equals(db_pwd))
 			{

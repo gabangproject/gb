@@ -16,8 +16,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.*;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.Session;
-import org.apache.catalina.connector.Request;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -35,38 +33,67 @@ import com.gabang.vo.MapVO;
 import com.gabang.vo.PropertyAddrDAO;
 import com.gabang.vo.PropertyAddrVO;
 import com.gabang.vo.RoomTypeVO;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Controller
 public class MaemoolModel {
-	@RequestMapping("main/maemool_list.do")
-	public String maemoolList(HttpServletRequest req) throws Exception {
+	@RequestMapping("main/maemool_theme_list.do")
+	public String maemoolThemeList(HttpServletRequest req) throws Exception {
 		req.setCharacterEncoding("euc-kr");
 		String theme = req.getParameter("theme");
 		System.out.println(theme);
+		//theme = theme.trim();		
+		List<MapVO> geoList = new ArrayList<MapVO>();
+		List<MapVO> tempList = null;
 		
-		List<MapVO> geoList = PropertyAddrDAO.getGeoInfo();
+		if(theme.equals("저보증금")) {						
+			tempList = MaemoolDAO.getDepositInfo();
+			System.out.println("갯수:"+tempList.size());
+			for(MapVO vo:tempList) {
+				if(vo.getDeposit().contains("전") || vo.getDeposit().contains("억")) continue;
+				String str = vo.getDeposit();				
+				str = str.replaceAll("[^0-9]+","").trim();
+				int num = Integer.parseInt(str);
+				if(num > 500) continue;				
+				geoList.add(vo);
+			}
+//			for(MapVO vo:geoList)
+//				System.out.println(vo.getDeposit());
+		}
+//			
+//		else if(theme.equals("주차 가능")) {
+//			tempList = MaemoolDAO.getParkingInfo(theme);
+//		}
+//			
+//		else if(theme.equals("원룸")) {
+//			tempList = MaemoolDAO.getOneRoomInfo(theme);
+//		}
+//			
+//		else if(theme.equals("오피스텔")) {
+//			tempList = MaemoolDAO.getOfficetelInfo(theme);
+//		}			
+		
 		List<ImgVO> imgList = null;
-		Map oneImg = new HashMap();
+		Map<Integer,Object> oneImg = new HashMap<Integer,Object>();
 
 		for (MapVO vo : geoList) {
 			// System.out.println("maemoolModel 매물번호 : " + vo.getNum());
 			try {
 				imgList = PropertyAddrDAO.imgFind(vo.getNum()); // 해당 매물번호로 이미지 검색
-				// System.out.println(imgList.get(0).getImg());
+				//System.out.println("img1");
 				oneImg.put(vo.getNum(), imgList.get(0).getImg()); // 매물번호 : 이미지 주소
+				//System.out.println("img2");
 				
 			} catch (Exception e) {
-				System.out.println("매물번호 : " +vo.getNum() + e.getMessage());
+				System.out.println("매물번호 : " +vo.getNum() + " "+ e.getMessage());
+				oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // 매물번호 : 이미지 주소
 			}
 		}
 		
-		// 관심목록 by.한솔
-		String num = req.getParameter("num");
-		if (num == null) {
-			num = "";
-		}
+//		// 관심목록 by.한솔
+//		String num = req.getParameter("num");
+//		if (num == null) {
+//			num = "";
+//		}
 //		Cookie cookie = new Cookie("likeNum", num);
 //		cookie.setMaxAge(365 * 24 * 60 * 60); // 쿠기 유효기간 365일 설정1
 //		cookie.setPath("C:\\GaBang\\gb");

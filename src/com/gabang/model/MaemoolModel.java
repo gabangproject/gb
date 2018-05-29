@@ -32,6 +32,7 @@ import com.gabang.vo.ImgVO;
 import com.gabang.vo.JjimDAO;
 import com.gabang.vo.MaemoolDAO;
 import com.gabang.vo.MaemoolVO;
+import com.gabang.vo.MapDAO;
 import com.gabang.vo.MapVO;
 import com.gabang.vo.PropertyAddrDAO;
 import com.gabang.vo.PropertyAddrVO;
@@ -282,7 +283,7 @@ public class MaemoolModel {
 		
 	}
 
-	// home.jsp에서 검색할 경우 작동
+	// home.jsp에서 검색할 경우 작동 by.한
 	@RequestMapping("main/maemool_search.do")
 	public String maemoolSearch(HttpServletRequest req) throws Exception {
 		req.setCharacterEncoding("euc-kr");
@@ -303,24 +304,26 @@ public class MaemoolModel {
 				oneImg.put(vo.getNum(), imgList.get(0).getImg()); // 매물번호 : 이미지 주소
 			} catch (Exception e) {
 				System.out.println("매물번호 : " +vo.getNum() + " "+ e.getMessage());
-				oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // 매물번호 : 이미지 주소
+				oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // 이미지 없는 매물의 경우 처리
 			}
 		}
 
 		req.setAttribute("oneImg", oneImg);
 		req.setAttribute("geoList", geoList);
+		// 공식 페이지
 		//req.setAttribute("main_jsp", "../maemool/list.jsp");
 
-		// 테스트 페이지로 이동하게끔
+		// 테스트 페이지
 		req.setAttribute("main_jsp", "../maemool/testList.jsp");
 
 		return "main.jsp";
 	}
 	
+	// 지도 옆 매물 목록을 출력 by. 한
 	// ajax로 해당페이지를 부른다.
 	@RequestMapping("main/sideList.do")
 	public String sideList(HttpServletRequest req) throws Exception {
-		// 본 메소드는 ajax를 통해서 한글로 전송받기때문에
+		// 본 메소드는 ajax를 통해서 한글을 파라미터로 전송받기 때문에
 		// utf-8로 받아야 한글이 깨지지 않는다.
 		req.setCharacterEncoding("utf-8");
 		String keyword = req.getParameter("keyword");// 검색어를 전달받는다.
@@ -360,19 +363,29 @@ public class MaemoolModel {
 		return "../maemool/sideList.jsp";
 	}
 	
-	// 테스트를 위한 메소드
+	// 테스트를 위한 메소드 by. 한
+	// ajax로 지도 이동에 따라 보여지는 영역에 알맞는 매물을 부르도록 테스트 중
 	@RequestMapping("main/testSideList.do")
 	public String testSideList(HttpServletRequest req) throws Exception {
-		// 본 메소드는 ajax를 통해서 한글로 전송받기때문에
-		// utf-8로 받아야 한글이 깨지지 않는다.
 		req.setCharacterEncoding("utf-8");
-		String keyword = req.getParameter("keyword");// 검색어를 전달받는다.
+		String keyword = req.getParameter("keyword");
 		
-		// 위도와 경도를 전달받는다.
-		String ne_x = req.getParameter("ne_x");
-		String ne_y = req.getParameter("ne_y");
-		String sw_x = req.getParameter("sw_x");
-		String sw_y = req.getParameter("sw_y");
+		// 지도 영역 각 모서리의 위도와 경도를 전달받는다.
+		String Sne_x = req.getParameter("ne_x");
+		String Sne_y = req.getParameter("ne_y");
+		String Ssw_x = req.getParameter("sw_x");
+		String Ssw_y = req.getParameter("sw_y");
+		
+		// 아래 코드는 제대로 값 받았나 확인용
+		/*
+		System.out.println("Sne_x : " + Sne_x);
+		System.out.println("Sne_y : " + Sne_y);
+		System.out.println("Ssw_x : " + Ssw_x);
+		System.out.println("Ssw_y : " + Ssw_y);
+		*/
+
+		// 위도경도를 저장하기 위한 map
+		Map<String, Double> bound = null;
 		
 		// 리스트 출력을 위한 변수
 		List<MapVO> geoList = null;
@@ -380,12 +393,35 @@ public class MaemoolModel {
 		// 매물번호 : 매물대표이미지
 		Map oneImg = new HashMap();
 		
+		// list.jsp에서 전송받은 지도 bound 확인
 		if(keyword != null) {
-			System.out.println("testSideList로 전송된 keyword : " + keyword);
+			System.out.println("◈ testSideList로 전송된 keyword : " + keyword);
 			geoList = PropertyAddrDAO.searchMaemool(keyword);
-		} else if(ne_x != null && ne_y != null && sw_x != null && sw_y != null){
-			System.out.println("testSideList로 전송됨\n" + ne_x + " " + ne_y + "\n" + sw_x + " " + sw_y);
+		
+			// 지도 움직일 경우 해당 지도 내 매물 출력
+			// 위도경도가 null이 아닐 경우
+		} else if((Sne_x != null) && (Sne_y != null) && (Ssw_x != null) && (Ssw_y != null)){
+			// 지도 북동끝점 위경도
+			double ne_x = Double.parseDouble(Sne_x);
+			double ne_y = Double.parseDouble(Sne_y);
+			// 지도 남서끝점 위경도
+			double sw_x = Double.parseDouble(Ssw_x);
+			double sw_y = Double.parseDouble(Ssw_y);
 			
+			System.out.println("◈ testSideList로 전송됨\nne_x : " + ne_x + " ne_y : " + ne_y);
+			System.out.println("sw_x : " + sw_x + " sw_y : " + sw_y);
+			// 받은 모서리 위경도를 맵에 저장
+			bound = new HashMap<String, Double>();
+			bound.put("sw_x", sw_x);
+			bound.put("sw_y", sw_y);
+			bound.put("ne_x", ne_x);
+			bound.put("ne_y", ne_y);
+			
+			try {
+				geoList = MapDAO.findMaemoolInBound(bound);
+			} catch (Exception e) {
+				System.out.println("geoList = MapDAO.findMaemoolInBound(bound) : " + e.getMessage());
+			}
 		}
 
 		// 이미지 출력 부분
@@ -400,6 +436,7 @@ public class MaemoolModel {
 				oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // 매물번호 : 이미지 주소
 			}
 		}
+		
 		
 		req.setAttribute("oneImg", oneImg);
 		req.setAttribute("geoList", geoList);

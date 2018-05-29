@@ -39,6 +39,7 @@ $(function() {
 		bound = map.getBounds();
 		
 		// 지도 북동쪽 끝 위도와 경도
+		// ajax로 전달할때는 문자열만 가능
 		var ne = bound.getNorthEast();
 		var ne_x = ne.getLat();
 		var ne_y = ne.getLng();
@@ -51,7 +52,7 @@ $(function() {
 		// 값이 정상적으로 들어오는지 확인
 		alert(ne_x + "  " + ne_y + "\n" + sw_x + "   " + sw_y);
 		
-		// 
+		// ajax로 sideList에 값을 전달하고 결과를 받는다.
 		$.ajax({
 			type:'post',
 			url:'testSideList.do',

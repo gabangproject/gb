@@ -35,7 +35,7 @@ $(function() {
 		var bounds = map.getBounds();
 		
 		// 주어진 좌표가 영역에 포함되는지 확인
-		bounds.contain();
+		//bounds.contain();
 		
 		// 영역정보의 남서쪽 정보를 얻어옵니다 
 	    swLatlng = bounds.getSouthWest().toString();
@@ -229,18 +229,14 @@ h2 a {
 						%>
 								x = <%=list.get(i).getX_position()%>
 								y = <%=list.get(i).getY_position()%>
-								
-								if (lb.contain(new daum.maps.LatLng(x, y))) {
-									markers.push(new daum.maps.Marker({
-										position : new daum.maps.LatLng(x, y)
-									}));
-								}
+							
+								markers.push(new daum.maps.Marker({
+									position : new daum.maps.LatLng(x, y)
+								}));
 						<%
 							}
 						%>
-							//panTo(x, y); // 가장 마지막 매물의 위치로 이동
-							// lb.contain()이 정상작동하나 확인하기 위한 부분
-							alert(lb.contain(new daum.maps.LatLng(x,y)));
+							panTo(x, y); // 가장 마지막 매물의 위치로 이동
 							clusterer.addMarkers(markers);
 
 							// 지도 이동 함수

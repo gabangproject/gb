@@ -6,9 +6,43 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<style>
+.carousel {
+   
+    overflow: hidden;
+}
+.carousel .item {
+    -webkit-transition: opacity 1s;
+    -moz-transition: opacity 1s;
+    -ms-transition: opacity 1s;
+    -o-transition: opacity 1s;
+    transition: opacity 1s;
+}
+.carousel .active.left, .carousel .active.right {
+    left:0;
+    opacity:0;
+    z-index:2;
+}
+.carousel .next, .carousel .prev {
+    left:0;
+    opacity:1;
+    z-index:1;
+}
+.item:nth-child(1) {
+  background: darkred;
+}
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+.item:nth-child(2) {
+  background: red;
+}
 
+.item:nth-child(3) {
+  background: orange;
+}
+</Style>
 </head>
 <body>
 
@@ -22,36 +56,48 @@
 				</div>
 			</div>
 
+
+			<div class="row">
+				<div id="myCarousel" class="carousel  slide">
+				  <!-- Dot Indicators -->
+				  <ol class="carousel-indicators">
+				  <c:forEach var="img" items="${imgList }" varStatus="n">
+				  	<c:if test="${n.index==0 }">
+				    	<li data-target="#myCarousel" data-slide-to="${n.index }" class="active"></li>
+				    </c:if>
+					<li data-target="#myCarousel" data-slide-to="${n.index }" ></li>
+				   
+				  </c:forEach>
+				    
+				  </ol>
+				  <!-- Items -->
+				  <div class="carousel-inner">
+					  <c:forEach var="img" items="${imgList }" varStatus="n">
+					  	<div class="active item">  
+					    <img src="//placehold.it/1300x500" class="img-responsive">
+					    </div>
+					  
+					    <div class="item">  
+					    <img src="//placehold.it/1300x500" class="img-responsive">
+					    </div>
+					  </c:forEach>
+				  </div>
+				  <!-- Navigation -->
+				   <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+				            <span class="glyphicon glyphicon-chevron-left"></span>
+				        </a>
+				        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+				            <span class="glyphicon glyphicon-chevron-right"></span>
+				        </a>
+				</div>
+			</div>
+
+
+
+
 			<div class="row" style="width:60%">
 
-				<!-- 매물 사진 출력 -->
-
-				<div id="carouselExampleIndicators" class="carousel slide"
-					data-ride="carousel">
-					<ol class="carousel-indicators">
-						<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-						<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-					</ol>
-			<!-- 매물 이미지 출력 -->
-					<div class="carousel-inner">
-						<c:forEach var="vo" items="${imgList }" >
-							<div class="carousel-item active">
-								<img class="d-block w-100" src="${vo.img }" >
-							</div>
-						</c:forEach>
-					</div>
-					<a class="carousel-control-prev" href="#carouselExampleIndicators"
-						role="button" data-slide="prev"> <span
-						class="carousel-control-prev-icon" aria-hidden="true"></span>
-						 <span class="sr-only">Previous</span>
-					</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
-						role="button" data-slide="next">
-						 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-						  <span class="sr-only">Next</span>
-					</a>
-				</div>
-
+		
 				<!-- 상세정보 출력 테이블 -->
 				<!--  	
 					private int num;				//매물번호

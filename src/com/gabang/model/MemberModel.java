@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.Response;
 
@@ -29,14 +30,14 @@ public class MemberModel {
 	
 	
 	@RequestMapping("main/login.do")
-	public String LoginData(HttpServletRequest request)
+	public String LoginData(HttpServletRequest request, HttpServletResponse response)
 	{
 		request.setAttribute("main_jsp", "../member/login.jsp");
 		return "main.jsp";
 	}
 	
 	@RequestMapping("main/login_ok.do")
-	public String LoginOk(HttpServletRequest request) throws Exception
+	public String LoginOk(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{	
 		request.setCharacterEncoding("EUC-KR");
 
@@ -108,7 +109,7 @@ public class MemberModel {
 	}
 	
 	@RequestMapping("main/reLogin.do")
-	public String reLogin(HttpServletRequest request)
+	public String reLogin(HttpServletRequest request, HttpServletResponse response)
 	{
 		HttpSession session=request.getSession();
 		String email=(String) session.getAttribute("id");
@@ -123,7 +124,7 @@ public class MemberModel {
 	
 	
 	@RequestMapping("main/logout.do")
-	public String logout(HttpServletRequest request)
+	public String logout(HttpServletRequest request, HttpServletResponse response)
 	{
 		HttpSession session=request.getSession();
 		
@@ -149,7 +150,7 @@ public class MemberModel {
 	
 	
 	@RequestMapping("main/check_ok.do")
-	public String idCheck(HttpServletRequest request) throws UnsupportedEncodingException
+	public String idCheck(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException
 	{
 		request.setCharacterEncoding("UTF-8");
 		String param=request.getParameter("param");
@@ -184,7 +185,7 @@ public class MemberModel {
 	}
 	
 	@RequestMapping("main/nick_ok.do")
-	public String nickCheck(HttpServletRequest request)
+	public String nickCheck(HttpServletRequest request, HttpServletResponse response)
 	{
 		String nick=request.getParameter("nick");
 		int count=MemberDAO.nickCheck(nick);
@@ -194,7 +195,7 @@ public class MemberModel {
 	}
 	
 	@RequestMapping("main/license_ok.do")
-	public String licenseCheck(HttpServletRequest request)
+	public String licenseCheck(HttpServletRequest request, HttpServletResponse response)
 	{
 		String license=request.getParameter("license");
 		int count=MemberDAO.licenseCheck(license);
@@ -204,7 +205,7 @@ public class MemberModel {
 	}
 	
 	@RequestMapping("main/compTel_ok.do")
-	public String compTelCheck(HttpServletRequest request)
+	public String compTelCheck(HttpServletRequest request, HttpServletResponse response)
 	{
 		String compTel=request.getParameter("compTel");
 		int count=MemberDAO.compTelCheck(compTel);
@@ -214,7 +215,7 @@ public class MemberModel {
 	}
 	
 	@RequestMapping("main/phone_ok.do")
-	public String phoneCheck(HttpServletRequest request)
+	public String phoneCheck(HttpServletRequest request, HttpServletResponse response)
 	{
 		String phone=request.getParameter("phone");
 		int count=MemberDAO.phoneCheck(phone);
@@ -224,7 +225,7 @@ public class MemberModel {
 	}
 	
 	@RequestMapping("main/maemul_upload.do")
-	public String maemul_upload(HttpServletRequest request)
+	public String maemul_upload(HttpServletRequest request, HttpServletResponse response)
 	{
 		
 		
@@ -243,14 +244,14 @@ public class MemberModel {
 	
 	
 	@RequestMapping("main/join.do")
-	public String JoinData(HttpServletRequest request)
+	public String JoinData(HttpServletRequest request, HttpServletResponse response)
 	{
 		request.setAttribute("main_jsp", "../member/join.jsp");
 		return "main.jsp";
 	}
 	
 	@RequestMapping("main/join_ok.do")
-	public String insertMemberData (HttpServletRequest request) throws IOException 
+	public String insertMemberData (HttpServletRequest request, HttpServletResponse response) throws IOException 
 	{
 		request.setCharacterEncoding("EUC-KR");
 		

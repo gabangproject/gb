@@ -40,7 +40,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 @Controller
 public class MaemoolModel {
 	@RequestMapping("main/maemool_theme_list.do")
-	public String maemoolThemeList(HttpServletRequest req) throws Exception {
+	public String maemoolThemeList(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		req.setCharacterEncoding("euc-kr");
 		String theme = req.getParameter("theme");
 		System.out.println(theme);
@@ -110,7 +110,7 @@ public class MaemoolModel {
 	
 
 	@RequestMapping("main/maemool_detail.do")
-	public String maemoolDetail(HttpServletRequest request)
+	public String maemoolDetail(HttpServletRequest request, HttpServletResponse res)
 	throws Exception {
 		request.setCharacterEncoding("euc-kr");
 	
@@ -132,7 +132,7 @@ public class MaemoolModel {
 	}
 	
 	@RequestMapping("main/imageUpload.do")
-	public void ImageInsert(HttpServletRequest request) throws IOException
+	public void ImageInsert(HttpServletRequest request, HttpServletResponse res) throws IOException
 	{
 		HttpSession session=request.getSession();
 		String email=(String) session.getAttribute("id");
@@ -202,7 +202,7 @@ public class MaemoolModel {
 	}
 
 	@RequestMapping("main/upload.do")
-	public String maemoolInsert(HttpServletRequest request) throws UnsupportedEncodingException {
+	public String maemoolInsert(HttpServletRequest request, HttpServletResponse res) throws UnsupportedEncodingException {
 
 		request.setCharacterEncoding("EUC-KR");
 		
@@ -369,7 +369,7 @@ public class MaemoolModel {
 
 	// home.jsp에서 검색할 경우 작동 by.한
 	@RequestMapping("main/maemool_search.do")
-	public String maemoolSearch(HttpServletRequest req) throws Exception {
+	public String maemoolSearch(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		req.setCharacterEncoding("euc-kr");
 		List<MapVO> geoList = null;
 		List<ImgVO> imgList = null;
@@ -406,7 +406,7 @@ public class MaemoolModel {
 	// 지도 옆 매물 목록을 출력 by. 한
 	// ajax로 해당페이지를 부른다.
 	@RequestMapping("main/sideList.do")
-	public String sideList(HttpServletRequest req) throws Exception {
+	public String sideList(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		// 본 메소드는 ajax를 통해서 한글을 파라미터로 전송받기 때문에
 		// utf-8로 받아야 한글이 깨지지 않는다.
 		req.setCharacterEncoding("utf-8");
@@ -450,7 +450,7 @@ public class MaemoolModel {
 	// 테스트를 위한 메소드 by. 한
 	// ajax로 지도 이동에 따라 보여지는 영역에 알맞는 매물을 부르도록 테스트 중
 	@RequestMapping("main/testSideList.do")
-	public String testSideList(HttpServletRequest req) throws Exception {
+	public String testSideList(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		req.setCharacterEncoding("utf-8");
 		String keyword = req.getParameter("keyword");
 		
@@ -530,7 +530,7 @@ public class MaemoolModel {
 	}
 	
 	@RequestMapping("main/jjim.do")
-	public String jjim(HttpServletRequest req) {
+	public String jjim(HttpServletRequest req, HttpServletResponse res) {
 		// id는 session에 저장되어있다.
 		HttpSession session = req.getSession();
 		Map map = new HashMap();
@@ -548,7 +548,7 @@ public class MaemoolModel {
 	}
 	
 	@RequestMapping("main/like.do")
-	public String like(HttpServletRequest req) {
+	public String like(HttpServletRequest req, HttpServletResponse res) {
 		String nums = "";
 		Cookie[] cookies = req.getCookies();
 		System.out.println("현재 저장된 관심목록 갯수 : " + cookies.length);

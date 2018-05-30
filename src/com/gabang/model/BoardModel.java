@@ -1,6 +1,7 @@
 package com.gabang.model;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.type.IntegerTypeHandler;
@@ -15,7 +16,7 @@ import com.gabang.vo.*;
 public class BoardModel {
 
 	@RequestMapping("main/qnaboard.do")
-	public String boardListData(HttpServletRequest request) {
+	public String boardListData(HttpServletRequest request, HttpServletResponse response) {
 
 		String search = request.getParameter("search");
 		String keyword = request.getParameter("keyword");
@@ -76,7 +77,7 @@ public class BoardModel {
 	}
 
 	@RequestMapping("main/content.do")
-	public String boardContentData(HttpServletRequest request) {
+	public String boardContentData(HttpServletRequest request, HttpServletResponse response) {
 		String no = request.getParameter("no");
 		BoardVO vo = new BoardVO();
 		vo = BoardDAO.boardContentData(Integer.parseInt(no));
@@ -91,7 +92,7 @@ public class BoardModel {
 	}
 
 	@RequestMapping("main/insert.do")
-	public String boardInsert(HttpServletRequest request) {
+	public String boardInsert(HttpServletRequest request, HttpServletResponse response) {
 		String page = request.getParameter("page");
 		request.setAttribute("curpage", page);
 		request.setAttribute("main_jsp", "../qnaboard/insert.jsp");
@@ -99,7 +100,7 @@ public class BoardModel {
 	}
 
 	@RequestMapping("main/insert_ok.do")
-	public String boardInsertOk(HttpServletRequest request) throws Exception {
+	public String boardInsertOk(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("EUC-KR");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
@@ -117,7 +118,7 @@ public class BoardModel {
 	}
 
 @RequestMapping("main/update.do")
-	public String boardUpdate(HttpServletRequest request) {
+	public String boardUpdate(HttpServletRequest request, HttpServletResponse response) {
 		String no = request.getParameter("no");
 		String page = request.getParameter("page");
 		BoardVO vo = BoardDAO.boardUpdateData(Integer.parseInt(no)); // 결과값 전송
@@ -128,7 +129,7 @@ public class BoardModel {
 	}
 
 	@RequestMapping("main/update_ok.do")
-	public String boardUpdateOk(HttpServletRequest request) throws Exception {
+	public String boardUpdateOk(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("EUC-KR");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
@@ -147,7 +148,7 @@ public class BoardModel {
 	}
 
 	@RequestMapping("main/delete.do")
-	public String boardDelete(HttpServletRequest request) {
+	public String boardDelete(HttpServletRequest request, HttpServletResponse response) {
 		String no = request.getParameter("no");
 		BoardVO vo = new BoardVO();
 		BoardDAO.boardDelete(Integer.parseInt(no));
@@ -156,7 +157,7 @@ public class BoardModel {
 		return "redirect:qnaboard.do";
 	}
 	@RequestMapping("main/reply.do")
-	public String replyInsert(HttpServletRequest request) {
+	public String replyInsert(HttpServletRequest request, HttpServletResponse response) {
 		
 		String no = request.getParameter("no");
 		String curpage = request.getParameter("page");
@@ -167,7 +168,7 @@ public class BoardModel {
 		return "main.jsp";
 	}
 	@RequestMapping("main/reply_ok.do")
-	public String replyInsertData(HttpServletRequest request) throws Exception {
+	public String replyInsertData(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("EUC-KR");
 		String pno = request.getParameter("no");
 		String curpage = request.getParameter("page");

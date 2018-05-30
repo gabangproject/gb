@@ -1,6 +1,7 @@
 package com.gabang.model;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.type.IntegerTypeHandler;
@@ -15,7 +16,7 @@ import com.gabang.vo.*;
 @Controller
 public class NoticeModel {
 	@RequestMapping("main/notice.do")
-	public String noticeListData(HttpServletRequest request) {
+	public String noticeListData(HttpServletRequest request, HttpServletResponse response) {
 		String page = request.getParameter("page");
 		if (page == null)
 			page = "1";
@@ -43,7 +44,7 @@ public class NoticeModel {
 	}
 
 	@RequestMapping("main/noticeContent.do")
-	public String noticeContentData(HttpServletRequest request) {
+	public String noticeContentData(HttpServletRequest request, HttpServletResponse response) {
 		String no = request.getParameter("no");
 		NoticeVO vo = new NoticeVO();
 		vo = NoticeDAO.noticeContentData(Integer.parseInt(no));
@@ -58,7 +59,7 @@ public class NoticeModel {
 	}
 
 	@RequestMapping("main/noticeInsert.do")
-	public String noticeInsert(HttpServletRequest request) {
+	public String noticeInsert(HttpServletRequest request, HttpServletResponse response) {
 		String page = request.getParameter("page");
 		request.setAttribute("curpage", page);
 		request.setAttribute("main_jsp", "../notice/noticeInsert.jsp");
@@ -66,7 +67,7 @@ public class NoticeModel {
 	}
 
 	@RequestMapping("main/noticeInsert_ok.do")
-	public String noticeInsertOk(HttpServletRequest request) throws Exception {
+	public String noticeInsertOk(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("EUC-KR");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
@@ -84,7 +85,7 @@ public class NoticeModel {
 	}
 
 @RequestMapping("main/noticeUpdate.do")
-	public String noticeUpdate(HttpServletRequest request) {
+	public String noticeUpdate(HttpServletRequest request, HttpServletResponse response) {
 		String no = request.getParameter("no"); // DB연동
 		String page = request.getParameter("page");
 		NoticeVO vo = NoticeDAO.noticeUpdateData(Integer.parseInt(no)); // 결과값 전송
@@ -96,7 +97,7 @@ public class NoticeModel {
 	}
 
 	@RequestMapping("main/noticeUpdate_ok.do")
-	public String noticeUpdateOk(HttpServletRequest request) throws Exception {
+	public String noticeUpdateOk(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("EUC-KR");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
@@ -115,7 +116,7 @@ public class NoticeModel {
 	}
 
 	@RequestMapping("main/noticeDelete.do")
-	public String noticeDelete(HttpServletRequest request) {
+	public String noticeDelete(HttpServletRequest request, HttpServletResponse response) {
 		String no = request.getParameter("no");
 		NoticeVO vo = new NoticeVO();
 		NoticeDAO.noticeDelete(Integer.parseInt(no));

@@ -48,7 +48,7 @@ public class DispatcherServlet extends HttpServlet {
 					RequestMapping rm=m.getAnnotation(RequestMapping.class);					
 					if(cmd.equals(rm.value()))
 					{
-						String jsp=(String)m.invoke(obj, request);
+						String jsp=(String)m.invoke(obj, request, response);
 						if(jsp.startsWith("redirect"))
 						{
 							response.sendRedirect(jsp.substring(jsp.indexOf(":")+1));

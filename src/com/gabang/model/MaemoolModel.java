@@ -486,15 +486,6 @@ public class MaemoolModel {
 			}
 		}
 		
-		// 관심목록 by.한솔
-		String num = req.getParameter("num");
-		if (num == null) {
-			num = "";
-		}
-		Cookie cookie = new Cookie("likeNum", num);
-		cookie.setMaxAge(365 * 24 * 60 * 60); // 쿠기 유효기간 365일 설정1
-		cookie.setPath("C:\\GaBang\\gb");
-		response.addCookie(cookie);
 
 		// 위도와 경도가 null이 아닐 경우 실행한다.
 		if (swLatlng != null && neLatlng != null) {
@@ -535,6 +526,17 @@ public class MaemoolModel {
 		List<ImgVO> imgList = null;
 		// 매물번호 : 매물대표이미지
 		Map oneImg = new HashMap();
+		
+		// 관심목록 by.한솔
+		String num = req.getParameter("num");
+		
+		if (num != null) {
+//			num = "";
+			Cookie cookie = new Cookie("likeNum", num);
+			cookie.setMaxAge(365 * 24 * 60 * 60); // 쿠기 유효기간 365일 설정1
+			cookie.setPath("C:\\GaBang\\gb");
+			res.addCookie(cookie);
+		}
 		
 		// list.jsp에서 전송받은 지도 bound 확인
 		if(keyword != null) {

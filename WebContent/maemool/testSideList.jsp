@@ -15,6 +15,18 @@ $(function() {
 	%>
 	alert('testSideList.jsp에서 출력\n매물 개수 : ' + <%=list.size()%> + '개');
 })
+	function send(){
+		var a = $('#num').attr('num');
+			$.ajax({
+				type :"POST",
+				url : "../main/like_ok.do",
+				data : {num : a},
+				success : function(data) {
+					alert("나와라제발");
+				}
+			}); 	
+	};
+
 </script>
 </head>
 <body>
@@ -23,7 +35,8 @@ $(function() {
 		<div class="media">
 			<div class="fav-box">
 				<i class="fa fa-heart-o" aria-hidden="true"></i>
-				<i class="fa fa-eye" id='like' aria-hidden="true" num='${i.num}'></i>
+				<i class="fa fa-eye" aria-hidden="true" num="${i.num} " id="num" onclick="send()"></i>
+				
 			</div>
 			<a href="maemool_detail.do?num=${i.num}&x=${i.x_position}&y=${i.y_position}">
 				<img class="d-flex align-self-start maemool-list-img" src="${oneImg.get(i.num)}">

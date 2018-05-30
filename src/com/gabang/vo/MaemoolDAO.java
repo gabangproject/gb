@@ -140,14 +140,14 @@ public class MaemoolDAO {
 		return vo1;
 	}
 	public MaemoolVO cookie(int num) {
-		MaemoolVO vo = new MaemoolVO();
+		MaemoolVO vo = null;
 		SqlSession session=null;
 		try {
 			session = ssf.openSession();
-			session.selectList("cookie",num);
+			vo = session.selectOne("cookie" , num);
 			
 		}catch (Exception e) {
-			
+			System.out.println("cookie : " + e.getMessage());
 		}finally {
 			if(session!=null)
 				session.close();
@@ -160,13 +160,13 @@ public class MaemoolDAO {
 	 *	who: t
 	 */
 	// 저보증금
-	public static List<MapVO> getInfo() {
+	public static List<MapVO> getDepositInfo() {
 		List<MapVO> list = new ArrayList<MapVO>();
 		SqlSession session = null;
 		
 		try {
 			session = ssf.openSession();
-			list = session.selectList("getInfo");
+			list = session.selectList("getDepositInfo");
 		} catch (Exception e) {
 			System.out.println("MaemoolDAO - getDepositInfo : " + e.getMessage());
 		} finally {
@@ -214,15 +214,15 @@ public class MaemoolDAO {
 	}
 	
 	// 오피스텔
-	public static List<MaemoolVO> getOfficetelInfo(String theme) {
-		List<MaemoolVO> list = new ArrayList<MaemoolVO>();
+	public static List<MapVO> getOfficetelInfo() {
+		List<MapVO> list = new ArrayList<MapVO>();
 		SqlSession session = null;
 		
 		try {
 			session = ssf.openSession();
-			list = session.selectList("getThemeInfo");
+			list = session.selectList("getOfficetelInfo");
 		} catch (Exception e) {
-			System.out.println("PropertyAddrDAO - getThemeInfo : " + e.getMessage());
+			System.out.println("MaemoolDAO - getOfficetelInfo : " + e.getMessage());
 		} finally {
 			if (session != null) {
 				session.close();

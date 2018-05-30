@@ -12,8 +12,12 @@
 	</select>
 	
 	<select id="getOneRoomInfo" resultType="MapVO">
-		SELECT * FROM map WHERE parking_lot=1
-	</select>	
+		SELECT * FROM map WHERE rtype=0 OR rtype=1 
+	</select>
+	
+		<select id="getOfficetelInfo" resultType="MapVO">
+		SELECT * FROM map WHERE btype=1 
+	</select>
 	
 	<!-- 매물 목록 출력 관련 by.한 -->
 	<select id="getGeoInfo_temp" resultType="MapVO">

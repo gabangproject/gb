@@ -186,6 +186,7 @@
 												<nav aria-label="Page navigation" class="text-center">
 													<!-- 좌측 우측 넘기는거  -->
 													<ul class="pagination">
+
 														<c:if test="${ curpage!=1}">
 															<li><a href="qnaboard.do?page=${curpage-1 }"
 																aria-label="Previous"> ◀ </a></li>
@@ -195,6 +196,7 @@
 															<li><a href="qnaboard.do?page=${curpage+1 }"
 																aria-label="Next"> ▶ </a></li>
 														</c:if>
+
 													</ul>
 												</nav>
 											</div>

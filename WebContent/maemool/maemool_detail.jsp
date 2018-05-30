@@ -53,30 +53,50 @@
 				</div>
 
 				<!-- 상세정보 출력 테이블 -->
-
+				<!--  	
+					private int num;				//매물번호
+					private String email; 		    //매물 등록자
+					private String deposit; 		//보증금
+					private String monthly_rent;	//월세	
+					private String floor;			//층/건물층수
+					private String manage_fee;		//관리비
+					private String maintenance;		//관리비 포함항목
+					private int	elev;				//엘리베이터
+					private int	parking_lot;		//주차
+					private String gross_area;		//크기
+					private String opt;				//옵션
+					private String moving_date;		//입주 가능일
+					private String description;		//상세설명
+					private String near_subway;		//인근 전철역
+					private Date regdate; 			//매물 등록일
+					private int	avg_score;			//평균 점수	
+					private String detail_title;    //매물 간단 설명
+				-->
 				<h4>상세정보</h4>
 				<table class="table table-hover">
-					<thead>
+				<!-- 	<thead>
 						<tr>
 							<th></th>
 							<th></th>
 						</tr>
-					</thead>
+					</thead> -->
 					<tbody>
-					<c:forEach var="vo" items="${infoMaemool }">
 						<tr>
-							<td>${vo.deposit }</td>
-							<td>${vo.monthly_rent }</td>
-						</tr>
-						<tr>ㅇ
-							<td></td>
-							<td></td>
+							<td>${infoMaemool.deposit }</td>
+							<td>${infoMaemool.monthly_rent }</td>
 						</tr>
 						<tr>
-							<td></td>
-							<td></td>
+							<td>${infoMaemool.manage_fee}</td>
+							<td>${infoMaemool.maintenance}</td>
 						</tr>
-					</c:forEach>
+						<tr>
+							<td>${infoMaemool.floor}</td>
+							<td>${infoMaemool.elev}</td>
+						</tr>
+						<tr>
+							<td>${infoMaemool.parking_lot}</td>
+							<td>${infoMaemool.detail_title}</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>

@@ -31,7 +31,6 @@ function jjim(input) {
 			},
 			url : "../main/remove_jjim.do",
 			success : function(data) {
-
 				$(input).attr('class', "glyphicon glyphicon-heart-empty");
 			}
 		});
@@ -49,19 +48,17 @@ function jjim(input) {
 	}
 }
 <%-- by.한솔 --%>
-	function send(){
-		var a = $('#num').attr('num');
-			$.ajax({
-				type :"POST",
-				url : "like_ok.do",
-				data : {num : a},
-				success : function(data) {
-					alert("나와라제발");
-				}
-			}); 	
-	};
-
-
+function send(){
+	var a = $('#num').attr('num');
+		$.ajax({
+			type :"POST",
+			url : "like_ok.do",
+			data : {num : a},
+			success : function(data) {
+				alert("나와라제발");
+			}
+		}); 	
+};
 </script>
 </head>
 <body>

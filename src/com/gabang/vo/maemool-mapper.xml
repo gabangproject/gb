@@ -59,7 +59,7 @@
 	</insert>
 	
 	<select id="maemoolNum" resultType="int">
-		SELECT * FROM NVL(MAX(num),1) FROM maemool
+		SELECT NVL(MAX(num),1) FROM maemool
 	</select>
 	
 	

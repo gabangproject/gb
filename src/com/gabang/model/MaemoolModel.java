@@ -34,6 +34,8 @@ import com.gabang.vo.MapVO;
 import com.gabang.vo.PropertyAddrDAO;
 import com.gabang.vo.PropertyAddrVO;
 import com.gabang.vo.RoomTypeVO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Controller
 public class MaemoolModel {
@@ -129,33 +131,15 @@ public class MaemoolModel {
 		return "main.jsp";
 	}
 	
-
-
-	@RequestMapping("main/upload.do")
-	public String maemoolInsert(HttpServletRequest request) throws IOException {
-
-		
-		BuildingTypeVO vo=new BuildingTypeVO();
-		DealTypeVO vo1=new DealTypeVO();
-		ImgVO vo2=new ImgVO();
-		MaemoolVO vo3=new MaemoolVO();
-		PropertyAddrVO vo4=new PropertyAddrVO();
-		RoomTypeVO vo5=new RoomTypeVO();
-		
-		
+	@RequestMapping("main/imageUpload.do")
+	public void ImageInsert(HttpServletRequest request) throws IOException
+	{
 		HttpSession session=request.getSession();
 		String email=(String) session.getAttribute("id");
 		int maemoolNum=MaemoolDAO.maemoolNum();
+		ImgVO vo=new ImgVO();
 		
-		
-		//property_Addr에 필요한 데이터 저장
-		String addr=request.getParameter("address")+" "+request.getParameter("datailAddress");
-		String x_position=request.getParameter("x_position");
-		String y_position=request.getParameter("y_position");
-		vo4.setAddr(addr);
-		vo4.setX_position(x_position);
-		vo4.setY_position(y_position);
-		vo4.setNum(maemoolNum);
+	
 		
 		//img테이블에 필요한 데이터 저장
 		//매물 이미지 정보 받아오는 라이브러리
@@ -204,9 +188,9 @@ public class MaemoolModel {
 						f.renameTo(file);
 						
 						System.out.println(file.getName());
-						vo2.setImg(file.getName());
-						vo2.setNum(maemoolNum);
-						
+						vo.setImg(file.getName());
+						vo.setNum(maemoolNum);
+						MaemoolDAO.insertImage(vo);
 					}
 				}
 			} catch (FileUploadException e) {
@@ -215,6 +199,46 @@ public class MaemoolModel {
 			}
 		}
 		
+	}
+
+	@RequestMapping("main/upload.do")
+	public String maemoolInsert(HttpServletRequest request) throws UnsupportedEncodingException {
+
+		request.setCharacterEncoding("EUC-KR");
+		
+		
+		
+		BuildingTypeVO vo=new BuildingTypeVO();
+		DealTypeVO vo1=new DealTypeVO();
+		MaemoolVO vo3=new MaemoolVO();
+		PropertyAddrVO vo4=new PropertyAddrVO();
+		RoomTypeVO vo5=new RoomTypeVO();
+		
+		
+		HttpSession session=request.getSession();
+		String email=(String) session.getAttribute("id");
+		int maemoolNum=MaemoolDAO.maemoolNum();
+		System.out.println(maemoolNum);
+		
+		
+		
+			
+		
+				
+		//property_Addr에 필요한 데이터 저장
+		String addr=request.getParameter("address")+" "+request.getParameter("datailAddress");
+		String x_position=request.getParameter("x_position");
+		String y_position=request.getParameter("y_position");
+		vo4.setAddr(addr);
+		vo4.setX_position(x_position);
+		vo4.setY_position(y_position);
+		vo4.setNum(maemoolNum);
+		
+		System.out.println(addr);
+		System.out.println(x_position);
+		System.out.println(y_position);
+		System.out.println(maemoolNum);
+			
 		
 		
 		//deal_type테이블에 필요한 데이터
@@ -310,6 +334,7 @@ public class MaemoolModel {
 		
 		String monthly_rent=monthly_rent1+monthly_rent2;
 		vo3.setMonthly_rent(monthly_rent);
+		System.out.println(monthly_rent);
 		
 		//전용면적
 		String gross_area=request.getParameter("gorss_area");
@@ -317,7 +342,7 @@ public class MaemoolModel {
 		
 		gross_area=request.getParameter("gorss_area")+"㎡"+" ("+pyeong+"P)";
 		vo3.setGross_area(gross_area);
-		
+		System.out.println(gross_area);
 		//입주가능일
 		String moving_date=request.getParameter("moving_date");
 		vo3.setMoving_date(moving_date);
@@ -335,7 +360,7 @@ public class MaemoolModel {
 		vo3.setDescription(description);
 		
 		
-		MaemoolDAO.insertMaemool(vo, vo1, vo2, vo3, vo4, vo5);
+		MaemoolDAO.insertMaemool(vo, vo1, vo3, vo4, vo5);
 		
 		
 		request.setAttribute("main_jsp", "../maemool/maemool_detail.jsp");

@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../member/shadow/css/shadowbox.css">
+
 <link rel="stylesheet" type="text/css" href="../member/shadow/css/shadowbox.css">
 <script type="text/javascript" src="../member/shadow/js/shadowbox.js"></script>
 

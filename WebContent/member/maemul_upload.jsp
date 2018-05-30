@@ -9,21 +9,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 
+<!-- shadowbox bootstrap  -->
+<link rel="stylesheet" type="text/css" href="../member/shadow/css/shadowbox.css">
+
 <!-- 회원가입 관련 bootstrap -->
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!-- 회원가입 관련 bootstrap 끝 -->
 
-<style>
-.sub label,.form-check-label
-{
-font-weight: 500;
-}
 
-</style>
+<!-- shadowbox bootstrap  -->
+<script type="text/javascript" src="../member/shadow/js/shadowbox.js"></script>
+
 
 <script>
+
+
 
 //input 입력값 유효성 체크 함수(eamil이면 eamil형식 전화번호면 전화번호 형식에 맞는지 확인하는 함수) 
 function pCheck(input)
@@ -60,8 +62,26 @@ function pCheck(input)
 		}
 }
 
+Shadowbox.init({
+	players:["iframe"]
+});
+
+function fileUpload()
+{
+ Shadowbox.open({
+	 content:'../member/image_upload.jsp',
+	 title:'이미지 업로드',
+	 player:'iframe',
+	 width:500,
+	 height:350
+ });	
+ 
+}
 
  $(document).ready(function () {
+	 
+	 
+	 
 	 $('#upload').click(function() {
 		 
 	//체크박스에(옵션부분) 최소 한개 이상 체크 하면 required 속성이 해제되는 함수
@@ -74,10 +94,20 @@ function pCheck(input)
       
 
     });
+	 
+	 
+	 
 }); 
 
 
 </script>
+<style>
+.sub label,.form-check-label
+{
+font-weight: 500;
+}
+
+</style>
 </head>
 <body>
 	<div id="fh5co-work-section">
@@ -100,8 +130,9 @@ function pCheck(input)
 			<div class="row" >
 				
 
-				<form id="maemul_upload" class="form-horizontal" method="post" enctype="multipart/form-data" action="../main/upload.do">
-					
+				
+				<form id="maemul_upload" class="form-horizontal" method="post" action="../main/upload.do">
+							
 					<fieldset form="maemul_upload">
 						
 						
@@ -114,7 +145,7 @@ function pCheck(input)
 								<span class="text-danger">*</span>
 								</label>
 								
-								<div class="col-sm-4" required>
+								<div class="col-sm-4">
 								<input type="text" id="postcode" name="postcode" class="form-control sri" placeholder="우편번호" 
 								style="background-color:white" onclick="searchPostcode()" readonly required>
 								
@@ -135,19 +166,18 @@ function pCheck(input)
 							<div id="map" style="width:300px;height:300px;margin-top:10px;display:none; margin:0px auto"></div>
 						</div>
 						
-						
 						<!-- 파일첨부  -->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="file">매물사진 등록
+							<label class="col-md-4 control-label" for="img">매물사진 등록
 							<span class="text-danger">*</span>
 							</label>
 							<div class="col-md-4">
-								<input type="file" name="img" multiple="multiple"
-									style="apperance: none;	-webkit-apperance: none;" required>		
+								<input type="button" id="img" onclick="fileUpload()" value="사진 등록" required>		
 							</div>
 						</div>
 
-
+						
+						
 						<!-- 거래형태 -->
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="radios">거래형태

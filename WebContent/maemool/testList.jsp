@@ -59,40 +59,13 @@ $(function() {
 			data:{'ne_x':ne_x, 'ne_y':ne_y, 'sw_x':sw_x, 'sw_y':sw_y},
 			success:function(res) {
 				$('#list').html(res);
-				var listNum = $(res).$('#listNum').text();
-				alert('testList.jsp에서 출력 : ' + listNum);
+				alert(res);
+				var num = res.substring(res.indexOf('◐') + 1,res.indexOf('◑'));
+				alert(num);
 			}
 		});
-		
-		//alert("ajax 이후");
-	});
-		
-	// 맵 내부에서 마우스 버튼을 놓을 경우 작동
-	// 이동한 좌표에 맞는 매물 목록을 불러온다.
-	/*
-	 $('#map').mouseup(function() {
-		bound = map.getBounds();
-		var ne = bound.getNorthEast();
-		var ne_x = ne.getLat();
-		var ne_y = ne.getLng();
-		
-		var sw = bound.getSouthWest();
-		var sw_x = sw.getLat();
-		var sw_y = sw.getLng();
-		alert(ne_x + "  " + ne_y + "\n" + sw_x + "   " + sw_y);
-				
-		$.ajax({
-			type:'post',
-			url:'testSideList.do',
-			data:{'keyword': keyword,'ne_x':ne_x, 'ne_y':ne_y},
-			success:function(res) {
-				$('#list').html(res);
-			}
-		});
-		
 		alert("ajax 이후");
 	});
-	*/
 });
 </script>
 <style>

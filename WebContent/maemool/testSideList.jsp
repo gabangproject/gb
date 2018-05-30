@@ -1,7 +1,8 @@
 <%@page import="com.gabang.vo.MapVO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,25 +14,18 @@ $(function() {
 	System.out.println(list.size());
 	%>
 	alert('testSideList.jsp에서 출력\n매물 개수 : ' + <%=list.size()%> + '개');
-	/*
-	function like(obj) {
-		$.ajax({
-			type:"post";
-			url:""
-		});
-	};*/
 })
 </script>
 </head>
 <body>
-	<input type="hidden" id='listNum' value='${list.size}'>
+	<%-- <input type="hidden" id='listNum' value='◐${fn:length(geoList)}◑'> --%>
 	<c:forEach var="i" items="${geoList}" varStatus="s">
 		<div class="media">
 			<div class="fav-box">
 				<i class="fa fa-heart-o" aria-hidden="true"></i>
-				<i class="fa fa-eye" id='like' aria-hidden="true" num='${i.num}' onclick="like(this)"></i>
+				<i class="fa fa-eye" id='like' aria-hidden="true" num='${i.num}'></i>
 			</div>
-			<a href="#?num=${i.num}">
+			<a href="maemool_detail.do?num=${i.num}&x=${i.x_position}&y=${i.y_position}">
 				<img class="d-flex align-self-start maemool-list-img" src="${oneImg.get(i.num)}">
 			</a>
 			<div class="media-body pl-3">
@@ -40,6 +34,7 @@ $(function() {
 					<div class=address>${i.addr}</div>
 				</div>
 				<div class="stats">
+					<input type="hidden" id='listNum' value='◐${i.x_position},${i.y_position}◑'>
 					<span>
 						위도<i class="fa fa-arrows-alt" id='${i.num}x'>${i.x_position}</i>
 					</span>

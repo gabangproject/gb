@@ -106,19 +106,24 @@ public class MaemoolModel {
 		request.setCharacterEncoding("euc-kr");
 	
 		String num=request.getParameter("num"); // 이미지랑 이미지에 해당하는 상세정보를 매물번호에 맞게 출력
+		
+	
+		
 		if(num == null)
-			num = "2";
+			num = "7";
+	
 		MaemoolVO vo1=new MaemoolVO();
-	//	vo1.setNum(Integer.parseInt(num));
+	
 		 
-		List<ImgVO> imgList = MaemoolDAO.detailMaemool(Integer.parseInt(num)); // 임시로 50번의 매물번호의 이미지를 출력
+		List<ImgVO> imgList = MaemoolDAO.detailMaemool(Integer.parseInt(num));
 		MaemoolVO vo = MaemoolDAO.infoMaemool(Integer.parseInt(num));
-		System.out.println(vo.getDeposit());
+		
 		
 		request.setAttribute("imgList", imgList);
+		
 		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../maemool/maemool_detail.jsp");
-	//	CommonModel.commonSendData(request);
+	
 		return "main.jsp";
 	}
 	
@@ -485,15 +490,6 @@ public class MaemoolModel {
 			}
 		}
 		
-		// 관심목록 by.한솔
-		String num = req.getParameter("num");
-		if (num == null) {
-			num = "";
-		}
-		Cookie cookie = new Cookie("likeNum", num);
-		cookie.setMaxAge(365 * 24 * 60 * 60); // 쿠기 유효기간 365일 설정1
-		cookie.setPath("C:\\GaBang\\gb");
-		response.addCookie(cookie);
 
 		// 위도와 경도가 null이 아닐 경우 실행한다.
 		if (swLatlng != null && neLatlng != null) {
@@ -535,6 +531,17 @@ public class MaemoolModel {
 		List<ImgVO> imgList = null;
 		// 매물번호 : 매물대표이미지
 		Map oneImg = new HashMap();
+		
+		// 관심목록 by.한솔
+		String num = req.getParameter("num");
+		
+		if (num != null) {
+//			num = "";
+			Cookie cookie = new Cookie("likeNum", num);
+			cookie.setMaxAge(365 * 24 * 60 * 60); // 쿠기 유효기간 365일 설정1
+			cookie.setPath("C:\\GaBang\\gb");
+			res.addCookie(cookie);
+		}
 		
 		// list.jsp에서 전송받은 지도 bound 확인
 		if(keyword != null) {

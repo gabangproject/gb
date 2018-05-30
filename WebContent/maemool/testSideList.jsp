@@ -8,6 +8,7 @@
 <head>
 <meta charset=EUC-KR>
 <script type="text/javascript">
+<%-- by.한 --%>
 $(function() {
 	<%
 	List<MapVO> list = (List<MapVO>) request.getAttribute("geoList");
@@ -16,60 +17,48 @@ $(function() {
 	alert('testSideList.jsp에서 출력\n매물 개수 : ' + <%=list.size()%> + '개');
 })
 
-
-function jjim(input)
-{
-	
-	var num=$(input).attr("num");
+<%-- by.준영 --%>
+function jjim(input) {
+	var num = $(input).attr("num");
 	alert(num);
-	var heart=$(input).attr('class');
-	
-	 
-        	 
-     if(heart=="glyphicon glyphicon-heart")
-         {
-         
-		         $.ajax({
-		    		 type: 'post',
-		             data : {maemool_num : num},
-		             url : "../main/remove_jjim.do",
-		             success : function(data) {
-		            	 
-		            				 $(input).attr('class',"glyphicon glyphicon-heart-empty");
-				             	  }
-				         }); 
-           }
-         
-     else
-        {
-        
-		        $.ajax({
-		   		 type: 'post',
-		            data : {maemool_num : num},
-		            url : "../main/add_jjim.do",
-		            success : function(data) {
+	var heart = $(input).attr('class');
 
-		            				$(input).attr('class',"glyphicon glyphicon-heart");
-		            			}
-				        }); 
-		        
-        }
-      
+	if (heart == "glyphicon glyphicon-heart") {
+		$.ajax({
+			type : 'post',
+			data : {
+				maemool_num : num
+			},
+			url : "../main/remove_jjim.do",
+			success : function(data) {
+				$(input).attr('class', "glyphicon glyphicon-heart-empty");
+			}
+		});
+	}
+
+	else {
+		$.ajax({
+			type : 'post',
+			data : {maemool_num : num},
+			url : "../main/add_jjim.do",
+			success : function(data) {
+				$(input).attr('class', "glyphicon glyphicon-heart");
+			}
+		});
+	}
 }
-
-	function send(){
-		var a = $('#num').attr('num');
-			$.ajax({
-				type :"POST",
-				url : "like_ok.do",
-				data : {num : a},
-				success : function(data) {
-					alert("나와라제발");
-				}
-			}); 	
-	};
-
-
+<%-- by.한솔 --%>
+function send(){
+	var a = $('#num').attr('num');
+		$.ajax({
+			type :"POST",
+			url : "like_ok.do",
+			data : {num : a},
+			success : function(data) {
+				alert("나와라제발");
+			}
+		}); 	
+};
 </script>
 </head>
 <body>

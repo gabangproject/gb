@@ -18,6 +18,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0414b62e66e43f9fc50e0f6dfd64b93f&libraries=clusterer,services"></script>
 
 <script type="text/javascript">
+<%-- by.한 --%>
 $(function() {
 	var keyword = '<%=request.getParameter("keyword")%>';
 	var bound;
@@ -61,13 +62,10 @@ $(function() {
 			data:{'ne_x':ne_x, 'ne_y':ne_y, 'sw_x':sw_x, 'sw_y':sw_y},
 			success:function(res) {
 				$('#list').html(res);
-				//alert(res);
 				var num = res.substring(res.indexOf('◐') + 1,res.indexOf('◑'));
-				//alert(num);
 				$('#info').text(num);
 			}
 		});
-		//alert("ajax 이후");
 	});
 });
 </script>
@@ -206,6 +204,7 @@ h2 a {
 						<!-- 지도 -->
 						<div id=map style="width: 50%; height: 250px%; display: inline-block" class="col-md-7"></div>
 						<script>
+							<%-- by.한 --%>
 							var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 							mapOption = {
 								center : new daum.maps.LatLng(37.563228970425506, 126.97727242618686), // 지도의 중심좌표

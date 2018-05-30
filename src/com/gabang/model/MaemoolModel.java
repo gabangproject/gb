@@ -577,24 +577,6 @@ public class MaemoolModel {
 		return "../maemool/testSideList.jsp";
 	}
 	
-	@RequestMapping("main/jjim.do")
-	public String jjim(HttpServletRequest req, HttpServletResponse res) {
-		// id는 session에 저장되어있다.
-		HttpSession session = req.getSession();
-		Map map = new HashMap();
-		String id = (String) session.getAttribute("id");
-		int num = (int) req.getAttribute("num");
-		
-		// 찜 활성화의 parameterType이 map이므로 map에 넣어준다.
-		map.put("id", id);
-		map.put("num", num);
-		
-		// 찜 활성화 실행.
-		JjimDAO.jjimActive(map);
-		
-		return "main.jsp";
-	}
-	
 	@RequestMapping("main/like.do")
 	public String like(HttpServletRequest req, HttpServletResponse res) {
 		String nums = "";
@@ -616,7 +598,7 @@ public class MaemoolModel {
 		return "main.jsp";
 	}
 	
-
+	/*by.준영*/
 	@RequestMapping("main/add_jjim.do")
 	public String real_jjim(HttpServletRequest req, HttpServletResponse res) {
 		// id는 session에 저장되어있다.
@@ -642,6 +624,7 @@ public class MaemoolModel {
 		return "../maemool/jjim.jsp";
 	}
 	
+	/*by.준영*/
 	@RequestMapping("main/remove_jjim.do")
 	public String remove_jjim(HttpServletRequest req, HttpServletResponse res) {
 		// id는 session에 저장되어있다.

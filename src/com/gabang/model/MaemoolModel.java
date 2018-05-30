@@ -560,8 +560,8 @@ public class MaemoolModel {
 					if(vo.getDeposit().contains("Àü") || vo.getDeposit().contains("¾ï")) continue;
 					String str = vo.getDeposit();				
 					str = str.replaceAll("[^0-9]+","").trim();
-					int num = Integer.parseInt(str);
-					if(num > 500) continue;				
+					int number = Integer.parseInt(str);
+					if(number > 500) continue;				
 					geoList.add(vo);
 				}
 //				for(MapVO vo:geoList)

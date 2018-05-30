@@ -60,40 +60,22 @@ function pCheck(input)
 		}
 }
 
-//체크박스 최소 한개 이상 체크 옵션
+
  $(document).ready(function () {
 	 $('#upload').click(function() {
+		 
+	//체크박스에(옵션부분) 최소 한개 이상 체크 하면 required 속성이 해제되는 함수
       var checked = $("input[type=checkbox]:checked").length;
 	
-     
-     /*  if(!checked) {
-       
-        $('#opt-0').setCustomValidity("최소 1개 옵션을 선택해 주세요.");
-        return false;ㅇ
-      } */
       if(checked)
     	{
     	  $('[type="checkbox"]').attr("required",false);
     	}
-      /* else
-    	{
-    	  $('#opt-0').attr("onblur", "setCustomValidity('최소 1개 옵션을 선택해 주세요')");
-    	  
-    	} */
+      
 
     });
 }); 
 
-/* $(function(){
-    var requiredCheckboxes = $('.options :checkbox[required]');
-    requiredCheckboxes.change(function(){
-        if(requiredCheckboxes.is(':checked')) {
-            requiredCheckboxes.removeAttr('required');
-        } else {
-            requiredCheckboxes.attr('required', 'required');
-        }
-    });
-}); */
 
 </script>
 </head>

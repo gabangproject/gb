@@ -259,12 +259,12 @@ public class MemberModel {
 		String enctype="EUC-KR";
 		
 		MultipartRequest mr=new MultipartRequest(request,path,size,enctype,new DefaultFileRenamePolicy());
+																		   //DefaultFileRenamePolicy() => 파일명 바꿔주는 것
 		
 		MemberVO vo=new MemberVO();
 		
+		//회원가입 정보 vo에 저장(db로 전달하려고)
 		String email=mr.getParameter("email");
-		//email=email.substring(0,email.indexOf("@"))+"\\"+email.substring(email.indexOf("@"));
-		
 		vo.setEmail(email);
 		vo.setPwd(mr.getParameter("password"));
 		vo.setName(mr.getParameter("name"));
@@ -273,6 +273,7 @@ public class MemberModel {
 		vo.setGender(mr.getParameter("gender"));
 		String grade=mr.getParameter("seller");
 		
+		//일반회원 OR 공인중개사 를 grade로 구분 1이면 일반회원
 		if(grade==null)
 		{
 			grade="1";
@@ -286,10 +287,7 @@ public class MemberModel {
 			vo.setGrade(Integer.parseInt(grade));
 			MemberDAO.insertMember(vo);
 			
-			//DefaultFileRenamePolicy() => 파일명 바꿔주는 것
-			
-			
-			
+
 			SellerVO vo1=new SellerVO();
 			vo1.setLicense(mr.getParameter("license"));
 			vo1.setEmail(email);
@@ -298,68 +296,35 @@ public class MemberModel {
 			vo1.setAddr(mr.getParameter("address")+mr.getParameter("detailAddress"));
 			vo1.setIntro(mr.getParameter("intro"));
 			
-			//파일 원본 이름 저장
+			
+			//업로드한 중개사 관련 사진의 원본 이름 저장
 			String fileName=mr.getOriginalFileName("pic");
-						
-			/*File folder=new File("c:\\download");
-			String[] listFiles=folder.list(new FilenameFilter() {
-				
-				@Override
-				public boolean accept(File dir, String name) {
-					
-					return name.startsWith(fileName);
-				}
-			});*/
-			
-			
-			//확장자 저장
-			String ext=fileName.substring(fileName.indexOf("."));
-			
-			
-			System.out.println(ext);
-			
+		
 			// 업로드가 없는 경우
 		    if(fileName==null)
 		    {
 		    	vo1.setPic("");
-		    	
 		    }
 		    // 업로드된 상태 
 		    else
 		    {
-		    	
+		    	//저장되어 있는 사진의 이름을 email명으로 변경
 		    	File f=new File("c:\\download\\"+fileName);
-		    	//닉네임으로 파일명 변경
-		    	File newFile=new File("c:\\download\\"+email+ext);
+		    	File newFile=new File("c:\\download\\"+email);
 		    	f.renameTo(newFile);
 		    	
-		    	System.out.println(f.getName());
-		    	vo1.setPic(email+ext);
+		    	
+		    	vo1.setPic(email);
 		    }
 			
-			
-	
-			
+
+			//오라클에 연결해서 seller정보 저장
 			MemberDAO.insertSeller(vo1);
-			
-			/*System.out.println(vo1.getLicense());
-			System.out.println(vo1.getComp_name());
-			System.out.println(vo1.getComp_tel());
-			System.out.println(vo1.getAddr());*/
-			
+
 			
 		}
 		
 
-		/*System.out.println(vo.getEmail());
-		System.out.println(vo.getPwd());
-		System.out.println(vo.getName());
-		System.out.println(vo.getNick());
-		System.out.println(vo.getPhone());
-		System.out.println(vo.getGender());
-		System.out.println(vo.getGrade());*/
-
-		
 		request.setAttribute("main_jsp", "home.jsp");
 		return "main.jsp";
 	}

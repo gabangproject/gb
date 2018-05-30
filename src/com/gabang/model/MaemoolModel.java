@@ -142,13 +142,13 @@ public class MaemoolModel {
 		PropertyAddrVO vo4=new PropertyAddrVO();
 		RoomTypeVO vo5=new RoomTypeVO();
 		
+		
 		HttpSession session=request.getSession();
 		String email=(String) session.getAttribute("id");
 		int maemoolNum=MaemoolDAO.maemoolNum();
 		
-		vo3.setNum(maemoolNum);
-		vo3.setEmail(email);
 		
+		//property_Addr에 필요한 데이터 저장
 		String addr=request.getParameter("address")+" "+request.getParameter("datailAddress");
 		String x_position=request.getParameter("x_position");
 		String y_position=request.getParameter("y_position");
@@ -157,6 +157,7 @@ public class MaemoolModel {
 		vo4.setY_position(y_position);
 		vo4.setNum(maemoolNum);
 		
+		//img테이블에 필요한 데이터 저장
 		//매물 이미지 정보 받아오는 라이브러리
 		final int KILOBYTE = 1024 * 1024;
 		final int MEMORY_THRESHOLD = 3 * KILOBYTE;
@@ -192,7 +193,7 @@ public class MaemoolModel {
 						// Process form file field (input type="file").
 						String fieldName = item.getFieldName();
 						String fileName = item.getName();
-								//session.getAttribute("email")+"//"+item.getName();
+						//session.getAttribute("email")+"//"+item.getName();
 						//System.out.println("fieldName:" + fieldName + ", fileName:" + fileName);
 						InputStream fileContent = item.getInputStream();
 						BufferedImage image = ImageIO.read(fileContent);
@@ -214,20 +215,31 @@ public class MaemoolModel {
 			}
 		}
 		
+		
+		
+		//deal_type테이블에 필요한 데이터
 		//거래 형태
 		String deal_type=request.getParameter("deal_type");
 		vo1.setType("deal_type");
 		vo1.setNum(maemoolNum);
 		
+		//room_type에 필요한 데이터
 		//방구조
 		String room_type=request.getParameter("room_type");
 		vo5.setType(Integer.parseInt(room_type));
 		vo5.setNum(maemoolNum);
 		
+		//building_type에 필요한 데이터
 		//건물형태
 		String building_type=request.getParameter("building_type");
 		vo.setType(Integer.parseInt(building_type));
 		vo.setNum(maemoolNum);
+		
+		
+		//maemool테이블에 필요한 데이터
+		vo3.setNum(maemoolNum);
+		vo3.setEmail(email);
+		
 		
 		//관리비
 		String manage_fee=request.getParameter("manage_fee");
@@ -253,22 +265,35 @@ public class MaemoolModel {
 		
 		//주차공간 유무
 		String parking_lot=request.getParameter("parking_lot");
+		vo3.setParking_lot(Integer.parseInt(parking_lot));
 		
 		//해당층
 		String floor1=request.getParameter("floor1");
-		//전체층
-		String floor2=request.getParameter("floor2")+"층";
-		if((floor1.startsWith("지")||floor1.startsWith("반")));
+		
+		if(!(floor1.startsWith("지")||floor1.startsWith("반")));
 		{
 			floor1=floor1+"층";
 		}
+		//전체층
+		String floor2=request.getParameter("floor2")+"층";
+		
 		String floor=floor1+"//"+floor2;
 		vo3.setFloor(floor);
 		
+	
 		//보증금
 		String deposit1=request.getParameter("deposit1");
+		if(deposit1!=null)
+		{
+			deposit1=deposit1 + " 억";
+		}
 		String deposit2=request.getParameter("deposit2");
-		String deposit=deposit1+" 억"+deposit2+" 만원";
+		if(deposit2!=null)
+		{
+			deposit2=deposit2 + " 만원";
+		}
+		
+		String deposit=deposit1+deposit2;
 		vo3.setDeposit(deposit);
 		
 		//월세
@@ -278,7 +303,12 @@ public class MaemoolModel {
 			monthly_rent1=monthly_rent1 + " 억";
 			}
 		String monthly_rent2=request.getParameter("monthly_rent2");
-		String monthly_rent=monthly_rent1+monthly_rent2+" 만원";
+		if(monthly_rent2!=null)
+		{
+		monthly_rent2=monthly_rent2 + " 만원";
+		}
+		
+		String monthly_rent=monthly_rent1+monthly_rent2;
 		vo3.setMonthly_rent(monthly_rent);
 		
 		//전용면적
@@ -295,6 +325,11 @@ public class MaemoolModel {
 		//매물 한줄 표현
 		String detail_title=request.getParameter("detail_title");
 		vo3.setDetail_title(detail_title);
+		
+		//인근 지하철 표시
+		String near_subway=request.getParameter("near_subway");
+		vo3.setNear_subway(near_subway);
+		
 		//매물 상세설명
 		String description=request.getParameter("description");
 		vo3.setDescription(description);

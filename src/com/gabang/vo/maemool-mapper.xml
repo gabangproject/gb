@@ -32,9 +32,15 @@
 	<insert id="jjimActive" parameterType="hashmap">
 		INSERT INTO jjim (email, num) values (#{id}, #{num})
 	</insert>
+	
 	<!-- 매물 상세정보  -->
 	<select id="infoFind" parameterType="int" resultType="MaemoolVO">
-		SELECT * FROM maemool_temp WHERE num = #{num}
+		SELECT * FROM maemool_temp WHERE num = #{num} 
+	</select>
+	
+	<!-- 해당 매물 상세보기안에 표시되는 위치지도 -->
+	<select id="Maemoolmap" parameterType="int" resultType="MapVO">
+		SELECT * FROM map_temp WHERE num=#{num} 	
 	</select>
 	
 	<insert id="insertBuildingType">

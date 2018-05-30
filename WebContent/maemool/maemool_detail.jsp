@@ -65,21 +65,25 @@
 				  	<c:if test="${n.index==0 }">
 				    	<li data-target="#myCarousel" data-slide-to="${n.index }" class="active"></li>
 				    </c:if>
+				    <c:if test="${n.index!=0 }">
 					<li data-target="#myCarousel" data-slide-to="${n.index }" ></li>
-				   
+				   	</c:if>
 				  </c:forEach>
 				    
 				  </ol>
 				  <!-- Items -->
 				  <div class="carousel-inner">
-					  <c:forEach var="img" items="${imgList }" varStatus="n">
-					  	<div class="active item">  
-					    <img src="//placehold.it/1300x500" class="img-responsive">
-					    </div>
-					  
-					    <div class="item">  
-					    <img src="//placehold.it/1300x500" class="img-responsive">
-					    </div>
+					  <c:forEach var="image" items="${imgList }" varStatus="n">
+					  	<c:if test="${n.index==0 }">
+						  	<div class="active item"> 
+						</c:if>
+						<c:if test="${n.index!=0 }">
+							<div class="item">
+						</c:if> 
+						    <img src="${image.img }" class="img-responsive">
+						    </div>
+					  	
+
 					  </c:forEach>
 				  </div>
 				  <!-- Navigation -->
@@ -92,110 +96,84 @@
 				</div>
 			</div>
 
-
-
-
-			<div class="row" style="width:60%">
-
-		
-				<!-- 상세정보 출력 테이블 -->
-				<!--  	
-					private int num;				//매물번호
-					private String email; 		    //매물 등록자
-					private String deposit; 		//보증금
-					private String monthly_rent;	//월세	
-					private String floor;			//층/건물층수
-					private String manage_fee;		//관리비
-					private String maintenance;		//관리비 포함항목
-					private int	elev;				//엘리베이터
-					private int	parking_lot;		//주차
-					private String gross_area;		//크기
-					private String opt;				//옵션
-					private String moving_date;		//입주 가능일
-					private String description;		//상세설명
-					private String near_subway;		//인근 전철역
-					private Date regdate; 			//매물 등록일
-					private int	avg_score;			//평균 점수	
-					private String detail_title;    //매물 간단 설명
-				-->
-				<h4>상세정보</h4>
+				<div class="col-md-6" style="font-size:20px;">상세정보</div> <div class="col-md-6" style="font-size:20px;">지도위치</div>
+				<div style="float: left; width:50%;">
 				<table class="table table-hover">
-				<!-- 	<thead>
-						<tr>
-							<th></th>
-							<th></th>
-						</tr>
-					</thead> -->
 					<tbody>
 						<tr>
+							<td><label class="col-sm-5">등록자<br>아이디</label>${vo.email}</td>
+							<td></td>
+						</tr>
+						<tr>
 							<td><label class="col-sm-5">보증금</label>${vo.deposit }</td>
-							<td>${vo.monthly_rent }</td> 
+							<td><label class="col-sm-5">월세</label>${vo.monthly_rent }</td> 
 						</tr>
 						<tr>
-							<td>${vo.manage_fee}</td>
-							<td>${vo.maintenance}</td>
+							<td><label class="col-sm-5">관리비</label>${vo.manage_fee}</td>
+							<td><label class="col-sm-5">관리비<br>포함항목</label>${vo.maintenance}</td>
 						</tr>
 						<tr>
-							<td>${vo.floor}</td>
-							<td>${vo.elev}</td>
+							<td><label class="col-sm-5">층/<br>건물층수</label>${vo.floor}</td>
+							<td><label class="col-sm-5">엘리베이터</label>
+							<c:if test="${vo.elev==1 }">
+							가능
+							</c:if>
+							<c:if test="${vo.elev==0 }">
+							불가능
+							</c:if>
+							</td>
 						</tr>
 						<tr>
-							<td>${vo.parking_lot}</td>
-							<td>${vo.detail_title}</td>
+							<td><label class="col-sm-5">주차</label>
+							<c:if test="${vo.parking_lot==1}">
+							가능
+							</c:if>
+							<c:if test="${vo.parking_lot==0}">
+							불가능
+							</c:if>
+							</td>
+							<td><label class="col-sm-5">매물 설명</label>${vo.detail_title}</td>
+						</tr>
+						<tr>
+							<td><label class="col-sm-5">크기</label>${vo.gross_area}</td>
+							<td><label class="col-sm-5">옵션</label>${vo.opt}</td>
+						</tr>
+						<tr>
+							<td><label class="col-sm-5">입주<br>가능일</label>${vo.moving_date}</td>
+							<td><label class="col-sm-5">인근<br>지하철</label>${vo.near_subway}</td>
 						</tr>
 					</tbody>
+							<tr>
+							</tr>
 				</table>
-			</div>
-
-			<div class="col-md-6">
-							<h3 class="section-title">Our Address</h3>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-							<ul class="contact-info">
-								<li><i class="icon-location-pin"></i>198 West 21th Street, Suite 721 New York NY 10016</li>
-								<li><i class="icon-phone2"></i>+ 1235 2355 98</li>
-								<li><i class="icon-mail"></i><a href="#">info@yoursite.com</a></li>
-								<li><i class="icon-globe2"></i><a href="#">www.yoursite.com</a></li>
-							</ul>
-						</div>
-						<div class="col-md-6">
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<input type="text" class="form-control" placeholder="Name">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<input type="text" class="form-control" placeholder="Email">
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="form-group">
-										<textarea name="" class="form-control" id="" cols="30" rows="7" placeholder="Message"></textarea>
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="form-group">
-										<input type="submit" value="Send Message" class="btn btn-primary">
-									</div>
-								</div>
-							</div>
-						</div>		
-				
-				
+				<label>상세설명</label>씨부레
+				<br>${vo.description}
+				</div>
 			
+			<!-- 해당 매물 지도위치 -->
+			 
+			<div style="float: right; width:45%;" id="map"></div>
+				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0414b62e66e43f9fc50e0f6dfd64b93f"></script>
+				<script>
+				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+				mapOption = {
+					center : new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+					level : 3
+				// 지도의 확대 레벨
+				};
+				
+				var map = new daum.maps.Map(mapContainer, mapOption); 
+				</script> 
 			</div> 
-			<!-- row 끝 -->
-		</div>
-		<!-- container 끝  -->
+			
 
-	</div>
-<!-- work-section 끝 -->
+
 		
 		
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>		
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+			</script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>		
 
 
 </body>

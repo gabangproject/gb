@@ -107,19 +107,24 @@ public class MaemoolModel {
 		request.setCharacterEncoding("euc-kr");
 	
 		String num=request.getParameter("num"); // 이미지랑 이미지에 해당하는 상세정보를 매물번호에 맞게 출력
+		
+	
+		
 		if(num == null)
-			num = "2";
+			num = "7";
+	
 		MaemoolVO vo1=new MaemoolVO();
-	//	vo1.setNum(Integer.parseInt(num));
+	
 		 
-		List<ImgVO> imgList = MaemoolDAO.detailMaemool(Integer.parseInt(num)); // 임시로 50번의 매물번호의 이미지를 출력
+		List<ImgVO> imgList = MaemoolDAO.detailMaemool(Integer.parseInt(num));
 		MaemoolVO vo = MaemoolDAO.infoMaemool(Integer.parseInt(num));
-		System.out.println(vo.getDeposit());
+		
 		
 		request.setAttribute("imgList", imgList);
+		
 		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../maemool/maemool_detail.jsp");
-	//	CommonModel.commonSendData(request);
+	
 		return "main.jsp";
 	}
 	

@@ -140,14 +140,14 @@ public class MaemoolDAO {
 		return vo1;
 	}
 	public MaemoolVO cookie(int num) {
-		MaemoolVO vo = new MaemoolVO();
+		MaemoolVO vo = null;
 		SqlSession session=null;
 		try {
 			session = ssf.openSession();
-			session.selectList("cookie",num);
+			vo = session.selectOne("cookie" , num);
 			
 		}catch (Exception e) {
-			
+			System.out.println("cookie : " + e.getMessage());
 		}finally {
 			if(session!=null)
 				session.close();

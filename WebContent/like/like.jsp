@@ -126,7 +126,7 @@
 												<c:forEach var="vo" items="${vo }">
 													<tr data-status="completed">
 														<td>${vo.num}</td>
-														<td></td>
+														<td>${vo. }</td>
 														<td></td>
 														<td><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd" /></td>
 														<td></td>

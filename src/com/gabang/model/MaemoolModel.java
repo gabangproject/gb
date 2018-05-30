@@ -42,15 +42,15 @@ public class MaemoolModel {
 	@RequestMapping("main/maemool_theme_list.do")
 	public String maemoolThemeList(HttpServletRequest req, HttpServletResponse response) throws Exception {
 		req.setCharacterEncoding("euc-kr");
-		String theme = req.getParameter("theme");
-		System.out.println(theme);
+		String keyword = req.getParameter("keyword");
+		System.out.println(keyword);
 		//theme = theme.trim();		
 		List<MapVO> geoList = new ArrayList<MapVO>();
 		List<MapVO> tempList = null;
 		
-		if(theme.equals("저보증금")) {						
+		if(keyword.equals("저보증금")) {						
 			tempList = MaemoolDAO.getDepositInfo();
-			System.out.println("갯수:"+tempList.size());
+			//System.out.println("갯수:"+tempList.size());
 			for(MapVO vo:tempList) {
 				if(vo.getDeposit().contains("전") || vo.getDeposit().contains("억")) continue;
 				String str = vo.getDeposit();				
@@ -62,19 +62,19 @@ public class MaemoolModel {
 //			for(MapVO vo:geoList)
 //				System.out.println(vo.getDeposit());
 		}
-//			
-//		else if(theme.equals("주차 가능")) {
-//			tempList = MaemoolDAO.getParkingInfo(theme);
-//		}
-//			
-//		else if(theme.equals("원룸")) {
-//			tempList = MaemoolDAO.getOneRoomInfo(theme);
-//		}
-//			
-//		else if(theme.equals("오피스텔")) {
-//			tempList = MaemoolDAO.getOfficetelInfo(theme);
-//		}			
-		
+////			
+////		else if(theme.equals("주차 가능")) {
+////			tempList = MaemoolDAO.getParkingInfo(theme);
+////		}
+////			
+////		else if(theme.equals("원룸")) {
+////			tempList = MaemoolDAO.getOneRoomInfo(theme);
+////		}
+////			
+////		else if(theme.equals("오피스텔")) {
+////			tempList = MaemoolDAO.getOfficetelInfo(theme);
+////		}			
+//		
 		List<ImgVO> imgList = null;
 		Map<Integer,Object> oneImg = new HashMap<Integer,Object>();
 
@@ -91,12 +91,11 @@ public class MaemoolModel {
 				oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // 매물번호 : 이미지 주소
 			}
 		}
-		
-
-
+//
 		req.setAttribute("oneImg", oneImg);
 		req.setAttribute("geoList", geoList);
-		req.setAttribute("main_jsp", "../maemool/list.jsp");
+//		//req.setAttribute("main_jsp", "../maemool/list.jsp");		
+		req.setAttribute("main_jsp", "../maemool/testList.jsp");
 		return "main.jsp";
 	}
 	
@@ -266,7 +265,7 @@ public class MaemoolModel {
 								// ... (do your job here)
 							} else {
 								// Process form file field (input type="file").
-								String fieldName = item.getFieldName();
+								String fieldName = item.getFieldName();				
 								String fileName = item.getName();
 								//session.getAttribute("email")+"//"+item.getName();
 								//System.out.println("fieldName:" + fieldName + ", fileName:" + fileName);
@@ -511,15 +510,6 @@ public class MaemoolModel {
 			}
 		}
 		
-		// 관심목록 by.한솔
-		String num = req.getParameter("num");
-		if (num == null) {
-			num = "";
-		}
-		Cookie cookie = new Cookie("likeNum", num);
-		cookie.setMaxAge(365 * 24 * 60 * 60); // 쿠기 유효기간 365일 설정1
-		cookie.setPath("C:\\GaBang\\gb");
-		response.addCookie(cookie);
 
 		// 위도와 경도가 null이 아닐 경우 실행한다.
 		if (swLatlng != null && neLatlng != null) {
@@ -535,9 +525,9 @@ public class MaemoolModel {
 	// ajax로 지도 이동에 따라 보여지는 영역에 알맞는 매물을 부르도록 테스트 중
 	@RequestMapping("main/testSideList.do")
 	public String testSideList(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		req.setCharacterEncoding("utf-8");
-		String keyword = req.getParameter("keyword");
-		
+		req.setCharacterEncoding("utf-8");		
+		String keyword = req.getParameter("keyword");		
+		System.out.println("testSideList.do"+keyword);
 		// 지도 영역 각 모서리의 위도와 경도를 전달받는다.
 		String Sne_x = req.getParameter("ne_x");
 		String Sne_y = req.getParameter("ne_y");
@@ -557,14 +547,47 @@ public class MaemoolModel {
 		
 		// 리스트 출력을 위한 변수
 		List<MapVO> geoList = null;
+		List<MapVO> tempList = null;
 		List<ImgVO> imgList = null;
 		// 매물번호 : 매물대표이미지
 		Map oneImg = new HashMap();
 		
+		// 관심목록 by.한솔
+		String num = req.getParameter("num");
+		
+		if (num != null) {
+//			num = "";
+			Cookie cookie = new Cookie("likeNum", num);
+			cookie.setMaxAge(365 * 24 * 60 * 60); // 쿠기 유효기간 365일 설정1
+			cookie.setPath("C:\\GaBang\\gb");
+			res.addCookie(cookie);
+		}
+		
 		// list.jsp에서 전송받은 지도 bound 확인
 		if(keyword != null) {
 			System.out.println("◈ testSideList로 전송된 keyword : " + keyword);
-			geoList = PropertyAddrDAO.searchMaemool(keyword);
+			
+			/*
+			 * 		by t.
+			 * 		2018.05.30
+			 * 		테마 검색	
+			 */			
+			if(keyword.equals("저보증금")) {
+				geoList = new ArrayList<MapVO>();
+				tempList = MaemoolDAO.getDepositInfo();
+				//System.out.println("갯수:"+tempList.size());
+				for(MapVO vo:tempList) {
+					if(vo.getDeposit().contains("전") || vo.getDeposit().contains("억")) continue;
+					String str = vo.getDeposit();				
+					str = str.replaceAll("[^0-9]+","").trim();
+					int number = Integer.parseInt(str);
+					if(number > 500) continue;				
+					geoList.add(vo);
+				}
+//				for(MapVO vo:geoList)
+//					System.out.println(vo.getDeposit());
+			} else			
+				geoList = PropertyAddrDAO.searchMaemool(keyword);
 		
 			// 지도 움직일 경우 해당 지도 내 매물 출력
 			// 위도경도가 null이 아닐 경우
@@ -604,8 +627,7 @@ public class MaemoolModel {
 				System.out.println("매물번호 : " +vo.getNum() + " "+ e.getMessage());
 				oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // 매물번호 : 이미지 주소
 			}
-		}
-		
+		}		
 		
 		req.setAttribute("oneImg", oneImg);
 		req.setAttribute("geoList", geoList);

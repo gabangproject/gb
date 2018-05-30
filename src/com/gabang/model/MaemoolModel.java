@@ -45,11 +45,12 @@ public class MaemoolModel {
 		String keyword = req.getParameter("keyword");
 		System.out.println(keyword);
 		//theme = theme.trim();		
-		List<MapVO> geoList = new ArrayList<MapVO>();
+		List<MapVO> geoList = null;
 		List<MapVO> tempList = null;
 		
 		if(keyword.equals("저보증금")) {						
-			tempList = MaemoolDAO.getDepositInfo();
+			tempList = MaemoolDAO.getInfo();
+			geoList = new ArrayList<MapVO>();
 			//System.out.println("갯수:"+tempList.size());
 			for(MapVO vo:tempList) {
 				if(vo.getDeposit().contains("전") || vo.getDeposit().contains("억")) continue;
@@ -59,17 +60,14 @@ public class MaemoolModel {
 				if(num > 500) continue;				
 				geoList.add(vo);
 			}
-//			for(MapVO vo:geoList)
-//				System.out.println(vo.getDeposit());
+		}			
+		else if(keyword.equals("주차 가능")) {
+			geoList = MaemoolDAO.getParkingInfo();
 		}
-////			
-////		else if(theme.equals("주차 가능")) {
-////			tempList = MaemoolDAO.getParkingInfo(theme);
-////		}
-////			
-////		else if(theme.equals("원룸")) {
-////			tempList = MaemoolDAO.getOneRoomInfo(theme);
-////		}
+			
+		else if(keyword.equals("원룸")) {
+			tempList = MaemoolDAO.getOneRoomInfo();
+		}
 ////			
 ////		else if(theme.equals("오피스텔")) {
 ////			tempList = MaemoolDAO.getOfficetelInfo(theme);
@@ -574,7 +572,7 @@ public class MaemoolModel {
 			 */			
 			if(keyword.equals("저보증금")) {
 				geoList = new ArrayList<MapVO>();
-				tempList = MaemoolDAO.getDepositInfo();
+				tempList = MaemoolDAO.getInfo();
 				//System.out.println("갯수:"+tempList.size());
 				for(MapVO vo:tempList) {
 					if(vo.getDeposit().contains("전") || vo.getDeposit().contains("억")) continue;

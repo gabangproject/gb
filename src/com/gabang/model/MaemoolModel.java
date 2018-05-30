@@ -689,20 +689,25 @@ public class MaemoolModel {
 		Cookie[] cookies = request.getCookies();
 		String name = "";
 		String ss = "";
+		
+		/*******************************************************/
 		System.out.println("ss 공백 : " + ss);
-		int ssInt = Integer.parseInt(ss);
-		System.out.println("ssInt : " + ssInt);
-		if(cookies != null) {
-			for(int i = 0; i<cookies.length; i++) {
+		System.out.println("cookies 길이 확인 : " + cookies.length); // 최초실행시에도 cookies 길이는 1로 확인됨
+		System.out.println("cookies[0] 이름 확인 : " + cookies[0].getName());
+//		int ssInt = Integer.parseInt(ss);
+//		System.out.println("ssInt : " + ssInt);
+		/*******************************************************/
+		// 따라서 cookies는 null이 아니고 아래 코드 실행됨.
+		if (cookies != null) {
+			for (int i = 0; i < cookies.length; i++) {
 				Cookie c = cookies[i];
 				String cName = c.getName();
-				if(cName.startsWith("cookNo")) {
+				if (cName.startsWith("cookNo")) {
 					String cValue = c.getValue();
-					ss=cName.replaceAll("[^0-9]", "");
-					System.out.println("ss = " + ss);
-				}
-				else {
-					name="cookNo1";
+					ss = cName.replaceAll("[^0-9]", "");
+					System.out.println("cName.startsWith(\"cookNo\") ss = " + ss);
+				} else {
+					name = "cookNo1";
 				}
 			}
 			/***************이 부분 한번 확인해주세요***************/
@@ -711,12 +716,13 @@ public class MaemoolModel {
 			/*******************************************************/
 			name ="cookNo"+(a+1);
 		}
+		// 쿠키가 null일 경우
 		else {
-			name ="cookNo1";
+			name = "cookNo1";
 		}
-		Cookie c = new Cookie(name,no);
-		c.setMaxAge(60*60*24);
-		response.addCookie(c);		
+		Cookie c = new Cookie(name, no);
+		c.setMaxAge(60 * 60 * 24); // 쿠키 최대 유지시간 설정
+		response.addCookie(c);
 		request.setAttribute("main_jsp", "../like/like_ok.jsp");
 		return "main.jsp";
 	}

@@ -1,15 +1,28 @@
+<%@page import="com.gabang.vo.MapVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset=EUC-KR>
+<script type="text/javascript">
+$(function() {
+	<%
+	List<MapVO> list = (List<MapVO>) request.getAttribute("geoList");
+	System.out.println(list.size());
+	%>
+	alert('testSideList.jsp에서 출력\n매물 개수 : ' + <%=list.size()%> + '개');
+})
+</script>
 </head>
 <body>
+	<input type="hidden" id='listNum' value='${list.size}'>
 	<c:forEach var="i" items="${geoList}" varStatus="s">
 		<div class="media">
 			<div class="fav-box">
 				<i class="fa fa-heart-o" aria-hidden="true"></i>
+				<i class="fa fa-eye" aria-hidden="true"></i>
 			</div>
 			<a href="#?num=${i.num}">
 				<img class="d-flex align-self-start maemool-list-img" src="${oneImg.get(i.num)}">
@@ -30,31 +43,6 @@
 			</div>
 		</div>
 	</c:forEach>
-	<!-- 아래는 테스트코드 -->
-	<%-- <c:forEach var="i" items="${geoList}" varStatus="s">
-		<div class="media">
-			<div class="fav-box">
-				<i class="fa fa-heart-o" aria-hidden="true"></i>
-			</div>
-			<a href="#?num=${s.index}">
-				<img class="d-flex align-self-start maemool-list-img" src="../maemool/img/noimg.png">
-			</a>
-			<div class="media-body pl-3">
-				<div class="price" num='${s.index}'>
-					${s.index}
-					<div class=address>${s.index}</div>
-				</div>
-				<div class="stats">
-					<span>
-						위도<i class="fa fa-arrows-alt" id='${s.index}x'>${s.index}</i>
-					</span>
-					<span>
-						경도<i class="fa fa-bath" id='${s.index}y'>${s.index}</i>
-					</span>
-				</div>
-			</div>
-		</div>
-	</c:forEach> --%>
 
 </body>
 </html>

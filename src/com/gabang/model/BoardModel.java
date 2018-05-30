@@ -61,7 +61,7 @@ public class BoardModel {
 			int totalpage = BoardDAO.contentCount(keyword);
 			count = BoardDAO.countQnAContent(keyword);
 			request.setAttribute("totalpage", totalpage);
-			bDisplay = false;			
+			bDisplay = false;
 		}
 		
 		HttpSession session=request.getSession();

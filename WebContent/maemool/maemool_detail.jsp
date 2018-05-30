@@ -84,6 +84,11 @@
 						<tr>
 							<td>${infoMaemool.deposit }</td>
 							<td>${infoMaemool.monthly_rent }</td>
+							 
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>${infoMaemool.manage_fee}</td>

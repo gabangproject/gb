@@ -5,11 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-</head>
-<script type="text/javascript">
-location.href="main.do";
-//안돼~ㅇㅇ
+<script>
+
 </script>
+</head>
 <body>
 
 </body>

@@ -13,14 +13,17 @@
 
 <!-- 다음 지도 api를 사용하기 위한 부분 -->
 <!-- 해당 키는 권한 키 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0414b62e66e43f9fc50e0f6dfd64b93f&libraries=clusterer"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0414b62e66e43f9fc50e0f6dfd64b93f&libraries=clusterer,services"></script>
 
 <script type="text/javascript">
 $(function() {
 	var keyword = '<%=request.getParameter("keyword")%>';
-	var swLatlng;
-	var neLatlng;
+	var bound;
 	
+	/*
+	페이지가 로딩되면 ajax로 화면 우측 매물목록을 불러온다.
+	이때 keyword를 같이 전송하여 매물목록에서 알맞은 매물을 출력하게끔 한다.
+	*/
 	$.ajax({
 		type:'post',
 		url:'testSideList.do',
@@ -30,35 +33,66 @@ $(function() {
 		}
 	});
 	
-	daum.maps.event.addListener(map,'bounds_changed', function() {
-		// 지도 영역정보를 얻어옵니다 
-		var bounds = map.getBounds();
+	// 맵 드래그가 끝난 후 실행
+	daum.maps.event.addListener(map, 'dragend', function() {
+		// 지도의 각 끝점을 구한다.
+		bound = map.getBounds();
 		
-		// 영역정보의 남서쪽 정보를 얻어옵니다 
-	    swLatlng = bounds.getSouthWest().toString();
-	    // 영역정보의 북동쪽 정보를 얻어옵니다 
-	    neLatlng = bounds.getNorthEast().toString();
-	    
-	    // 지도 하단에 위도와 경도를 출력
-	    $('#info').text(swLatlng + '    ' + neLatlng);
-	});
-	
-	// 맵 내부에서 마우스 버튼을 놓을 경우 작동
-	// 이동한 좌표에 맞는 매물 목록을 불러온다.
-	$('#map').mouseup(function() {
+		// 지도 북동쪽 끝 위도와 경도
+		// ajax로 전달할때는 문자열만 가능
+		var ne = bound.getNorthEast();
+		var ne_x = ne.getLat();
+		var ne_y = ne.getLng();
+		
+		// 지도 남서쪽 끝 위도와 경도
+		var sw = bound.getSouthWest();
+		var sw_x = sw.getLat();
+		var sw_y = sw.getLng();
+		
+		// 값이 정상적으로 들어오는지 확인
+		//alert(ne_x + "  " + ne_y + "\n" + sw_x + "   " + sw_y);
+		
+		// ajax로 sideList에 값을 전달하고 결과를 받는다.
 		$.ajax({
 			type:'post',
 			url:'testSideList.do',
-			data:{
-				'keyword':keyword,
-				'swLatlng':swLatlng,
-				'neLatlng':neLatlng
-			},
+			data:{'ne_x':ne_x, 'ne_y':ne_y, 'sw_x':sw_x, 'sw_y':sw_y},
+			success:function(res) {
+				$('#list').html(res);
+				var listNum = $(res).$('#listNum').text();
+				alert('testList.jsp에서 출력 : ' + listNum);
+			}
+		});
+		
+		//alert("ajax 이후");
+	});
+		
+	// 맵 내부에서 마우스 버튼을 놓을 경우 작동
+	// 이동한 좌표에 맞는 매물 목록을 불러온다.
+	/*
+	 $('#map').mouseup(function() {
+		bound = map.getBounds();
+		var ne = bound.getNorthEast();
+		var ne_x = ne.getLat();
+		var ne_y = ne.getLng();
+		
+		var sw = bound.getSouthWest();
+		var sw_x = sw.getLat();
+		var sw_y = sw.getLng();
+		alert(ne_x + "  " + ne_y + "\n" + sw_x + "   " + sw_y);
+				
+		$.ajax({
+			type:'post',
+			url:'testSideList.do',
+			data:{'keyword': keyword,'ne_x':ne_x, 'ne_y':ne_y},
 			success:function(res) {
 				$('#list').html(res);
 			}
 		});
+		
+		alert("ajax 이후");
 	});
+	*/
 });
 </script>
 <style>
@@ -198,37 +232,37 @@ h2 a {
 						<script>
 							var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 							mapOption = {
-								center : new daum.maps.LatLng(33.450701,
-										126.570667), // 지도의 중심좌표
+								center : new daum.maps.LatLng(37.563228970425506, 126.97727242618686), // 지도의 중심좌표
 								level : 5
-							// 지도의 확대 레벨
 							};
 
-							// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+							// 지도를 표시할 div와 지도 옵션으로 지도를 생성합니다
 							var map = new daum.maps.Map(mapContainer, mapOption);
 
 							// 마커 클러스터러
 							var clusterer = new daum.maps.MarkerClusterer({
 								map : map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
 								averageCenter : true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-								minLevel : 2, // 클러스터 할 최소 지도 레벨 
-								gridSize : 150,
+								gridSize : 100,
 								clickable : false
 							});
 
 							var markers = new Array();
 							var x;
 							var y;
+							
 						<%
 							List<MapVO> list = (List<MapVO>) request.getAttribute("geoList");
+							System.out.println(list.size());
 							String x, y;
 							for (int i = 0; i < list.size(); i++) {
 						%>
 								x = <%=list.get(i).getX_position()%>
 								y = <%=list.get(i).getY_position()%>
+								
 								markers.push(new daum.maps.Marker({
 									position : new daum.maps.LatLng(x, y)
-								}));
+								}))
 						<%
 							}
 						%>

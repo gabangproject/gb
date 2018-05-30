@@ -21,10 +21,8 @@ public class FileConfig {
 	   List<String> list=new ArrayList<String>();
 	   try
 	   {
-		   String basePath= "C:\\GaBang\\gb";
-		   System.out.println(basePath);
-		   String strPack=basePath+"\\src\\"+pack.replace(".", "\\");
-		   System.out.println(strPack);
+		   String basePath= "C:\\GaBang\\gb";		   
+		   String strPack=basePath+"\\src\\"+pack.replace(".", "\\");		   
 		   File dir=new File(strPack);
 		   File[] files=dir.listFiles();
 		   for(File f:files)

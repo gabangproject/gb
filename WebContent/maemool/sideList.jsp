@@ -6,10 +6,11 @@
 <meta charset=EUC-KR>
 </head>
 <body>
-	<c:forEach var="i" items="${geoList}">
+	<c:forEach var="i" items="${geoList}" varStatus="s">
 		<div class="media">
 			<div class="fav-box">
 				<i class="fa fa-heart-o" aria-hidden="true"></i>
+				<i class="fa fa-eye" aria-hidden="true"></i>
 			</div>
 			<a href="#?num=${i.num}">
 				<img class="d-flex align-self-start maemool-list-img" src="${oneImg.get(i.num)}">

@@ -2,6 +2,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -59,12 +61,13 @@ $(function() {
 			data:{'ne_x':ne_x, 'ne_y':ne_y, 'sw_x':sw_x, 'sw_y':sw_y},
 			success:function(res) {
 				$('#list').html(res);
-				alert(res);
+				//alert(res);
 				var num = res.substring(res.indexOf('◐') + 1,res.indexOf('◑'));
-				alert(num);
+				//alert(num);
+				$('#info').text(num);
 			}
 		});
-		alert("ajax 이후");
+		//alert("ajax 이후");
 	});
 });
 </script>
@@ -251,16 +254,20 @@ h2 a {
 								// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
 								map.panTo(moveLatLon);
 							};
-							alert(markers.length + '개 매물');
+							var mNum = markers.length;
+							
+							alert('mNum은 ' + mNum);
+							
 						</script>
-
 						<!-- 매물들의 리스트 출력 부분 -->
 						<div class="col-md-5 listing-block" id=list style="width: 50%; display: inline-block">
 						</div>
 					</div>
 				</div>
 			</section>
-			<div id=info></div>
+			<div style="width: 300px; height: 30px; background-color:yellow;" align="center">
+				<h3 id=info>${fn:length(geoList)} 개 매물</h3>
+			</div>
 		</div>
 	</div>
 </body>

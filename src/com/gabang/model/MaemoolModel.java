@@ -40,7 +40,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 @Controller
 public class MaemoolModel {
 	@RequestMapping("main/maemool_theme_list.do")
-	public String maemoolThemeList(HttpServletRequest req, HttpServletResponse res) throws Exception {
+	public String maemoolThemeList(HttpServletRequest req, HttpServletResponse response) throws Exception {
 		req.setCharacterEncoding("euc-kr");
 		String theme = req.getParameter("theme");
 		System.out.println(theme);
@@ -92,15 +92,7 @@ public class MaemoolModel {
 			}
 		}
 		
-//		// 관심목록 by.한솔
-//		String num = req.getParameter("num");
-//		if (num == null) {
-//			num = "";
-//		}
-//		Cookie cookie = new Cookie("likeNum", num);
-//		cookie.setMaxAge(365 * 24 * 60 * 60); // 쿠기 유효기간 365일 설정1
-//		cookie.setPath("C:\\GaBang\\gb");
-//		response.addCookie(cookie);
+
 
 		req.setAttribute("oneImg", oneImg);
 		req.setAttribute("geoList", geoList);
@@ -468,7 +460,7 @@ public class MaemoolModel {
 	// 지도 옆 매물 목록을 출력 by. 한
 	// ajax로 해당페이지를 부른다.
 	@RequestMapping("main/sideList.do")
-	public String sideList(HttpServletRequest req, HttpServletResponse res) throws Exception {
+	public String sideList(HttpServletRequest req, HttpServletResponse response) throws Exception {
 		// 본 메소드는 ajax를 통해서 한글을 파라미터로 전송받기 때문에
 		// utf-8로 받아야 한글이 깨지지 않는다.
 		req.setCharacterEncoding("utf-8");
@@ -498,6 +490,16 @@ public class MaemoolModel {
 				oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // 매물번호 : 이미지 주소
 			}
 		}
+		
+		// 관심목록 by.한솔
+		String num = req.getParameter("num");
+		if (num == null) {
+			num = "";
+		}
+		Cookie cookie = new Cookie("likeNum", num);
+		cookie.setMaxAge(365 * 24 * 60 * 60); // 쿠기 유효기간 365일 설정1
+		cookie.setPath("C:\\GaBang\\gb");
+		response.addCookie(cookie);
 
 		// 위도와 경도가 null이 아닐 경우 실행한다.
 		if (swLatlng != null && neLatlng != null) {
@@ -531,7 +533,6 @@ public class MaemoolModel {
 		*/
 
 		// 위도경도를 저장하기 위한 map
-		//Map<String, Double> bound = null;
 		Map<String, Object> bound = null;
 		
 		// 리스트 출력을 위한 변수

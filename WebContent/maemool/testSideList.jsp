@@ -13,6 +13,13 @@ $(function() {
 	System.out.println(list.size());
 	%>
 	alert('testSideList.jsp에서 출력\n매물 개수 : ' + <%=list.size()%> + '개');
+	/*
+	function like(obj) {
+		$.ajax({
+			type:"post";
+			url:""
+		});
+	};*/
 })
 </script>
 </head>
@@ -22,7 +29,7 @@ $(function() {
 		<div class="media">
 			<div class="fav-box">
 				<i class="fa fa-heart-o" aria-hidden="true"></i>
-				<i class="fa fa-eye" aria-hidden="true"></i>
+				<i class="fa fa-eye" id='like' aria-hidden="true" num='${i.num}' onclick="like(this)"></i>
 			</div>
 			<a href="#?num=${i.num}">
 				<img class="d-flex align-self-start maemool-list-img" src="${oneImg.get(i.num)}">

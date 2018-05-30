@@ -726,7 +726,7 @@ public class MaemoolModel {
 		
 		
 		return "../maemool/jjim.jsp";
-
+	}
 	// by. ÇÑ¼Ö
 	@RequestMapping("main/like_ok.do")
 	public String Likes(HttpServletRequest request, HttpServletResponse response) {

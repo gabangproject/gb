@@ -40,4 +40,12 @@
 		INSERT INTO seller(license,email,comp_tel,comp_name,addr,intro,pic) 
 		VALUES(#{license},#{email},#{comp_tel},#{comp_name},#{addr},#{intro},#{pic})
 	</insert>
+	
+	<select id="sellerData" parameterType="String" resultType="SellerVO">
+		SELECT * FROM seller WHERE email=#{email}
+	</select>
+	
+	<select id="sellerEmail" parameterType="int" resultType="String">
+		SELECT email FROM maemool WHERE num=#{num}
+	</select>
 </mapper>

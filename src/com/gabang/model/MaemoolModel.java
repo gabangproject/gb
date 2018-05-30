@@ -35,9 +35,11 @@ import com.gabang.vo.MaemoolDAO;
 import com.gabang.vo.MaemoolVO;
 import com.gabang.vo.MapDAO;
 import com.gabang.vo.MapVO;
+import com.gabang.vo.MemberDAO;
 import com.gabang.vo.PropertyAddrDAO;
 import com.gabang.vo.PropertyAddrVO;
 import com.gabang.vo.RoomTypeVO;
+import com.gabang.vo.SellerVO;
 
 @Controller
 public class MaemoolModel {
@@ -104,8 +106,8 @@ public class MaemoolModel {
 		request.setCharacterEncoding("euc-kr");
 	
 		String num=request.getParameter("num"); // 이미지랑 이미지에 해당하는 상세정보를 매물번호에 맞게 출력
-		
-	
+		String x=request.getParameter("x");
+		String y=request.getParameter("y");
 		
 		if(num == null)
 			num = "7";
@@ -115,85 +117,20 @@ public class MaemoolModel {
 		 
 		List<ImgVO> imgList = MaemoolDAO.detailMaemool(Integer.parseInt(num));
 		MaemoolVO vo = MaemoolDAO.infoMaemool(Integer.parseInt(num));
+		String email=MemberDAO.sellerEmail(Integer.parseInt(num));
+		SellerVO seller=MemberDAO.sellerData(email);
 		
-		
+		request.setAttribute("x", x);
+		request.setAttribute("y", y);
 		request.setAttribute("imgList", imgList);
-		
+		request.setAttribute("seller", seller);
 		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../maemool/maemool_detail.jsp");
 	
 		return "main.jsp";
 	}
 	
-	@RequestMapping("main/imageUpload.do")
-	public void ImageInsert(HttpServletRequest request, HttpServletResponse res) throws IOException
-	{
-		HttpSession session=request.getSession();
-		String email=(String) session.getAttribute("id");
-		int maemoolNum=MaemoolDAO.maemoolNum();
-		ImgVO vo=new ImgVO();
-		
 	
-		
-		//img테이블에 필요한 데이터 저장
-		//매물 이미지 정보 받아오는 라이브러리
-		final int KILOBYTE = 1024 * 1024;
-		final int MEMORY_THRESHOLD = 3 * KILOBYTE;
-		final int MAX_FILE_SIZE = 40 * KILOBYTE;
-		final int MAZ_REQUEST_SIZE = 50 * KILOBYTE;
-		final String PATH = "c:\\download";
-		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-		if (isMultipart) {
-			// Create a factory for disk-based file items
-			DiskFileItemFactory factory = new DiskFileItemFactory();
-
-			// Set factory constraints
-			factory.setSizeThreshold(MEMORY_THRESHOLD);			
-
-			// Create a new file upload handler
-			ServletFileUpload upload = new ServletFileUpload(factory);
-
-			// Set overall request size constraint
-			upload.setSizeMax(MAZ_REQUEST_SIZE);
-			upload.setFileSizeMax(MAX_FILE_SIZE);
-			
-			// Parse the request			
-			try { 
-				List<FileItem> items = new ServletFileUpload(factory).parseRequest(request);
-				for (FileItem item : items) {
-					if (item.isFormField()) {
-						// Process regular form field (input type="text|radio|checkbox|etc", select,
-						// etc).
-						String fieldName = item.getFieldName();
-						String fieldValue = item.getString();
-						// ... (do your job here)
-					} else {
-						// Process form file field (input type="file").
-						String fieldName = item.getFieldName();
-						String fileName = item.getName();
-						//session.getAttribute("email")+"//"+item.getName();
-						//System.out.println("fieldName:" + fieldName + ", fileName:" + fileName);
-						InputStream fileContent = item.getInputStream();
-						BufferedImage image = ImageIO.read(fileContent);
-						ImageIO.write(image, "jpg", new File(PATH + "/" + fileName));
-						
-						File f=new File(PATH+"\\"+fileName);
-						File file=new File(PATH+"\\"+email+"-"+fileName);
-						f.renameTo(file);
-						
-						System.out.println(file.getName());
-						vo.setImg(file.getName());
-						vo.setNum(maemoolNum);
-						MaemoolDAO.insertImage(vo);
-					}
-				}
-			} catch (FileUploadException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-	}
 
 	@RequestMapping("main/upload.do")
 	public String maemoolInsert(HttpServletRequest request, HttpServletResponse res) throws IOException {
@@ -707,6 +644,29 @@ public class MaemoolModel {
 	
 	@RequestMapping("main/remove_jjim.do")
 	public String remove_jjim(HttpServletRequest req, HttpServletResponse res) {
+		// id는 session에 저장되어있다.
+		HttpSession session = req.getSession();
+		
+		//찜에 필요한 데이터 (id하고 매물번호)
+		String email = (String) session.getAttribute("id");
+		String num = req.getParameter("maemool_num");
+		
+		
+		Map map=new HashMap();
+		
+		map.put("email", email);
+		map.put("num", num);
+		System.out.println(map.get("email"));
+		System.out.println(map.get("num"));
+		
+		JjimDAO.removeJjim(map);
+		
+		
+		return "../maemool/jjim.jsp";
+	}
+	
+	@RequestMapping("main/jjim_detail.do")
+	public String jjim_detail(HttpServletRequest req, HttpServletResponse res) {
 		// id는 session에 저장되어있다.
 		HttpSession session = req.getSession();
 		

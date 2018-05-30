@@ -19,7 +19,7 @@ $(function() {
 		var a = $('#num').attr('num');
 			$.ajax({
 				type :"POST",
-				url : "../main/like_ok.do",
+				url : "like_ok.do",
 				data : {num : a},
 				success : function(data) {
 					alert("나와라제발");

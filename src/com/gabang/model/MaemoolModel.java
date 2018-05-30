@@ -670,6 +670,8 @@ public class MaemoolModel {
 		req.setAttribute("main_jsp", "../like/like.jsp");
 		return "main.jsp";
 	}
+	
+	// by. 한솔
 	@RequestMapping("main/like_ok.do")
 	public String Likes(HttpServletRequest request, HttpServletResponse response) {
 /*		// 관심목록 by.한솔
@@ -683,10 +685,13 @@ public class MaemoolModel {
 		
 		
 		String no = request.getParameter("num");
-		System.out.println(no);
+		System.out.println("파라미터 num : " + no);
 		Cookie[] cookies = request.getCookies();
 		String name = "";
 		String ss = "";
+		System.out.println("ss 공백 : " + ss);
+		int ssInt = Integer.parseInt(ss);
+		System.out.println("ssInt : " + ssInt);
 		if(cookies != null) {
 			for(int i = 0; i<cookies.length; i++) {
 				Cookie c = cookies[i];
@@ -700,8 +705,10 @@ public class MaemoolModel {
 					name="cookNo1";
 				}
 			}
+			/***************이 부분 한번 확인해주세요***************/
 			int a = Integer.parseInt(ss);
 			System.out.println("ss=" + ss);
+			/*******************************************************/
 			name ="cookNo"+(a+1);
 		}
 		else {

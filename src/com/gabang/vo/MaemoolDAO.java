@@ -168,7 +168,7 @@ public class MaemoolDAO {
 			session = ssf.openSession();
 			list = session.selectList("getDepositInfo");
 		} catch (Exception e) {
-			System.out.println("PropertyAddrDAO - getDepositInfo : " + e.getMessage());
+			System.out.println("MaemoolDAO - getDepositInfo : " + e.getMessage());
 		} finally {
 			if (session != null) {
 				session.close();
@@ -178,15 +178,15 @@ public class MaemoolDAO {
 	}
 	
 	// 주차 가능
-	public static List<MaemoolVO> getParkingInfo(String theme) {
-		List<MaemoolVO> list = new ArrayList<MaemoolVO>();
+	public static List<MapVO> getParkingInfo() {
+		List<MapVO> list = new ArrayList<MapVO>();
 		SqlSession session = null;
 		
 		try {
 			session = ssf.openSession();
-			list = session.selectList("getThemeInfo");
+			list = session.selectList("getParkingInfo");
 		} catch (Exception e) {
-			System.out.println("PropertyAddrDAO - getThemeInfo : " + e.getMessage());
+			System.out.println("MaemoolDAO - getParkingInfo : " + e.getMessage());
 		} finally {
 			if (session != null) {
 				session.close();
@@ -196,15 +196,15 @@ public class MaemoolDAO {
 	}
 	
 	// 원룸
-	public static List<MaemoolVO> getOneRoomInfo(String theme) {
-		List<MaemoolVO> list = new ArrayList<MaemoolVO>();
+	public static List<MapVO> getOneRoomInfo() {
+		List<MapVO> list = new ArrayList<MapVO>();
 		SqlSession session = null;
 		
 		try {
 			session = ssf.openSession();
-			list = session.selectList("getThemeInfo");
+			list = session.selectList("getOneRoomInfo");
 		} catch (Exception e) {
-			System.out.println("PropertyAddrDAO - getThemeInfo : " + e.getMessage());
+			System.out.println("MaemoolDAO - getOneRoomInfo : " + e.getMessage());
 		} finally {
 			if (session != null) {
 				session.close();
@@ -214,15 +214,15 @@ public class MaemoolDAO {
 	}
 	
 	// 오피스텔
-	public static List<MaemoolVO> getOfficetelInfo(String theme) {
-		List<MaemoolVO> list = new ArrayList<MaemoolVO>();
+	public static List<MapVO> getOfficetelInfo() {
+		List<MapVO> list = new ArrayList<MapVO>();
 		SqlSession session = null;
 		
 		try {
 			session = ssf.openSession();
-			list = session.selectList("getThemeInfo");
+			list = session.selectList("getOfficetelInfo");
 		} catch (Exception e) {
-			System.out.println("PropertyAddrDAO - getThemeInfo : " + e.getMessage());
+			System.out.println("MaemoolDAO - getOfficetelInfo : " + e.getMessage());
 		} finally {
 			if (session != null) {
 				session.close();

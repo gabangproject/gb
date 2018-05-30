@@ -42,11 +42,12 @@ public class MaemoolModel {
 		String keyword = req.getParameter("keyword");
 		System.out.println(keyword);
 		//theme = theme.trim();		
-		List<MapVO> geoList = new ArrayList<MapVO>();
+		List<MapVO> geoList = null;
 		List<MapVO> tempList = null;
 		
 		if(keyword.equals("저보증금")) {						
 			tempList = MaemoolDAO.getDepositInfo();
+			geoList = new ArrayList<MapVO>();
 			//System.out.println("갯수:"+tempList.size());
 			for(MapVO vo:tempList) {
 				if(vo.getDeposit().contains("전") || vo.getDeposit().contains("억")) continue;
@@ -56,22 +57,17 @@ public class MaemoolModel {
 				if(num > 500) continue;				
 				geoList.add(vo);
 			}
-//			for(MapVO vo:geoList)
-//				System.out.println(vo.getDeposit());
 		}
-////			
-////		else if(theme.equals("주차 가능")) {
-////			tempList = MaemoolDAO.getParkingInfo(theme);
-////		}
-////			
-////		else if(theme.equals("원룸")) {
-////			tempList = MaemoolDAO.getOneRoomInfo(theme);
-////		}
-////			
-////		else if(theme.equals("오피스텔")) {
-////			tempList = MaemoolDAO.getOfficetelInfo(theme);
-////		}			
-//		
+		
+		else if(keyword.equals("주차 가능"))
+			geoList = MaemoolDAO.getParkingInfo();	
+			
+		else if(keyword.equals("원룸"))
+			geoList = MaemoolDAO.getOneRoomInfo();		
+			
+		else if(keyword.equals("오피스텔")) 
+			geoList = MaemoolDAO.getOfficetelInfo();				
+		
 		List<ImgVO> imgList = null;
 		Map<Integer,Object> oneImg = new HashMap<Integer,Object>();
 
@@ -581,9 +577,16 @@ public class MaemoolModel {
 					if(number > 500) continue;				
 					geoList.add(vo);
 				}
-//				for(MapVO vo:geoList)
-//					System.out.println(vo.getDeposit());
-			} else			
+			}
+			else if(keyword.equals("주차 가능"))
+				geoList = MaemoolDAO.getParkingInfo();	
+				
+			else if(keyword.equals("원룸"))
+				geoList = MaemoolDAO.getOneRoomInfo();		
+				
+			else if(keyword.equals("오피스텔")) 
+				geoList = MaemoolDAO.getOfficetelInfo();	
+			else			
 				geoList = PropertyAddrDAO.searchMaemool(keyword);
 		
 			// 지도 움직일 경우 해당 지도 내 매물 출력

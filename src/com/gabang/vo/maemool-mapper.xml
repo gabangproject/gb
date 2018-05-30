@@ -15,7 +15,7 @@
 		SELECT * FROM map WHERE rtype=0 OR rtype=1 
 	</select>
 	
-		<select id="getOfficetelInfo" resultType="MapVO">
+	<select id="getOfficetelInfo" resultType="MapVO">
 		SELECT * FROM map WHERE btype=1 
 	</select>
 	

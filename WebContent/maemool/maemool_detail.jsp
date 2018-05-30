@@ -146,7 +146,7 @@
 							<tr>
 							</tr>
 				</table>
-				<label>상세설명</label>
+				<label>상세설명</label>씨부레
 				<br>${vo.description}
 				</div>
 			

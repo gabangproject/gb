@@ -673,4 +673,47 @@ public class MaemoolModel {
 		req.setAttribute("main_jsp", "../like/like.jsp");
 		return "main.jsp";
 	}
+	@RequestMapping("main/like_ok.do")
+	public String Likes(HttpServletRequest request, HttpServletResponse response) {
+/*		// 관심목록 by.한솔
+		String num = request.getParameter("num");
+		System.out.println(num);
+		Cookie c = new Cookie("cookNo", num);
+		c.setMaxAge(0);
+		// cookie.setPath("C:\\GaBang\\gb"); //쿠키의 범위 설정
+		response.addCookie(c); // 쿠키를 저장
+		System.out.println(c);*/
+		
+		
+		String no = request.getParameter("num");
+		System.out.println(no);
+		Cookie[] cookies = request.getCookies();
+		String name = "";
+		String ss = "";
+		if(cookies != null) {
+			for(int i = 0; i<cookies.length; i++) {
+				Cookie c = cookies[i];
+				String cName = c.getName();
+				if(cName.startsWith("cookNo")) {
+					String cValue = c.getValue();
+					ss=cName.replaceAll("[^0-9]", "");
+					System.out.println("ss = " + ss);
+				}
+				else {
+					name="cookNo1";
+				}
+			}
+			int a = Integer.parseInt(ss);
+			System.out.println("ss=" + ss);
+			name ="cookNo"+(a+1);
+		}
+		else {
+			name ="cookNo1";
+		}
+		Cookie c = new Cookie(name,no);
+		c.setMaxAge(60*60*24);
+		response.addCookie(c);		
+		request.setAttribute("main_jsp", "../like/like_ok.jsp");
+		return "main.jsp";
+	}
 }

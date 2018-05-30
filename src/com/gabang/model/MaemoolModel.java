@@ -469,7 +469,6 @@ public class MaemoolModel {
 		*/
 
 		// 위도경도를 저장하기 위한 map
-		//Map<String, Double> bound = null;
 		Map<String, Object> bound = null;
 		
 		// 리스트 출력을 위한 변수

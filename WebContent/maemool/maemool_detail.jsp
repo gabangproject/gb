@@ -128,25 +128,20 @@
 					</thead> -->
 					<tbody>
 						<tr>
-							<td>${infoMaemool.deposit }</td>
-							<td>${infoMaemool.monthly_rent }</td>
-							 
+							<td><label class="col-sm-5">∫∏¡ı±›</label>${vo.deposit }</td>
+							<td>${vo.monthly_rent }</td> 
 						</tr>
 						<tr>
-							<td></td>
-							<td></td>
+							<td>${vo.manage_fee}</td>
+							<td>${vo.maintenance}</td>
 						</tr>
 						<tr>
-							<td>${infoMaemool.manage_fee}</td>
-							<td>${infoMaemool.maintenance}</td>
+							<td>${vo.floor}</td>
+							<td>${vo.elev}</td>
 						</tr>
 						<tr>
-							<td>${infoMaemool.floor}</td>
-							<td>${infoMaemool.elev}</td>
-						</tr>
-						<tr>
-							<td>${infoMaemool.parking_lot}</td>
-							<td>${infoMaemool.detail_title}</td>
+							<td>${vo.parking_lot}</td>
+							<td>${vo.detail_title}</td>
 						</tr>
 					</tbody>
 				</table>

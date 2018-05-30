@@ -171,9 +171,13 @@ font-weight: 500;
 							<label class="col-md-4 control-label" for="img">매물사진 등록
 							<span class="text-danger">*</span>
 							</label>
-							<div class="col-md-4">
-								<input type="button" id="img" onclick="fileUpload()" value="사진 등록" required>		
-							</div>
+							 <div class="form-group files">
+				               
+				                <input type="file" name="img" multiple="multiple"
+								style="apperance: none;	-webkit-apperance: none;" required>
+				              </div>
+              
+            
 						</div>
 
 						

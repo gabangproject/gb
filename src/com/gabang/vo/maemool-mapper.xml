@@ -73,4 +73,12 @@
 		SELECT * FROM maemool_temp
 		WHERE num = #{num}
 	</select>
+	
+	<insert id="insertJjim" parameterType="JjimVO">
+		Insert into jjim(email,num) VALUES(#{email},#{num})
+	</insert>
+	
+	<delete id="removeJjim" parameterType="java.util.Map">
+		Delete from (SELECT * FROM jjim where email=#{email}) WHERE num=#{num}
+	</delete>
 </mapper>

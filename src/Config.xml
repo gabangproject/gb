@@ -19,6 +19,7 @@
     <typeAlias type="com.gabang.vo.DealTypeVO" alias="DealTypeVO"/>
     <typeAlias type="com.gabang.vo.ImgVO" alias="ImgVO"/>
     <typeAlias type="com.gabang.vo.RoomTypeVO" alias="RoomTypeVO"/>
+    <typeAlias type="com.gabang.vo.JjimVO" alias="JjimVO"/>
   </typeAliases>
   <environments default="development">
     <environment id="development">

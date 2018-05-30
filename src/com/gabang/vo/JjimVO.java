@@ -6,6 +6,7 @@ public class JjimVO {
 	private Date regdate;	// 등록일
 	private String email;	// 아이디
 	private int num;		// 매물번호
+	
 	public Date getRegdate() {
 		return regdate;
 	}

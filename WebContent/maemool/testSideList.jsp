@@ -15,6 +15,47 @@ $(function() {
 	%>
 	alert('testSideList.jsp에서 출력\n매물 개수 : ' + <%=list.size()%> + '개');
 })
+
+function jjim(input)
+{
+	
+	var num=$(input).attr("num");
+	alert(num);
+	var heart=$(input).attr('class');
+	
+	 
+        	 
+     if(heart=="glyphicon glyphicon-heart")
+         {
+         
+		         $.ajax({
+		    		 type: 'post',
+		             data : {maemool_num : num},
+		             url : "../main/remove_jjim.do",
+		             success : function(data) {
+		            	 
+		            				 $(input).attr('class',"glyphicon glyphicon-heart-empty");
+				             	  }
+				         }); 
+           }
+         
+     else
+        {
+        
+		        $.ajax({
+		   		 type: 'post',
+		            data : {maemool_num : num},
+		            url : "../main/add_jjim.do",
+		            success : function(data) {
+
+		            				$(input).attr('class',"glyphicon glyphicon-heart");
+		            			}
+				        }); 
+		        
+        }
+      
+}
+
 </script>
 </head>
 <body>
@@ -22,7 +63,7 @@ $(function() {
 	<c:forEach var="i" items="${geoList}" varStatus="s">
 		<div class="media">
 			<div class="fav-box">
-				<i class="fa fa-heart-o" aria-hidden="true"></i>
+				<a><span class="glyphicon glyphicon-heart-empty" onclick="jjim(this)" num=${i.num }></span></a>
 				<i class="fa fa-eye" id='like' aria-hidden="true" num='${i.num}'></i>
 			</div>
 			<a href="maemool_detail.do?num=${i.num}&x=${i.x_position}&y=${i.y_position}">

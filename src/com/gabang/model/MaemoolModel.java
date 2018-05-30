@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +28,7 @@ import com.gabang.vo.BuildingTypeVO;
 import com.gabang.vo.DealTypeVO;
 import com.gabang.vo.ImgVO;
 import com.gabang.vo.JjimDAO;
+import com.gabang.vo.JjimVO;
 import com.gabang.vo.MaemoolDAO;
 import com.gabang.vo.MaemoolVO;
 import com.gabang.vo.MapDAO;
@@ -672,5 +674,53 @@ public class MaemoolModel {
 
 		req.setAttribute("main_jsp", "../like/like.jsp");
 		return "main.jsp";
+	}
+	
+	@RequestMapping("main/add_jjim.do")
+	public String real_jjim(HttpServletRequest req, HttpServletResponse res) {
+		// id는 session에 저장되어있다.
+		HttpSession session = req.getSession();
+		
+		//찜에 필요한 데이터 (id하고 매물번호)
+		String email = (String) session.getAttribute("id");
+		String num = req.getParameter("maemool_num");
+		
+		
+		JjimVO vo=new JjimVO();
+		
+		vo.setEmail(email);
+		vo.setNum(Integer.parseInt(num));
+		vo.setRegdate(new Date());
+		
+		System.out.println(email);
+		System.out.println(num);
+		
+		JjimDAO.insertJjim(vo);
+		System.out.println("dao 완료");
+		
+		return "../maemool/jjim.jsp";
+	}
+	
+	@RequestMapping("main/remove_jjim.do")
+	public String remove_jjim(HttpServletRequest req, HttpServletResponse res) {
+		// id는 session에 저장되어있다.
+		HttpSession session = req.getSession();
+		
+		//찜에 필요한 데이터 (id하고 매물번호)
+		String email = (String) session.getAttribute("id");
+		String num = req.getParameter("maemool_num");
+		
+		
+		Map map=new HashMap();
+		
+		map.put("email", email);
+		map.put("num", num);
+		System.out.println(map.get("email"));
+		System.out.println(map.get("num"));
+		
+		JjimDAO.removeJjim(map);
+		
+		
+		return "../maemool/jjim.jsp";
 	}
 }

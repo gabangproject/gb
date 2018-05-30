@@ -132,7 +132,7 @@ public class MaemoolModel {
 
 
 	@RequestMapping("main/upload.do")
-	public void maemoolInsert(HttpServletRequest request) throws IOException {
+	public String maemoolInsert(HttpServletRequest request) throws IOException {
 
 		
 		BuildingTypeVO vo=new BuildingTypeVO();
@@ -338,7 +338,8 @@ public class MaemoolModel {
 		MaemoolDAO.insertMaemool(vo, vo1, vo2, vo3, vo4, vo5);
 		
 		
-		
+		request.setAttribute("main_jsp", "../maemool/maemool_detail.jsp");
+			return "main.jsp";
 	}
 
 	// home.jsp에서 검색할 경우 작동 by.한

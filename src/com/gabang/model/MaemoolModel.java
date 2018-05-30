@@ -202,7 +202,7 @@ public class MaemoolModel {
 	}
 
 	@RequestMapping("main/upload.do")
-	public String maemoolInsert(HttpServletRequest request, HttpServletResponse res) throws UnsupportedEncodingException {
+	public String maemoolInsert(HttpServletRequest request, HttpServletResponse res) throws IOException {
 
 		request.setCharacterEncoding("EUC-KR");
 		
@@ -210,6 +210,7 @@ public class MaemoolModel {
 		
 		BuildingTypeVO vo=new BuildingTypeVO();
 		DealTypeVO vo1=new DealTypeVO();
+		ImgVO vo2=new ImgVO();
 		MaemoolVO vo3=new MaemoolVO();
 		PropertyAddrVO vo4=new PropertyAddrVO();
 		RoomTypeVO vo5=new RoomTypeVO();
@@ -221,7 +222,63 @@ public class MaemoolModel {
 		System.out.println(maemoolNum);
 		
 		
-		
+		//img테이블에 필요한 데이터 저장
+				//매물 이미지 정보 받아오는 라이브러리
+				final int KILOBYTE = 1024 * 1024;
+				final int MEMORY_THRESHOLD = 3 * KILOBYTE;
+				final int MAX_FILE_SIZE = 40 * KILOBYTE;
+				final int MAZ_REQUEST_SIZE = 50 * KILOBYTE;
+				final String PATH = "c:\\download";
+				boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+				if (isMultipart) {
+					// Create a factory for disk-based file items
+					DiskFileItemFactory factory = new DiskFileItemFactory();
+
+					// Set factory constraints
+					factory.setSizeThreshold(MEMORY_THRESHOLD);			
+
+					// Create a new file upload handler
+					ServletFileUpload upload = new ServletFileUpload(factory);
+
+					// Set overall request size constraint
+					upload.setSizeMax(MAZ_REQUEST_SIZE);
+					upload.setFileSizeMax(MAX_FILE_SIZE);
+					
+					// Parse the request			
+					try { 
+						List<FileItem> items = new ServletFileUpload(factory).parseRequest(request);
+						for (FileItem item : items) {
+							if (item.isFormField()) {
+								// Process regular form field (input type="text|radio|checkbox|etc", select,
+								// etc).
+								String fieldName = item.getFieldName();
+								String fieldValue = item.getString();
+								// ... (do your job here)
+							} else {
+								// Process form file field (input type="file").
+								String fieldName = item.getFieldName();
+								String fileName = item.getName();
+								//session.getAttribute("email")+"//"+item.getName();
+								//System.out.println("fieldName:" + fieldName + ", fileName:" + fileName);
+								InputStream fileContent = item.getInputStream();
+								BufferedImage image = ImageIO.read(fileContent);
+								ImageIO.write(image, "jpg", new File(PATH + "/" + fileName));
+								
+								File f=new File(PATH+"\\"+fileName);
+								File file=new File(PATH+"\\"+email+"-"+fileName);
+								f.renameTo(file);
+								
+								System.out.println(file.getName());
+								vo2.setImg(file.getName());
+								vo2.setNum(maemoolNum);
+								MaemoolDAO.insertImage(vo2);
+							}
+						}
+					} catch (FileUploadException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 			
 		
 				

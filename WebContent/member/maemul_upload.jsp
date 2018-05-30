@@ -131,12 +131,12 @@ font-weight: 500;
 				
 
 				
-				<form id="maemul_upload" class="form-horizontal" method="post" action="../main/upload.do">
+				<form id="maemul_upload" class="form-horizontal" method="post" enctype="multipart/form-data" 
+				action="../main/upload.do">
 							
 					<fieldset form="maemul_upload">
 						
-						
-						
+
 						
 						<!-- 매물주소 -->
 						<div class="form-group">
@@ -263,7 +263,7 @@ font-weight: 500;
 									
 									<c:forEach var="option" items="${opt }" varStatus="n">
 										<label for="opt-${n.index }" class="form-check-label">
-										<input type="checkbox" id="opt-${n.index }" name="opt" value="${n.index }" 
+										<input type="checkbox" id="opt-${n.index }" name="opt" value="${option }" 
 										required>${option }
 										</label>
 									</c:forEach>

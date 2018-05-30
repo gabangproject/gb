@@ -250,6 +250,7 @@ public class MemberModel {
 		return "main.jsp";
 	}
 	
+	
 	@RequestMapping("main/join_ok.do")
 	public String insertMemberData (HttpServletRequest request, HttpServletResponse response) throws IOException 
 	{

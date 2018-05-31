@@ -9,6 +9,8 @@
 <html>
 <head>
 <meta charset=EUC-KR>
+<%-- awesomefont를 사용하기 위한 링크 --%>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -24,6 +26,9 @@ $(function() {
 	var latlngTotal;
 	var latlngList;
 	var mMarkers = new Array();
+	
+	<%-- 로딩 화살표가 확대되는 애니메이션 --%>
+	$('.fa-spin').animate({"font-size":"15em"});
 	<%-- 
 	페이지가 로딩되면 ajax로 화면 우측 매물목록을 불러온다.
 	이때 keyword를 같이 전송하여 매물목록에서 알맞은 매물을 출력하게끔 한다.
@@ -33,12 +38,35 @@ $(function() {
 		url:'testSideList.do',
 		data:{'keyword': keyword},
 		success:function(res) {
+			$('#list').css({'text-align':''});
 			$('#list').html(res);			
 		}
 	});
 	
 	<%-- 맵 드래그가 끝난 후 실행 --%>
 	daum.maps.event.addListener(map, 'dragend', function() {
+		$('#list').html("<div id='loadingBox' style='text-align:center; text-valign:center; width: 100%; height:220px;'><i class='fas fa-sync fa-spin' style='font-size:2em;color:#65D2FB'></i></div>");
+		$('#list').css({'text-align':'center'});
+		<%-- 로딩 화살표가 커지는 효과 --%>
+		$('.fa-spin').animate({"font-size":"15em"});
+
+		<%-- 2초 후 로딩 화살표 아래 글자 추가 --%>
+		setTimeout(function() {
+			$("#list").append("<h1 id=msg color=#2574AF;>좀 더 기다려요!<h1>");
+		},2000);
+		
+		<%-- 5초 후 글자 변경 --%>
+		setTimeout(function() {
+			$("#msg").text("거의 다 됐어요!");
+			$("#msg").attr("color","red");
+		},5000);
+		
+		<%-- 9초 후 글자 변경 --%>
+		setTimeout(function() {
+			$("#msg").text("미안해요! 열심히 찾고있어요!");
+			//$("#msg").attr("color","red");
+		},9000);
+		
 		<%-- 지도의 각 끝점을 구한다. --%>
 		bound = map.getBounds();
 		
@@ -62,6 +90,7 @@ $(function() {
 			url:'testSideList.do',
 			data:{'ne_x':ne_x, 'ne_y':ne_y, 'sw_x':sw_x, 'sw_y':sw_y},
 			success:function (res) {
+				$('#list').css({'text-align':''});
 				$('#list').html(res);
 				<%-- 정규식을 이용해서 결과값의 위경도만 받는다. --%>
 				<%-- split 함수를 사용하기위해서 object 타입을 String 타입으로 전환 --%>
@@ -298,20 +327,23 @@ h2 a {
 								// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
 								map.panTo(moveLatLon);
 							};
-							var mNum = markers.length;
+							<%--var markerNum = markers.length;
 							
-							alert('mNum은 ' + mNum);
-							
+							alert('markerNum은 ' + mNum);--%>
 						</script>
 						<!-- 매물들의 리스트 출력 부분 -->
-						<div class="col-md-5 listing-block" id=list style="width: 50%; display: inline-block">
+						<div class="col-md-5 listing-block" id=list style="text-align:center;width: 50%; display: inline-block">
+							<div id='loadingBox' style="text-align:center; text-valign:center; width: 100%; height:220px;">
+								<i class="fas fa-sync fa-spin" style="font-size:2em;color:#65D2FB"></i>
+							</div>
+							<h1 id=info style="color:#2574AF;">매물을 골라오고 있어요!</h1>
 						</div>
 					</div>
 				</div>
 			</section>
-			<div style="width: 300px; height: 30px; background-color:yellow;" align="center">
+			<%--<div style="width: 300px; height: 30px; background-color:yellow;" align="center">
 				<h3 id=info>${fn:length(geoList)} 개 매물</h3>
-			</div>
+			</div> --%>
 		</div>
 	</div>
 </body>

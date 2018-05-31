@@ -98,15 +98,16 @@ public class MaemoolDAO {
 		}
 	}
 
-	public static List<ImgVO> detailMaemool(int num)
+	public static List<ImgVO> maemoolImage(int num)
 	{
 		SqlSession session=null;
 		List<ImgVO> list=new ArrayList<ImgVO>();
 		try {
-			
+				System.out.println("maemool Image");
 			session=ssf.openSession();
+			System.out.println("maemool Image ing");
 			list=session.selectList("imgFind", num);
-			
+			System.out.println("maemool end");
 		}catch(Exception ex)
 		{
 			System.out.println(ex.getMessage());
@@ -116,17 +117,18 @@ public class MaemoolDAO {
 			if(session!=null)
 				session.close();
 		}
+		System.out.println("maemool Image finally");
 		return list;
 	}
 	// 매물 상세정보
 	public static MaemoolVO infoMaemool(int num)
 	{
-		MaemoolVO vo1 = new MaemoolVO();
+		MaemoolVO vo = new MaemoolVO();
 		SqlSession session = null;
 		try
 		{	
 			session=ssf.openSession();
-			vo1=session.selectOne("infoFind",num);
+			vo=session.selectOne("infoFind",num);
 		}
 		catch (Exception ex)
 		{
@@ -137,7 +139,7 @@ public class MaemoolDAO {
 			if(session!=null)
 				session.close();
 		}
-		return vo1;
+		return vo;
 	}
 	public MaemoolVO cookie(int num) {
 		MaemoolVO vo = null;

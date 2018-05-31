@@ -58,7 +58,7 @@ border-bottom: 1px solid #e6e6e6;
 </style>
 </head>
 <body>
-
+    <%= application.getRealPath("/") %>
 	<!-- end:header-top -->
 	<div id="fh5co-work-section" >
 		<div class="container" >
@@ -121,7 +121,9 @@ border-bottom: 1px solid #e6e6e6;
 								<tbody>
 									<tr>
 										<td class="col-md-2 h">등록자 아이디</td>
-										<td colspan="3">${vo.email}</td>
+										<td >${vo.email}</td>
+										<td class="h">입주가능일 </td>
+										<td>${vo.moving_date}</td>
 									</tr>
 									<tr>
 										<td class="h">보증금 </td>
@@ -132,8 +134,8 @@ border-bottom: 1px solid #e6e6e6;
 									<tr>
 										<td class="h">관리비 </td>
 										<td>${vo.manage_fee}</td>
-										<td class="h col-md-2 ">관리비 항목</td>
-										<td>${vo.maintenance}</td>
+										<td class="h">인근지하철</td>
+										<td>${vo.near_subway}</td>
 									</tr>
 									<tr>
 										<td class="h">층/건물층수</td>
@@ -167,12 +169,7 @@ border-bottom: 1px solid #e6e6e6;
 										<td class="h">옵션</td>
 										<td>${vo.opt}</td>
 									</tr>
-									<tr>
-										<td class="h">입주 가능일</td>
-										<td>${vo.moving_date}</td>
-										<td class="h">인근지하철</td>
-										<td>${vo.near_subway}</td>
-									</tr>
+									
 									<tr>
 										<td class="h">상세설명</td>
 										<td colspan="3">${vo.description}</td>

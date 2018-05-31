@@ -298,7 +298,8 @@ public class MemberModel {
 			vo1.setAddr(mr.getParameter("address")+mr.getParameter("detailAddress"));
 			vo1.setIntro(mr.getParameter("intro"));
 			
-			
+			String realPath="C:\\\\webDev\\\\webStudy\\\\.metadata\\\\.plugins\\\\org.eclipse.wst.server.core\\\\tmp1\\\\wtpwebapps\\\\GaBang\\\\upload\\\\";
+
 			//업로드한 중개사 관련 사진의 원본 이름 저장
 			String fileName=mr.getOriginalFileName("pic");
 		
@@ -312,11 +313,11 @@ public class MemberModel {
 		    {
 		    	//저장되어 있는 사진의 이름을 email명으로 변경
 		    	File f=new File("c:\\download\\"+fileName);
-		    	File newFile=new File("c:\\download\\"+email);
+		    	File newFile=new File(realPath+email);
 		    	f.renameTo(newFile);
 		    	
 		    	
-		    	vo1.setPic(email);
+		    	vo1.setPic("..\\upload\\"+email);
 		    }
 			
 

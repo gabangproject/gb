@@ -100,9 +100,10 @@ public class MaemoolModel {
 	}
 	
 
+	
 	@RequestMapping("main/maemool_detail.do")
-	public String maemoolDetail(HttpServletRequest request, HttpServletResponse res)
-	throws Exception {
+	public String maemoolDetail1(HttpServletRequest request, HttpServletResponse res) throws Exception {
+		System.out.println(11111);
 		request.setCharacterEncoding("euc-kr");
 		
 		String num=request.getParameter("num"); // 이미지랑 이미지에 해당하는 상세정보를 매물번호에 맞게 출력
@@ -113,19 +114,18 @@ public class MaemoolModel {
 		System.out.println(y);
 		
 		
-	
 		MaemoolVO vo1=new MaemoolVO();
 	
 		 
-		List<ImgVO> imgList = MaemoolDAO.detailMaemool(Integer.parseInt(num));
+		List<ImgVO> imgList = MaemoolDAO.maemoolImage(Integer.parseInt(num));
+		System.out.println(333333);
 		MaemoolVO vo = MaemoolDAO.infoMaemool(Integer.parseInt(num));
 		String email=MemberDAO.sellerEmail(Integer.parseInt(num));
+		System.out.println(email);
 		SellerVO seller=MemberDAO.sellerData(email);
+		System.out.println(seller.getEmail());
+		System.out.println("seller:"+seller.getComp_name());
 		
-		for(ImgVO vo2:imgList)
-		{
-			System.out.println(vo2.getImg());
-		}
 		
 		request.setAttribute("x", x);
 		request.setAttribute("y", y);
@@ -158,7 +158,7 @@ public class MaemoolModel {
 		
 		 
 		//fileItem.getString("EUC_KR"); 
-		int i=1;
+		
 		
 		String option="";
 		Map map=new HashMap();
@@ -195,8 +195,7 @@ public class MaemoolModel {
 								// etc).
 								String fieldName = item.getFieldName();
 								String fieldValue = item.getString("EUC_KR");
-								System.out.println(fieldName);
-								System.out.println(fieldValue);
+								
 								if(!(fieldName.equals("opt")))
 								{
 									map.put(fieldName, fieldValue);
@@ -238,10 +237,7 @@ public class MaemoolModel {
 		vo4.setY_position(y_position);
 		vo4.setNum(maemoolNum);
 		
-		System.out.println(addr);
-		System.out.println(x_position);
-		System.out.println(y_position);
-		System.out.println(maemoolNum);
+		
 			
 		
 		
@@ -250,21 +246,21 @@ public class MaemoolModel {
 		String deal_type= (String) map.get("deal_type");
 		vo3.setType(Integer.parseInt(deal_type));
 		vo3.setNum(maemoolNum);
-		System.out.println(deal_type);
+		
 		
 		//room_type에 필요한 데이터
 		//방구조
 		String room_type=(String) map.get("room_type");
 		vo5.setType(Integer.parseInt(room_type));
 		vo5.setNum(maemoolNum);
-		System.out.println(room_type);
+		
 		
 		//building_type에 필요한 데이터
 		//건물형태
 		String building_type=(String) map.get("building_type");
 		vo2.setType(Integer.parseInt(building_type));
 		vo2.setNum(maemoolNum);
-		System.out.println(building_type);
+		
 		
 		//maemool테이블에 필요한 데이터
 		vo1.setNum(maemoolNum);
@@ -278,23 +274,23 @@ public class MaemoolModel {
 			manage_fee=manage_fee+"만원";
 		}
 		vo1.setManage_fee(manage_fee);
-		System.out.println(manage_fee);
+		
 		
 		//관리비 포함항목
 		//option=(String) map.get("option");
 		option=option.substring(0,option.lastIndexOf(","));
 		vo1.setOpt(option);
-		System.out.println(option);
+		
 		
 		//엘리베이터 유무
 		String elev=(String) map.get("elev");
 		vo1.setElev(Integer.parseInt(elev));
-		System.out.println(elev);
+		
 		
 		//주차공간 유무
 		String parking_lot=(String) map.get("parking_lot");
 		vo1.setParking_lot(Integer.parseInt(parking_lot));
-		System.out.println(parking_lot);
+		
 		
 		//해당층
 		String floor1=(String) map.get("floor1")+"층";
@@ -303,12 +299,12 @@ public class MaemoolModel {
 		String floor2=(String) map.get("floor2")+"층";
 		String floor=floor1+"/"+floor2;
 		vo1.setFloor(floor);
-		System.out.println(floor);
+		
 	
 		//월세
 		String monthly_rent=(String) map.get("monthly_rent");
 		vo1.setMonthly_rent(monthly_rent+ "만원");
-		System.out.println("monthly_rent:"+monthly_rent);
+		
 		
 		//보증금
 		String deposit1=(String) map.get("deposit1");
@@ -324,57 +320,53 @@ public class MaemoolModel {
 		
 		String deposit=deposit1+deposit2;
 		
-		/*if(monthly_rent.trim()==null)
-		{
-		deposit=deposit+" (전세가능)";
-		}*/
+		
 			vo1.setDeposit(deposit);
-		System.out.println(deposit);
+		
 		
 		
 		
 		//전용면적
 		String gross_area=(String) map.get("gross_area")+"㎡";
 		vo1.setGross_area(gross_area);
-		System.out.println(gross_area);
+		
 		
 		//입주가능일
 		String moving_date=(String) map.get("moving_date");
 		vo1.setMoving_date(moving_date);
-		System.out.println(moving_date);
+		
 		
 		//매물 한줄 표현
 		String detail_title=(String) map.get("detail_title");
 		vo1.setDetail_title(detail_title);
-		System.out.println(detail_title);
+		
 		
 		//인근 지하철 표시
 		String near_subway=(String) map.get("near_subway");
 		vo1.setNear_subway(near_subway);
-		System.out.println(near_subway);
+		
 		
 		//매물 상세설명
 		String description=(String) map.get("description");
 		vo1.setDescription(description);
-		System.out.println(description);
+		
 		
 		
 		MaemoolDAO.insertMaemool(vo1, vo2, vo3, vo4, vo5);
 		
 		
-		
+		String realPath="C:\\\\webDev\\\\webStudy\\\\.metadata\\\\.plugins\\\\org.eclipse.wst.server.core\\\\tmp1\\\\wtpwebapps\\\\GaBang\\\\upload\\\\";
 		//이미지 저장
 		ImgVO vo=new ImgVO();
 		for(String fileName:list)
 		{
 					
 			File f=new File(PATH+"\\"+fileName);
-			File file=new File(PATH+"\\"+email+"-"+fileName);
+			File file=new File(realPath+email+"-"+fileName);
 			f.renameTo(file);
-			vo.setImg("c:download\\"+file.getName());
+			vo.setImg("..\\upload\\"+file.getName());
 			vo.setNum(maemoolNum);
-			vo.getImg();
-			vo.getNum();
+			
 			MaemoolDAO.insertImage(vo);
 		}
 		

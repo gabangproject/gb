@@ -9,7 +9,6 @@ public class MaemoolVO {
 	private String monthly_rent;	//월세	
 	private String floor;			//층/건물층수
 	private String manage_fee;		//관리비
-	private String maintenance;		//관리비 포함항목
 	private int	elev;				//엘리베이터
 	private int	parking_lot;		//주차
 	private String gross_area;		//크기
@@ -69,14 +68,7 @@ public class MaemoolVO {
 		this.monthly_rent = monthly_rent;
 	}
 
-	public String getMaintenance() {
-		return maintenance;
-	}
-
-	public void setMaintenance(String maintenance) {
-		this.maintenance = maintenance;
-	}
-
+	
 	public String getManage_fee() {
 		return manage_fee;
 	}

@@ -184,14 +184,18 @@ public class MemberDAO {
 		SqlSession session = null;
 		SellerVO vo=null;
 		try {
-			session = ssf.openSession(true);
+			
+			session = ssf.openSession();
 			vo=session.selectOne("sellerData", email);
+			System.out.println("sellerdata check");
+			System.out.println(vo.getAddr());
+			System.out.println("memberDao getAddr ¿Ã»ƒ");
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		} finally {
 			if (session != null)
 				session.close();
-		}
+		}System.out.println("sellerdata check finally");
 		return vo;
 	}
 	

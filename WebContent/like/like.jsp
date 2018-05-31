@@ -123,8 +123,6 @@
 												<th class="col-text" width="15%">매물번호</th>
 												<th class="col-text" width="20%">보증금</th>
 												<th class="col-text" width="20%">월세</th>
-												<th class="col-text" width="10%">관리비</th>
-												<th class="col-text" width="25%">평수</th>
 												<th class="col-text" width="10%">삭제</th>
 											</tr>
 										</thead>
@@ -132,14 +130,16 @@
 
 											<!-- table 게시글 리스트 출력 시작-->
 											<%-- <c:forEach var="vo" items="${vo }"> --%>
-											<c:forEach var="vo" items="${list }">
+											<c:forEach var="vo" items="${list }" end="10">
 												<tr>
-													<td>${vo.num}</td>
-													<td>${vo.deposit }</td>
+													
+													<td><a href="../main/maemool_detail.do?num=${vo.num }&X=${vo.x_position }&Y=${vo.y_position}">${vo.num}</a></td>
+													<%-- <td><a href="../main/maemool_detail.do?num=${vo.num }">${vo.deposit }</a></td> --%>
 													<td>${vo.monthly_rent }</td>
-													<td>${vo.manage_fee }</td>
-													<td>${vo.gross_area}</td>
+													
+													
 													<td>
+													
 														<form action="../main/like_delete.do" method="post">
 															<input type=submit value="삭제" class="btn btn-sm btn-danger">
 															<input type="hidden" name="num" value="${vo.num }">

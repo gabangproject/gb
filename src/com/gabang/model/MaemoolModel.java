@@ -468,7 +468,7 @@ public class MaemoolModel {
 		System.out.println("testSideList.do start-----------------");
 		req.setCharacterEncoding("utf-8");
 		String keyword = req.getParameter("keyword");
-		System.out.println("testSideList.do" + keyword);
+		System.out.println("testSideList.do로 전달받은 키워드" + keyword);
 		// 지도 영역 각 모서리의 위도와 경도를 전달받는다.
 		String Sne_x = req.getParameter("ne_x");
 		String Sne_y = req.getParameter("ne_y");
@@ -570,8 +570,8 @@ public class MaemoolModel {
 			double sw_x = Double.parseDouble(Ssw_x);
 			double sw_y = Double.parseDouble(Ssw_y);
 
-			System.out.println("◈ testSideList로 전송됨\nne_x : " + ne_x + " ne_y : " + ne_y);
-			System.out.println("sw_x : " + sw_x + " sw_y : " + sw_y);
+			/*System.out.println("◈ testSideList로 전송됨\nne_x : " + ne_x + " ne_y : " + ne_y);
+			System.out.println("sw_x : " + sw_x + " sw_y : " + sw_y);*/
 			// 받은 모서리 위경도를 맵에 저장
 			// bound = new HashMap<String, Double>();
 			bound = new HashMap<String, Object>();
@@ -690,7 +690,7 @@ public class MaemoolModel {
 		MaemoolDAO dao = new MaemoolDAO();
 
 		int num = Integer.parseInt(nums);
-		MaemoolVO vo = dao.cookie(num);
+		MapVO vo = dao.cookie(num);
 
 		req.setAttribute("vo", vo);
 

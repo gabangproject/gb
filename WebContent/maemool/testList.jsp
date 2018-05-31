@@ -30,6 +30,7 @@ $(function() {
 		data:{'keyword': keyword},
 		success:function(res) {
 			$('#list').html(res);
+			return res;
 		}
 	});
 	

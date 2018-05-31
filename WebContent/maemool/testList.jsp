@@ -22,6 +22,8 @@
 <%-- by.วั --%>
 $(function() {
 	var keyword = '<%=request.getParameter("keyword")%>';
+	var curpage = <%=request.getAttribute("curpage")%>
+	curpage = Number(curpage)
 	var bound;
 	var latlngTotal;
 	var latlngList;
@@ -36,7 +38,7 @@ $(function() {
 	$.ajax({
 		type:'post',
 		url:'testSideList.do',
-		data:{'keyword': keyword},
+		data:{'keyword': keyword, 'page':curpage},
 		success:function(res) {
 			$('#list').css({'text-align':''});
 			$('#list').html(res);			

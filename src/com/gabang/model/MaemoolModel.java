@@ -118,9 +118,6 @@ public class MaemoolModel {
 			}
 		}
 		//
-		//String strCurpage = String.valueOf(curpage);
-		//req.setAttribute("curpage", strCurpage);
-		System.out.println("ccccccccccc:"+curpage);
 		req.setAttribute("curpage", curpage);
 		req.setAttribute("totalpage", totalpage);
 		req.setAttribute("oneImg", oneImg);
@@ -541,8 +538,7 @@ public class MaemoolModel {
 				}				
 				totalpage = (int)Math.ceil(tempList.size()/30);
 				System.out.println("totalpage:"+totalpage);
-				System.out.println("start:"+start+", end:"+end);
-				
+				System.out.println("start:"+start+", end:"+end);				
 				geoList.clear();
 				for(int i = start ; i <= end; i++)
 					geoList.add(tempList.get(i));

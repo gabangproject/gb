@@ -10,15 +10,15 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <meta charset=EUC-KR>
 <script type="text/javascript">
-<%-- ************** 이 문서에는 위도, 경도를 추가로 입력해서는 안됩니다. ************** --%>
+<%-- <%-- ************** 이 문서에는 위도, 경도를 추가로 입력해서는 안됩니다. ************** --%>
 <%-- by.한 --%>
 $(function() {
-   <%
-   List<MapVO> list = (List<MapVO>) request.getAttribute("geoList");
-   System.out.println(list.size());
-   %>
-   <%--alert('testSideList.jsp에서 출력\n매물 개수 : ' + <%=list.size()%> + '개');--%>
-})
+	   <%
+	   List<MapVO> list = (List<MapVO>) request.getAttribute("geoList");
+	   System.out.println(list.size());
+	   %>
+	   <%--alert('testSideList.jsp에서 출력\n매물 개수 : ' + <%=list.size()%> + '개');--%>
+	});
 <%-- by.준영 --%>
 function jjim(input) {
    var num = $(input).attr("num");
@@ -167,7 +167,7 @@ function send(input){
 	 <c:if test="${curpage < totalpage && curpage > 1}">
 	 	<a href="maemool_theme_list.do?page=${curpage-1 }&keyword=${keyword}" class="btn btn-sm btn-primary">◀</a>
 	 	<a href="maemool_theme_list.do?page=${curpage+1 }&keyword=${keyword}" class="btn btn-sm btn-primary">▶</a>
-		&nbsp;&nbsp;${totalpage } page / ${totalpage } pages
+		&nbsp;&nbsp;${curpage } page / ${totalpage } pages
 	</c:if>
 	</div>
 </body>

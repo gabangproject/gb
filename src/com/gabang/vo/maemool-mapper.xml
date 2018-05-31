@@ -70,26 +70,29 @@
 	<insert id="insertDealType">
 		Insert into deal_type VALUES(#{type},#{num})
 	</insert>
+	
 	<insert id="insertImg">
 		Insert into img VALUES(#{img},#{num})
 	</insert>
+	
 	<insert id="insertMaemool">
-		Insert into img
+		Insert into maemool(num,email,deposit,monthly_rent,floor,manage_fee,elev,parking_lot,
+		gross_area,moving_date,opt,description,near_subway,detail_title)
 		VALUES(#{num},#{email},#{deposit},#{monthly_rent},#{floor},#{manage_fee},#{elev},#{parking_lot},
-		#{gross_area},#{moving_date},#{regdate},#{avg_score},#{opt},#{description},#{near_subway},
+		#{gross_area},#{moving_date},#{opt},#{description},#{near_subway},
 		#{detail_title})
 	</insert>
+	
 	<insert id="insertPropertyAddr">
-		Insert into img
+		Insert into property_addr
 		VALUES(#{addr},#{x_position},#{y_position},#{num})
 	</insert>
 	<insert id="insertRoomType">
-		Insert into img VALUES(#{type},#{num})
+		Insert into room_type VALUES(#{type},#{num})
 	</insert>
 
 	<select id="maemoolNum" resultType="int">
-		SELECT NVL(MAX(num),1) FROM
-		maemool
+		SELECT NVL(MAX(num),1) FROM maemool
 	</select>
 
 

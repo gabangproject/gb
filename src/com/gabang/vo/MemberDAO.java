@@ -180,6 +180,7 @@ public class MemberDAO {
 
 
 	public static SellerVO sellerData(String email) {
+		
 		SqlSession session = null;
 		SellerVO vo=null;
 		try {

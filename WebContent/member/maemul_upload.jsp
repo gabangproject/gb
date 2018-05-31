@@ -355,14 +355,9 @@ font-weight: 500;
 						<!-- 월세  -->
 						<div class="form-group">
 							<label class="col-md-4 control-label" >월세</label>
+														
 								<div class="col-md-2 sub">
-								<input type="text" id="monthly_rent1" name="monthly_rent1" class="form-control" 
-								style="width:45%; display:inline;" onblur="pCheck(this)">
-								<label for="monthly_lent1">억</label>
-								</div>
-								
-								<div class="col-md-2 sub">
-								<input type="text" id="monthly_rent2" name="monthly_rent2" class="form-control" 
+								<input type="text" id="monthly_rent" name="monthly_rent" class="form-control" 
 								style="width:45%; display:inline;" onblur="pCheck(this)">
 								<label for="monthly_lent2">만원</label>
 								</div>

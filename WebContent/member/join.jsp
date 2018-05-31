@@ -300,7 +300,15 @@ $(function(){
 					<fieldset id="sellerform" form="join">
 					
 						<!-- 공인중개사 등록 -->
-						<legend style="text-align: center;">공인중개사 등록</legend>
+						<div class="row">
+							<div
+								class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+								<h3>공인중개사 등록</h3>
+								<small class="text-muted"> <span class="text-danger">*</span>
+									은 필수입력
+								</small>
+							</div>
+						</div>
 
 						<!-- 공인중개사 번호입력 -->
 						<div class="form-group">
@@ -387,7 +395,7 @@ $(function(){
 					<div class="form-group text-center" >
 						<!-- 가입 버튼은 기본적으로 비활성화(disabled) 시켜놓고 입력값 중복체크를 처리하면 활성화 시킴  -->
 						<input type=submit id="join" name="join" class="btn" value="가입" disabled>
-						<input type=button id="cencel" name="cencel" class="btn btn-primary" value="취소">
+						<input type=button id="cencel" name="cencel" class="btn btn-primary" value="취소" onclick="location='main.do'">
 					</div>
 					</fieldset>
 					

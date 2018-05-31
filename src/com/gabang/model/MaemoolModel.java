@@ -52,12 +52,12 @@ public class MaemoolModel {
 		List<MapVO> geoList = null;
 		List<MapVO> tempList = null;
 		
-		if(keyword.equals("Àúº¸Áõ±İ")) {						
+		if(keyword.equals("ì €ë³´ì¦ê¸ˆ")) {						
 			tempList = MaemoolDAO.getDepositInfo();
 			geoList = new ArrayList<MapVO>();
-			//System.out.println("°¹¼ö:"+tempList.size());
+			//System.out.println("ê°¯ìˆ˜:"+tempList.size());
 			for(MapVO vo:tempList) {
-				if(vo.getDeposit().contains("Àü") || vo.getDeposit().contains("¾ï")) continue;
+				if(vo.getDeposit().contains("ì „") || vo.getDeposit().contains("ì–µ")) continue;
 				String str = vo.getDeposit();				
 				str = str.replaceAll("[^0-9]+","").trim();
 				int num = Integer.parseInt(str);
@@ -66,29 +66,29 @@ public class MaemoolModel {
 			}
 		}
 		
-		else if(keyword.equals("ÁÖÂ÷ °¡´É"))
+		else if(keyword.equals("ì£¼ì°¨ ê°€ëŠ¥"))
 			geoList = MaemoolDAO.getParkingInfo();	
 			
-		else if(keyword.equals("¿ø·ë"))
+		else if(keyword.equals("ì›ë£¸"))
 			geoList = MaemoolDAO.getOneRoomInfo();		
 			
-		else if(keyword.equals("¿ÀÇÇ½ºÅÚ")) 
+		else if(keyword.equals("ì˜¤í”¼ìŠ¤í…”")) 
 			geoList = MaemoolDAO.getOfficetelInfo();				
 		
 		List<ImgVO> imgList = null;
 		Map<Integer,Object> oneImg = new HashMap<Integer,Object>();
 
 		for (MapVO vo : geoList) {
-			// System.out.println("maemoolModel ¸Å¹°¹øÈ£ : " + vo.getNum());
+			// System.out.println("maemoolModel ë§¤ë¬¼ë²ˆí˜¸ : " + vo.getNum());
 			try {
-				imgList = PropertyAddrDAO.imgFind(vo.getNum()); // ÇØ´ç ¸Å¹°¹øÈ£·Î ÀÌ¹ÌÁö °Ë»ö
+				imgList = PropertyAddrDAO.imgFind(vo.getNum()); // í•´ë‹¹ ë§¤ë¬¼ë²ˆí˜¸ë¡œ ì´ë¯¸ì§€ ê²€ìƒ‰
 				//System.out.println("img1");
-				oneImg.put(vo.getNum(), imgList.get(0).getImg()); // ¸Å¹°¹øÈ£ : ÀÌ¹ÌÁö ÁÖ¼Ò
+				oneImg.put(vo.getNum(), imgList.get(0).getImg()); // ë§¤ë¬¼ë²ˆí˜¸ : ì´ë¯¸ì§€ ì£¼ì†Œ
 				//System.out.println("img2");
 				
 			} catch (Exception e) {
-				System.out.println("¸Å¹°¹øÈ£ : " +vo.getNum() + " "+ e.getMessage());
-				oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // ¸Å¹°¹øÈ£ : ÀÌ¹ÌÁö ÁÖ¼Ò
+				System.out.println("ë§¤ë¬¼ë²ˆí˜¸ : " +vo.getNum() + " "+ e.getMessage());
+				oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // ë§¤ë¬¼ë²ˆí˜¸ : ì´ë¯¸ì§€ ì£¼ì†Œ
 			}
 		}
 //
@@ -105,7 +105,7 @@ public class MaemoolModel {
 	throws Exception {
 		request.setCharacterEncoding("euc-kr");
 		
-		String num=request.getParameter("num"); // ÀÌ¹ÌÁö¶û ÀÌ¹ÌÁö¿¡ ÇØ´çÇÏ´Â »ó¼¼Á¤º¸¸¦ ¸Å¹°¹øÈ£¿¡ ¸Â°Ô Ãâ·Â
+		String num=request.getParameter("num"); // ì´ë¯¸ì§€ë‘ ì´ë¯¸ì§€ì— í•´ë‹¹í•˜ëŠ” ìƒì„¸ì •ë³´ë¥¼ ë§¤ë¬¼ë²ˆí˜¸ì— ë§ê²Œ ì¶œë ¥
 		String x=request.getParameter("x");
 		String y=request.getParameter("y");
 		System.out.println(num);
@@ -164,8 +164,8 @@ public class MaemoolModel {
 		Map map=new HashMap();
 		List<String> list=new ArrayList<String>();
 		
-		//imgÅ×ÀÌºí¿¡ ÇÊ¿äÇÑ µ¥ÀÌÅÍ ÀúÀå
-				//¸Å¹° ÀÌ¹ÌÁö Á¤º¸ ¹Ş¾Æ¿À´Â ¶óÀÌºê·¯¸®
+		//imgí…Œì´ë¸”ì— í•„ìš”í•œ ë°ì´í„° ì €ì¥
+				//ë§¤ë¬¼ ì´ë¯¸ì§€ ì •ë³´ ë°›ì•„ì˜¤ëŠ” ë¼ì´ë¸ŒëŸ¬ë¦¬
 				final int KILOBYTE = 1024 * 1024;
 				final int MEMORY_THRESHOLD = 3 * KILOBYTE;
 				final int MAX_FILE_SIZE = 40 * KILOBYTE;
@@ -229,7 +229,7 @@ public class MaemoolModel {
 			
 		
 				
-		//property_Addr¿¡ ÇÊ¿äÇÑ µ¥ÀÌÅÍ ÀúÀå
+		//property_Addrì— í•„ìš”í•œ ë°ì´í„° ì €ì¥
 		String addr=map.get("address")+" "+map.get("detailAddress");
 		String x_position=(String) map.get("x_position");
 		String y_position=(String) map.get("y_position");
@@ -245,115 +245,115 @@ public class MaemoolModel {
 			
 		
 		
-		//deal_typeÅ×ÀÌºí¿¡ ÇÊ¿äÇÑ µ¥ÀÌÅÍ
-		//°Å·¡ ÇüÅÂ
+		//deal_typeí…Œì´ë¸”ì— í•„ìš”í•œ ë°ì´í„°
+		//ê±°ë˜ í˜•íƒœ
 		String deal_type= (String) map.get("deal_type");
 		vo3.setType(Integer.parseInt(deal_type));
 		vo3.setNum(maemoolNum);
 		System.out.println(deal_type);
 		
-		//room_type¿¡ ÇÊ¿äÇÑ µ¥ÀÌÅÍ
-		//¹æ±¸Á¶
+		//room_typeì— í•„ìš”í•œ ë°ì´í„°
+		//ë°©êµ¬ì¡°
 		String room_type=(String) map.get("room_type");
 		vo5.setType(Integer.parseInt(room_type));
 		vo5.setNum(maemoolNum);
 		System.out.println(room_type);
 		
-		//building_type¿¡ ÇÊ¿äÇÑ µ¥ÀÌÅÍ
-		//°Ç¹°ÇüÅÂ
+		//building_typeì— í•„ìš”í•œ ë°ì´í„°
+		//ê±´ë¬¼í˜•íƒœ
 		String building_type=(String) map.get("building_type");
 		vo2.setType(Integer.parseInt(building_type));
 		vo2.setNum(maemoolNum);
 		System.out.println(building_type);
 		
-		//maemoolÅ×ÀÌºí¿¡ ÇÊ¿äÇÑ µ¥ÀÌÅÍ
+		//maemoolí…Œì´ë¸”ì— í•„ìš”í•œ ë°ì´í„°
 		vo1.setNum(maemoolNum);
 		vo1.setEmail(email);
 		
 		
-		//°ü¸®ºñ
+		//ê´€ë¦¬ë¹„
 		String manage_fee=(String) map.get("manage_fee");
 		if(manage_fee!=null)
 		{
-			manage_fee=manage_fee+"¸¸¿ø";
+			manage_fee=manage_fee+"ë§Œì›";
 		}
 		vo1.setManage_fee(manage_fee);
 		System.out.println(manage_fee);
 		
-		//°ü¸®ºñ Æ÷ÇÔÇ×¸ñ
+		//ê´€ë¦¬ë¹„ í¬í•¨í•­ëª©
 		//option=(String) map.get("option");
 		option=option.substring(0,option.lastIndexOf(","));
 		vo1.setOpt(option);
 		System.out.println(option);
 		
-		//¿¤¸®º£ÀÌÅÍ À¯¹«
+		//ì—˜ë¦¬ë² ì´í„° ìœ ë¬´
 		String elev=(String) map.get("elev");
 		vo1.setElev(Integer.parseInt(elev));
 		System.out.println(elev);
 		
-		//ÁÖÂ÷°ø°£ À¯¹«
+		//ì£¼ì°¨ê³µê°„ ìœ ë¬´
 		String parking_lot=(String) map.get("parking_lot");
 		vo1.setParking_lot(Integer.parseInt(parking_lot));
 		System.out.println(parking_lot);
 		
-		//ÇØ´çÃş
-		String floor1=(String) map.get("floor1")+"Ãş";
+		//í•´ë‹¹ì¸µ
+		String floor1=(String) map.get("floor1")+"ì¸µ";
 		
-		//ÀüÃ¼Ãş
-		String floor2=(String) map.get("floor2")+"Ãş";
+		//ì „ì²´ì¸µ
+		String floor2=(String) map.get("floor2")+"ì¸µ";
 		String floor=floor1+"/"+floor2;
 		vo1.setFloor(floor);
 		System.out.println(floor);
 	
-		//¿ù¼¼
+		//ì›”ì„¸
 		String monthly_rent=(String) map.get("monthly_rent");
-		vo1.setMonthly_rent(monthly_rent+ "¸¸¿ø");
+		vo1.setMonthly_rent(monthly_rent+ "ë§Œì›");
 		System.out.println("monthly_rent:"+monthly_rent);
 		
-		//º¸Áõ±İ
+		//ë³´ì¦ê¸ˆ
 		String deposit1=(String) map.get("deposit1");
 		if(deposit1!=null)
 		{
-			deposit1=deposit1 + "¾ï";
+			deposit1=deposit1 + "ì–µ";
 		}
 		String deposit2=(String) map.get("deposit2");
 		if(deposit2!=null)
 		{
-			deposit2=deposit2 + "¸¸¿ø";
+			deposit2=deposit2 + "ë§Œì›";
 		}
 		
 		String deposit=deposit1+deposit2;
 		
 		/*if(monthly_rent.trim()==null)
 		{
-		deposit=deposit+" (Àü¼¼°¡´É)";
+		deposit=deposit+" (ì „ì„¸ê°€ëŠ¥)";
 		}*/
 			vo1.setDeposit(deposit);
 		System.out.println(deposit);
 		
 		
 		
-		//Àü¿ë¸éÀû
-		String gross_area=(String) map.get("gross_area")+"§³";
+		//ì „ìš©ë©´ì 
+		String gross_area=(String) map.get("gross_area")+"ã¡";
 		vo1.setGross_area(gross_area);
 		System.out.println(gross_area);
 		
-		//ÀÔÁÖ°¡´ÉÀÏ
+		//ì…ì£¼ê°€ëŠ¥ì¼
 		String moving_date=(String) map.get("moving_date");
 		vo1.setMoving_date(moving_date);
 		System.out.println(moving_date);
 		
-		//¸Å¹° ÇÑÁÙ Ç¥Çö
+		//ë§¤ë¬¼ í•œì¤„ í‘œí˜„
 		String detail_title=(String) map.get("detail_title");
 		vo1.setDetail_title(detail_title);
 		System.out.println(detail_title);
 		
-		//ÀÎ±Ù ÁöÇÏÃ¶ Ç¥½Ã
+		//ì¸ê·¼ ì§€í•˜ì²  í‘œì‹œ
 		String near_subway=(String) map.get("near_subway");
 		vo1.setNear_subway(near_subway);
 		System.out.println(near_subway);
 		
-		//¸Å¹° »ó¼¼¼³¸í
+		//ë§¤ë¬¼ ìƒì„¸ì„¤ëª…
 		String description=(String) map.get("description");
 		vo1.setDescription(description);
 		System.out.println(description);
@@ -363,7 +363,7 @@ public class MaemoolModel {
 		
 		
 		
-		//ÀÌ¹ÌÁö ÀúÀå
+		//ì´ë¯¸ì§€ ì €ì¥
 		ImgVO vo=new ImgVO();
 		for(String fileName:list)
 		{
@@ -387,78 +387,78 @@ public class MaemoolModel {
 			return "main.jsp";
 	}
 
-	// home.jsp¿¡¼­ °Ë»öÇÒ °æ¿ì ÀÛµ¿ by.ÇÑ
+	// home.jspì—ì„œ ê²€ìƒ‰í•  ê²½ìš° ì‘ë™ by.í•œ
 	@RequestMapping("main/maemool_search.do")
 	public String maemoolSearch(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		req.setCharacterEncoding("euc-kr");
 		List<MapVO> geoList = null;
 		List<ImgVO> imgList = null;
-		Map oneImg = new HashMap();	// ¸Å¹°¹øÈ£ : ¸Å¹°´ëÇ¥ÀÌ¹ÌÁö
+		Map oneImg = new HashMap();	// ë§¤ë¬¼ë²ˆí˜¸ : ë§¤ë¬¼ëŒ€í‘œì´ë¯¸ì§€
 		String keyword = req.getParameter("keyword");
 
 		System.out.println("MaemoolModel maemoolSearch : " + keyword);
 		geoList = PropertyAddrDAO.searchMaemool(keyword);
 
-		// ÀÌ¹ÌÁö Ãâ·Â ºÎºĞ
+		// ì´ë¯¸ì§€ ì¶œë ¥ ë¶€ë¶„
 		for (MapVO vo : geoList) {
-			// System.out.println("maemoolModel ¸Å¹°¹øÈ£ : " + vo.getNum());
+			// System.out.println("maemoolModel ë§¤ë¬¼ë²ˆí˜¸ : " + vo.getNum());
 			try {
-				imgList = PropertyAddrDAO.imgFind(vo.getNum()); // ÇØ´ç ¸Å¹°¹øÈ£·Î ÀÌ¹ÌÁö °Ë»ö
+				imgList = PropertyAddrDAO.imgFind(vo.getNum()); // í•´ë‹¹ ë§¤ë¬¼ë²ˆí˜¸ë¡œ ì´ë¯¸ì§€ ê²€ìƒ‰
 				// System.out.println(imgList.get(0).getImg());
-				oneImg.put(vo.getNum(), imgList.get(0).getImg()); // ¸Å¹°¹øÈ£ : ÀÌ¹ÌÁö ÁÖ¼Ò
+				oneImg.put(vo.getNum(), imgList.get(0).getImg()); // ë§¤ë¬¼ë²ˆí˜¸ : ì´ë¯¸ì§€ ì£¼ì†Œ
 			} catch (Exception e) {
-				System.out.println("¸Å¹°¹øÈ£ : " +vo.getNum() + " "+ e.getMessage());
-				oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // ÀÌ¹ÌÁö ¾ø´Â ¸Å¹°ÀÇ °æ¿ì Ã³¸®
+				System.out.println("ë§¤ë¬¼ë²ˆí˜¸ : " +vo.getNum() + " "+ e.getMessage());
+				oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // ì´ë¯¸ì§€ ì—†ëŠ” ë§¤ë¬¼ì˜ ê²½ìš° ì²˜ë¦¬
 			}
 		}
 
 		req.setAttribute("oneImg", oneImg);
 		req.setAttribute("geoList", geoList);
-		// °ø½Ä ÆäÀÌÁö
+		// ê³µì‹ í˜ì´ì§€
 		//req.setAttribute("main_jsp", "../maemool/list.jsp");
 
-		// Å×½ºÆ® ÆäÀÌÁö
+		// í…ŒìŠ¤íŠ¸ í˜ì´ì§€
 		req.setAttribute("main_jsp", "../maemool/testList.jsp");
 
 		return "main.jsp";
 	}
 	
-	// Áöµµ ¿· ¸Å¹° ¸ñ·ÏÀ» Ãâ·Â by. ÇÑ
-	// ajax·Î ÇØ´çÆäÀÌÁö¸¦ ºÎ¸¥´Ù.
+	// ì§€ë„ ì˜† ë§¤ë¬¼ ëª©ë¡ì„ ì¶œë ¥ by. í•œ
+	// ajaxë¡œ í•´ë‹¹í˜ì´ì§€ë¥¼ ë¶€ë¥¸ë‹¤.
 	@RequestMapping("main/sideList.do")
 	public String sideList(HttpServletRequest req, HttpServletResponse response) throws Exception {
-		// º» ¸Ş¼Òµå´Â ajax¸¦ ÅëÇØ¼­ ÇÑ±ÛÀ» ÆÄ¶ó¹ÌÅÍ·Î Àü¼Û¹Ş±â ¶§¹®¿¡
-		// utf-8·Î ¹Ş¾Æ¾ß ÇÑ±ÛÀÌ ±úÁöÁö ¾Ê´Â´Ù.
+		// ë³¸ ë©”ì†Œë“œëŠ” ajaxë¥¼ í†µí•´ì„œ í•œê¸€ì„ íŒŒë¼ë¯¸í„°ë¡œ ì „ì†¡ë°›ê¸° ë•Œë¬¸ì—
+		// utf-8ë¡œ ë°›ì•„ì•¼ í•œê¸€ì´ ê¹¨ì§€ì§€ ì•ŠëŠ”ë‹¤.
 		req.setCharacterEncoding("utf-8");
-		String keyword = req.getParameter("keyword");// °Ë»ö¾î¸¦ Àü´Ş¹Ş´Â´Ù.
+		String keyword = req.getParameter("keyword");// ê²€ìƒ‰ì–´ë¥¼ ì „ë‹¬ë°›ëŠ”ë‹¤.
 
-		// À§µµ¿Í °æµµ¸¦ Àü´Ş¹Ş´Â´Ù.
+		// ìœ„ë„ì™€ ê²½ë„ë¥¼ ì „ë‹¬ë°›ëŠ”ë‹¤.
 		String swLatlng = req.getParameter("swLatlng");
 		String neLatlng = req.getParameter("neLatlng");
 
-		// ¸®½ºÆ® Ãâ·ÂÀ» À§ÇÑ º¯¼ö
+		// ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ì„ ìœ„í•œ ë³€ìˆ˜
 		List<MapVO> geoList = null;
 		List<ImgVO> imgList = null;
-		Map oneImg = new HashMap(); // ¸Å¹°¹øÈ£ : ¸Å¹°´ëÇ¥ÀÌ¹ÌÁö
+		Map oneImg = new HashMap(); // ë§¤ë¬¼ë²ˆí˜¸ : ë§¤ë¬¼ëŒ€í‘œì´ë¯¸ì§€
 
-		System.out.println("testSideList·Î Àü¼ÛµÈ keyword : " + keyword);
+		System.out.println("testSideListë¡œ ì „ì†¡ëœ keyword : " + keyword);
 		geoList = PropertyAddrDAO.searchMaemool(keyword);
 
-		// ÀÌ¹ÌÁö Ãâ·Â ºÎºĞ
+		// ì´ë¯¸ì§€ ì¶œë ¥ ë¶€ë¶„
 		for (MapVO vo : geoList) {
-			// System.out.println("maemoolModel ¸Å¹°¹øÈ£ : " + vo.getNum());
+			// System.out.println("maemoolModel ë§¤ë¬¼ë²ˆí˜¸ : " + vo.getNum());
 			try {
-				imgList = PropertyAddrDAO.imgFind(vo.getNum()); // ÇØ´ç ¸Å¹°¹øÈ£·Î ÀÌ¹ÌÁö °Ë»ö
+				imgList = PropertyAddrDAO.imgFind(vo.getNum()); // í•´ë‹¹ ë§¤ë¬¼ë²ˆí˜¸ë¡œ ì´ë¯¸ì§€ ê²€ìƒ‰
 				// System.out.println(imgList.get(0).getImg());
-				oneImg.put(vo.getNum(), imgList.get(0).getImg()); // ¸Å¹°¹øÈ£ : ÀÌ¹ÌÁö ÁÖ¼Ò
+				oneImg.put(vo.getNum(), imgList.get(0).getImg()); // ë§¤ë¬¼ë²ˆí˜¸ : ì´ë¯¸ì§€ ì£¼ì†Œ
 			} catch (Exception e) {
-				System.out.println("¸Å¹°¹øÈ£ : " + vo.getNum() + " " + e.getMessage());
-				oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // ¸Å¹°¹øÈ£ : ÀÌ¹ÌÁö ÁÖ¼Ò
+				System.out.println("ë§¤ë¬¼ë²ˆí˜¸ : " + vo.getNum() + " " + e.getMessage());
+				oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // ë§¤ë¬¼ë²ˆí˜¸ : ì´ë¯¸ì§€ ì£¼ì†Œ
 			}
 		}
 		
 
-		// À§µµ¿Í °æµµ°¡ nullÀÌ ¾Æ´Ò °æ¿ì ½ÇÇàÇÑ´Ù.
+		// ìœ„ë„ì™€ ê²½ë„ê°€ nullì´ ì•„ë‹ ê²½ìš° ì‹¤í–‰í•œë‹¤.
 		if (swLatlng != null && neLatlng != null) {
 			System.out.println(swLatlng);
 			System.out.println(neLatlng);
@@ -468,20 +468,20 @@ public class MaemoolModel {
 		return "../maemool/sideList.jsp";
 	}
 	
-	// Å×½ºÆ®¸¦ À§ÇÑ ¸Ş¼Òµå by. ÇÑ
-	// ajax·Î Áöµµ ÀÌµ¿¿¡ µû¶ó º¸¿©Áö´Â ¿µ¿ª¿¡ ¾Ë¸Â´Â ¸Å¹°À» ºÎ¸£µµ·Ï Å×½ºÆ® Áß
+	// í…ŒìŠ¤íŠ¸ë¥¼ ìœ„í•œ ë©”ì†Œë“œ by. í•œ
+	// ajaxë¡œ ì§€ë„ ì´ë™ì— ë”°ë¼ ë³´ì—¬ì§€ëŠ” ì˜ì—­ì— ì•Œë§ëŠ” ë§¤ë¬¼ì„ ë¶€ë¥´ë„ë¡ í…ŒìŠ¤íŠ¸ ì¤‘
 	@RequestMapping("main/testSideList.do")
 	public String testSideList(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		req.setCharacterEncoding("utf-8");		
 		String keyword = req.getParameter("keyword");		
 		System.out.println("testSideList.do"+keyword);
-		// Áöµµ ¿µ¿ª °¢ ¸ğ¼­¸®ÀÇ À§µµ¿Í °æµµ¸¦ Àü´Ş¹Ş´Â´Ù.
+		// ì§€ë„ ì˜ì—­ ê° ëª¨ì„œë¦¬ì˜ ìœ„ë„ì™€ ê²½ë„ë¥¼ ì „ë‹¬ë°›ëŠ”ë‹¤.
 		String Sne_x = req.getParameter("ne_x");
 		String Sne_y = req.getParameter("ne_y");
 		String Ssw_x = req.getParameter("sw_x");
 		String Ssw_y = req.getParameter("sw_y");
 		
-		// ¾Æ·¡ ÄÚµå´Â Á¦´ë·Î °ª ¹Ş¾Ò³ª È®ÀÎ¿ë
+		// ì•„ë˜ ì½”ë“œëŠ” ì œëŒ€ë¡œ ê°’ ë°›ì•˜ë‚˜ í™•ì¸ìš©
 		/*
 		System.out.println("Sne_x : " + Sne_x);
 		System.out.println("Sne_y : " + Sne_y);
@@ -489,42 +489,42 @@ public class MaemoolModel {
 		System.out.println("Ssw_y : " + Ssw_y);
 		*/
 
-		// À§µµ°æµµ¸¦ ÀúÀåÇÏ±â À§ÇÑ map
+		// ìœ„ë„ê²½ë„ë¥¼ ì €ì¥í•˜ê¸° ìœ„í•œ map
 		Map<String, Object> bound = null;
 		
-		// ¸®½ºÆ® Ãâ·ÂÀ» À§ÇÑ º¯¼ö
+		// ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ì„ ìœ„í•œ ë³€ìˆ˜
 		List<MapVO> geoList = null;
 		List<MapVO> tempList = null;
 		List<ImgVO> imgList = null;
-		// ¸Å¹°¹øÈ£ : ¸Å¹°´ëÇ¥ÀÌ¹ÌÁö
+		// ë§¤ë¬¼ë²ˆí˜¸ : ë§¤ë¬¼ëŒ€í‘œì´ë¯¸ì§€
 		Map oneImg = new HashMap();
 		
-		// °ü½É¸ñ·Ï by.ÇÑ¼Ö
+		// ê´€ì‹¬ëª©ë¡ by.í•œì†”
 		String num = req.getParameter("num");
 		
 		if (num != null) {
 //			num = "";
 			Cookie cookie = new Cookie("likeNum", num);
-			cookie.setMaxAge(365 * 24 * 60 * 60); // Äí±â À¯È¿±â°£ 365ÀÏ ¼³Á¤1
+			cookie.setMaxAge(365 * 24 * 60 * 60); // ì¿ ê¸° ìœ íš¨ê¸°ê°„ 365ì¼ ì„¤ì •1
 			cookie.setPath("C:\\GaBang\\gb");
 			res.addCookie(cookie);
 		}
 		
-		// list.jsp¿¡¼­ Àü¼Û¹ŞÀº Áöµµ bound È®ÀÎ
+		// list.jspì—ì„œ ì „ì†¡ë°›ì€ ì§€ë„ bound í™•ì¸
 		if(keyword != null) {
-			System.out.println("¢Â testSideList·Î Àü¼ÛµÈ keyword : " + keyword);
+			System.out.println("â—ˆ testSideListë¡œ ì „ì†¡ëœ keyword : " + keyword);
 			
 			/*
 			 * 		by t.
 			 * 		2018.05.30
-			 * 		Å×¸¶ °Ë»ö	
+			 * 		í…Œë§ˆ ê²€ìƒ‰	
 			 */			
-			if(keyword.equals("Àúº¸Áõ±İ")) {
+			if(keyword.equals("ì €ë³´ì¦ê¸ˆ")) {
 				geoList = new ArrayList<MapVO>();
 				tempList = MaemoolDAO.getDepositInfo();
-				//System.out.println("°¹¼ö:"+tempList.size());
+				//System.out.println("ê°¯ìˆ˜:"+tempList.size());
 				for(MapVO vo:tempList) {
-					if(vo.getDeposit().contains("Àü") || vo.getDeposit().contains("¾ï")) continue;
+					if(vo.getDeposit().contains("ì „") || vo.getDeposit().contains("ì–µ")) continue;
 					String str = vo.getDeposit();				
 					str = str.replaceAll("[^0-9]+","").trim();
 					int number = Integer.parseInt(str);
@@ -532,30 +532,30 @@ public class MaemoolModel {
 					geoList.add(vo);
 				}
 			}
-			else if(keyword.equals("ÁÖÂ÷ °¡´É"))
+			else if(keyword.equals("ì£¼ì°¨ ê°€ëŠ¥"))
 				geoList = MaemoolDAO.getParkingInfo();	
 				
-			else if(keyword.equals("¿ø·ë"))
+			else if(keyword.equals("ì›ë£¸"))
 				geoList = MaemoolDAO.getOneRoomInfo();		
 				
-			else if(keyword.equals("¿ÀÇÇ½ºÅÚ")) 
+			else if(keyword.equals("ì˜¤í”¼ìŠ¤í…”")) 
 				geoList = MaemoolDAO.getOfficetelInfo();	
 			else			
 				geoList = PropertyAddrDAO.searchMaemool(keyword);
 		
-			// Áöµµ ¿òÁ÷ÀÏ °æ¿ì ÇØ´ç Áöµµ ³» ¸Å¹° Ãâ·Â
-			// À§µµ°æµµ°¡ nullÀÌ ¾Æ´Ò °æ¿ì
+			// ì§€ë„ ì›€ì§ì¼ ê²½ìš° í•´ë‹¹ ì§€ë„ ë‚´ ë§¤ë¬¼ ì¶œë ¥
+			// ìœ„ë„ê²½ë„ê°€ nullì´ ì•„ë‹ ê²½ìš°
 		} else if((Sne_x != null) && (Sne_y != null) && (Ssw_x != null) && (Ssw_y != null)){
-			// Áöµµ ºÏµ¿³¡Á¡ À§°æµµ
+			// ì§€ë„ ë¶ë™ëì  ìœ„ê²½ë„
 			double ne_x = Double.parseDouble(Sne_x);
 			double ne_y = Double.parseDouble(Sne_y);
-			// Áöµµ ³²¼­³¡Á¡ À§°æµµ
+			// ì§€ë„ ë‚¨ì„œëì  ìœ„ê²½ë„
 			double sw_x = Double.parseDouble(Ssw_x);
 			double sw_y = Double.parseDouble(Ssw_y);
 			
-			System.out.println("¢Â testSideList·Î Àü¼ÛµÊ\nne_x : " + ne_x + " ne_y : " + ne_y);
+			System.out.println("â—ˆ testSideListë¡œ ì „ì†¡ë¨\nne_x : " + ne_x + " ne_y : " + ne_y);
 			System.out.println("sw_x : " + sw_x + " sw_y : " + sw_y);
-			// ¹ŞÀº ¸ğ¼­¸® À§°æµµ¸¦ ¸Ê¿¡ ÀúÀå
+			// ë°›ì€ ëª¨ì„œë¦¬ ìœ„ê²½ë„ë¥¼ ë§µì— ì €ì¥
 			//bound = new HashMap<String, Double>();
 			bound = new HashMap<String, Object>();
 			bound.put("sw_x", sw_x);
@@ -570,16 +570,16 @@ public class MaemoolModel {
 			}
 		}
 
-		// ÀÌ¹ÌÁö Ãâ·Â ºÎºĞ
+		// ì´ë¯¸ì§€ ì¶œë ¥ ë¶€ë¶„
 		for (MapVO vo : geoList) {
-			// System.out.println("maemoolModel ¸Å¹°¹øÈ£ : " + vo.getNum());
+			// System.out.println("maemoolModel ë§¤ë¬¼ë²ˆí˜¸ : " + vo.getNum());
 			try {
-				imgList = PropertyAddrDAO.imgFind(vo.getNum()); // ÇØ´ç ¸Å¹°¹øÈ£·Î ÀÌ¹ÌÁö °Ë»ö
+				imgList = PropertyAddrDAO.imgFind(vo.getNum()); // í•´ë‹¹ ë§¤ë¬¼ë²ˆí˜¸ë¡œ ì´ë¯¸ì§€ ê²€ìƒ‰
 				// System.out.println(imgList.get(0).getImg());
-				oneImg.put(vo.getNum(), imgList.get(0).getImg()); // ¸Å¹°¹øÈ£ : ÀÌ¹ÌÁö ÁÖ¼Ò
+				oneImg.put(vo.getNum(), imgList.get(0).getImg()); // ë§¤ë¬¼ë²ˆí˜¸ : ì´ë¯¸ì§€ ì£¼ì†Œ
 			} catch (Exception e) {
-				System.out.println("¸Å¹°¹øÈ£ : " +vo.getNum() + " "+ e.getMessage());
-				oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // ¸Å¹°¹øÈ£ : ÀÌ¹ÌÁö ÁÖ¼Ò
+				System.out.println("ë§¤ë¬¼ë²ˆí˜¸ : " +vo.getNum() + " "+ e.getMessage());
+				oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // ë§¤ë¬¼ë²ˆí˜¸ : ì´ë¯¸ì§€ ì£¼ì†Œ
 			}
 		}		
 		
@@ -589,13 +589,13 @@ public class MaemoolModel {
 		return "../maemool/testSideList.jsp";
 	}
 	
-	/*by.ÁØ¿µ*/
+	/*by.ì¤€ì˜*/
 	@RequestMapping("main/add_jjim.do")
 	public String real_jjim(HttpServletRequest req, HttpServletResponse res) {
-		// id´Â session¿¡ ÀúÀåµÇ¾îÀÖ´Ù.
+		// idëŠ” sessionì— ì €ì¥ë˜ì–´ìˆë‹¤.
 		HttpSession session = req.getSession();
 		
-		//Âò¿¡ ÇÊ¿äÇÑ µ¥ÀÌÅÍ (idÇÏ°í ¸Å¹°¹øÈ£)
+		//ì°œì— í•„ìš”í•œ ë°ì´í„° (idí•˜ê³  ë§¤ë¬¼ë²ˆí˜¸)
 		String email = (String) session.getAttribute("id");
 		String num = req.getParameter("maemool_num");
 		
@@ -610,18 +610,18 @@ public class MaemoolModel {
 		System.out.println(num);
 		
 		JjimDAO.insertJjim(vo);
-		System.out.println("dao ¿Ï·á");
+		System.out.println("dao ì™„ë£Œ");
 		
 		return "../maemool/jjim.jsp";
 	}
 	
-	/*by.ÁØ¿µ*/
+	/*by.ì¤€ì˜*/
 	@RequestMapping("main/remove_jjim.do")
 	public String remove_jjim(HttpServletRequest req, HttpServletResponse res) {
-		// id´Â session¿¡ ÀúÀåµÇ¾îÀÖ´Ù.
+		// idëŠ” sessionì— ì €ì¥ë˜ì–´ìˆë‹¤.
 		HttpSession session = req.getSession();
 		
-		//Âò¿¡ ÇÊ¿äÇÑ µ¥ÀÌÅÍ (idÇÏ°í ¸Å¹°¹øÈ£)
+		//ì°œì— í•„ìš”í•œ ë°ì´í„° (idí•˜ê³  ë§¤ë¬¼ë²ˆí˜¸)
 		String email = (String) session.getAttribute("id");
 		String num = req.getParameter("maemool_num");
 		
@@ -640,10 +640,10 @@ public class MaemoolModel {
 	
 	@RequestMapping("main/jjim_detail.do")
 	public String jjim_detail(HttpServletRequest req, HttpServletResponse res) {
-		// id´Â session¿¡ ÀúÀåµÇ¾îÀÖ´Ù.
+		// idëŠ” sessionì— ì €ì¥ë˜ì–´ìˆë‹¤.
 		HttpSession session = req.getSession();
 		
-		//Âò¿¡ ÇÊ¿äÇÑ µ¥ÀÌÅÍ (idÇÏ°í ¸Å¹°¹øÈ£)
+		//ì°œì— í•„ìš”í•œ ë°ì´í„° (idí•˜ê³  ë§¤ë¬¼ë²ˆí˜¸)
 		String email = (String) session.getAttribute("id");
 		String num = req.getParameter("maemool_num");
 		
@@ -659,63 +659,75 @@ public class MaemoolModel {
 		
 		return "../maemool/jjim.jsp";
 	}
-	
+	//í•œì†”
 	@RequestMapping("main/like.do")
-	public String like(HttpServletRequest req, HttpServletResponse res) {
+	public String like(HttpServletRequest request, HttpServletResponse response) {
 		String nums = "";
-		Cookie[] cookies = req.getCookies();
-		System.out.println("ÇöÀç ÀúÀåµÈ °ü½É¸ñ·Ï °¹¼ö : " + cookies.length);
+		List<MaemoolVO> list = new ArrayList<MaemoolVO>();
+		MaemoolVO vo = null;
+		MaemoolDAO dao = null;
+		int num = 0;
+		Cookie[] cookies = request.getCookies();
+		System.out.println("í˜„ì¬ ì €ì¥ëœ ê´€ì‹¬ëª©ë¡ ê°¯ìˆ˜ : " + cookies.length);
+	
 		if(cookies!=null) {
 			for(int i=0; i<cookies.length; i++) {
-					nums=cookies[i].getValue();
+				Cookie c = cookies[i];
+				String cName = c.getName();
+				System.out.println(cName);
+				if (cName.startsWith("cookNo")) {
+
+				nums=c.getValue();
+				System.out.println(nums);
+				dao = new MaemoolDAO();
+				num = Integer.parseInt(nums);
+				vo = dao.cookie(num);
+				
+				}
+				
 			}
 		}
-		MaemoolDAO dao = new MaemoolDAO();
-		
-		int num = Integer.parseInt(nums);
-		MaemoolVO vo = dao.cookie(num);
-		
-		req.setAttribute("vo", vo);
-
-		req.setAttribute("main_jsp", "../like/like.jsp");
+		request.setAttribute("vo", vo);
+		//request.setAttribute("list", list);
+		request.setAttribute("main_jsp", "../like/like.jsp");
 		return "main.jsp";
 	}
-	// by. ÇÑ¼Ö
+	// by. í•œì†”
 	@RequestMapping("main/like_add.do")
 	public String LikeAdd(HttpServletRequest request, HttpServletResponse response) {
-/*		// °ü½É¸ñ·Ï by.ÇÑ¼Ö
+/*		// ê´€ì‹¬ëª©ë¡ by.í•œì†”
 		String num = request.getParameter("num");
 		System.out.println(num);
 		Cookie c = new Cookie("cookNo", num);
 		c.setMaxAge(0);
-		// cookie.setPath("C:\\GaBang\\gb"); //ÄíÅ°ÀÇ ¹üÀ§ ¼³Á¤
-		response.addCookie(c); // ÄíÅ°¸¦ ÀúÀå
+		// cookie.setPath("C:\\GaBang\\gb"); //ì¿ í‚¤ì˜ ë²”ìœ„ ì„¤ì •
+		response.addCookie(c); // ì¿ í‚¤ë¥¼ ì €ì¥
 		System.out.println(c);*/
 		
 		
 		String no = request.getParameter("num");
-		System.out.println("ÆÄ¶ó¹ÌÅÍ num : " + no);
+		System.out.println("íŒŒë¼ë¯¸í„° num : " + no);
 		Cookie[] cookies = request.getCookies();
 		String name = "";
 		String ss = "";
 		int num = Integer.parseInt(no);
 		/*******************************************************/
 //		for (Cookie c : cookies) {
-//			System.out.println("¡ÚÄíÅ° ÀÌ¸§ : " + c.getName());
-//			System.out.println("ÄíÅ° °ª : " + c.getValue());
-//			System.out.println("ÄíÅ° À¯Áö½Ã°£ :" + c.getMaxAge());
+//			System.out.println("â˜…ì¿ í‚¤ ì´ë¦„ : " + c.getName());
+//			System.out.println("ì¿ í‚¤ ê°’ : " + c.getValue());
+//			System.out.println("ì¿ í‚¤ ìœ ì§€ì‹œê°„ :" + c.getMaxAge());
 //		}
 
 		if (cookies != null) {
-			System.out.println("ÄíÅ° °¹¼ö : " + cookies.length);
+			System.out.println("ì¿ í‚¤ ê°¯ìˆ˜ : " + cookies.length);
 			
 			for (int i = 0; i < cookies.length; i++) {
 				
 				Cookie c = cookies[i];
 				String cName = c.getName();
-				System.out.println("cookies["+i+"] ÀÌ¸§ È®ÀÎ : " + cookies[i].getName());
-				System.out.println("cookies["+i+"] °ª È®ÀÎ : " + cookies[i].getValue());
-				System.out.println("cookies["+i+"] ½Ã°£ È®ÀÎ : " + cookies[i].getMaxAge());
+				System.out.println("cookies["+i+"] ì´ë¦„ í™•ì¸ : " + cookies[i].getName());
+				System.out.println("cookies["+i+"] ê°’ í™•ì¸ : " + cookies[i].getValue());
+				System.out.println("cookies["+i+"] ì‹œê°„ í™•ì¸ : " + cookies[i].getMaxAge());
 				
 				if (cName.startsWith("cookNo")) {
 					String cValue = c.getValue();
@@ -727,21 +739,21 @@ public class MaemoolModel {
 				}
 			}
 			
-			/***************ÀÌ ºÎºĞ ÇÑ¹ø È®ÀÎÇØÁÖ¼¼¿ä***************/
+			/***************ì´ ë¶€ë¶„ í•œë²ˆ í™•ì¸í•´ì£¼ì„¸ìš”***************/
 			int a = Integer.parseInt(ss);
 			System.out.println("ss=" + ss);
 			/*******************************************************/
 			name ="cookNo"+no;
 		}
-		// ÄíÅ°°¡ nullÀÏ °æ¿ì
+		// ì¿ í‚¤ê°€ nullì¼ ê²½ìš°
 		else {
 			name = "cookNo"+ num;
 		}
 		Cookie c = new Cookie(name, no);
-		c.setMaxAge(60 * 60 * 24); // ÄíÅ° ÃÖ´ë À¯Áö½Ã°£ ¼³Á¤
+		c.setMaxAge(60 * 60 * 24); // ì¿ í‚¤ ìµœëŒ€ ìœ ì§€ì‹œê°„ ì„¤ì •
 		response.addCookie(c);
 		
-		
+		System.out.println(no+"ì¶”ê°€ì™„ë£Œ");
 		return "../like/like.jsp";
 
 	}
@@ -754,20 +766,25 @@ public class MaemoolModel {
 			for(int i = 0; i<cookies.length; i++) {
 				Cookie c = cookies[i]; 
 				String cName = c.getName();
-				
-				//ÄíÅ° ÀÌ¸§ÀÌ cookNo·Î ½ÃÀÛ
-				if (cName.equals("cookNo" + no)) {
-					c.setMaxAge(0);
-					System.out.println("ÄíÅ° À¯Áö½Ã°£ : " + c.getMaxAge());
+ like
+
+				if (cName.equals("cookNo"+no)) {
+					c.setMaxAge(0); // ì¿ í‚¤ ìµœëŒ€ ìœ ì§€ì‹œê°„ ì„¤ì •
+					System.out.println(c.getMaxAge());
 					response.addCookie(c);
+					System.out.println("cookNo["+no+"]ì‚­ì œì™„ë£Œ");
+
 				}
+				/////////////////////////////////////
+
 			}
+			
 		}
-		System.out.println("ÄíÅ° °¹¼ö : " + cookies.length);
+		System.out.println("ì¿ í‚¤ ê°¯ìˆ˜ : " + cookies.length);
 		for (Cookie c : cookies) {
-			System.out.println("¡ÚÄíÅ° ÀÌ¸§ : " + c.getName());
-			System.out.println("ÄíÅ° °ª : " + c.getValue());
-			System.out.println("ÄíÅ° À¯Áö½Ã°£ :" + c.getMaxAge());
+			System.out.println("â˜…ì¿ í‚¤ ì´ë¦„ : " + c.getName());
+			System.out.println("ì¿ í‚¤ ê°’ : " + c.getValue());
+			System.out.println("ì¿ í‚¤ ìœ ì§€ì‹œê°„ :" + c.getMaxAge());
 		}
 		
 		

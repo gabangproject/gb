@@ -17,67 +17,7 @@ $(function() {
 	alert('testSideList.jsp에서 출력\n매물 개수 : ' + <%=list.size()%> + '개');
 })
 
-<%-- by.준영 --%>
-function jjim(input) {
-	var num = $(input).attr("num");
-	alert(num);
-	var heart = $(input).attr('class');
 
-	if (heart == "glyphicon glyphicon-heart") {
-		$.ajax({
-			type : 'post',
-			data : {
-				maemool_num : num
-			},
-			url : "../main/remove_jjim.do",
-			success : function(data) {
-				$(input).attr('class', "glyphicon glyphicon-heart-empty");
-			}
-		});
-	}
-
-	else {
-		$.ajax({
-			type : 'post',
-			data : {maemool_num : num},
-			url : "../main/add_jjim.do",
-			success : function(data) {
-				$(input).attr('class', "glyphicon glyphicon-heart");
-			}
-		});
-	}
-}
-<%-- by.한솔 --%>
-function send(input){
-	var a = $(input).attr('num');
-	alert(a);
-	var eye = $(input).attr('class');
-	
-	if(eye == "fa fa-eye"){
-		$.ajax({
-			type :"POST",
-			url : "../main/like_add.do",
-			data : {num : a},
-			success : function(data) {
-				alert("나와라제발 눈깔변신");
-				$(input).attr('class', "fa fa-eye-slash")
-			}
-		}); 	
-	}
-	
-	else{
-		$.ajax({
-			type :"POST",
-			url : "../main/like_delete.do",
-			data : {num : a},
-			success : function(data) {
-				alert("나와라제발 눈깔 슬래쉬삭제");
-				$(input).attr('class', "fa fa-eye")
-			}
-		}); 	
-		
-	}
-};
 </script>
 </head>
 <body>

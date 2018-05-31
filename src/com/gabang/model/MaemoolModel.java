@@ -661,6 +661,7 @@ public class MaemoolModel {
       return "../maemool/jjim.jsp";
    }
    
+
    @RequestMapping("main/like.do")
    public String like(HttpServletRequest request, HttpServletResponse response) {
       String nums = "";
@@ -669,24 +670,26 @@ public class MaemoolModel {
       MaemoolDAO dao = null;
       int num = 0;
       Cookie[] cookies = request.getCookies();
-      System.out.println("현재 저장된 관심목록 갯수 : " + cookies.length);
+      //System.out.println("현재 저장된 관심목록 갯수 : " + cookies.length);
    
       if(cookies!=null) {
          for(int i=0; i<cookies.length; i++) {
             Cookie c = cookies[i];
             String cName = c.getName();
-            System.out.println(cName);
+           // System.out.println(cName);
             
             if (cName.startsWith("cookNo")) {
             nums=c.getValue();
-            System.out.println(nums);
+            //System.out.println(nums);
             dao = new MaemoolDAO();
             num = Integer.parseInt(nums);
             vo = dao.cookie(num);
+            list.add(vo);
+            
             }
          }
       }
-      request.setAttribute("vo", vo);
+      request.setAttribute("list", list);
       //request.setAttribute("list", list);
       request.setAttribute("main_jsp", "../like/like.jsp");
       return "main.jsp";
@@ -718,24 +721,24 @@ public class MaemoolModel {
             
             Cookie c = cookies[i];
             String cName = c.getName();
-            System.out.println("cookies["+i+"] 이름 확인 : " + cookies[i].getName());
+            /*System.out.println("cookies["+i+"] 이름 확인 : " + cookies[i].getName());
             System.out.println("cookies["+i+"] 값 확인 : " + cookies[i].getValue());
-            System.out.println("cookies["+i+"] 시간 확인 : " + cookies[i].getMaxAge());
+            System.out.println("cookies["+i+"] 시간 확인 : " + cookies[i].getMaxAge());*/
             
             if (cName.startsWith("cookNo")) {
                String cValue = c.getValue();
                ss = cName.replaceAll("[^0-9]", "");
-               System.out.println("cName.startsWith(\"cookNo\") ss = " + ss);
+              // System.out.println("cName.startsWith(\"cookNo\") ss = " + ss);
             } else {
                name = "cookNo"+ no;
                ss = "0";
             }
          }
          
-         /***************이 부분 한번 확인해주세요***************/
+        
          int a = Integer.parseInt(ss);
-         System.out.println("ss=" + ss);
-         /*******************************************************/
+         //System.out.println("ss=" + ss);
+       
          name ="cookNo"+no;
       }
       // 쿠키가 null일 경우
@@ -752,9 +755,10 @@ public class MaemoolModel {
    }
    @RequestMapping("main/like_delete.do")
    public String LikeDelete(HttpServletRequest request, HttpServletResponse response) {
+	   
       String no = request.getParameter("num");
       Cookie[] cookies = request.getCookies();
-      System.out.println(no);
+      //System.out.println(no);
       if(cookies!=null) {
          for(int i = 0; i<cookies.length; i++) {
             Cookie c = cookies[i]; 
@@ -763,19 +767,19 @@ public class MaemoolModel {
             //쿠키 이름이 cookNo로 시작
             if (cName.equals("cookNo" + no)) {
                c.setMaxAge(0);
-               System.out.println("쿠키 유지시간 : " + c.getMaxAge());
+               //System.out.println("쿠키 유지시간 : " + c.getMaxAge());
                response.addCookie(c);
             }
          }
       }
-      System.out.println("쿠키 갯수 : " + cookies.length);
+/*      System.out.println("쿠키 갯수 : " + cookies.length);
       for (Cookie c : cookies) {
          System.out.println("★쿠키 이름 : " + c.getName());
          System.out.println("쿠키 값 : " + c.getValue());
          System.out.println("쿠키 유지시간 :" + c.getMaxAge());
-      }
+      }*/
       
-      
-      return "../like/like.jsp";
+      //request.setAttribute("main_jsp", "../like/like.do");
+      return "redirect:../main/like.do";
    }
 }

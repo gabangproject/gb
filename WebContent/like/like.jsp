@@ -114,24 +114,25 @@
 											<thead>
 												<tr>
 													<th class="col-text" width="10%">매물번호</th>
-													<th class="col-text" width="45%"></th>
-													<th class="col-text" width="15%"></th>
-													<th class="col-text" width="20%">작성일</th>
-													<th class="col-text" width="10%">조회수</th>
+													<th class="col-text" width="10%">매물사진</th>
+													<th class="col-text" width="40%">월세</th>
+													<th class="col-text" width="40%">보증금</th>
+													
 												</tr>
 											</thead>
 											<tbody>
 
 												<!-- table 게시글 리스트 출력 시작-->
-												<c:forEach var="vo" items="${vo }">
-													<tr data-status="completed">
+  												<%-- <c:forEach var="vo" items="${vo }"> --%>
+
+													<tr>
 														<td>${vo.num}</td>
-														<%-- <td>${vo. }</td> --%>
-														<td></td>
 														<td><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd" /></td>
-														<td></td>
+														<td>${vo.deposit }</td>
+														<td>${vo.deposit }</td>
 													</tr>
-												</c:forEach>
+
+												<%-- </c:forEach> --%>
 												<!-- table 게시글 리스트 출력 끝-->
 											</tbody>
 										</table>

@@ -109,7 +109,7 @@
 										<tr>
 											<td width="15%" class="text-right" style="background-color: #8BBDFF">내용</td>
 											<td width="85%" class="text-left" height="500px">
-											<textarea rows="10" cols="50" name=content required style="height: 470px; width: 850px;"></textarea>
+											<textarea rows="10" cols="50" name=content required style="height: 470px;"></textarea>
 											</td>
 										</tr>
 

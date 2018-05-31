@@ -93,6 +93,7 @@ public class BoardModel {
 
 	@RequestMapping("main/insert.do")
 	public String boardInsert(HttpServletRequest request, HttpServletResponse response) {
+		
 		String page = request.getParameter("page");
 		request.setAttribute("curpage", page);
 		request.setAttribute("main_jsp", "../qnaboard/insert.jsp");

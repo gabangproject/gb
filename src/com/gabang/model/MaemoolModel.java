@@ -649,25 +649,37 @@ public class MaemoolModel {
 		
 		return "../maemool/jjim.jsp";
 	}
-	
+	//한솔
 	@RequestMapping("main/like.do")
-	public String like(HttpServletRequest req, HttpServletResponse res) {
+	public String like(HttpServletRequest request, HttpServletResponse response) {
 		String nums = "";
-		Cookie[] cookies = req.getCookies();
+		List<MaemoolVO> list = new ArrayList<MaemoolVO>();
+		MaemoolVO vo = null;
+		MaemoolDAO dao = null;
+		int num = 0;
+		Cookie[] cookies = request.getCookies();
 		System.out.println("현재 저장된 관심목록 갯수 : " + cookies.length);
+	
 		if(cookies!=null) {
 			for(int i=0; i<cookies.length; i++) {
-					nums=cookies[i].getValue();
+				Cookie c = cookies[i];
+				String cName = c.getName();
+				System.out.println(cName);
+				if (cName.startsWith("cookNo")) {
+
+				nums=c.getValue();
+				System.out.println(nums);
+				dao = new MaemoolDAO();
+				num = Integer.parseInt(nums);
+				vo = dao.cookie(num);
+				
+				}
+				
 			}
 		}
-		MaemoolDAO dao = new MaemoolDAO();
-		
-		int num = Integer.parseInt(nums);
-		MaemoolVO vo = dao.cookie(num);
-		
-		req.setAttribute("vo", vo);
-
-		req.setAttribute("main_jsp", "../like/like.jsp");
+		request.setAttribute("vo", vo);
+		//request.setAttribute("list", list);
+		request.setAttribute("main_jsp", "../like/like.jsp");
 		return "main.jsp";
 	}
 	// by. 한솔
@@ -727,7 +739,7 @@ public class MaemoolModel {
 		c.setMaxAge(60 * 60 * 24); // 쿠키 최대 유지시간 설정
 		response.addCookie(c);
 		
-		
+		System.out.println(no+"추가완료");
 		return "../like/like.jsp";
 
 	}
@@ -743,22 +755,17 @@ public class MaemoolModel {
 			for(int i = 0; i<cookies.length; i++) {
 				Cookie c = cookies[i]; 
 				String cName = c.getName();
-				
-				//쿠키 이름이 cookNo로 시작안하면 전부다 삭제
-				if (cName.startsWith("cookNo")) {
-					String cValue = c.getValue();
-					ss = cName.replaceAll("[^0-9]", "");
-					System.out.println("cName.startsWith(\"cookNo\") ss = " + ss);
+
+				if (cName.equals("cookNo"+no)) {
+					c.setMaxAge(0); // 쿠키 최대 유지시간 설정
+					System.out.println(c.getMaxAge());
+					response.addCookie(c);
+					System.out.println("cookNo["+no+"]삭제완료");
 				}
 				/////////////////////////////////////
-				if(ss == no) {
-					name = "cookNo"+ ss;
-					c = new Cookie(name, no);
-					c.setMaxAge(0); // 쿠키 최대 유지시간 설정
-					response.addCookie(c);
-					System.out.println("cookNo["+ss+"]삭제완료");
-				}
+
 			}
+			
 		}
 		
 		return "../like/like.jsp";

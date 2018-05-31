@@ -104,13 +104,15 @@ public class MaemoolModel {
 	public String maemoolDetail(HttpServletRequest request, HttpServletResponse res)
 	throws Exception {
 		request.setCharacterEncoding("euc-kr");
-	
+		
 		String num=request.getParameter("num"); // 이미지랑 이미지에 해당하는 상세정보를 매물번호에 맞게 출력
 		String x=request.getParameter("x");
 		String y=request.getParameter("y");
+		System.out.println(num);
+		System.out.println(x);
+		System.out.println(y);
 		
-		if(num == null)
-			num = "7";
+		
 	
 		MaemoolVO vo1=new MaemoolVO();
 	
@@ -120,11 +122,17 @@ public class MaemoolModel {
 		String email=MemberDAO.sellerEmail(Integer.parseInt(num));
 		SellerVO seller=MemberDAO.sellerData(email);
 		
+		for(ImgVO vo2:imgList)
+		{
+			System.out.println(vo2.getImg());
+		}
+		
 		request.setAttribute("x", x);
 		request.setAttribute("y", y);
 		request.setAttribute("imgList", imgList);
 		request.setAttribute("seller", seller);
 		request.setAttribute("vo", vo);
+		
 		request.setAttribute("main_jsp", "../maemool/maemool_detail.jsp");
 	
 		return "main.jsp";
@@ -142,9 +150,6 @@ public class MaemoolModel {
 		DealTypeVO vo3=new DealTypeVO();
 		PropertyAddrVO vo4=new PropertyAddrVO();
 		RoomTypeVO vo5=new RoomTypeVO();
-		
-		
-		
 		
 		
 		HttpSession session=request.getSession();
@@ -319,10 +324,10 @@ public class MaemoolModel {
 		
 		String deposit=deposit1+deposit2;
 		
-		if(monthly_rent.trim()==null)
+		/*if(monthly_rent.trim()==null)
 		{
 		deposit=deposit+" (전세가능)";
-		}
+		}*/
 			vo1.setDeposit(deposit);
 		System.out.println(deposit);
 		
@@ -366,14 +371,19 @@ public class MaemoolModel {
 			File f=new File(PATH+"\\"+fileName);
 			File file=new File(PATH+"\\"+email+"-"+fileName);
 			f.renameTo(file);
-			vo.setImg(file.getName());
+			vo.setImg("c:download\\"+file.getName());
 			vo.setNum(maemoolNum);
 			vo.getImg();
 			vo.getNum();
 			MaemoolDAO.insertImage(vo);
 		}
 		
-		request.setAttribute("main_jsp", "../maemool/maemool_detail.jsp");
+		
+		request.setAttribute("num", maemoolNum);
+		request.setAttribute("x", x_position);
+		request.setAttribute("y", y_position);
+		
+		request.setAttribute("main_jsp", "../main/complete.jsp");
 			return "main.jsp";
 	}
 

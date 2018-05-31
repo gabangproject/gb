@@ -96,8 +96,7 @@ border-bottom: 1px solid #e6e6e6;
 						<c:if test="${n.index!=0 }">
 							<div class="item">
 						</c:if> 
-						    <img src="${image.img }" class="img-responsive"">
-						    
+						    <img src="${image.img }" class="img-responsive">
 						    </div>
 					  </c:forEach>
 					  

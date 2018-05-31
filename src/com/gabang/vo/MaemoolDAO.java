@@ -49,17 +49,17 @@ public class MaemoolDAO {
 		return maemoolNum;
 	}
 	
-	public static void insertMaemool(BuildingTypeVO vo,DealTypeVO vo1,MaemoolVO vo3,PropertyAddrVO vo4,RoomTypeVO vo5)
+	public static void insertMaemool(MaemoolVO vo1,BuildingTypeVO vo2,DealTypeVO vo3,PropertyAddrVO vo4,RoomTypeVO vo5)
 	{
 		SqlSession session=null;
 		
 		try {
 			
 			session=ssf.openSession(true);
-			session.insert("insertBuildingType",vo);
-			session.insert("insertDealType",vo1);
 			
-			session.insert("insertMaemool",vo3);
+			session.insert("insertMaemool",vo1);
+			session.insert("insertBuildingType",vo2);
+			session.insert("insertDealType",vo3);
 			session.insert("insertPropertyAddr",vo4);
 			session.insert("insertRoomType",vo5);
 			
@@ -74,6 +74,7 @@ public class MaemoolDAO {
 				session.close();
 		}
 	}
+	
 	public static void insertImage(ImgVO vo)
 	{
 		SqlSession session=null;
@@ -81,11 +82,8 @@ public class MaemoolDAO {
 		try {
 			
 			session=ssf.openSession(true);
-			
 			session.insert("insertImg",vo);
 			
-			
-
 		}catch(Exception ex)
 		{
 			System.out.println(ex.getMessage());

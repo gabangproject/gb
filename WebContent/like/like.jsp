@@ -1,4 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+	<!-- ///////////////////박한솔 - 쿠키 사용 - 관심목록//////////////////////// -->
+	
+	
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -7,8 +11,11 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <style type="text/css">
@@ -75,76 +82,90 @@
 <body>
 
 
-
+	<!-- ///////////////////박한솔 - 쿠키 사용 - 관심목록//////////////////////// -->
 	<!-- header랑 연결된 하단 부분 끝 -->
 
 	<div id="fh5co-work-section">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+				<div
+					class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
 					<h3>관심목록</h3>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-<div class="container" style="width: 80%;">
-			<table class="table">
-				<tr>
-					<td class="col-md-2"><img src="../qnaboard/icon1.jpg" width="278" height="623" /></td>
-					<td class="col-md-8" style="margin: auto;">
 
-						<div class="row">
-							<div class="col-md-10 col-md-offset-1">
-								<div class="panel panel-default panel-table">
+	<div class="container" style="width: 80%;">
+		<table class="table">
+			<tr>
+				<td class="col-md-2"><img src="../qnaboard/icon1.jpg"
+					width="278" height="623" /></td>
+				<td class="col-md-8" style="margin: auto;">
 
-									<!-- 게시글목록 테마별 보기?? 시작 -->
-									<div class="panel-heading">
-										<div class="row">
-											<div class="col col-xs-6">
-												<h3 class="panel-title">매물목록</h3>
-											</div>
-										</div>
-									</div>
+					<div class="row">
+						<div class="col-md-10 col-md-offset-1">
+							<div class="panel panel-default panel-table">
 
-									<!-- 게시글목록 테마별 보기?? 끝-->
-
-									<div class="panel-body">
-										<table id="mytable" class="table table-striped table-bordered table-list">
-											<thead>
-												<tr>
-													<th class="col-text" width="10%">매물번호</th>
-													<th class="col-text" width="45%"></th>
-													<th class="col-text" width="15%"></th>
-													<th class="col-text" width="20%">작성일</th>
-													<th class="col-text" width="10%">조회수</th>
-												</tr>
-											</thead>
-											<tbody>
-
-												<!-- table 게시글 리스트 출력 시작-->
-												<c:forEach var="vo" items="${vo }">
-													<tr data-status="completed">
-														<td>${vo.num}</td>
-														<%-- <td>${vo. }</td> --%>
-														<td></td>
-														<td><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd" /></td>
-														<td></td>
-													</tr>
-												</c:forEach>
-												<!-- table 게시글 리스트 출력 끝-->
-											</tbody>
-										</table>
-
-									</div>
-									
+								<!-- 게시글목록 테마별 보기?? 시작 -->
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col col-xs-6">
+											<h3 class="panel-title">매물목록</h3>
 										</div>
 									</div>
 								</div>
-					</td>
-					<td class="col-md-2"><img src="../qnaboard/icon1.jpg" width="278" height="623" /></td>
-				</tr>
-			</table>
-		</div>
+
+								<!-- 게시글목록 테마별 보기?? 끝-->
+
+								<div class="panel-body">
+									<table id="mytable"
+										class="table table-striped table-bordered table-list">
+										<thead>
+											<tr>
+												<th class="col-text" width="15%">매물번호</th>
+												<th class="col-text" width="30%">보증금</th>
+												<th class="col-text" width="15%">월세</th>
+												<th class="col-text" width="35%">주소</th>
+												<th class="col-text" width="10%">삭제</th>
+											</tr>
+										</thead>
+										<tbody>
+
+											<!-- table 게시글 리스트 출력 시작-->
+											<%-- <c:forEach var="vo" items="${vo }"> --%>
+											<c:forEach var="vo" items="${list }" end="10">
+												<tr>
+													
+													<td><a href="../main/maemool_detail.do?num=${vo.num }&X=${vo.x_position }&Y=${vo.y_position}">${vo.num}</a></td>
+													<td><a href="../main/maemool_detail.do?num=${vo.num }&X=${vo.x_position }&Y=${vo.y_position}">${vo.deposit }</a></td>
+													<td><a href="../main/maemool_detail.do?num=${vo.num }&X=${vo.x_position }&Y=${vo.y_position}">${vo.monthly_rent }</a></td>
+													<td><a href="../main/maemool_detail.do?num=${vo.num }&X=${vo.x_position }&Y=${vo.y_position}">${vo.addr }</a></td>
+													
+													
+													<td>
+													
+														<form action="../main/like_delete.do" method="post">
+															<input type=submit value="삭제" class="btn btn-sm btn-danger">
+															<input type="hidden" name="num" value="${vo.num }">
+														</form>
+													</td>
+												</tr>
+											</c:forEach>
+											<%-- </c:forEach> --%>
+											<!-- table 게시글 리스트 출력 끝-->
+										</tbody>
+									</table>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</td>
+				<td class="col-md-2"><img src="../qnaboard/icon1.jpg"
+					width="278" height="623" /></td>
+			</tr>
+		</table>
+	</div>
 	</div>
 </body>

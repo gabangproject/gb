@@ -11,70 +11,37 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class MaemoolDAO {
-	
+
 	private static SqlSessionFactory ssf;
-	
-	static
-	{
-		try 
-		{
-			
-			Reader reader=Resources.getResourceAsReader("Config.xml");
-			ssf=new SqlSessionFactoryBuilder().build(reader);
-			
-		}catch(Exception ex)
-		{
+
+	static {
+		try {
+			Reader reader = Resources.getResourceAsReader("Config.xml");
+			ssf = new SqlSessionFactoryBuilder().build(reader);
+
+		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		}
 	}
-	
-	public static int maemoolNum()
-	{
-		SqlSession session=null;
-		int maemoolNum=0;
-		try {
-			
-			session=ssf.openSession();
-			maemoolNum=session.selectOne("maemoolNum");
-			
 
-		}catch(Exception ex)
-		{
+	public static int maemoolNum() {
+		SqlSession session = null;
+		int maemoolNum = 0;
+		try {
+			session = ssf.openSession();
+			maemoolNum = session.selectOne("maemoolNum");
+
+		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
-		}
-		finally
-		{
-			if(session!=null)
+		} finally {
+			if (session != null)
 				session.close();
 		}
 		return maemoolNum;
 	}
-	
-	public static void insertMaemool(MaemoolVO vo1,BuildingTypeVO vo2,DealTypeVO vo3,PropertyAddrVO vo4,RoomTypeVO vo5)
-	{
-		SqlSession session=null;
-		
-		try {
-			
-			session=ssf.openSession(true);
-			
-			session.insert("insertMaemool",vo1);
-			session.insert("insertBuildingType",vo2);
-			session.insert("insertDealType",vo3);
-			session.insert("insertPropertyAddr",vo4);
-			session.insert("insertRoomType",vo5);
-			
 
-		}catch(Exception ex)
-		{
-			System.out.println(ex.getMessage());
-		}
-		finally
-		{
-			if(session!=null)
-				session.close();
-		}
-	}
+
+	
 	
 	public static void insertImage(ImgVO vo)
 	{
@@ -99,72 +66,123 @@ public class MaemoolDAO {
 		}
 	}
 
-	public static List<ImgVO> detailMaemool(int num)
+	public static List<ImgVO> maemoolImage(int num)
 	{
 		SqlSession session=null;
 		List<ImgVO> list=new ArrayList<ImgVO>();
 		try {
-			
-			session=ssf.openSession();
-			list=session.selectList("imgFind", num);
-			
-		}catch(Exception ex)
+		
+				
+				session=ssf.openSession();
+				list=session.selectList("imgFind", num);
+				
+			}
+		catch(Exception ex)
 		{
 			System.out.println(ex.getMessage());
 		}
-		finally
+		finally 
 		{
 			if(session!=null)
+			session.close();
+		}
+		
+		return list;
+		
+	}
+	
+	public static void insertMaemool(MaemoolVO vo1, BuildingTypeVO vo2, DealTypeVO vo3, PropertyAddrVO vo4,RoomTypeVO vo5) 
+	{
+		SqlSession session = null;
+
+		try {
+			
+		
+		
+			session = ssf.openSession(true);
+
+			session.insert("insertMaemool", vo1);
+			session.insert("insertBuildingType", vo2);
+			session.insert("insertDealType", vo3);
+			session.insert("insertPropertyAddr", vo4);
+			session.insert("insertRoomType", vo5);
+
+		} catch (Exception ex) {
+
+			System.out.println(ex.getMessage());
+		} finally {
+			if (session != null)
 				session.close();
 		}
+	}
+
+	
+
+	public static List<ImgVO> detailMaemool(int num) {
+		SqlSession session = null;
+		List<ImgVO> list = new ArrayList<ImgVO>();
+		try {
+
+			session = ssf.openSession();
+			list = session.selectList("imgFind", num);
+
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			if (session != null)
+				session.close();
+		}
+		System.out.println("maemool Image finally");
 		return list;
 	}
+
 	// 매물 상세정보
+
 	public static MaemoolVO infoMaemool(int num)
 	{
-		MaemoolVO vo1 = new MaemoolVO();
+		MaemoolVO vo = new MaemoolVO();
+
 		SqlSession session = null;
+
 		try
 		{	
 			session=ssf.openSession();
-			vo1=session.selectOne("infoFind",num);
+			vo=session.selectOne("infoFind",num);
 		}
 		catch (Exception ex)
 		{
-			System.out.println(ex.getMessage());
-		}
-		finally
-		{
-			if(session!=null)
-				session.close();
-		}
-		return vo1;
-	}
-	public MaemoolVO cookie(int num) {
-		MaemoolVO vo = null;
-		SqlSession session=null;
-		try {
-			session = ssf.openSession();
-			vo = session.selectOne("cookie" , num);
-			
-		}catch (Exception e) {
-			System.out.println("cookie : " + e.getMessage());
-		}finally {
-			if(session!=null)
+	System.out.println(ex.getMessage());
+		} finally {
+			if (session != null)
 				session.close();
 		}
 		return vo;
 	}
-	
+	///////////////////박한솔 - 쿠키 사용////////////////////////
+	public MapVO cookie(int num) {
+		MapVO vo = null;
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			vo = session.selectOne("cookie", num);
+
+		} catch (Exception e) {
+			System.out.println("cookie : " + e.getMessage());
+		} finally {
+			if (session != null)
+				session.close();
+		}
+		return vo;
+	}
+	///////////////////박한솔 - 쿠키 사용////////////////////////
 	/*
-	 *	day: 2018.05.29
-	 *	who: t
+	 * day: 2018.05.29 who: t
 	 */
 	// 저보증금
 	public static List<MapVO> getDepositInfo() {
 		List<MapVO> list = new ArrayList<MapVO>();
 		SqlSession session = null;
-		
+
 		try {
 			session = ssf.openSession();
 			list = session.selectList("getDepositInfo");
@@ -174,15 +192,15 @@ public class MaemoolDAO {
 			if (session != null) {
 				session.close();
 			}
-		}		
+		}
 		return list;
 	}
-	
+
 	// 주차 가능
 	public static List<MapVO> getParkingInfo(Map<String, Object> map) {
 		List<MapVO> list = new ArrayList<MapVO>();
 		SqlSession session = null;
-		
+
 		try {
 			session = ssf.openSession();
 			list = session.selectList("getParkingInfo",map);
@@ -192,7 +210,7 @@ public class MaemoolDAO {
 			if (session != null) {
 				session.close();
 			}
-		}		
+		}
 		return list;
 	}
 	
@@ -211,12 +229,12 @@ public class MaemoolDAO {
 		}		
 		return total;
 	}
-	
+
 	// 원룸
 	public static List<MapVO> getOneRoomInfo() {
 		List<MapVO> list = new ArrayList<MapVO>();
 		SqlSession session = null;
-		
+
 		try {
 			session = ssf.openSession();
 			list = session.selectList("getOneRoomInfo");
@@ -226,15 +244,15 @@ public class MaemoolDAO {
 			if (session != null) {
 				session.close();
 			}
-		}		
+		}
 		return list;
 	}
-	
+
 	// 오피스텔
 	public static List<MapVO> getOfficetelInfo() {
 		List<MapVO> list = new ArrayList<MapVO>();
 		SqlSession session = null;
-		
+
 		try {
 			session = ssf.openSession();
 			list = session.selectList("getOfficetelInfo");
@@ -244,7 +262,7 @@ public class MaemoolDAO {
 			if (session != null) {
 				session.close();
 			}
-		}		
+		}
 		return list;
 	}
 }

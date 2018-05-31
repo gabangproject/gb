@@ -77,7 +77,7 @@
 
 
 	<!-- header랑 연결된 하단 부분 끝 -->
-
+	
 	<div id="fh5co-work-section">
 		<div class="container">
 			<div class="row">
@@ -86,7 +86,7 @@
 				</div>
 			</div>
 		</div>
-
+		
 		<div class="container" style="width: 80%;">
 			<table class="table">
 				<tr>
@@ -108,7 +108,7 @@
 										<tr>
 											<td width="15%" height="500px" class="success text-right" style="background-color: #8BBDFF">내용</td>
 											<td width="85%" height="500px" class="text-left">
-											<textarea rows="10" cols="50" name=content required style="height: 470px; width: 850px;"></textarea>
+											<textarea rows="10" cols="50" name=content required style="height: 470px;"></textarea>
 											</td>
 										</tr>
 

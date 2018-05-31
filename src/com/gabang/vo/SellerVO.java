@@ -9,13 +9,15 @@ public class SellerVO {
 	private String addr;			// аж╪р
 	private String intro;
 	private String pic;
-	private int pic_size;
+	private int snum;
 	
-	public int getPic_size() {
-		return pic_size;
+	
+	
+	public int getSnum() {
+		return snum;
 	}
-	public void setPic_size(int pic_size) {
-		this.pic_size = pic_size;
+	public void setSnum(int snum) {
+		this.snum = snum;
 	}
 	public String getIntro() {
 		return intro;

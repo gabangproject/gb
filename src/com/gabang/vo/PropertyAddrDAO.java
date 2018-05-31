@@ -46,9 +46,9 @@ public class PropertyAddrDAO {
 		
 		try {
 			session = ssf.openSession();
-			list = session.selectList("searchMaemool_temp", keyword);
+			list = session.selectList("searchMaemool", keyword);
 		} catch (Exception e) {
-			System.out.println("PropertyAddrDAO - guMaemool : " + e.getMessage());
+			System.out.println("PropertyAddrDAO - searchMaemool : " + e.getMessage());
 		} finally {
 			if (session != null) {
 				session.close();

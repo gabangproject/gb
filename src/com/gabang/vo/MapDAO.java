@@ -27,12 +27,12 @@ public class MapDAO {
 		SqlSession session = null;
 		List<MapVO> list = null;
 
-		System.out.println("★MapDAO의 findMaemoolInBound");
-		System.out.println("bound의 크기 : " + bound.size());
-		System.out.println("sw_x : " + bound.get("sw_x"));
-		System.out.println("sw_y : " + bound.get("sw_y"));
-		System.out.println("ne_x : " + bound.get("ne_x"));
-		System.out.println("ne_y : " + bound.get("ne_y"));
+//		System.out.println("★MapDAO의 findMaemoolInBound");
+//		System.out.println("bound의 크기 : " + bound.size());
+//		System.out.println("sw_x : " + bound.get("sw_x"));
+//		System.out.println("sw_y : " + bound.get("sw_y"));
+//		System.out.println("ne_x : " + bound.get("ne_x"));
+//		System.out.println("ne_y : " + bound.get("ne_y"));
 		try {
 			session = ssf.openSession();
 			list = session.selectList("findMaemoolInBound", bound);

@@ -176,4 +176,37 @@ public class MemberDAO {
 				session.close();
 		}
 	}
+	
+
+
+	public static SellerVO sellerData(String email) {
+		
+		SqlSession session = null;
+		SellerVO vo=null;
+		try {
+			session = ssf.openSession(true);
+			vo=session.selectOne("sellerData", email);
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			if (session != null)
+				session.close();
+		}
+		return vo;
+	}
+	
+	public static String sellerEmail(int num) {
+		SqlSession session = null;
+		String sellerEmail="";
+		try {
+			session = ssf.openSession(true);
+			sellerEmail=session.selectOne("sellerEmail", num);
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			if (session != null)
+				session.close();
+		}
+		return sellerEmail;
+	}
 }

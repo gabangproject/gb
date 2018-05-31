@@ -131,12 +131,12 @@ font-weight: 500;
 				
 
 				
-				<form id="maemul_upload" class="form-horizontal" method="post" action="../main/upload.do">
+				<form id="maemul_upload" class="form-horizontal" method="post" enctype="multipart/form-data" 
+				action="../main/upload.do">
 							
 					<fieldset form="maemul_upload">
 						
-						
-						
+
 						
 						<!-- 매물주소 -->
 						<div class="form-group">
@@ -263,7 +263,7 @@ font-weight: 500;
 									
 									<c:forEach var="option" items="${opt }" varStatus="n">
 										<label for="opt-${n.index }" class="form-check-label">
-										<input type="checkbox" id="opt-${n.index }" name="opt" value="${n.index }" 
+										<input type="checkbox" id="opt-${n.index }" name="opt" value="${option }" 
 										required>${option }
 										</label>
 									</c:forEach>
@@ -355,14 +355,9 @@ font-weight: 500;
 						<!-- 월세  -->
 						<div class="form-group">
 							<label class="col-md-4 control-label" >월세</label>
+														
 								<div class="col-md-2 sub">
-								<input type="text" id="monthly_rent1" name="monthly_rent1" class="form-control" 
-								style="width:45%; display:inline;" onblur="pCheck(this)">
-								<label for="monthly_lent1">억</label>
-								</div>
-								
-								<div class="col-md-2 sub">
-								<input type="text" id="monthly_rent2" name="monthly_rent2" class="form-control" 
+								<input type="text" id="monthly_rent" name="monthly_rent" class="form-control" 
 								style="width:45%; display:inline;" onblur="pCheck(this)">
 								<label for="monthly_lent2">만원</label>
 								</div>

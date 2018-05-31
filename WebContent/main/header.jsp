@@ -86,7 +86,7 @@ function idcheck()
 						<c:if test="${sessionScope.nick!=null }">
 							<li><a class="fh5co-sub-ddown">마이페이지</a>
 								<ul class="fh5co-sub-menu">
-										<li><a href="list.jsp" target="_blank">찜목록 보기</a></li>
+										<li><a href="jjim_detail.do" target="_blank">찜목록 보기</a></li>
 										<li><a href="#" target="_blank">개인정보 관리</a></li>
 									<c:if test="${sessionScope.grade!='2' }">	
 										<li><a href="maemul_upload.do" target="_blank">매물등록</a></li>

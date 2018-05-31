@@ -14,7 +14,7 @@ $(function() {
    List<MapVO> list = (List<MapVO>) request.getAttribute("geoList");
    System.out.println(list.size());
    %>
-   alert('testSideList.jsp에서 출력\n매물 개수 : ' + <%=list.size()%> + '개');
+   alert('sideList.jsp에서 출력\n매물 개수 : ' + <%=list.size()%> + '개');
 })
 <%-- by.준영 --%>
 function jjim(input) {

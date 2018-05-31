@@ -30,7 +30,7 @@ $(function() {
 	--%>
 	$.ajax({
 		type:'post',
-		url:'testSideList.do',
+		url:'sideList.do',
 		data:{'keyword': keyword},
 		success:function(res) {
 			$('#list').html(res);			
@@ -59,7 +59,7 @@ $(function() {
 		<%-- ajax로 sideList에 값을 전달하고 결과를 받는다. --%>
 		$.ajax({
 			type:'post',
-			url:'testSideList.do',
+			url:'sideList.do',
 			data:{'ne_x':ne_x, 'ne_y':ne_y, 'sw_x':sw_x, 'sw_y':sw_y},
 			success:function (res) {
 				$('#list').html(res);

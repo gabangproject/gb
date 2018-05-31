@@ -690,11 +690,14 @@ public class MaemoolModel {
 		String ss = "";
 		int num = Integer.parseInt(no);
 		/*******************************************************/
-		System.out.println("ss 공백 : " + ss);
-		System.out.println("cookies 길이 확인 : " + cookies.length);
-	//	System.out.println("cookies[0] 이름 확인 : " + cookies[0].getName());
+//		for (Cookie c : cookies) {
+//			System.out.println("★쿠키 이름 : " + c.getName());
+//			System.out.println("쿠키 값 : " + c.getValue());
+//			System.out.println("쿠키 유지시간 :" + c.getMaxAge());
+//		}
 
 		if (cookies != null) {
+			System.out.println("쿠키 갯수 : " + cookies.length);
 			
 			for (int i = 0; i < cookies.length; i++) {
 				
@@ -702,6 +705,7 @@ public class MaemoolModel {
 				String cName = c.getName();
 				System.out.println("cookies["+i+"] 이름 확인 : " + cookies[i].getName());
 				System.out.println("cookies["+i+"] 값 확인 : " + cookies[i].getValue());
+				System.out.println("cookies["+i+"] 시간 확인 : " + cookies[i].getMaxAge());
 				
 				if (cName.startsWith("cookNo")) {
 					String cValue = c.getValue();
@@ -735,31 +739,27 @@ public class MaemoolModel {
 	public String LikeDelete(HttpServletRequest request, HttpServletResponse response) {
 		String no = request.getParameter("num");
 		Cookie[] cookies = request.getCookies();
-		String name = "";
-		int Value = 0;
-		String ss ="";
 		System.out.println(no);
 		if(cookies!=null) {
 			for(int i = 0; i<cookies.length; i++) {
 				Cookie c = cookies[i]; 
 				String cName = c.getName();
 				
-				//쿠키 이름이 cookNo로 시작안하면 전부다 삭제
-				if (cName.startsWith("cookNo")) {
-					String cValue = c.getValue();
-					ss = cName.replaceAll("[^0-9]", "");
-					System.out.println("cName.startsWith(\"cookNo\") ss = " + ss);
-				}
-				/////////////////////////////////////
-				if(ss == no) {
-					name = "cookNo"+ ss;
-					c = new Cookie(name, no);
-					c.setMaxAge(0); // 쿠키 최대 유지시간 설정
+				//쿠키 이름이 cookNo로 시작
+				if (cName.equals("cookNo" + no)) {
+					c.setMaxAge(0);
+					System.out.println("쿠키 유지시간 : " + c.getMaxAge());
 					response.addCookie(c);
-					System.out.println("cookNo["+ss+"]삭제완료");
 				}
 			}
 		}
+		System.out.println("쿠키 갯수 : " + cookies.length);
+		for (Cookie c : cookies) {
+			System.out.println("★쿠키 이름 : " + c.getName());
+			System.out.println("쿠키 값 : " + c.getValue());
+			System.out.println("쿠키 유지시간 :" + c.getMaxAge());
+		}
+		
 		
 		return "../like/like.jsp";
 	}

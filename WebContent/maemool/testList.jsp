@@ -66,9 +66,9 @@ $(function() {
 				var sList = list.match(/\d+.\d+/g);
 				alert('list는 ' + list + '\nsList의 길이 : ' + sList.length + '\nsList의 값 : ' + sList); */
 				var res1 = '13.55 132.55'
-				res1 = res1.match(/[13]+\.\d+/g);
-				//res = res.match(/\d+\.\d+/g);
-				alert(res1);
+				//res1 = res1.match(/[13]+\.\d+/g);
+				res = res.match(/\d+\.\d+/g);
+				alert(res);
 			}
 		});
 	});

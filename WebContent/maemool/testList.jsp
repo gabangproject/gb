@@ -32,7 +32,7 @@ $(function() {
 		url:'testSideList.do',
 		data:{'keyword': keyword},
 		success:function(res) {
-			$('#list').html(res);
+			$('#list').html(res);			
 		}
 	});
 	

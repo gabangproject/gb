@@ -84,15 +84,21 @@ function send(input){
 		<c:forEach var="i" items="${geoList}" varStatus="s">
 			<div class="media">
 				<div class="fav-box">
-					<a><span class="glyphicon glyphicon-heart-empty" onclick="jjim(this)" num=${i.num }></span></a>
+					<a><span class="glyphicon glyphicon-heart-empty" onclick="jjim(this)" num=${i.num}></span></a>
 					<i class="fa fa-eye" id='like' aria-hidden="true" num='${i.num}' onclick="send(this)"></i>
 				</div>
 				<a href="maemool_detail.do?num=${i.num}&x=${i.x_position}&y=${i.y_position}">
 					<img class="d-flex align-self-start maemool-list-img" src="${oneImg.get(i.num)}">
 				</a>
 				<div class="media-body pl-3">
-					<div class="price" num='${i.num}'>
-							${i.deposit} / ${i.monthly_rent}
+					<div class="price" num='${i.num}' style="display:inline;">
+							${i.deposit}
+							<%-- <c:if test="${i.monthly_rent != '0 만원'" > --%>
+							<c:set var="rent" value="${i.monthly_rent}"/>
+							<c:if test="${rent ne '0 만원'}" >
+								/
+								<div style="font-size:0.6em;display: inline;">${i.monthly_rent}</div>
+							</c:if> 
 						<div class=address>${i.addr}</div>
 					</div>
 					<div class="stats">

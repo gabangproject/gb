@@ -16,13 +16,11 @@ $(function() {
    %>
    alert('testSideList.jsp에서 출력\n매물 개수 : ' + <%=list.size()%> + '개');
 })
-
 <%-- by.준영 --%>
 function jjim(input) {
    var num = $(input).attr("num");
    alert(num);
    var heart = $(input).attr('class');
-
    if (heart == "glyphicon glyphicon-heart") {
       $.ajax({
          type : 'post',
@@ -35,7 +33,6 @@ function jjim(input) {
          }
       });
    }
-
    else {
       $.ajax({
          type : 'post',
@@ -93,9 +90,7 @@ function send(input){
          </a>
          <div class="media-body pl-3">
             <div class="price" num='${i.num}'>
-               <a href="maemool_detail.do?num=${i.num}&x=${i.x_position}&y=${i.y_position}">
                   ${i.deposit}
-               </a>
                <div class=address>${i.addr}</div>
             </div>
             <div class="stats">

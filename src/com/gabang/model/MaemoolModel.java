@@ -475,7 +475,7 @@ public class MaemoolModel {
    public String testSideList(HttpServletRequest req, HttpServletResponse res) throws Exception {
       req.setCharacterEncoding("utf-8");      
       String keyword = req.getParameter("keyword");      
-      System.out.println("testSideList.do"+keyword);
+      System.out.println("testSideList.do 받은 키워드 : "+keyword);
       // 지도 영역 각 모서리의 위도와 경도를 전달받는다.
       String Sne_x = req.getParameter("ne_x");
       String Sne_y = req.getParameter("ne_y");
@@ -544,7 +544,7 @@ public class MaemoolModel {
          else         
             geoList = PropertyAddrDAO.searchMaemool(keyword);
       
-         // 지도 움직일 경우 해당 지도 내 매물 출력
+         // 지도 움직일 경우 키워드는 전송하지 않고 해당 지도 내 매물 출력
          // 위도경도가 null이 아닐 경우
       } else if((Sne_x != null) && (Sne_y != null) && (Ssw_x != null) && (Ssw_y != null)){
          // 지도 북동끝점 위경도
@@ -554,8 +554,8 @@ public class MaemoolModel {
          double sw_x = Double.parseDouble(Ssw_x);
          double sw_y = Double.parseDouble(Ssw_y);
          
-         System.out.println("◈ testSideList로 전송됨\nne_x : " + ne_x + " ne_y : " + ne_y);
-         System.out.println("sw_x : " + sw_x + " sw_y : " + sw_y);
+//         System.out.println("◈ testSideList로 전송됨\nne_x : " + ne_x + " ne_y : " + ne_y);
+//         System.out.println("sw_x : " + sw_x + " sw_y : " + sw_y);
          // 받은 모서리 위경도를 맵에 저장
          //bound = new HashMap<String, Double>();
          bound = new HashMap<String, Object>();

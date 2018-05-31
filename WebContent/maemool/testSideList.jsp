@@ -8,7 +8,7 @@
 <head>
 <meta charset=EUC-KR>
 <script type="text/javascript">
-
+<%-- ************** 이 문서에는 위도, 경도를 추가로 입력해서는 안됩니다. ************** --%>
 <%-- by.한 --%>
 $(function() {
    <%

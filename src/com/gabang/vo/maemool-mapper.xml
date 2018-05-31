@@ -96,8 +96,8 @@
 	</select>
 
 
-	<select resultType="MaemoolVO" id="cookie" parameterType="int"> 
-		SELECT * FROM maemool_temp 
+	<select resultType="MapVO" id="cookie" parameterType="int"> 
+		SELECT * FROM map
 		WHERE num = #{num} 
 	</select>
 	

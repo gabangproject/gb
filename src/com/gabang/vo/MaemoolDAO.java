@@ -139,8 +139,8 @@ public class MaemoolDAO {
 		}
 		return vo1;
 	}
-	public MaemoolVO cookie(int num) {
-		MaemoolVO vo = null;
+	public MapVO cookie(int num) {
+		MapVO vo = null;
 		SqlSession session=null;
 		try {
 			session = ssf.openSession();

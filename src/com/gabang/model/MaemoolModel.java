@@ -665,8 +665,8 @@ public class MaemoolModel {
    @RequestMapping("main/like.do")
    public String like(HttpServletRequest request, HttpServletResponse response) {
       String nums = "";
-      List<MaemoolVO> list = new ArrayList<MaemoolVO>();
-      MaemoolVO vo = null;
+      List<MapVO> list = new ArrayList<MapVO>();
+      MapVO vo = null;
       MaemoolDAO dao = null;
       int num = 0;
       Cookie[] cookies = request.getCookies();

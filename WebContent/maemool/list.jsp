@@ -2,6 +2,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -13,55 +15,103 @@
 
 <!-- 다음 지도 api를 사용하기 위한 부분 -->
 <!-- 해당 키는 권한 키 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0414b62e66e43f9fc50e0f6dfd64b93f&libraries=clusterer"></script>
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0414b62e66e43f9fc50e0f6dfd64b93f&libraries=clusterer,services"></script>
 <script type="text/javascript">
+<%-- by.한 --%>
 $(function() {
 	var keyword = '<%=request.getParameter("keyword")%>';
-	var swLatlng;
-	var neLatlng;
-	
+	var bound;
+	var latlngTotal;
+	var latlngList;
+	var mMarkers = new Array();
+	<%-- 
+	페이지가 로딩되면 ajax로 화면 우측 매물목록을 불러온다.
+	이때 keyword를 같이 전송하여 매물목록에서 알맞은 매물을 출력하게끔 한다.
+	--%>
 	$.ajax({
 		type:'post',
-		url:'sideList.do',
+		url:'testSideList.do',
 		data:{'keyword': keyword},
 		success:function(res) {
-			$('#list').html(res);
+			$('#list').html(res);			
 		}
 	});
 	
-	daum.maps.event.addListener(map,'center_changed', function() {
-		// 지도 영역정보를 얻어옵니다 
-		var bounds = map.getBounds();
+	<%-- 맵 드래그가 끝난 후 실행 --%>
+	daum.maps.event.addListener(map, 'dragend', function() {
+		<%-- 지도의 각 끝점을 구한다. --%>
+		bound = map.getBounds();
 		
-		// 주어진 좌표가 영역에 포함되는지 확인
-		//bounds.contain();
+		<%-- 지도 북동쪽 끝 위도와 경도 --%>
+		<%-- ajax로 전달할때는 문자열만 가능 --%>
+		var ne = bound.getNorthEast();
+		var ne_x = ne.getLat();
+		var ne_y = ne.getLng();
 		
-		// 영역정보의 남서쪽 정보를 얻어옵니다 
-	    swLatlng = bounds.getSouthWest().toString();
-	    // 영역정보의 북동쪽 정보를 얻어옵니다 
-	    neLatlng = bounds.getNorthEast().toString();
-	    
-	    // 지도 하단에 위도와 경도를 출력
-	    $('#info').text(swLatlng + '    ' + neLatlng);
-	});
-	
-	// 맵 내부에서 마우스 버튼을 놓을 경우 작동
-	// 이동한 좌표에 맞는 매물 목록을 불러온다.
-	/* $('#map').mouseup(function() {
+		<%-- 지도 남서쪽 끝 위도와 경도 --%>
+		var sw = bound.getSouthWest();
+		var sw_x = sw.getLat();
+		var sw_y = sw.getLng();
+		
+		<%-- 값이 정상적으로 들어오는지 확인 --%>
+		<%-- alert(ne_x + "  " + ne_y + "\n" + sw_x + "   " + sw_y); --%>
+		
+		<%-- ajax로 sideList에 값을 전달하고 결과를 받는다. --%>
 		$.ajax({
 			type:'post',
 			url:'testSideList.do',
-			data:{
-				'keyword':keyword,
-				'swLatlng':swLatlng,
-				'neLatlng':neLatlng
-			},
-			success:function(res) {
+			data:{'ne_x':ne_x, 'ne_y':ne_y, 'sw_x':sw_x, 'sw_y':sw_y},
+			success:function (res) {
 				$('#list').html(res);
+				<%-- 정규식을 이용해서 결과값의 위경도만 받는다. --%>
+				<%-- split 함수를 사용하기위해서 object 타입을 String 타입으로 전환 --%>
+				latlngTotal = String(res.match(/[13]\d{1,2}\.\d{8,}/g));
+				
+				<%-- 
+				// 타입 확인
+				alert(typeof(latlngTotal));
+				--%>
+				
+				<%-- 구분자 ,로 분리 --%>
+				latlngList = latlngTotal.split(',');
+				
+				<%-- 콘솔에 출력 --%>
+				console.log("latlngList 길이 : " + latlngList.length);
+				for(var i = 0; i < latlngList.length; i++) {
+					console.log(latlngList[i]);
+					var mx;
+					var my;
+					
+					<%-- 짝수면 경도 --%>
+					if(((i + 1) % 2) == 0) {
+						my = latlngList[i];
+						console.log("my : " + my);
+					} else {
+						<%-- 홀수면 위도 --%>
+						mx = latlngList[i];
+						console.log("mx : " + mx)
+					}
+					
+					<%-- mx, my를 마커에 설정 --%>
+					var mLatlng = new daum.maps.LatLng(mx, my);
+					var mMarker = new daum.maps.Marker({
+						position: mLatlng
+					});
+					
+					<%-- 배열에 추가 --%>
+					mMarkers.push(mMarker);
+				}
+				<%-- 기존 클러스터의 마커 삭제 --%>
+				clusterer.clear();
+				<%-- console.log('클러스터 마커 삭제'); --%>
+				
+				<%-- 새로운 마커 추가하여 표시 --%>
+				clusterer.addMarkers(mMarkers);
+				console.log('클러스터 마커 추가');
+				
 			}
 		});
-	}); */
+	});
 });
 </script>
 <style>
@@ -199,15 +249,14 @@ h2 a {
 						<!-- 지도 -->
 						<div id=map style="width: 50%; height: 250px%; display: inline-block" class="col-md-7"></div>
 						<script>
+							<%-- by.한 --%>
 							var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 							mapOption = {
-								center : new daum.maps.LatLng(33.450701,
-										126.570667), // 지도의 중심좌표
+								center : new daum.maps.LatLng(37.563228970425506, 126.97727242618686), // 지도의 중심좌표
 								level : 5
-							// 지도의 확대 레벨
 							};
 
-							// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+							// 지도를 표시할 div와 지도 옵션으로 지도를 생성합니다
 							var map = new daum.maps.Map(mapContainer, mapOption);
 
 							// 마커 클러스터러
@@ -221,18 +270,19 @@ h2 a {
 							var markers = new Array();
 							var x;
 							var y;
-							var lb = map.getBounds();
+							
 						<%
 							List<MapVO> list = (List<MapVO>) request.getAttribute("geoList");
+							System.out.println(list.size());
 							String x, y;
 							for (int i = 0; i < list.size(); i++) {
 						%>
 								x = <%=list.get(i).getX_position()%>
 								y = <%=list.get(i).getY_position()%>
-							
+								
 								markers.push(new daum.maps.Marker({
 									position : new daum.maps.LatLng(x, y)
-								}));
+								}))
 						<%
 							}
 						%>
@@ -248,16 +298,20 @@ h2 a {
 								// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
 								map.panTo(moveLatLon);
 							};
-							alert(markers.length + '개 매물');
+							var mNum = markers.length;
+							
+							alert('mNum은 ' + mNum);
+							
 						</script>
-
 						<!-- 매물들의 리스트 출력 부분 -->
 						<div class="col-md-5 listing-block" id=list style="width: 50%; display: inline-block">
 						</div>
 					</div>
 				</div>
 			</section>
-			<div id=info></div>
+			<div style="width: 300px; height: 30px; background-color:yellow;" align="center">
+				<h3 id=info>${fn:length(geoList)} 개 매물</h3>
+			</div>
 		</div>
 	</div>
 </body>

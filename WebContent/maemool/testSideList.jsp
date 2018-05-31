@@ -64,7 +64,6 @@ function send(){
 <body>
 	<%-- <input type="hidden" id='listNum' value='◐${fn:length(geoList)}◑'> --%>
 	<c:forEach var="i" items="${geoList}" varStatus="s">
-
 		<div class="media">
 			<div class="fav-box">
 				<a><span class="glyphicon glyphicon-heart-empty" onclick="jjim(this)" num=${i.num }></span></a>
@@ -75,33 +74,18 @@ function send(){
 			</a>
 			<div class="media-body pl-3">
 				<div class="price" num='${i.num}'>
-					${i.deposit}
-					<div class=address>${i.addr}</div>
-
-			<div class="media">
-				<div class="fav-box">
-					<i class="fa fa-heart-o" aria-hidden="true"></i>
-					<i class="fa fa-eye" aria-hidden="true" num="${i.num} " id="num" onclick="send()"></i>
-
-				</div>
 					<a href="maemool_detail.do?num=${i.num}&x=${i.x_position}&y=${i.y_position}">
-						<img class="d-flex align-self-start maemool-list-img" src="${oneImg.get(i.num)}">
+						${i.deposit}
 					</a>
-				<div class="media-body pl-3">
-					<div class="price" num='${i.num}'>
-						<a href="maemool_detail.do?num=${i.num}&x=${i.x_position}&y=${i.y_position}">
-							${i.deposit}
-						</a>
-						<div class=address>${i.addr}</div>
-					</div>
-					<div class="stats">
-						<input type="hidden" id='listNum' value='◐${i.x_position},${i.y_position}◑'>
-						<span>위도<i class="fa fa-arrows-alt" id='${i.num}x'>${i.x_position}</i></span>
-						<span>경도<i class="fa fa-bath" id='${i.num}y'>${i.y_position}</i></span>
-					</div>
+					<div class=address>${i.addr}</div>
+				</div>
+				<div class="stats">
+					<%--<input type="hidden" id='listNum' value='◐${i.x_position},${i.y_position}◑'> --%>
+					<span>위도<i class="fa fa-arrows-alt" id='${i.num}x'>${i.x_position}</i></span>
+					<span>경도<i class="fa fa-bath" id='${i.num}y'>${i.y_position}</i></span>
 				</div>
 			</div>
+		</div>
 	</c:forEach>
-
 </body>
 </html>

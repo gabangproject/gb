@@ -62,8 +62,9 @@ $(function() {
 			data:{'ne_x':ne_x, 'ne_y':ne_y, 'sw_x':sw_x, 'sw_y':sw_y},
 			success:function(res) {
 				$('#list').html(res);
-				var num = res.substring(res.indexOf('◐') + 1,res.indexOf('◑'));
-				$('#info').text(num);
+				var list = '153.111,58.5585';
+				var sList = list.split('^[0-9]+.^[0-9]');
+				alert('sList의 길이 : ' + sList.length + '\nsList의 값 : ' + sList[0]);
 			}
 		});
 	});

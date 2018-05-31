@@ -113,7 +113,7 @@
 							<td><label class="col-sm-5">관리비<br>포함항목</label>${vo.maintenance}</td>
 						</tr>
 						<tr>
-							<td><label class="col-sm-5">층/<br>건물층수</label>${vo.floor}</td>
+							<td><label class="col-sm-5">층/<br>건물<br>층수</label>${vo.floor}</td>
 							<td><label class="col-sm-5">엘리베이터</label>
 							<c:if test="${vo.elev==1 }">
 							가능
@@ -146,7 +146,7 @@
 							<tr>
 							</tr>
 				</table>
-				<label>상세설명</label>씨부레
+				<label>상세설명</label>
 				<br>${vo.description}
 				</div>
 			

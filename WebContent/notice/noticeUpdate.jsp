@@ -110,7 +110,7 @@
 										<tr>
 											<td width="15%" class="success text-right">내용</td>
 											<td width="85%" height="500px" class="text-left">
-											<textarea rows="10" cols="50" name=content required style="height: 470px; width: 850px;">${vo.content }</textarea>
+											<textarea rows="10" cols="50" name=content required style="height: 470px;">${vo.content }</textarea>
 											</td>
 										</tr>
 

@@ -29,28 +29,25 @@
 		maemool_temp
 	</select>
 
-	<select id="searchMaemool_temp" parameterType="String"
+	<!-- 홈에서 매물 검색할 때 사용 by. 한 -->
+	<select id="searchMaemool" parameterType="String"
 		resultType="MapVO">
-		select * from map_temp where addr like '%'||#{keyword}||'%'
+		select * from map where addr like '%'||#{keyword}||'%'
 	</select>
 
+	<!-- 이미지 검색 by.한 -->
 	<select id="imgFind" parameterType="int" resultType="ImgVO">
 		SELECT *
 		FROM img WHERE num = #{num}
 	</select>
 
-	<!-- 지도 이동시 보여지는 영역 내 매물을 검색 by.한 -->
+	<!-- 지도 이동할 때 보여지는 영역 내 매물을 검색 by.한 -->
 	<select id="findMaemoolInBound" parameterType="hashmap"
 		resultType="MapVO">
-		SELECT * FROM map_temp
+		SELECT * FROM map
 		WHERE (TO_NUMBER(x_position) BETWEEN #{sw_x} AND #{ne_x}) AND
 		(TO_NUMBER(y_position) BETWEEN #{sw_y} AND #{ne_y})
 	</select>
-
-	<insert id="jjimActive" parameterType="hashmap">
-		INSERT INTO jjim (email,
-		num) values (#{id}, #{num})
-	</insert>
 
 	<!-- 매물 상세정보 -->
 	<select id="infoFind" parameterType="int" resultType="MaemoolVO">
@@ -95,8 +92,8 @@
 	</select>
 
 
-	<select resultType="MaemoolVO" id="cookie" parameterType="int"> 
-		SELECT * FROM maemool_temp 
+	<select resultType="MapVO" id="cookie" parameterType="int"> 
+		SELECT * FROM map
 		WHERE num = #{num} 
 	</select>
 	

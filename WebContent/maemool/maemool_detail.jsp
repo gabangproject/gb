@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+   pageEncoding="EUC-KR"%>
+   <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -58,60 +58,49 @@ border-bottom: 1px solid #e6e6e6;
 </style>
 </head>
 <body>
-    <%= application.getRealPath("/") %>
-	<!-- end:header-top -->
-	<div id="fh5co-work-section" >
-		<div class="container" >
-
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-					<h3>매물정보</h3>
-				</div>
-			</div>
 
 
 
-			<!-- 매물 이미지 출력 -->
-			<div class="row" >
-				<div style="width: 70%; margin:0px auto;">
-				<div id="myCarousel" class="carousel  slide" style=" height:500px;">
-				  <!-- Dot Indicators -->
-				  <ol class="carousel-indicators">
-				  <c:forEach var="img" items="${imgList}" varStatus="n">
-				  	<c:if test="${n.index==0 }">
-				    	<li data-target="#myCarousel" data-slide-to="${n.index}" class="active"></li>
-				    </c:if>
-				    <c:if test="${n.index!=0 }">
-					<li data-target="#myCarousel" data-slide-to="${n.index }" ></li>
-				   	</c:if>
-				  </c:forEach>
-				    
-				  </ol>
-				  <!-- Items -->
-				  <div class="carousel-inner">
-					  <c:forEach var="image" items="${imgList }" varStatus="n">
-					  	<c:if test="${n.index==0 }">
-						  	<div class="active item"> 
-						</c:if>
-						<c:if test="${n.index!=0 }">
-							<div class="item">
-						</c:if> 
-						    <img src="${image.img }" class="img-responsive">
+   <!-- end:header-top -->
+   <div id="fh5co-work-section" >
+      <div class="container" >
 
-						    </div>
-					  </c:forEach>
-					  
-				  </div>
-				  <!-- Navigation -->
-				   		<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-				            <span class="glyphicon glyphicon-chevron-left"></span>
-				        </a>
-				        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-				            <span class="glyphicon glyphicon-chevron-right"></span>
-				        </a>
-			   </div>
-			</div>
-			
+
+         <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+               <h3>매물정보</h3>
+            </div>
+         </div>
+
+
+
+         <!-- 매물 이미지 출력 -->
+         <div class="row" >
+            <div style="width: 70%; margin:0px auto;">
+            <div id="myCarousel" class="carousel  slide" style=" height:500px;">
+              <!-- Dot Indicators -->
+              <ol class="carousel-indicators">
+              <c:forEach var="img" items="${imgList}" varStatus="n">
+                 <c:if test="${n.index==0 }">
+                   <li data-target="#myCarousel" data-slide-to="${n.index}" class="active"></li>
+                </c:if>
+                <c:if test="${n.index!=0 }">
+               <li data-target="#myCarousel" data-slide-to="${n.index }" ></li>
+                  </c:if>
+              </c:forEach>
+                
+              </ol>
+              <!-- Items -->
+              <div class="carousel-inner">
+                 <c:forEach var="image" items="${imgList }" varStatus="n">
+                    <c:if test="${n.index==0 }">
+                       <div class="active item"> 
+                  </c:if>
+                  <c:if test="${n.index!=0 }">
+                     <div class="item">
+                  </c:if> 
+                      <img src="c:\download\admin-error.png" class="img-responsive">
+
 
 			<div class="row">
 				<div style="margin-top:20px; ">
@@ -211,57 +200,79 @@ border-bottom: 1px solid #e6e6e6;
 					
 				<!-- 지도 출력 -->
 
-				<div class="row">
-					<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-						<h3>매물위치</h3>
-					</div>
-				</div>
-				
-				<input type="hidden" id="x_position" value="${x }">
-					<input type="hidden" id="y_position" value="${y }">
-					<!-- 해당 매물 위치 -->
-					 
-					<div id="map" style="width:50%; margin:0px auto"></div>
-			</div>
-		
-			</div>
-			<!-- container 끝 -->
-			<div class="form-group text-center" >
-				<input type=button id="cencel" name="cencel" class="btn btn-primary" value="뒤로가기" onClick="history.back()">
-			</div>
-	</div> 
+                      </div>
+                 </c:forEach>
+                 
+              </div>
+              <!-- Navigation -->
+                     <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+            </div>
+         </div>
+         
+
+
+         
+   
+         <div class="row" style="margin-bottom:30px;">
+               
+            <!-- 지도 출력 -->
+
+            <div class="row">
+               <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                  <h3>매물위치</h3>
+               </div>
+            </div>
+            
+            <input type="hidden" id="x_position" value="${x }">
+               <input type="hidden" id="y_position" value="${y }">
+               <!-- 해당 매물 위치 -->
+                
+               <div id="map" style="width:50%; margin:0px auto"></div>
+         </div>
+      
+         </div>
+         <!-- container 끝 -->
+         <div class="form-group text-center" >
+            <input type=button id="cencel" name="cencel" class="btn btn-primary" value="뒤로가기" onClick="history.back()">
+         </div>
+   </div> 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 </script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>		
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>      
 
 <!-- 다음 지도 관련 script -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0414b62e66e43f9fc50e0f6dfd64b93f"></script>
 <script>
 
-		var x_position=$('#x_position').val();
-		var y_position=$('#y_position').val();
-		
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		mapOption = {
-			center : new daum.maps.LatLng(x_position, y_position), // 지도의 중심좌표
-			level : 3
-		// 지도의 확대 레벨
-		};
-				
-		var map = new daum.maps.Map(mapContainer, mapOption); 
-		
-		var markerPosition  = new daum.maps.LatLng(x_position, y_position); 
+      var x_position=$('#x_position').val();
+      var y_position=$('#y_position').val();
+      
+      var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+      mapOption = {
+         center : new daum.maps.LatLng(x_position, y_position), // 지도의 중심좌표
+         level : 3
+      // 지도의 확대 레벨
+      };
+            
+      var map = new daum.maps.Map(mapContainer, mapOption); 
+      
+      var markerPosition  = new daum.maps.LatLng(x_position, y_position); 
 
-		// 마커를 생성합니다
-		var marker = new daum.maps.Marker({
-		    position: markerPosition
-		});
+      // 마커를 생성합니다
+      var marker = new daum.maps.Marker({
+          position: markerPosition
+      });
 
-		// 마커가 지도 위에 표시되도록 설정합니다
-		marker.setMap(map);
-		
-		//평점 스크립트
+      // 마커가 지도 위에 표시되도록 설정합니다
+      marker.setMap(map);
+      
+      //평점 스크립트
 
 </script>
 

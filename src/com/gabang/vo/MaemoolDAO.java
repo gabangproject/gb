@@ -10,70 +10,37 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class MaemoolDAO {
-	
+
 	private static SqlSessionFactory ssf;
-	
-	static
-	{
-		try 
-		{
-			
-			Reader reader=Resources.getResourceAsReader("Config.xml");
-			ssf=new SqlSessionFactoryBuilder().build(reader);
-			
-		}catch(Exception ex)
-		{
+
+	static {
+		try {
+			Reader reader = Resources.getResourceAsReader("Config.xml");
+			ssf = new SqlSessionFactoryBuilder().build(reader);
+
+		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		}
 	}
-	
-	public static int maemoolNum()
-	{
-		SqlSession session=null;
-		int maemoolNum=0;
-		try {
-			
-			session=ssf.openSession();
-			maemoolNum=session.selectOne("maemoolNum");
-			
 
-		}catch(Exception ex)
-		{
+	public static int maemoolNum() {
+		SqlSession session = null;
+		int maemoolNum = 0;
+		try {
+			session = ssf.openSession();
+			maemoolNum = session.selectOne("maemoolNum");
+
+		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
-		}
-		finally
-		{
-			if(session!=null)
+		} finally {
+			if (session != null)
 				session.close();
 		}
 		return maemoolNum;
 	}
-	
-	public static void insertMaemool(MaemoolVO vo1,BuildingTypeVO vo2,DealTypeVO vo3,PropertyAddrVO vo4,RoomTypeVO vo5)
-	{
-		SqlSession session=null;
-		
-		try {
-			
-			session=ssf.openSession(true);
-			
-			session.insert("insertMaemool",vo1);
-			session.insert("insertBuildingType",vo2);
-			session.insert("insertDealType",vo3);
-			session.insert("insertPropertyAddr",vo4);
-			session.insert("insertRoomType",vo5);
-			
 
-		}catch(Exception ex)
-		{
-			System.out.println(ex.getMessage());
-		}
-		finally
-		{
-			if(session!=null)
-				session.close();
-		}
-	}
+
+	
 	
 	public static void insertImage(ImgVO vo)
 	{
@@ -103,28 +70,79 @@ public class MaemoolDAO {
 		SqlSession session=null;
 		List<ImgVO> list=new ArrayList<ImgVO>();
 		try {
-				System.out.println("maemool Image");
-			session=ssf.openSession();
-			System.out.println("maemool Image ing");
-			list=session.selectList("imgFind", num);
-			System.out.println("maemool end");
-		}catch(Exception ex)
+		
+				
+				session=ssf.openSession();
+				list=session.selectList("imgFind", num);
+				
+			}
+		catch(Exception ex)
 		{
 			System.out.println(ex.getMessage());
 		}
-		finally
+		finally 
 		{
 			if(session!=null)
+			session.close();
+		}
+		
+		return list;
+		
+	}
+	
+	public static void insertMaemool(MaemoolVO vo1, BuildingTypeVO vo2, DealTypeVO vo3, PropertyAddrVO vo4,RoomTypeVO vo5) 
+	{
+		SqlSession session = null;
+
+		try {
+			
+		
+		
+			session = ssf.openSession(true);
+
+			session.insert("insertMaemool", vo1);
+			session.insert("insertBuildingType", vo2);
+			session.insert("insertDealType", vo3);
+			session.insert("insertPropertyAddr", vo4);
+			session.insert("insertRoomType", vo5);
+
+		} catch (Exception ex) {
+
+			System.out.println(ex.getMessage());
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
+
+	
+
+	public static List<ImgVO> detailMaemool(int num) {
+		SqlSession session = null;
+		List<ImgVO> list = new ArrayList<ImgVO>();
+		try {
+
+			session = ssf.openSession();
+			list = session.selectList("imgFind", num);
+
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			if (session != null)
 				session.close();
 		}
 		System.out.println("maemool Image finally");
 		return list;
 	}
+
 	// 매물 상세정보
+
 	public static MaemoolVO infoMaemool(int num)
 	{
 		MaemoolVO vo = new MaemoolVO();
+
 		SqlSession session = null;
+
 		try
 		{	
 			session=ssf.openSession();
@@ -132,40 +150,38 @@ public class MaemoolDAO {
 		}
 		catch (Exception ex)
 		{
-			System.out.println(ex.getMessage());
-		}
-		finally
-		{
-			if(session!=null)
+	System.out.println(ex.getMessage());
+		} finally {
+			if (session != null)
 				session.close();
 		}
 		return vo;
 	}
-	public MaemoolVO cookie(int num) {
-		MaemoolVO vo = null;
-		SqlSession session=null;
+
+	public MapVO cookie(int num) {
+		MapVO vo = null;
+		SqlSession session = null;
 		try {
 			session = ssf.openSession();
-			vo = session.selectOne("cookie" , num);
-			
-		}catch (Exception e) {
+			vo = session.selectOne("cookie", num);
+
+		} catch (Exception e) {
 			System.out.println("cookie : " + e.getMessage());
-		}finally {
-			if(session!=null)
+		} finally {
+			if (session != null)
 				session.close();
 		}
 		return vo;
 	}
-	
+
 	/*
-	 *	day: 2018.05.29
-	 *	who: t
+	 * day: 2018.05.29 who: t
 	 */
 	// 저보증금
 	public static List<MapVO> getDepositInfo() {
 		List<MapVO> list = new ArrayList<MapVO>();
 		SqlSession session = null;
-		
+
 		try {
 			session = ssf.openSession();
 			list = session.selectList("getDepositInfo");
@@ -175,15 +191,15 @@ public class MaemoolDAO {
 			if (session != null) {
 				session.close();
 			}
-		}		
+		}
 		return list;
 	}
-	
+
 	// 주차 가능
 	public static List<MapVO> getParkingInfo() {
 		List<MapVO> list = new ArrayList<MapVO>();
 		SqlSession session = null;
-		
+
 		try {
 			session = ssf.openSession();
 			list = session.selectList("getParkingInfo");
@@ -193,15 +209,15 @@ public class MaemoolDAO {
 			if (session != null) {
 				session.close();
 			}
-		}		
+		}
 		return list;
 	}
-	
+
 	// 원룸
 	public static List<MapVO> getOneRoomInfo() {
 		List<MapVO> list = new ArrayList<MapVO>();
 		SqlSession session = null;
-		
+
 		try {
 			session = ssf.openSession();
 			list = session.selectList("getOneRoomInfo");
@@ -211,15 +227,15 @@ public class MaemoolDAO {
 			if (session != null) {
 				session.close();
 			}
-		}		
+		}
 		return list;
 	}
-	
+
 	// 오피스텔
 	public static List<MapVO> getOfficetelInfo() {
 		List<MapVO> list = new ArrayList<MapVO>();
 		SqlSession session = null;
-		
+
 		try {
 			session = ssf.openSession();
 			list = session.selectList("getOfficetelInfo");
@@ -229,7 +245,7 @@ public class MaemoolDAO {
 			if (session != null) {
 				session.close();
 			}
-		}		
+		}
 		return list;
 	}
 }

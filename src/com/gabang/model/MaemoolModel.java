@@ -43,55 +43,56 @@ import com.gabang.vo.SellerVO;
 
 @Controller
 public class MaemoolModel {
-	@RequestMapping("main/maemool_theme_list.do")
-	public String maemoolThemeList(HttpServletRequest req, HttpServletResponse response) throws Exception {
-		req.setCharacterEncoding("euc-kr");
-		String keyword = req.getParameter("keyword");
-		System.out.println(keyword);
-		//theme = theme.trim();		
-		List<MapVO> geoList = null;
-		List<MapVO> tempList = null;
-		
-		if(keyword.equals("저보증금")) {						
-			tempList = MaemoolDAO.getDepositInfo();
-			geoList = new ArrayList<MapVO>();
-			//System.out.println("갯수:"+tempList.size());
-			for(MapVO vo:tempList) {
-				if(vo.getDeposit().contains("전") || vo.getDeposit().contains("억")) continue;
-				String str = vo.getDeposit();				
-				str = str.replaceAll("[^0-9]+","").trim();
-				int num = Integer.parseInt(str);
-				if(num > 500) continue;				
-				geoList.add(vo);
-			}
-		}
-		
-		else if(keyword.equals("주차 가능"))
-			geoList = MaemoolDAO.getParkingInfo();	
-			
-		else if(keyword.equals("원룸"))
-			geoList = MaemoolDAO.getOneRoomInfo();		
-			
-		else if(keyword.equals("오피스텔")) 
-			geoList = MaemoolDAO.getOfficetelInfo();				
-		
-		List<ImgVO> imgList = null;
-		Map<Integer,Object> oneImg = new HashMap<Integer,Object>();
+   @RequestMapping("main/maemool_theme_list.do")
+   public String maemoolThemeList(HttpServletRequest req, HttpServletResponse response) throws Exception {
+      req.setCharacterEncoding("euc-kr");
+      String keyword = req.getParameter("keyword");
+      System.out.println(keyword);
+      //theme = theme.trim();      
+      List<MapVO> geoList = null;
+      List<MapVO> tempList = null;
+      
+      if(keyword.equals("저보증금")) {                  
+         tempList = MaemoolDAO.getDepositInfo();
+         geoList = new ArrayList<MapVO>();
+         //System.out.println("갯수:"+tempList.size());
+         for(MapVO vo:tempList) {
+            if(vo.getDeposit().contains("전") || vo.getDeposit().contains("억")) continue;
+            String str = vo.getDeposit();            
+            str = str.replaceAll("[^0-9]+","").trim();
+            int num = Integer.parseInt(str);
+            if(num > 500) continue;            
+            geoList.add(vo);
+         }
+      }
+      
+      else if(keyword.equals("주차 가능"))
+         geoList = MaemoolDAO.getParkingInfo();   
+         
+      else if(keyword.equals("원룸"))
+         geoList = MaemoolDAO.getOneRoomInfo();      
+         
+      else if(keyword.equals("오피스텔")) 
+         geoList = MaemoolDAO.getOfficetelInfo();            
+      
+      List<ImgVO> imgList = null;
+      Map<Integer,Object> oneImg = new HashMap<Integer,Object>();
 
-		for (MapVO vo : geoList) {
-			// System.out.println("maemoolModel 매물번호 : " + vo.getNum());
-			try {
-				imgList = PropertyAddrDAO.imgFind(vo.getNum()); // 해당 매물번호로 이미지 검색
-				//System.out.println("img1");
-				oneImg.put(vo.getNum(), imgList.get(0).getImg()); // 매물번호 : 이미지 주소
-				//System.out.println("img2");
-				
-			} catch (Exception e) {
-				System.out.println("매물번호 : " +vo.getNum() + " "+ e.getMessage());
-				oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // 매물번호 : 이미지 주소
-			}
-		}
+      for (MapVO vo : geoList) {
+         // System.out.println("maemoolModel 매물번호 : " + vo.getNum());
+         try {
+            imgList = PropertyAddrDAO.imgFind(vo.getNum()); // 해당 매물번호로 이미지 검색
+            //System.out.println("img1");
+            oneImg.put(vo.getNum(), imgList.get(0).getImg()); // 매물번호 : 이미지 주소
+            //System.out.println("img2");
+            
+         } catch (Exception e) {
+            System.out.println("매물번호 : " +vo.getNum() + " "+ e.getMessage());
+            oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // 매물번호 : 이미지 주소
+         }
+      }
 //
+
 		req.setAttribute("oneImg", oneImg);
 		req.setAttribute("geoList", geoList);
 //		//req.setAttribute("main_jsp", "../maemool/list.jsp");		
@@ -99,7 +100,6 @@ public class MaemoolModel {
 		return "main.jsp";
 	}
 	
-
 	
 	@RequestMapping("main/maemool_detail.do")
 	public String maemoolDetail1(HttpServletRequest request, HttpServletResponse res) throws Exception {
@@ -138,33 +138,75 @@ public class MaemoolModel {
 		return "main.jsp";
 	}
 	
-	
 
-	@RequestMapping("main/upload.do")
-	public String maemoolInsert(HttpServletRequest request, HttpServletResponse res) throws IOException {
+		
 
-		request.setCharacterEncoding("EUC-KR");
+   @RequestMapping("main/maemool_detail.do")
+   public String maemoolDetail(HttpServletRequest request, HttpServletResponse res)
+   throws Exception {
+      
+      request.setCharacterEncoding("euc-kr");
+      
+      String num=request.getParameter("num"); // 이미지랑 이미지에 해당하는 상세정보를 매물번호에 맞게 출력
+      String x=request.getParameter("x");
+      String y=request.getParameter("y");
+      System.out.println(num);
+      System.out.println(x);
+      System.out.println(y);
+      
+      
+   
+      MaemoolVO vo1=new MaemoolVO();
+   
+       
+      List<ImgVO> imgList = MaemoolDAO.detailMaemool(Integer.parseInt(num));
+      MaemoolVO vo = MaemoolDAO.infoMaemool(Integer.parseInt(num));
+      String email=MemberDAO.sellerEmail(Integer.parseInt(num));
+      SellerVO seller=MemberDAO.sellerData(email);
+      
+      for(ImgVO vo2:imgList)
+      {
+         System.out.println(vo2.getImg());
+      }
+      
+      request.setAttribute("x", x);
+      request.setAttribute("y", y);
+      request.setAttribute("imgList", imgList);
+      request.setAttribute("seller", seller);
+      request.setAttribute("vo", vo);
+      
+      request.setAttribute("main_jsp", "../maemool/maemool_detail.jsp");
+   
+      return "main.jsp";
+   }
+   
+   
+
+
+   @RequestMapping("main/upload.do")
+   public String maemoolInsert(HttpServletRequest request, HttpServletResponse res) throws IOException {
+			   request.setCharacterEncoding("EUC-KR");
+				
+				MaemoolVO vo1=new MaemoolVO();
+				BuildingTypeVO vo2=new BuildingTypeVO();
+				DealTypeVO vo3=new DealTypeVO();
+				PropertyAddrVO vo4=new PropertyAddrVO();
+				RoomTypeVO vo5=new RoomTypeVO();
+				
+				
+				HttpSession session=request.getSession();
+				String email=(String) session.getAttribute("id");
+				int maemoolNum=MaemoolDAO.maemoolNum()+1;
+				
+				 
+				//fileItem.getString("EUC_KR"); 
+				
+				
+				String option="";
+				Map map=new HashMap();
+				List<String> list=new ArrayList<String>();
 		
-		MaemoolVO vo1=new MaemoolVO();
-		BuildingTypeVO vo2=new BuildingTypeVO();
-		DealTypeVO vo3=new DealTypeVO();
-		PropertyAddrVO vo4=new PropertyAddrVO();
-		RoomTypeVO vo5=new RoomTypeVO();
-		
-		
-		HttpSession session=request.getSession();
-		String email=(String) session.getAttribute("id");
-		int maemoolNum=MaemoolDAO.maemoolNum()+1;
-		
-		 
-		//fileItem.getString("EUC_KR"); 
-		
-		
-		String option="";
-		Map map=new HashMap();
-		List<String> list=new ArrayList<String>();
-		
-		//img테이블에 필요한 데이터 저장
+				//img테이블에 필요한 데이터 저장
 				//매물 이미지 정보 받아오는 라이브러리
 				final int KILOBYTE = 1024 * 1024;
 				final int MEMORY_THRESHOLD = 3 * KILOBYTE;
@@ -175,9 +217,6 @@ public class MaemoolModel {
 				if (isMultipart) {
 					// Create a factory for disk-based file items
 					DiskFileItemFactory factory = new DiskFileItemFactory();
-
-					// Set factory constraints
-					factory.setSizeThreshold(MEMORY_THRESHOLD);			
 
 					// Create a new file upload handler
 					ServletFileUpload upload = new ServletFileUpload(factory);
@@ -379,390 +418,477 @@ public class MaemoolModel {
 			return "main.jsp";
 	}
 
-	// home.jsp에서 검색할 경우 작동 by.한
-	@RequestMapping("main/maemool_search.do")
-	public String maemoolSearch(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		req.setCharacterEncoding("euc-kr");
-		List<MapVO> geoList = null;
-		List<ImgVO> imgList = null;
-		Map oneImg = new HashMap();	// 매물번호 : 매물대표이미지
-		String keyword = req.getParameter("keyword");
+      
 
-		System.out.println("MaemoolModel maemoolSearch : " + keyword);
-		geoList = PropertyAddrDAO.searchMaemool(keyword);
 
-		// 이미지 출력 부분
-		for (MapVO vo : geoList) {
-			// System.out.println("maemoolModel 매물번호 : " + vo.getNum());
-			try {
-				imgList = PropertyAddrDAO.imgFind(vo.getNum()); // 해당 매물번호로 이미지 검색
-				// System.out.println(imgList.get(0).getImg());
-				oneImg.put(vo.getNum(), imgList.get(0).getImg()); // 매물번호 : 이미지 주소
-			} catch (Exception e) {
-				System.out.println("매물번호 : " +vo.getNum() + " "+ e.getMessage());
-				oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // 이미지 없는 매물의 경우 처리
-			}
-		}
+   // home.jsp에서 검색할 경우 작동 by.한
+   @RequestMapping("main/maemool_search.do")
+   public String maemoolSearch(HttpServletRequest req, HttpServletResponse res) throws Exception {
+      req.setCharacterEncoding("euc-kr");
+      List<MapVO> geoList = null;
+      List<ImgVO> imgList = null;
+      Map oneImg = new HashMap();   // 매물번호 : 매물대표이미지
+      String keyword = req.getParameter("keyword");
 
-		req.setAttribute("oneImg", oneImg);
-		req.setAttribute("geoList", geoList);
-		// 공식 페이지
-		//req.setAttribute("main_jsp", "../maemool/list.jsp");
+      System.out.println("MaemoolModel maemoolSearch : " + keyword);
+      geoList = PropertyAddrDAO.searchMaemool(keyword);
 
-		// 테스트 페이지
-		req.setAttribute("main_jsp", "../maemool/testList.jsp");
+      // 이미지 출력 부분
+      for (MapVO vo : geoList) {
+         // System.out.println("maemoolModel 매물번호 : " + vo.getNum());
+         try {
+            imgList = PropertyAddrDAO.imgFind(vo.getNum()); // 해당 매물번호로 이미지 검색
+            // System.out.println(imgList.get(0).getImg());
+            oneImg.put(vo.getNum(), imgList.get(0).getImg()); // 매물번호 : 이미지 주소
+         } catch (Exception e) {
+            System.out.println("매물번호 : " +vo.getNum() + " "+ e.getMessage());
+            oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // 이미지 없는 매물의 경우 처리
+         }
+      }
 
-		return "main.jsp";
-	}
-	
-	// 지도 옆 매물 목록을 출력 by. 한
-	// ajax로 해당페이지를 부른다.
-	@RequestMapping("main/sideList.do")
-	public String sideList(HttpServletRequest req, HttpServletResponse response) throws Exception {
-		// 본 메소드는 ajax를 통해서 한글을 파라미터로 전송받기 때문에
-		// utf-8로 받아야 한글이 깨지지 않는다.
-		req.setCharacterEncoding("utf-8");
-		String keyword = req.getParameter("keyword");// 검색어를 전달받는다.
+      req.setAttribute("oneImg", oneImg);
+      req.setAttribute("geoList", geoList);
+      // 공식 페이지
+      //req.setAttribute("main_jsp", "../maemool/list.jsp");
 
-		// 위도와 경도를 전달받는다.
-		String swLatlng = req.getParameter("swLatlng");
-		String neLatlng = req.getParameter("neLatlng");
+      // 테스트 페이지
+      req.setAttribute("main_jsp", "../maemool/testList.jsp");
 
-		// 리스트 출력을 위한 변수
-		List<MapVO> geoList = null;
-		List<ImgVO> imgList = null;
-		Map oneImg = new HashMap(); // 매물번호 : 매물대표이미지
+      return "main.jsp";
+   }
+   
+   // 지도 옆 매물 목록을 출력 by. 한
+   // ajax로 해당페이지를 부른다.
+   @RequestMapping("main/sideList.do")
+   public String sideList(HttpServletRequest req, HttpServletResponse res) throws Exception {
+	      req.setCharacterEncoding("utf-8");      
+	      String keyword = req.getParameter("keyword");      
+	      System.out.println("sideList.do 받은 키워드 : "+keyword);
+	      // 지도 영역 각 모서리의 위도와 경도를 전달받는다.
+	      String Sne_x = req.getParameter("ne_x");
+	      String Sne_y = req.getParameter("ne_y");
+	      String Ssw_x = req.getParameter("sw_x");
+	      String Ssw_y = req.getParameter("sw_y");
+	      
+	      // 아래 코드는 제대로 값 받았나 확인용
+	      /*
+	      System.out.println("Sne_x : " + Sne_x);
+	      System.out.println("Sne_y : " + Sne_y);
+	      System.out.println("Ssw_x : " + Ssw_x);
+	      System.out.println("Ssw_y : " + Ssw_y);
+	      */
 
-		System.out.println("testSideList로 전송된 keyword : " + keyword);
-		geoList = PropertyAddrDAO.searchMaemool(keyword);
+	      // 위도경도를 저장하기 위한 map
+	      Map<String, Object> bound = null;
+	      
+	      // 리스트 출력을 위한 변수
+	      List<MapVO> geoList = null;
+	      List<MapVO> tempList = null;
+	      List<ImgVO> imgList = null;
+	      // 매물번호 : 매물대표이미지
+	      Map oneImg = new HashMap();
+	      
+	      // 관심목록 by.한솔
+	      String num = req.getParameter("num");
+	      
+	      if (num != null) {
+//	         num = "";
+	         Cookie cookie = new Cookie("likeNum", num);
+	         cookie.setMaxAge(365 * 24 * 60 * 60); // 쿠기 유효기간 365일 설정1
+	         cookie.setPath("C:\\GaBang\\gb");
+	         res.addCookie(cookie);
+	      }
+	      
+	      // list.jsp에서 전송받은 지도 bound 확인
+	      if(keyword != null) {
+	         System.out.println("◈ sideList로 전송된 keyword : " + keyword);
+	         
+	         /*
+	          *       by t.
+	          *       2018.05.30
+	          *       테마 검색   
+	          */         
+	         if(keyword.equals("저보증금")) {
+	            geoList = new ArrayList<MapVO>();
+	            tempList = MaemoolDAO.getDepositInfo();
+	            //System.out.println("갯수:"+tempList.size());
+	            for(MapVO vo:tempList) {
+	               if(vo.getDeposit().contains("전") || vo.getDeposit().contains("억")) continue;
+	               String str = vo.getDeposit();            
+	               str = str.replaceAll("[^0-9]+","").trim();
+	               int number = Integer.parseInt(str);
+	               if(number > 500) continue;            
+	               geoList.add(vo);
+	            }
+	         }
+	         else if(keyword.equals("주차 가능"))
+	            geoList = MaemoolDAO.getParkingInfo();   
+	            
+	         else if(keyword.equals("원룸"))
+	            geoList = MaemoolDAO.getOneRoomInfo();      
+	            
+	         else if(keyword.equals("오피스텔")) 
+	            geoList = MaemoolDAO.getOfficetelInfo();   
+	         else         
+	            geoList = PropertyAddrDAO.searchMaemool(keyword);
+	      
+	         // 지도 움직일 경우 키워드는 전송하지 않고 해당 지도 내 매물 출력
+	         // 위도경도가 null이 아닐 경우
+	      } else if((Sne_x != null) && (Sne_y != null) && (Ssw_x != null) && (Ssw_y != null)){
+	         // 지도 북동끝점 위경도
+	         double ne_x = Double.parseDouble(Sne_x);
+	         double ne_y = Double.parseDouble(Sne_y);
+	         // 지도 남서끝점 위경도
+	         double sw_x = Double.parseDouble(Ssw_x);
+	         double sw_y = Double.parseDouble(Ssw_y);
+	         
+//	         System.out.println("◈ testSideList로 전송됨\nne_x : " + ne_x + " ne_y : " + ne_y);
+//	         System.out.println("sw_x : " + sw_x + " sw_y : " + sw_y);
+	         // 받은 모서리 위경도를 맵에 저장
+	         //bound = new HashMap<String, Double>();
+	         bound = new HashMap<String, Object>();
+	         bound.put("sw_x", sw_x);
+	         bound.put("sw_y", sw_y);
+	         bound.put("ne_x", ne_x);
+	         bound.put("ne_y", ne_y);
+	         
+	         try {
+	            geoList = MapDAO.findMaemoolInBound(bound);
+	         } catch (Exception e) {
+	            System.out.println("geoList = MapDAO.findMaemoolInBound(bound) : " + e.getMessage());
+	         }
+	      }
 
-		// 이미지 출력 부분
-		for (MapVO vo : geoList) {
-			// System.out.println("maemoolModel 매물번호 : " + vo.getNum());
-			try {
-				imgList = PropertyAddrDAO.imgFind(vo.getNum()); // 해당 매물번호로 이미지 검색
-				// System.out.println(imgList.get(0).getImg());
-				oneImg.put(vo.getNum(), imgList.get(0).getImg()); // 매물번호 : 이미지 주소
-			} catch (Exception e) {
-				System.out.println("매물번호 : " + vo.getNum() + " " + e.getMessage());
-				oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // 매물번호 : 이미지 주소
-			}
-		}
-		
+	      // 이미지 출력 부분
+	      for (MapVO vo : geoList) {
+	         // System.out.println("maemoolModel 매물번호 : " + vo.getNum());
+	         try {
+	            imgList = PropertyAddrDAO.imgFind(vo.getNum()); // 해당 매물번호로 이미지 검색
+	            // System.out.println(imgList.get(0).getImg());
+	            oneImg.put(vo.getNum(), imgList.get(0).getImg()); // 매물번호 : 이미지 주소
+	         } catch (Exception e) {
+	            System.out.println("매물번호 : " +vo.getNum() + " "+ e.getMessage());
+	            oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // 매물번호 : 이미지 주소
+	         }
+	      }      
+	      
+	      req.setAttribute("oneImg", oneImg);
+	      req.setAttribute("geoList", geoList);
+	      
+	      return "../maemool/sideList.jsp";
+   }
+   
+   // 테스트를 위한 메소드 by. 한
+   // ajax로 지도 이동에 따라 보여지는 영역에 알맞는 매물을 부르도록 테스트 중
+   @RequestMapping("main/testSideList.do")
+   public String testSideList(HttpServletRequest req, HttpServletResponse res) throws Exception {
+      req.setCharacterEncoding("utf-8");      
+      String keyword = req.getParameter("keyword");      
+      System.out.println("testSideList.do 받은 키워드 : "+keyword);
+      // 지도 영역 각 모서리의 위도와 경도를 전달받는다.
+      String Sne_x = req.getParameter("ne_x");
+      String Sne_y = req.getParameter("ne_y");
+      String Ssw_x = req.getParameter("sw_x");
+      String Ssw_y = req.getParameter("sw_y");
+      
+      // 아래 코드는 제대로 값 받았나 확인용
+      /*
+      System.out.println("Sne_x : " + Sne_x);
+      System.out.println("Sne_y : " + Sne_y);
+      System.out.println("Ssw_x : " + Ssw_x);
+      System.out.println("Ssw_y : " + Ssw_y);
+      */
 
-		// 위도와 경도가 null이 아닐 경우 실행한다.
-		if (swLatlng != null && neLatlng != null) {
-			System.out.println(swLatlng);
-			System.out.println(neLatlng);
-		}
-		req.setAttribute("oneImg", oneImg);
-		req.setAttribute("geoList", geoList);
-		return "../maemool/sideList.jsp";
-	}
-	
-	// 테스트를 위한 메소드 by. 한
-	// ajax로 지도 이동에 따라 보여지는 영역에 알맞는 매물을 부르도록 테스트 중
-	@RequestMapping("main/testSideList.do")
-	public String testSideList(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		req.setCharacterEncoding("utf-8");		
-		String keyword = req.getParameter("keyword");		
-		System.out.println("testSideList.do"+keyword);
-		// 지도 영역 각 모서리의 위도와 경도를 전달받는다.
-		String Sne_x = req.getParameter("ne_x");
-		String Sne_y = req.getParameter("ne_y");
-		String Ssw_x = req.getParameter("sw_x");
-		String Ssw_y = req.getParameter("sw_y");
-		
-		// 아래 코드는 제대로 값 받았나 확인용
-		/*
-		System.out.println("Sne_x : " + Sne_x);
-		System.out.println("Sne_y : " + Sne_y);
-		System.out.println("Ssw_x : " + Ssw_x);
-		System.out.println("Ssw_y : " + Ssw_y);
-		*/
+      // 위도경도를 저장하기 위한 map
+      Map<String, Object> bound = null;
+      
+      // 리스트 출력을 위한 변수
+      List<MapVO> geoList = null;
+      List<MapVO> tempList = null;
+      List<ImgVO> imgList = null;
+      // 매물번호 : 매물대표이미지
+      Map oneImg = new HashMap();
+      
+      // 관심목록 by.한솔
+      String num = req.getParameter("num");
+      
+      if (num != null) {
+//         num = "";
+         Cookie cookie = new Cookie("likeNum", num);
+         cookie.setMaxAge(365 * 24 * 60 * 60); // 쿠기 유효기간 365일 설정1
+         cookie.setPath("C:\\GaBang\\gb");
+         res.addCookie(cookie);
+      }
+      
+      // list.jsp에서 전송받은 지도 bound 확인
+      if(keyword != null) {
+         System.out.println("◈ testSideList로 전송된 keyword : " + keyword);
+         
+         /*
+          *       by t.
+          *       2018.05.30
+          *       테마 검색   
+          */         
+         if(keyword.equals("저보증금")) {
+            geoList = new ArrayList<MapVO>();
+            tempList = MaemoolDAO.getDepositInfo();
+            //System.out.println("갯수:"+tempList.size());
+            for(MapVO vo:tempList) {
+               if(vo.getDeposit().contains("전") || vo.getDeposit().contains("억")) continue;
+               String str = vo.getDeposit();            
+               str = str.replaceAll("[^0-9]+","").trim();
+               int number = Integer.parseInt(str);
+               if(number > 500) continue;            
+               geoList.add(vo);
+            }
+         }
+         else if(keyword.equals("주차 가능"))
+            geoList = MaemoolDAO.getParkingInfo();   
+            
+         else if(keyword.equals("원룸"))
+            geoList = MaemoolDAO.getOneRoomInfo();      
+            
+         else if(keyword.equals("오피스텔")) 
+            geoList = MaemoolDAO.getOfficetelInfo();   
+         else         
+            geoList = PropertyAddrDAO.searchMaemool(keyword);
+      
+         // 지도 움직일 경우 키워드는 전송하지 않고 해당 지도 내 매물 출력
+         // 위도경도가 null이 아닐 경우
+      } else if((Sne_x != null) && (Sne_y != null) && (Ssw_x != null) && (Ssw_y != null)){
+         // 지도 북동끝점 위경도
+         double ne_x = Double.parseDouble(Sne_x);
+         double ne_y = Double.parseDouble(Sne_y);
+         // 지도 남서끝점 위경도
+         double sw_x = Double.parseDouble(Ssw_x);
+         double sw_y = Double.parseDouble(Ssw_y);
+         
+//         System.out.println("◈ testSideList로 전송됨\nne_x : " + ne_x + " ne_y : " + ne_y);
+//         System.out.println("sw_x : " + sw_x + " sw_y : " + sw_y);
+         // 받은 모서리 위경도를 맵에 저장
+         //bound = new HashMap<String, Double>();
+         bound = new HashMap<String, Object>();
+         bound.put("sw_x", sw_x);
+         bound.put("sw_y", sw_y);
+         bound.put("ne_x", ne_x);
+         bound.put("ne_y", ne_y);
+         
+         try {
+            geoList = MapDAO.findMaemoolInBound(bound);
+         } catch (Exception e) {
+            System.out.println("geoList = MapDAO.findMaemoolInBound(bound) : " + e.getMessage());
+         }
+      }
 
-		// 위도경도를 저장하기 위한 map
-		Map<String, Object> bound = null;
-		
-		// 리스트 출력을 위한 변수
-		List<MapVO> geoList = null;
-		List<MapVO> tempList = null;
-		List<ImgVO> imgList = null;
-		// 매물번호 : 매물대표이미지
-		Map oneImg = new HashMap();
-		
-		// 관심목록 by.한솔
-		String num = req.getParameter("num");
-		
-		if (num != null) {
-//			num = "";
-			Cookie cookie = new Cookie("likeNum", num);
-			cookie.setMaxAge(365 * 24 * 60 * 60); // 쿠기 유효기간 365일 설정1
-			cookie.setPath("C:\\GaBang\\gb");
-			res.addCookie(cookie);
-		}
-		
-		// list.jsp에서 전송받은 지도 bound 확인
-		if(keyword != null) {
-			System.out.println("◈ testSideList로 전송된 keyword : " + keyword);
-			
-			/*
-			 * 		by t.
-			 * 		2018.05.30
-			 * 		테마 검색	
-			 */			
-			if(keyword.equals("저보증금")) {
-				geoList = new ArrayList<MapVO>();
-				tempList = MaemoolDAO.getDepositInfo();
-				//System.out.println("갯수:"+tempList.size());
-				for(MapVO vo:tempList) {
-					if(vo.getDeposit().contains("전") || vo.getDeposit().contains("억")) continue;
-					String str = vo.getDeposit();				
-					str = str.replaceAll("[^0-9]+","").trim();
-					int number = Integer.parseInt(str);
-					if(number > 500) continue;				
-					geoList.add(vo);
-				}
-			}
-			else if(keyword.equals("주차 가능"))
-				geoList = MaemoolDAO.getParkingInfo();	
-				
-			else if(keyword.equals("원룸"))
-				geoList = MaemoolDAO.getOneRoomInfo();		
-				
-			else if(keyword.equals("오피스텔")) 
-				geoList = MaemoolDAO.getOfficetelInfo();	
-			else			
-				geoList = PropertyAddrDAO.searchMaemool(keyword);
-		
-			// 지도 움직일 경우 해당 지도 내 매물 출력
-			// 위도경도가 null이 아닐 경우
-		} else if((Sne_x != null) && (Sne_y != null) && (Ssw_x != null) && (Ssw_y != null)){
-			// 지도 북동끝점 위경도
-			double ne_x = Double.parseDouble(Sne_x);
-			double ne_y = Double.parseDouble(Sne_y);
-			// 지도 남서끝점 위경도
-			double sw_x = Double.parseDouble(Ssw_x);
-			double sw_y = Double.parseDouble(Ssw_y);
-			
-			System.out.println("◈ testSideList로 전송됨\nne_x : " + ne_x + " ne_y : " + ne_y);
-			System.out.println("sw_x : " + sw_x + " sw_y : " + sw_y);
-			// 받은 모서리 위경도를 맵에 저장
-			//bound = new HashMap<String, Double>();
-			bound = new HashMap<String, Object>();
-			bound.put("sw_x", sw_x);
-			bound.put("sw_y", sw_y);
-			bound.put("ne_x", ne_x);
-			bound.put("ne_y", ne_y);
-			
-			try {
-				geoList = MapDAO.findMaemoolInBound(bound);
-			} catch (Exception e) {
-				System.out.println("geoList = MapDAO.findMaemoolInBound(bound) : " + e.getMessage());
-			}
-		}
+      // 이미지 출력 부분
+      for (MapVO vo : geoList) {
+         // System.out.println("maemoolModel 매물번호 : " + vo.getNum());
+         try {
+            imgList = PropertyAddrDAO.imgFind(vo.getNum()); // 해당 매물번호로 이미지 검색
+            // System.out.println(imgList.get(0).getImg());
+            oneImg.put(vo.getNum(), imgList.get(0).getImg()); // 매물번호 : 이미지 주소
+         } catch (Exception e) {
+            System.out.println("매물번호 : " +vo.getNum() + " "+ e.getMessage());
+            oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // 매물번호 : 이미지 주소
+         }
+      }      
+      
+      req.setAttribute("oneImg", oneImg);
+      req.setAttribute("geoList", geoList);
+      
+      return "../maemool/testSideList.jsp";
+   }
+   
+   /*by.준영*/
+   @RequestMapping("main/add_jjim.do")
+   public String real_jjim(HttpServletRequest req, HttpServletResponse res) {
+      // id는 session에 저장되어있다.
+      HttpSession session = req.getSession();
+      
+      //찜에 필요한 데이터 (id하고 매물번호)
+      String email = (String) session.getAttribute("id");
+      String num = req.getParameter("maemool_num");
+      
+      
+      JjimVO vo=new JjimVO();
+      
+      vo.setEmail(email);
+      vo.setNum(Integer.parseInt(num));
+      vo.setRegdate(new Date());
+      
+      System.out.println(email);
+      System.out.println(num);
+      
+      JjimDAO.insertJjim(vo);
+      System.out.println("dao 완료");
+      
+      return "../maemool/jjim.jsp";
+   }
+   
+   /*by.준영*/
+   @RequestMapping("main/remove_jjim.do")
+   public String remove_jjim(HttpServletRequest req, HttpServletResponse res) {
+      // id는 session에 저장되어있다.
+      HttpSession session = req.getSession();
+      
+      //찜에 필요한 데이터 (id하고 매물번호)
+      String email = (String) session.getAttribute("id");
+      String num = req.getParameter("maemool_num");
+      
+      
+      Map map=new HashMap();
+      
+      map.put("email", email);
+      map.put("num", num);
+      System.out.println(map.get("email"));
+      System.out.println(map.get("num"));
+      
+      JjimDAO.removeJjim(map);
+      
+      return "../maemool/jjim.jsp";
+   }
+   
+   @RequestMapping("main/jjim_detail.do")
+   public String jjim_detail(HttpServletRequest req, HttpServletResponse res) {
+      // id는 session에 저장되어있다.
+      HttpSession session = req.getSession();
+      
+      //찜에 필요한 데이터 (id하고 매물번호)
+      String email = (String) session.getAttribute("id");
+      String num = req.getParameter("maemool_num");
+      
+      Map map=new HashMap();
+      
+      map.put("email", email);
+      map.put("num", num);
+      System.out.println(map.get("email"));
+      System.out.println(map.get("num"));
+      
+      JjimDAO.removeJjim(map);
+      
+      
+      return "../maemool/jjim.jsp";
+   }
+   
 
-		// 이미지 출력 부분
-		for (MapVO vo : geoList) {
-			// System.out.println("maemoolModel 매물번호 : " + vo.getNum());
-			try {
-				imgList = PropertyAddrDAO.imgFind(vo.getNum()); // 해당 매물번호로 이미지 검색
-				// System.out.println(imgList.get(0).getImg());
-				oneImg.put(vo.getNum(), imgList.get(0).getImg()); // 매물번호 : 이미지 주소
-			} catch (Exception e) {
-				System.out.println("매물번호 : " +vo.getNum() + " "+ e.getMessage());
-				oneImg.put(vo.getNum(), "../maemool/img/noimg.png"); // 매물번호 : 이미지 주소
-			}
-		}		
-		
-		req.setAttribute("oneImg", oneImg);
-		req.setAttribute("geoList", geoList);
-		
-		return "../maemool/testSideList.jsp";
-	}
-	
-	/*by.준영*/
-	@RequestMapping("main/add_jjim.do")
-	public String real_jjim(HttpServletRequest req, HttpServletResponse res) {
-		// id는 session에 저장되어있다.
-		HttpSession session = req.getSession();
-		
-		//찜에 필요한 데이터 (id하고 매물번호)
-		String email = (String) session.getAttribute("id");
-		String num = req.getParameter("maemool_num");
-		
-		
-		JjimVO vo=new JjimVO();
-		
-		vo.setEmail(email);
-		vo.setNum(Integer.parseInt(num));
-		vo.setRegdate(new Date());
-		
-		System.out.println(email);
-		System.out.println(num);
-		
-		JjimDAO.insertJjim(vo);
-		System.out.println("dao 완료");
-		
-		return "../maemool/jjim.jsp";
-	}
-	
-	/*by.준영*/
-	@RequestMapping("main/remove_jjim.do")
-	public String remove_jjim(HttpServletRequest req, HttpServletResponse res) {
-		// id는 session에 저장되어있다.
-		HttpSession session = req.getSession();
-		
-		//찜에 필요한 데이터 (id하고 매물번호)
-		String email = (String) session.getAttribute("id");
-		String num = req.getParameter("maemool_num");
-		
-		
-		Map map=new HashMap();
-		
-		map.put("email", email);
-		map.put("num", num);
-		System.out.println(map.get("email"));
-		System.out.println(map.get("num"));
-		
-		JjimDAO.removeJjim(map);
-		
-		return "../maemool/jjim.jsp";
-	}
-	
-	@RequestMapping("main/jjim_detail.do")
-	public String jjim_detail(HttpServletRequest req, HttpServletResponse res) {
-		// id는 session에 저장되어있다.
-		HttpSession session = req.getSession();
-		
-		//찜에 필요한 데이터 (id하고 매물번호)
-		String email = (String) session.getAttribute("id");
-		String num = req.getParameter("maemool_num");
-		
-		Map map=new HashMap();
-		
-		map.put("email", email);
-		map.put("num", num);
-		System.out.println(map.get("email"));
-		System.out.println(map.get("num"));
-		
-		JjimDAO.removeJjim(map);
-		
-		
-		return "../maemool/jjim.jsp";
-	}
-	
-	@RequestMapping("main/like.do")
-	public String like(HttpServletRequest req, HttpServletResponse res) {
-		String nums = "";
-		Cookie[] cookies = req.getCookies();
-		System.out.println("현재 저장된 관심목록 갯수 : " + cookies.length);
-		if(cookies!=null) {
-			for(int i=0; i<cookies.length; i++) {
-					nums=cookies[i].getValue();
-			}
-		}
-		MaemoolDAO dao = new MaemoolDAO();
-		
-		int num = Integer.parseInt(nums);
-		MaemoolVO vo = dao.cookie(num);
-		
-		req.setAttribute("vo", vo);
+   @RequestMapping("main/like.do")
+   public String like(HttpServletRequest request, HttpServletResponse response) {
+      String nums = "";
+      List<MapVO> list = new ArrayList<MapVO>();
+      MapVO vo = null;
+      MaemoolDAO dao = null;
+      int num = 0;
+      Cookie[] cookies = request.getCookies();
+      //System.out.println("현재 저장된 관심목록 갯수 : " + cookies.length);
+   
+      if(cookies!=null) {
+         for(int i=0; i<cookies.length; i++) {
+            Cookie c = cookies[i];
+            String cName = c.getName();
+           // System.out.println(cName);
+            
+            if (cName.startsWith("cookNo")) {
+            nums=c.getValue();
+            //System.out.println(nums);
+            dao = new MaemoolDAO();
+            num = Integer.parseInt(nums);
+            vo = dao.cookie(num);
+            list.add(vo);
+            
+            }
+         }
+      }
+      request.setAttribute("list", list);
+      //request.setAttribute("list", list);
+      request.setAttribute("main_jsp", "../like/like.jsp");
+      return "main.jsp";
+   }
+   // by. 한솔
+   @RequestMapping("main/like_add.do")
+   public String LikeAdd(HttpServletRequest request, HttpServletResponse response) {
+/*      // 관심목록 by.한솔
+      String num = request.getParameter("num");
+      System.out.println(num);
+      Cookie c = new Cookie("cookNo", num);
+      c.setMaxAge(0);
+      // cookie.setPath("C:\\GaBang\\gb"); //쿠키의 범위 설정
+      response.addCookie(c); // 쿠키를 저장
+      System.out.println(c);*/
+      
+      
+      String no = request.getParameter("num");
+      System.out.println("파라미터 num : " + no);
+      Cookie[] cookies = request.getCookies();
+      String name = "";
+      String ss = "";
+      int num = Integer.parseInt(no);
 
-		req.setAttribute("main_jsp", "../like/like.jsp");
-		return "main.jsp";
-	}
-	// by. 한솔
-	@RequestMapping("main/like_add.do")
-	public String LikeAdd(HttpServletRequest request, HttpServletResponse response) {
-/*		// 관심목록 by.한솔
-		String num = request.getParameter("num");
-		System.out.println(num);
-		Cookie c = new Cookie("cookNo", num);
-		c.setMaxAge(0);
-		// cookie.setPath("C:\\GaBang\\gb"); //쿠키의 범위 설정
-		response.addCookie(c); // 쿠키를 저장
-		System.out.println(c);*/
-		
-		
-		String no = request.getParameter("num");
-		System.out.println("파라미터 num : " + no);
-		Cookie[] cookies = request.getCookies();
-		String name = "";
-		String ss = "";
-		int num = Integer.parseInt(no);
-		/*******************************************************/
-//		for (Cookie c : cookies) {
-//			System.out.println("★쿠키 이름 : " + c.getName());
-//			System.out.println("쿠키 값 : " + c.getValue());
-//			System.out.println("쿠키 유지시간 :" + c.getMaxAge());
-//		}
+      if (cookies != null) {
+         System.out.println("쿠키 갯수 : " + cookies.length);
+         
+         for (int i = 0; i < cookies.length; i++) {
+            
+            Cookie c = cookies[i];
+            String cName = c.getName();
+            /*System.out.println("cookies["+i+"] 이름 확인 : " + cookies[i].getName());
+            System.out.println("cookies["+i+"] 값 확인 : " + cookies[i].getValue());
+            System.out.println("cookies["+i+"] 시간 확인 : " + cookies[i].getMaxAge());*/
+            
+            if (cName.startsWith("cookNo")) {
+               String cValue = c.getValue();
+               ss = cName.replaceAll("[^0-9]", "");
+              // System.out.println("cName.startsWith(\"cookNo\") ss = " + ss);
+            } else {
+               name = "cookNo"+ no;
+               ss = "0";
+            }
+         }
+         
+        
+         int a = Integer.parseInt(ss);
+         //System.out.println("ss=" + ss);
+       
+         name ="cookNo"+no;
+      }
+      // 쿠키가 null일 경우
+      else {
+         name = "cookNo"+ num;
+      }
+      Cookie c = new Cookie(name, no);
+      c.setMaxAge(60 * 60 * 24); // 쿠키 최대 유지시간 설정
+      response.addCookie(c);
+      
+      
+      return "../like/like.jsp";
 
-		if (cookies != null) {
-			System.out.println("쿠키 갯수 : " + cookies.length);
-			
-			for (int i = 0; i < cookies.length; i++) {
-				
-				Cookie c = cookies[i];
-				String cName = c.getName();
-				System.out.println("cookies["+i+"] 이름 확인 : " + cookies[i].getName());
-				System.out.println("cookies["+i+"] 값 확인 : " + cookies[i].getValue());
-				System.out.println("cookies["+i+"] 시간 확인 : " + cookies[i].getMaxAge());
-				
-				if (cName.startsWith("cookNo")) {
-					String cValue = c.getValue();
-					ss = cName.replaceAll("[^0-9]", "");
-					System.out.println("cName.startsWith(\"cookNo\") ss = " + ss);
-				} else {
-					name = "cookNo"+ no;
-					ss = "0";
-				}
-			}
-			
-			/***************이 부분 한번 확인해주세요***************/
-			int a = Integer.parseInt(ss);
-			System.out.println("ss=" + ss);
-			/*******************************************************/
-			name ="cookNo"+no;
-		}
-		// 쿠키가 null일 경우
-		else {
-			name = "cookNo"+ num;
-		}
-		Cookie c = new Cookie(name, no);
-		c.setMaxAge(60 * 60 * 24); // 쿠키 최대 유지시간 설정
-		response.addCookie(c);
-		
-		
-		return "../like/like.jsp";
-
-	}
-	@RequestMapping("main/like_delete.do")
-	public String LikeDelete(HttpServletRequest request, HttpServletResponse response) {
-		String no = request.getParameter("num");
-		Cookie[] cookies = request.getCookies();
-		System.out.println(no);
-		if(cookies!=null) {
-			for(int i = 0; i<cookies.length; i++) {
-				Cookie c = cookies[i]; 
-				String cName = c.getName();
-				
-				//쿠키 이름이 cookNo로 시작
-				if (cName.equals("cookNo" + no)) {
-					c.setMaxAge(0);
-					System.out.println("쿠키 유지시간 : " + c.getMaxAge());
-					response.addCookie(c);
-				}
-			}
-		}
-		System.out.println("쿠키 갯수 : " + cookies.length);
-		for (Cookie c : cookies) {
-			System.out.println("★쿠키 이름 : " + c.getName());
-			System.out.println("쿠키 값 : " + c.getValue());
-			System.out.println("쿠키 유지시간 :" + c.getMaxAge());
-		}
-		
-		
-		return "../like/like.jsp";
-	}
+   }
+   @RequestMapping("main/like_delete.do")
+   public String LikeDelete(HttpServletRequest request, HttpServletResponse response) {
+	   
+      String no = request.getParameter("num");
+      Cookie[] cookies = request.getCookies();
+      //System.out.println(no);
+      if(cookies!=null) {
+         for(int i = 0; i<cookies.length; i++) {
+            Cookie c = cookies[i]; 
+            String cName = c.getName();
+            
+            //쿠키 이름이 cookNo로 시작
+            if (cName.equals("cookNo" + no)) {
+               c.setMaxAge(0);
+               //System.out.println("쿠키 유지시간 : " + c.getMaxAge());
+               response.addCookie(c);
+            }
+         }
+      }
+/*      System.out.println("쿠키 갯수 : " + cookies.length);
+      for (Cookie c : cookies) {
+         System.out.println("★쿠키 이름 : " + c.getName());
+         System.out.println("쿠키 값 : " + c.getValue());
+         System.out.println("쿠키 유지시간 :" + c.getMaxAge());
+      }*/
+      
+      //request.setAttribute("main_jsp", "../like/like.do");
+      return "redirect:../main/like.do";
+   }
 }

@@ -21,11 +21,13 @@
 $(function() {
 	var keyword = '<%=request.getParameter("keyword")%>';
 	var bound;
-	
-	/*
+	var latlngTotal;
+	var latlngList;
+	var mMarkers = new Array();
+	<%-- 
 	페이지가 로딩되면 ajax로 화면 우측 매물목록을 불러온다.
 	이때 keyword를 같이 전송하여 매물목록에서 알맞은 매물을 출력하게끔 한다.
-	*/
+	--%>
 	$.ajax({
 		type:'post',
 		url:'testSideList.do',
@@ -35,38 +37,80 @@ $(function() {
 		}
 	});
 	
-	// 맵 드래그가 끝난 후 실행
+	<%-- 맵 드래그가 끝난 후 실행 --%>
 	daum.maps.event.addListener(map, 'dragend', function() {
-		// 지도의 각 끝점을 구한다.
+		<%-- 지도의 각 끝점을 구한다. --%>
 		bound = map.getBounds();
 		
-		// 지도 북동쪽 끝 위도와 경도
-		// ajax로 전달할때는 문자열만 가능
+		<%-- 지도 북동쪽 끝 위도와 경도 --%>
+		<%-- ajax로 전달할때는 문자열만 가능 --%>
 		var ne = bound.getNorthEast();
 		var ne_x = ne.getLat();
 		var ne_y = ne.getLng();
 		
-		// 지도 남서쪽 끝 위도와 경도
+		<%-- 지도 남서쪽 끝 위도와 경도 --%>
 		var sw = bound.getSouthWest();
 		var sw_x = sw.getLat();
 		var sw_y = sw.getLng();
 		
-		// 값이 정상적으로 들어오는지 확인
-		//alert(ne_x + "  " + ne_y + "\n" + sw_x + "   " + sw_y);
+		<%-- 값이 정상적으로 들어오는지 확인 --%>
+		<%-- alert(ne_x + "  " + ne_y + "\n" + sw_x + "   " + sw_y); --%>
 		
-		// ajax로 sideList에 값을 전달하고 결과를 받는다.
+		<%-- ajax로 sideList에 값을 전달하고 결과를 받는다. --%>
 		$.ajax({
 			type:'post',
 			url:'testSideList.do',
 			data:{'ne_x':ne_x, 'ne_y':ne_y, 'sw_x':sw_x, 'sw_y':sw_y},
 			success:function (res) {
 				$('#list').html(res);
-				res = res.match(/[13]\d{1,2}\.\d+/g);
-				alert(res);
+				<%-- 정규식을 이용해서 결과값의 위경도만 받는다. --%>
+				<%-- split 함수를 사용하기위해서 object 타입을 String 타입으로 전환 --%>
+				latlngTotal = String(res.match(/[13]\d{1,2}\.\d{8,}/g));
+				
+				<%-- 
+				// 타입 확인
+				alert(typeof(latlngTotal));
+				--%>
+				
+				<%-- 구분자 ,로 분리 --%>
+				latlngList = latlngTotal.split(',');
+				
+				<%-- 콘솔에 출력 --%>
+				console.log("latlngList 길이 : " + latlngList.length);
+				for(var i = 0; i < latlngList.length; i++) {
+					console.log(latlngList[i]);
+					var mx;
+					var my;
+					
+					<%-- 짝수면 경도 --%>
+					if(((i + 1) % 2) == 0) {
+						my = latlngList[i];
+						console.log("my : " + my);
+					} else {
+						<%-- 홀수면 위도 --%>
+						mx = latlngList[i];
+						console.log("mx : " + mx)
+					}
+					
+					<%-- mx, my를 마커에 설정 --%>
+					var mLatlng = new daum.maps.LatLng(mx, my);
+					var mMarker = new daum.maps.Marker({
+						position: mLatlng
+					});
+					
+					<%-- 배열에 추가 --%>
+					mMarkers.push(mMarker);
+				}
+				<%-- 기존 클러스터의 마커 삭제 --%>
+				clusterer.clear();
+				<%-- console.log('클러스터 마커 삭제'); --%>
+				
+				<%-- 새로운 마커 추가하여 표시 --%>
+				clusterer.addMarkers(mMarkers);
+				console.log('클러스터 마커 추가');
+				
 			}
 		});
-		
-		/////////////
 	});
 });
 </script>

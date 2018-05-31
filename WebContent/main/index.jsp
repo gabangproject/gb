@@ -9,6 +9,6 @@
 	location.href = "main.do";
 </script>
 <body>
-
+//Á¦¹ß
 </body>
 </html>

@@ -77,9 +77,9 @@ border-bottom: 1px solid #e6e6e6;
 				<div id="myCarousel" class="carousel  slide" style=" height:500px;">
 				  <!-- Dot Indicators -->
 				  <ol class="carousel-indicators">
-				  <c:forEach var="img" items="${imgList }" varStatus="n">
+				  <c:forEach var="img" items="${imgList}" varStatus="n">
 				  	<c:if test="${n.index==0 }">
-				    	<li data-target="#myCarousel" data-slide-to="${n.index }" class="active"></li>
+				    	<li data-target="#myCarousel" data-slide-to="${n.index}" class="active"></li>
 				    </c:if>
 				    <c:if test="${n.index!=0 }">
 					<li data-target="#myCarousel" data-slide-to="${n.index }" ></li>
@@ -96,7 +96,7 @@ border-bottom: 1px solid #e6e6e6;
 						<c:if test="${n.index!=0 }">
 							<div class="item">
 						</c:if> 
-						    <img src="${image.img }" class="img-responsive"">
+						    <img src="${image.img }" class="img-responsive">
 						    
 						    </div>
 					  </c:forEach>

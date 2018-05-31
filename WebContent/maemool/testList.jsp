@@ -16,7 +16,6 @@
 <!-- 다음 지도 api를 사용하기 위한 부분 -->
 <!-- 해당 키는 권한 키 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0414b62e66e43f9fc50e0f6dfd64b93f&libraries=clusterer,services"></script>
-
 <script type="text/javascript">
 <%-- by.한 --%>
 $(function() {

@@ -137,23 +137,27 @@ public class MaemoolModel {
 
 		request.setCharacterEncoding("EUC-KR");
 		
-		
-		
-		BuildingTypeVO vo=new BuildingTypeVO();
-		DealTypeVO vo1=new DealTypeVO();
-		ImgVO vo2=new ImgVO();
-		MaemoolVO vo3=new MaemoolVO();
+		MaemoolVO vo1=new MaemoolVO();
+		BuildingTypeVO vo2=new BuildingTypeVO();
+		DealTypeVO vo3=new DealTypeVO();
 		PropertyAddrVO vo4=new PropertyAddrVO();
 		RoomTypeVO vo5=new RoomTypeVO();
 		
 		
+		
+		
+		
 		HttpSession session=request.getSession();
 		String email=(String) session.getAttribute("id");
-		int maemoolNum=MaemoolDAO.maemoolNum();
+		int maemoolNum=MaemoolDAO.maemoolNum()+1;
 		
+		 
+		//fileItem.getString("EUC_KR"); 
+		int i=1;
 		
 		String option="";
 		Map map=new HashMap();
+		List<String> list=new ArrayList<String>();
 		
 		//img테이블에 필요한 데이터 저장
 				//매물 이미지 정보 받아오는 라이브러리
@@ -172,7 +176,7 @@ public class MaemoolModel {
 
 					// Create a new file upload handler
 					ServletFileUpload upload = new ServletFileUpload(factory);
-
+					upload.setHeaderEncoding("EUC_KR");
 					// Set overall request size constraint
 					upload.setSizeMax(MAZ_REQUEST_SIZE);
 					upload.setFileSizeMax(MAX_FILE_SIZE);
@@ -185,18 +189,18 @@ public class MaemoolModel {
 								// Process regular form field (input type="text|radio|checkbox|etc", select,
 								// etc).
 								String fieldName = item.getFieldName();
-								String fieldValue = item.getString();
+								String fieldValue = item.getString("EUC_KR");
 								System.out.println(fieldName);
-								
+								System.out.println(fieldValue);
 								if(!(fieldName.equals("opt")))
 								{
 									map.put(fieldName, fieldValue);
 								}
 								else 
 								{
-									option=fieldValue+", ";
+									option=option+fieldValue+", ";
 								}
-								System.out.println(map.get(fieldName));
+								
 								// ... (do your job here)
 							} else {
 								// Process form file field (input type="file").
@@ -208,14 +212,8 @@ public class MaemoolModel {
 								BufferedImage image = ImageIO.read(fileContent);
 								ImageIO.write(image, "jpg", new File(PATH + "/" + fileName));
 								
-								File f=new File(PATH+"\\"+fileName);
-								File file=new File(PATH+"\\"+email+"-"+fileName);
-								f.renameTo(file);
-								System.out.println(fieldName);
-								System.out.println(fileName);
-								vo2.setImg(file.getName());
-								vo2.setNum(maemoolNum);
-								MaemoolDAO.insertImage(vo2);
+								list.add(fileName);
+								
 							}
 						}
 					} catch (FileUploadException e) {
@@ -227,7 +225,7 @@ public class MaemoolModel {
 		
 				
 		//property_Addr에 필요한 데이터 저장
-		String addr=map.get("address")+" "+map.get("datailAddress");
+		String addr=map.get("address")+" "+map.get("detailAddress");
 		String x_position=(String) map.get("x_position");
 		String y_position=(String) map.get("y_position");
 		vo4.setAddr(addr);
@@ -245,131 +243,135 @@ public class MaemoolModel {
 		//deal_type테이블에 필요한 데이터
 		//거래 형태
 		String deal_type= (String) map.get("deal_type");
-		vo1.setType("deal_type");
-		vo1.setNum(maemoolNum);
+		vo3.setType(Integer.parseInt(deal_type));
+		vo3.setNum(maemoolNum);
 		System.out.println(deal_type);
 		
 		//room_type에 필요한 데이터
 		//방구조
-		/*Object room_type=map.get("room_type");
+		String room_type=(String) map.get("room_type");
 		vo5.setType(Integer.parseInt(room_type));
 		vo5.setNum(maemoolNum);
-		System.out.println(room_type);*/
+		System.out.println(room_type);
 		
 		//building_type에 필요한 데이터
 		//건물형태
 		String building_type=(String) map.get("building_type");
-		vo.setType(Integer.parseInt(building_type));
-		vo.setNum(maemoolNum);
+		vo2.setType(Integer.parseInt(building_type));
+		vo2.setNum(maemoolNum);
 		System.out.println(building_type);
 		
 		//maemool테이블에 필요한 데이터
-		vo3.setNum(maemoolNum);
-		vo3.setEmail(email);
+		vo1.setNum(maemoolNum);
+		vo1.setEmail(email);
 		
 		
 		//관리비
 		String manage_fee=(String) map.get("manage_fee");
 		if(manage_fee!=null)
 		{
-			manage_fee=manage_fee+" 만원";
+			manage_fee=manage_fee+"만원";
 		}
-		vo3.setManage_fee(manage_fee);
+		vo1.setManage_fee(manage_fee);
 		System.out.println(manage_fee);
 		
 		//관리비 포함항목
 		//option=(String) map.get("option");
+		option=option.substring(0,option.lastIndexOf(","));
+		vo1.setOpt(option);
 		System.out.println(option);
-		option=option.substring(0,option.lastIndexOf(",")-1);
-		vo3.setOpt(option);
 		
 		//엘리베이터 유무
 		String elev=(String) map.get("elev");
-		vo3.setElev(Integer.parseInt(elev));
+		vo1.setElev(Integer.parseInt(elev));
 		System.out.println(elev);
 		
 		//주차공간 유무
 		String parking_lot=(String) map.get("parking_lot");
-		vo3.setParking_lot(Integer.parseInt(parking_lot));
+		vo1.setParking_lot(Integer.parseInt(parking_lot));
 		System.out.println(parking_lot);
 		
 		//해당층
-		String floor1=(String) map.get("floor1");
+		String floor1=(String) map.get("floor1")+"층";
 		
-		if(!(floor1.startsWith("지")||floor1.startsWith("반")));
-		{
-			floor1=floor1+"층";
-		}
 		//전체층
 		String floor2=(String) map.get("floor2")+"층";
-		
-		String floor=floor1+"//"+floor2;
-		vo3.setFloor(floor);
+		String floor=floor1+"/"+floor2;
+		vo1.setFloor(floor);
 		System.out.println(floor);
 	
+		//월세
+		String monthly_rent=(String) map.get("monthly_rent");
+		vo1.setMonthly_rent(monthly_rent+ "만원");
+		System.out.println("monthly_rent:"+monthly_rent);
+		
 		//보증금
 		String deposit1=(String) map.get("deposit1");
 		if(deposit1!=null)
 		{
-			deposit1=deposit1 + " 억";
+			deposit1=deposit1 + "억";
 		}
 		String deposit2=(String) map.get("deposit2");
 		if(deposit2!=null)
 		{
-			deposit2=deposit2 + " 만원";
+			deposit2=deposit2 + "만원";
 		}
 		
 		String deposit=deposit1+deposit2;
-		vo3.setDeposit(deposit);
+		
+		if(monthly_rent.trim()==null)
+		{
+		deposit=deposit+" (전세가능)";
+		}
+			vo1.setDeposit(deposit);
 		System.out.println(deposit);
 		
-		//월세
-		String monthly_rent1=(String) map.get("monthly_rent1");
-		if(monthly_rent1!=null)
-			{
-			monthly_rent1=monthly_rent1 + " 억";
-			}
-		String monthly_rent2=(String) map.get("monthly_rent2");
-		if(monthly_rent2!=null)
-		{
-		monthly_rent2=monthly_rent2 + " 만원";
-		}
 		
-		String monthly_rent=monthly_rent1+monthly_rent2;
-		vo3.setMonthly_rent(monthly_rent);
-		System.out.println(monthly_rent);
 		
 		//전용면적
 		String gross_area=(String) map.get("gross_area")+"㎡";
-		//int pyeong=(int) Math.round(((Integer.parseInt(gross_area)/3.3)*10)/10);
-		
-		//gross_area=(String) map.get("gorss_area")+"㎡"+" ("+pyeong+"P)";
-		vo3.setGross_area(gross_area);
+		vo1.setGross_area(gross_area);
 		System.out.println(gross_area);
 		
 		//입주가능일
 		String moving_date=(String) map.get("moving_date");
-		vo3.setMoving_date(moving_date);
+		vo1.setMoving_date(moving_date);
 		System.out.println(moving_date);
 		
 		//매물 한줄 표현
 		String detail_title=(String) map.get("detail_title");
-		vo3.setDetail_title(detail_title);
+		vo1.setDetail_title(detail_title);
 		System.out.println(detail_title);
 		
 		//인근 지하철 표시
 		String near_subway=(String) map.get("near_subway");
-		vo3.setNear_subway(near_subway);
+		vo1.setNear_subway(near_subway);
 		System.out.println(near_subway);
 		
 		//매물 상세설명
 		String description=(String) map.get("description");
-		vo3.setDescription(description);
+		vo1.setDescription(description);
 		System.out.println(description);
 		
 		
-		MaemoolDAO.insertMaemool(vo, vo1, vo3, vo4, vo5);
+		MaemoolDAO.insertMaemool(vo1, vo2, vo3, vo4, vo5);
 		
+		
+		
+		//이미지 저장
+		ImgVO vo=new ImgVO();
+		for(String fileName:list)
+		{
+					
+			File f=new File(PATH+"\\"+fileName);
+			File file=new File(PATH+"\\"+email+"-"+fileName);
+			f.renameTo(file);
+			vo.setImg(file.getName());
+			vo.setNum(maemoolNum);
+			vo.getImg();
+			vo.getNum();
+			MaemoolDAO.insertImage(vo);
+		}
 		
 		request.setAttribute("main_jsp", "../maemool/maemool_detail.jsp");
 			return "main.jsp";
@@ -577,27 +579,6 @@ public class MaemoolModel {
 		return "../maemool/testSideList.jsp";
 	}
 	
-	@RequestMapping("main/like.do")
-	public String like(HttpServletRequest req, HttpServletResponse res) {
-		String nums = "";
-		Cookie[] cookies = req.getCookies();
-		System.out.println("현재 저장된 관심목록 갯수 : " + cookies.length);
-		if(cookies!=null) {
-			for(int i=0; i<cookies.length; i++) {
-					nums=cookies[i].getValue();
-			}
-		}
-		MaemoolDAO dao = new MaemoolDAO();
-		
-		int num = Integer.parseInt(nums);
-		MaemoolVO vo = dao.cookie(num);
-		
-		req.setAttribute("vo", vo);
-
-		req.setAttribute("main_jsp", "../like/like.jsp");
-		return "main.jsp";
-	}
-	
 	/*by.준영*/
 	@RequestMapping("main/add_jjim.do")
 	public String real_jjim(HttpServletRequest req, HttpServletResponse res) {
@@ -644,7 +625,6 @@ public class MaemoolModel {
 		
 		JjimDAO.removeJjim(map);
 		
-		
 		return "../maemool/jjim.jsp";
 	}
 	
@@ -656,7 +636,6 @@ public class MaemoolModel {
 		//찜에 필요한 데이터 (id하고 매물번호)
 		String email = (String) session.getAttribute("id");
 		String num = req.getParameter("maemool_num");
-		
 		
 		Map map=new HashMap();
 		
@@ -670,9 +649,30 @@ public class MaemoolModel {
 		
 		return "../maemool/jjim.jsp";
 	}
+	
+	@RequestMapping("main/like.do")
+	public String like(HttpServletRequest req, HttpServletResponse res) {
+		String nums = "";
+		Cookie[] cookies = req.getCookies();
+		System.out.println("현재 저장된 관심목록 갯수 : " + cookies.length);
+		if(cookies!=null) {
+			for(int i=0; i<cookies.length; i++) {
+					nums=cookies[i].getValue();
+			}
+		}
+		MaemoolDAO dao = new MaemoolDAO();
+		
+		int num = Integer.parseInt(nums);
+		MaemoolVO vo = dao.cookie(num);
+		
+		req.setAttribute("vo", vo);
+
+		req.setAttribute("main_jsp", "../like/like.jsp");
+		return "main.jsp";
+	}
 	// by. 한솔
-	@RequestMapping("main/like_ok.do")
-	public String Likes(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping("main/like_add.do")
+	public String LikeAdd(HttpServletRequest request, HttpServletResponse response) {
 /*		// 관심목록 by.한솔
 		String num = request.getParameter("num");
 		System.out.println(num);
@@ -688,42 +688,79 @@ public class MaemoolModel {
 		Cookie[] cookies = request.getCookies();
 		String name = "";
 		String ss = "";
-		
+		int num = Integer.parseInt(no);
 		/*******************************************************/
 		System.out.println("ss 공백 : " + ss);
-		System.out.println("cookies 길이 확인 : " + cookies.length); // 최초실행시에도 cookies 길이는 1로 확인됨
-		System.out.println("cookies[0] 이름 확인 : " + cookies[0].getName());
-//		int ssInt = Integer.parseInt(ss);
-//		System.out.println("ssInt : " + ssInt);
-		/*******************************************************/
-		// 따라서 cookies는 null이 아니고 아래 코드 실행됨.
+		System.out.println("cookies 길이 확인 : " + cookies.length);
+	//	System.out.println("cookies[0] 이름 확인 : " + cookies[0].getName());
+
 		if (cookies != null) {
+			
 			for (int i = 0; i < cookies.length; i++) {
+				
 				Cookie c = cookies[i];
 				String cName = c.getName();
+				System.out.println("cookies["+i+"] 이름 확인 : " + cookies[i].getName());
+				System.out.println("cookies["+i+"] 값 확인 : " + cookies[i].getValue());
+				
 				if (cName.startsWith("cookNo")) {
 					String cValue = c.getValue();
 					ss = cName.replaceAll("[^0-9]", "");
 					System.out.println("cName.startsWith(\"cookNo\") ss = " + ss);
 				} else {
-					name = "cookNo1";
+					name = "cookNo"+ no;
+					ss = "0";
 				}
 			}
+			
 			/***************이 부분 한번 확인해주세요***************/
 			int a = Integer.parseInt(ss);
 			System.out.println("ss=" + ss);
 			/*******************************************************/
-			name ="cookNo"+(a+1);
+			name ="cookNo"+no;
 		}
 		// 쿠키가 null일 경우
 		else {
-			name = "cookNo1";
+			name = "cookNo"+ num;
 		}
 		Cookie c = new Cookie(name, no);
 		c.setMaxAge(60 * 60 * 24); // 쿠키 최대 유지시간 설정
 		response.addCookie(c);
-		request.setAttribute("main_jsp", "../like/like_ok.jsp");
-		return "main.jsp";
+		
+		
+		return "../like/like.jsp";
 
+	}
+	@RequestMapping("main/like_delete.do")
+	public String LikeDelete(HttpServletRequest request, HttpServletResponse response) {
+		String no = request.getParameter("num");
+		Cookie[] cookies = request.getCookies();
+		String name = "";
+		int Value = 0;
+		String ss ="";
+		System.out.println(no);
+		if(cookies!=null) {
+			for(int i = 0; i<cookies.length; i++) {
+				Cookie c = cookies[i]; 
+				String cName = c.getName();
+				
+				//쿠키 이름이 cookNo로 시작안하면 전부다 삭제
+				if (cName.startsWith("cookNo")) {
+					String cValue = c.getValue();
+					ss = cName.replaceAll("[^0-9]", "");
+					System.out.println("cName.startsWith(\"cookNo\") ss = " + ss);
+				}
+				/////////////////////////////////////
+				if(ss == no) {
+					name = "cookNo"+ ss;
+					c = new Cookie(name, no);
+					c.setMaxAge(0); // 쿠키 최대 유지시간 설정
+					response.addCookie(c);
+					System.out.println("cookNo["+ss+"]삭제완료");
+				}
+			}
+		}
+		
+		return "../like/like.jsp";
 	}
 }

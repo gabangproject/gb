@@ -48,16 +48,35 @@ function jjim(input) {
 	}
 }
 <%-- by.한솔 --%>
-function send(){
-	var a = $('#num').attr('num');
+function send(input){
+	var a = $(input).attr('num');
+	alert(a);
+	var eye = $(input).attr('class');
+	
+	if(eye == "fa fa-eye"){
 		$.ajax({
 			type :"POST",
-			url : "like_ok.do",
+			url : "../main/like_add.do",
 			data : {num : a},
 			success : function(data) {
-				alert("나와라제발");
+				alert("나와라제발 눈깔변신");
+				$(input).attr('class', "fa fa-eye-slash")
 			}
 		}); 	
+	}
+	
+	else{
+		$.ajax({
+			type :"POST",
+			url : "../main/like_delete.do",
+			data : {num : a},
+			success : function(data) {
+				alert("나와라제발 눈깔 슬래쉬삭제");
+				$(input).attr('class', "fa fa-eye")
+			}
+		}); 	
+		
+	}
 };
 </script>
 </head>
@@ -67,7 +86,7 @@ function send(){
 		<div class="media">
 			<div class="fav-box">
 				<a><span class="glyphicon glyphicon-heart-empty" onclick="jjim(this)" num=${i.num }></span></a>
-				<i class="fa fa-eye" id='like' aria-hidden="true" num='${i.num}'></i>
+				<i class="fa fa-eye" id='like' aria-hidden="true" num='${i.num}' onclick="send(this)"></i>
 			</div>
 			<a href="maemool_detail.do?num=${i.num}&x=${i.x_position}&y=${i.y_position}">
 				<img class="d-flex align-self-start maemool-list-img" src="${oneImg.get(i.num)}">

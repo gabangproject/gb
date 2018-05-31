@@ -62,15 +62,16 @@ border-bottom: 1px solid #e6e6e6;
 	<!-- end:header-top -->
 	<div id="fh5co-work-section" >
 		<div class="container" >
-			
-			<div class="row" >
-				 <div class=" text-center heading-section animate-box" > 
-					<h3>매물 정보</h3>
+
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+					<h3>매물정보</h3>
 				</div>
 			</div>
 
 
-	<!-- 매물 이미지 출력 -->
+
+			<!-- 매물 이미지 출력 -->
 			<div class="row" >
 				<div style="width: 70%; margin:0px auto;">
 				<div id="myCarousel" class="carousel  slide" style=" height:500px;">
@@ -121,22 +122,18 @@ border-bottom: 1px solid #e6e6e6;
 									<tr>
 										<td class="col-md-2 h">등록자 아이디</td>
 										<td colspan="3">${vo.email}</td>
-										
 									</tr>
 									<tr>
 										<td class="h">보증금 </td>
 										<td>${vo.deposit }</td>
 										<td  class="h">월세</td>
 										<td>${vo.monthly_rent }</td>
-										
-
 									</tr>
 									<tr>
 										<td class="h">관리비 </td>
 										<td>${vo.manage_fee}</td>
 										<td class="h col-md-2 ">관리비 항목</td>
 										<td>${vo.maintenance}</td>
-										
 									</tr>
 									<tr>
 										<td class="h">층/건물층수</td>
@@ -202,7 +199,7 @@ border-bottom: 1px solid #e6e6e6;
 									<tr>
 										<td class="h" >중개사 평점</td>
 										<td>
-											${seller.intro }
+											${seller.eval_score } 점
 										</td>
 									</tr>
 								</tbody>
@@ -212,33 +209,30 @@ border-bottom: 1px solid #e6e6e6;
 						</div>
 				</div>
 			</div>
-			
+	
 			<div class="row" style="margin-bottom:30px;">
 					
 				<!-- 지도 출력 -->
+
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+						<h3>매물위치</h3>
+					</div>
+				</div>
 				
-					<div class="text-center" style="font-size:20px; font-weight: bold ; margin-bottom:10px">매물 위치</div>
-					<input type="hidden" id="x_position" value="${x }">
+				<input type="hidden" id="x_position" value="${x }">
 					<input type="hidden" id="y_position" value="${y }">
 					<!-- 해당 매물 위치 -->
 					 
 					<div id="map" style="width:50%; margin:0px auto"></div>
-				
-
 			</div>
-			
-			
-				
-				
-				
+		
 			</div>
 			<!-- container 끝 -->
+			<div class="form-group text-center" >
+				<input type=button id="cencel" name="cencel" class="btn btn-primary" value="뒤로가기" onClick="history.back()">
+			</div>
 	</div> 
-			
-			
-
-		
-		
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 </script>

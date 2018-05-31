@@ -15,7 +15,7 @@
 	src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-<!-- ÆòÁ¡ °ü·Ã -->
+<!-- í‰ì  ê´€ë ¨ -->
 
 <style>
 .carousel {
@@ -65,7 +65,7 @@ table, th, td {
 </style>
 <script type="text/javascript">
 	
-<%-- by.ÁØ¿µ --%>
+<%-- by.ì¤€ì˜ --%>
 	function jjim(input) {
 		var num = $(input).attr("num");
 		alert(num);
@@ -97,7 +97,7 @@ table, th, td {
 			});
 		}
 	}
-<%-- by.ÇÑ¼Ö --%>
+<%-- by.í•œì†” --%>
 	function send(input) {
 		var a = $(input).attr('num');
 		alert(a);
@@ -111,7 +111,7 @@ table, th, td {
 					num : a
 				},
 				success : function(data) {
-					alert("³ª¿Í¶óÁ¦¹ß ´«±òº¯½Å");
+					alert("ë‚˜ì™€ë¼ì œë°œ ëˆˆê¹”ë³€ì‹ ");
 					$(input).attr('class', "fas fa-eye")
 				}
 			});
@@ -125,7 +125,7 @@ table, th, td {
 					num : a
 				},
 				success : function(data) {
-					alert("³ª¿Í¶óÁ¦¹ß ´«±ò ½½·¡½¬»èÁ¦");
+					alert("ë‚˜ì™€ë¼ì œë°œ ëˆˆê¹” ìŠ¬ë˜ì‰¬ì‚­ì œ");
 					$(input).attr('class', "far fa-eye")
 				}
 			});
@@ -143,13 +143,14 @@ table, th, td {
 			<div class="row">
 				<div
 					class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-					<h3>¸Å¹°Á¤º¸</h3>
+					<h3>ë§¤ë¬¼ì •ë³´</h3>
 				</div>
 			</div>
 
 
 
-			<!-- ¸Å¹° ÀÌ¹ÌÁö Ãâ·Â -->
+			<!-- ë§¤ë¬¼ ì´ë¯¸ì§€ ì¶œë ¥ -->
+
 			<div class="row">
 				<div style="width: 70%; margin: 0px auto;">
 					<div id="myCarousel" class="carousel  slide" style="height: 500px;">
@@ -178,7 +179,7 @@ table, th, td {
 								<img src="${image.img }" class="img-responsive"">
 						</div>
 						</c:forEach>
-						<!-- ÀÌ¹ÌÁö³¡ -->
+						<!-- ì´ë¯¸ì§€ë -->
 					</div>
 					<!-- Navigation -->
 					<a class="left carousel-control" href="#myCarousel"
@@ -195,86 +196,86 @@ table, th, td {
 			<div class="row">
 
 				<div style="margin-top: 20px;">
-					<div style="font-size: 20px; font-weight: bold;">»ó¼¼Á¤º¸</div>
+					<div style="font-size: 20px; font-weight: bold;">ìƒì„¸ì •ë³´</div>
 					<div>
 						<table class="table table-hover"">
 							<tbody>
 								<tr>
-									<td class="col-md-2 h">µî·ÏÀÚ ¾ÆÀÌµğ</td>
+									<td class="col-md-2 h">ë“±ë¡ì ì•„ì´ë””</td>
 									<td colspan="3">${vo.email}</td>
 								</tr>
 								<tr>
-									<td class="h">º¸Áõ±İ</td>
+									<td class="h">ë³´ì¦ê¸ˆ</td>
 									<td>${vo.deposit }</td>
-									<td class="h">¿ù¼¼</td>
+									<td class="h">ì›”ì„¸</td>
 									<td>${vo.monthly_rent }</td>
 								</tr>
 								<tr>
-									<td class="h">°ü¸®ºñ</td>
+									<td class="h">ê´€ë¦¬ë¹„</td>
 									<td>${vo.manage_fee}</td>
-									<td class="h col-md-2 ">°ü¸®ºñ Ç×¸ñ</td>
+									<td class="h col-md-2 ">ê´€ë¦¬ë¹„ í•­ëª©</td>
 									<td>${vo.maintenance}</td>
 								</tr>
 								<tr>
-									<td class="h">Ãş/°Ç¹°Ãş¼ö</td>
+									<td class="h">ì¸µ/ê±´ë¬¼ì¸µìˆ˜</td>
 									<td>${vo.floor}</td>
-									<td class="h">¿¤¸®º£ÀÌÅÍ</td>
+									<td class="h">ì—˜ë¦¬ë² ì´í„°</td>
 									<td><c:if test="${vo.elev==1 }">
-											°¡´É
+											ê°€ëŠ¥
 											</c:if> <c:if test="${vo.elev==0 }">
-											ºÒ°¡´É
+											ë¶ˆê°€ëŠ¥
 											</c:if></td>
 								</tr>
 								<tr>
-									<td class="h">ÁÖÂ÷</td>
+									<td class="h">ì£¼ì°¨</td>
 									<td><c:if test="${vo.parking_lot==1}">
-											°¡´É
+											ê°€ëŠ¥
 											</c:if> <c:if test="${vo.parking_lot==0}">
-											ºÒ°¡´É
+											ë¶ˆê°€ëŠ¥
 											</c:if></td>
-									<td class="h">¸Å¹° ¼³¸í</td>
+									<td class="h">ë§¤ë¬¼ ì„¤ëª…</td>
 									<td>${vo.detail_title}</td>
 								</tr>
 								<tr>
-									<td class="h">Å©±â</td>
+									<td class="h">í¬ê¸°</td>
 									<td>${vo.gross_area}</td>
-									<td class="h">¿É¼Ç</td>
+									<td class="h">ì˜µì…˜</td>
 									<td>${vo.opt}</td>
 								</tr>
 								<tr>
-									<td class="h">ÀÔÁÖ °¡´ÉÀÏ</td>
+									<td class="h">ì…ì£¼ ê°€ëŠ¥ì¼</td>
 									<td>${vo.moving_date}</td>
-									<td class="h">ÀÎ±ÙÁöÇÏÃ¶</td>
+									<td class="h">ì¸ê·¼ì§€í•˜ì² </td>
 									<td>${vo.near_subway}</td>
 								</tr>
 								<tr>
-									<td class="h">»ó¼¼¼³¸í</td>
+									<td class="h">ìƒì„¸ì„¤ëª…</td>
 									<td colspan="3">${vo.description}</td>
 								</tr>
 								<tr>
-									<td class="h" rowspan="5" style="vertical-align: middle;">Áß°³»ç
-										Á¤º¸</td>
+									<td class="h" rowspan="5" style="vertical-align: middle;">ì¤‘ê°œì‚¬
+										ì •ë³´</td>
 									<td rowspan="5"><img src="${seller.pic }" width="200px"
 										height="200px"></td>
-									<td class="h">ÀüÈ­¹øÈ£</td>
+									<td class="h">ì „í™”ë²ˆí˜¸</td>
 									<td>${seller.comp_tel }</td>
 								</tr>
 
 								<tr>
-									<td class="h">Áß°³»ç¸í</td>
+									<td class="h">ì¤‘ê°œì‚¬ëª…</td>
 									<td>${seller.comp_name }</td>
 								</tr>
 								<tr>
-									<td class="h">ÁÖ¼Ò</td>
+									<td class="h">ì£¼ì†Œ</td>
 									<td>${seller.addr }</td>
 								</tr>
 								<tr>
-									<td class="h">Áß°³»ç ¼Ò°³</td>
+									<td class="h">ì¤‘ê°œì‚¬ ì†Œê°œ</td>
 									<td>${seller.intro}</td>
 								</tr>
 								<tr>
-									<td class="h">Áß°³»ç ÆòÁ¡</td>
-									<td>${seller.eval_score } Á¡</td>
+									<td class="h">ì¤‘ê°œì‚¬ í‰ì </td>
+									<td>${seller.eval_score } ì </td>
 								</tr>
 							</tbody>
 						</table>
@@ -296,27 +297,27 @@ table, th, td {
 				</div>
 				<div class="row" style="margin-bottom: 30px;">
 
-					<!-- Áöµµ Ãâ·Â -->
+					<!-- ì§€ë„ ì¶œë ¥ -->
 
 					<div class="row">
 						<div
 							class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-							<h3>¸Å¹°À§Ä¡</h3>
+							<h3>ë§¤ë¬¼ìœ„ì¹˜</h3>
 						</div>
 					</div>
 
 					<input type="hidden" id="x_position" value="${x }"> <input
 						type="hidden" id="y_position" value="${y }">
-					<!-- ÇØ´ç ¸Å¹° À§Ä¡ -->
+					<!-- í•´ë‹¹ ë§¤ë¬¼ ìœ„ì¹˜ -->
 
 					<div id="map" style="width: 50%; margin: 0px auto"></div>
 				</div>
 
 			</div>
-			<!-- container ³¡ -->
+			<!-- container ë -->
 			<div class="form-group text-center">
 				<input type=button id="cencel" name="cencel" class="btn btn-primary"
-					value="µÚ·Î°¡±â" onClick="history.back()">
+					value="ë’¤ë¡œê°€ê¸°" onClick="history.back()">
 			</div>
 		</div>
 
@@ -327,33 +328,33 @@ table, th, td {
 		<script
 			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-		<!-- ´ÙÀ½ Áöµµ °ü·Ã script -->
+		<!-- ë‹¤ìŒ ì§€ë„ ê´€ë ¨ script -->
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0414b62e66e43f9fc50e0f6dfd64b93f"></script>
 		<script>
 			var x_position = $('#x_position').val();
 			var y_position = $('#y_position').val();
 
-			var mapContainer = document.getElementById('map'), // Áöµµ¸¦ Ç¥½ÃÇÒ div 
+			var mapContainer = document.getElementById('map'), // ì§€ë„ë¥¼ í‘œì‹œí•  div 
 			mapOption = {
-				center : new daum.maps.LatLng(x_position, y_position), // ÁöµµÀÇ Áß½ÉÁÂÇ¥
+				center : new daum.maps.LatLng(x_position, y_position), // ì§€ë„ì˜ ì¤‘ì‹¬ì¢Œí‘œ
 				level : 3
-			// ÁöµµÀÇ È®´ë ·¹º§
+			// ì§€ë„ì˜ í™•ëŒ€ ë ˆë²¨
 			};
 
 			var map = new daum.maps.Map(mapContainer, mapOption);
 
 			var markerPosition = new daum.maps.LatLng(x_position, y_position);
 
-			// ¸¶Ä¿¸¦ »ı¼ºÇÕ´Ï´Ù
+			// ë§ˆì»¤ë¥¼ ìƒì„±í•©ë‹ˆë‹¤
 			var marker = new daum.maps.Marker({
 				position : markerPosition
 			});
 
-			// ¸¶Ä¿°¡ Áöµµ À§¿¡ Ç¥½ÃµÇµµ·Ï ¼³Á¤ÇÕ´Ï´Ù
+			// ë§ˆì»¤ê°€ ì§€ë„ ìœ„ì— í‘œì‹œë˜ë„ë¡ ì„¤ì •í•©ë‹ˆë‹¤
 			marker.setMap(map);
 
-			//ÆòÁ¡ ½ºÅ©¸³Æ®
+			//í‰ì  ìŠ¤í¬ë¦½íŠ¸
 		</script>
 </body>
 </html>

@@ -46,7 +46,9 @@
 				<%-- <c:forEach var="i" begin="1" end="6"> --%>
 				<c:forEach var="i" items="${theme}" varStatus="s">
 					<div class="col-md-4">
-						<div class="fh5co-grid animate-box" style="background-image: url(images/work-${s.index+1}.jpg);">
+						<%--<div class="fh5co-grid animate-box" style="background-image: url(images/work-${s.index+1}.jpg);">  --%>
+						<div class="fh5co-grid animate-box" style="background-image: url(images/theme-${s.index+1}.jpg); background-size:320px 302px;
+						background-repeat:no-repeat;">
 							<a class="image-popup text-center" href="maemool_theme_list.do?keyword=${i}">
 								<div class="prod-title">
 									<h3>${i}</h3>

@@ -16,7 +16,6 @@
 <!-- 다음 지도 api를 사용하기 위한 부분 -->
 <!-- 해당 키는 권한 키 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0414b62e66e43f9fc50e0f6dfd64b93f&libraries=clusterer,services"></script>
-
 <script type="text/javascript">
 <%-- by.한 --%>
 $(function() {
@@ -32,7 +31,7 @@ $(function() {
 		url:'testSideList.do',
 		data:{'keyword': keyword},
 		success:function(res) {
-			$('#list').html(res);
+			$('#list').html(res);			
 		}
 	});
 	
@@ -60,13 +59,14 @@ $(function() {
 			type:'post',
 			url:'testSideList.do',
 			data:{'ne_x':ne_x, 'ne_y':ne_y, 'sw_x':sw_x, 'sw_y':sw_y},
-			success:function(res) {
+			success:function (res) {
 				$('#list').html(res);
-				var list = '153.111,58.5585';
-				var sList = list.split('^[0-9]+.^[0-9]');
-				alert('sList의 길이 : ' + sList.length + '\nsList의 값 : ' + sList[0]);
+				res = res.match(/[13]\d{1,2}\.\d+/g);
+				alert(res);
 			}
 		});
+		
+		/////////////
 	});
 });
 </script>

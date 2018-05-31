@@ -157,7 +157,7 @@ public class MaemoolDAO {
 		}
 		return vo;
 	}
-
+	///////////////////박한솔 - 쿠키 사용////////////////////////
 	public MapVO cookie(int num) {
 		MapVO vo = null;
 		SqlSession session = null;
@@ -173,7 +173,7 @@ public class MaemoolDAO {
 		}
 		return vo;
 	}
-
+	///////////////////박한솔 - 쿠키 사용////////////////////////
 	/*
 	 * day: 2018.05.29 who: t
 	 */

@@ -770,7 +770,7 @@ public class MaemoolModel {
       return "../maemool/jjim.jsp";
    }
    
-
+	///////////////////박한솔 - 쿠키 사용 - 관심목록////////////////////////
    @RequestMapping("main/like.do")
    public String like(HttpServletRequest request, HttpServletResponse response) {
       String nums = "";
@@ -803,10 +803,10 @@ public class MaemoolModel {
       request.setAttribute("main_jsp", "../like/like.jsp");
       return "main.jsp";
    }
-   // by. 한솔
+	///////////////////박한솔 - 쿠키 사용 - 관심목록////////////////////////
    @RequestMapping("main/like_add.do")
    public String LikeAdd(HttpServletRequest request, HttpServletResponse response) {
-/*      // 관심목록 by.한솔
+/*     
       String num = request.getParameter("num");
       System.out.println(num);
       Cookie c = new Cookie("cookNo", num);
@@ -862,6 +862,7 @@ public class MaemoolModel {
       return "../like/like.jsp";
 
    }
+	///////////////////박한솔 - 쿠키 사용 - 관심목록////////////////////////
    @RequestMapping("main/like_delete.do")
    public String LikeDelete(HttpServletRequest request, HttpServletResponse response) {
 	   

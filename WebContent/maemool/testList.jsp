@@ -2,6 +2,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -16,6 +18,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0414b62e66e43f9fc50e0f6dfd64b93f&libraries=clusterer,services"></script>
 
 <script type="text/javascript">
+<%-- by.한 --%>
 $(function() {
 	var keyword = '<%=request.getParameter("keyword")%>';
 	var bound;
@@ -59,40 +62,11 @@ $(function() {
 			data:{'ne_x':ne_x, 'ne_y':ne_y, 'sw_x':sw_x, 'sw_y':sw_y},
 			success:function(res) {
 				$('#list').html(res);
-				var listNum = $(res).$('#listNum').text();
-				alert('testList.jsp에서 출력 : ' + listNum);
+				var num = res.substring(res.indexOf('◐') + 1,res.indexOf('◑'));
+				$('#info').text(num);
 			}
 		});
-		
-		//alert("ajax 이후");
 	});
-		
-	// 맵 내부에서 마우스 버튼을 놓을 경우 작동
-	// 이동한 좌표에 맞는 매물 목록을 불러온다.
-	/*
-	 $('#map').mouseup(function() {
-		bound = map.getBounds();
-		var ne = bound.getNorthEast();
-		var ne_x = ne.getLat();
-		var ne_y = ne.getLng();
-		
-		var sw = bound.getSouthWest();
-		var sw_x = sw.getLat();
-		var sw_y = sw.getLng();
-		alert(ne_x + "  " + ne_y + "\n" + sw_x + "   " + sw_y);
-				
-		$.ajax({
-			type:'post',
-			url:'testSideList.do',
-			data:{'keyword': keyword,'ne_x':ne_x, 'ne_y':ne_y},
-			success:function(res) {
-				$('#list').html(res);
-			}
-		});
-		
-		alert("ajax 이후");
-	});
-	*/
 });
 </script>
 <style>
@@ -230,6 +204,7 @@ h2 a {
 						<!-- 지도 -->
 						<div id=map style="width: 50%; height: 250px%; display: inline-block" class="col-md-7"></div>
 						<script>
+							<%-- by.한 --%>
 							var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 							mapOption = {
 								center : new daum.maps.LatLng(37.563228970425506, 126.97727242618686), // 지도의 중심좌표
@@ -278,16 +253,20 @@ h2 a {
 								// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
 								map.panTo(moveLatLon);
 							};
-							alert(markers.length + '개 매물');
+							var mNum = markers.length;
+							
+							alert('mNum은 ' + mNum);
+							
 						</script>
-
 						<!-- 매물들의 리스트 출력 부분 -->
 						<div class="col-md-5 listing-block" id=list style="width: 50%; display: inline-block">
 						</div>
 					</div>
 				</div>
 			</section>
-			<div id=info></div>
+			<div style="width: 300px; height: 30px; background-color:yellow;" align="center">
+				<h3 id=info>${fn:length(geoList)} 개 매물</h3>
+			</div>
 		</div>
 	</div>
 </body>

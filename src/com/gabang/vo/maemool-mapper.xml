@@ -1,48 +1,69 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gabang.vo.maemool-mapper">
-	<!-- 매물 테마 검색 -->	
+
+	<!-- 매물 테마 검색 by.t-->	
 	<select id="getDepositInfo" resultType="MapVO">
 		SELECT * FROM map 
+	</select>
+	
+	<select id="getParkingInfo" resultType="MapVO">
+		SELECT * FROM map WHERE parking_lot=1
+	</select>
+	
+	<select id="getOneRoomInfo" resultType="MapVO">
+		SELECT * FROM map WHERE rtype=0 OR rtype=1 
+	</select>
+	
+	<select id="getOfficetelInfo" resultType="MapVO">
+		SELECT * FROM map WHERE btype=1 
 	</select>
 	
 	<!-- 매물 목록 출력 관련 by.한 -->
 	<select id="getGeoInfo_temp" resultType="MapVO">
 		SELECT * FROM map_temp
 	</select>
-	
+
 	<select id="getDeposit_temp" resultType="MaemoolVO">
-		SELECT num, deposit FROM maemool_temp
+		SELECT num, deposit FROM
+		maemool_temp
 	</select>
-	
-	<select id="searchMaemool_temp" parameterType="String" resultType="MapVO">
+
+	<select id="searchMaemool_temp" parameterType="String"
+		resultType="MapVO">
 		select * from map_temp where addr like '%'||#{keyword}||'%'
 	</select>
-	
+
 	<select id="imgFind" parameterType="int" resultType="ImgVO">
-		SELECT * FROM img WHERE num = #{num}
+		SELECT *
+		FROM img WHERE num = #{num}
 	</select>
-	
+
 	<!-- 지도 이동시 보여지는 영역 내 매물을 검색 by.한 -->
-	<select id="findMaemoolInBound" parameterType="hashmap" resultType="MapVO">
-		SELECT * FROM map_temp 
-		WHERE (TO_NUMBER(x_position) BETWEEN #{sw_x} AND #{ne_x}) AND (TO_NUMBER(y_position) BETWEEN #{sw_y} AND #{ne_y})
+	<select id="findMaemoolInBound" parameterType="hashmap"
+		resultType="MapVO">
+		SELECT * FROM map_temp
+		WHERE (TO_NUMBER(x_position) BETWEEN #{sw_x} AND #{ne_x}) AND
+		(TO_NUMBER(y_position) BETWEEN #{sw_y} AND #{ne_y})
 	</select>
-	
+
 	<insert id="jjimActive" parameterType="hashmap">
-		INSERT INTO jjim (email, num) values (#{id}, #{num})
+		INSERT INTO jjim (email,
+		num) values (#{id}, #{num})
 	</insert>
-	
-	<!-- 매물 상세정보  -->
+
+	<!-- 매물 상세정보 -->
 	<select id="infoFind" parameterType="int" resultType="MaemoolVO">
-		SELECT * FROM maemool_temp WHERE num = #{num} 
+		SELECT *
+		FROM maemool_temp WHERE num = #{num}
 	</select>
-	
+
 	<!-- 해당 매물 상세보기안에 표시되는 위치지도 -->
 	<select id="Maemoolmap" parameterType="int" resultType="MapVO">
-		SELECT * FROM map_temp WHERE num=#{num} 	
+		SELECT *
+		FROM map_temp WHERE num=#{num}
 	</select>
-	
+
 	<insert id="insertBuildingType">
 		Insert into building_type VALUES(#{type},#{num})
 	</insert>
@@ -53,24 +74,35 @@
 		Insert into img VALUES(#{img},#{num})
 	</insert>
 	<insert id="insertMaemool">
-		Insert into img VALUES(#{num},#{email},#{deposit},#{monthly_rent},#{floor},#{manage_fee},#{elev},#{parking_lot},
-							   #{gross_area},#{moving_date},#{regdate},#{avg_score},#{opt},#{description},#{near_subway},
-							   #{detail_title})
+		Insert into img
+		VALUES(#{num},#{email},#{deposit},#{monthly_rent},#{floor},#{manage_fee},#{elev},#{parking_lot},
+		#{gross_area},#{moving_date},#{regdate},#{avg_score},#{opt},#{description},#{near_subway},
+		#{detail_title})
 	</insert>
 	<insert id="insertPropertyAddr">
-		Insert into img VALUES(#{addr},#{x_position},#{y_position},#{num})
+		Insert into img
+		VALUES(#{addr},#{x_position},#{y_position},#{num})
 	</insert>
 	<insert id="insertRoomType">
 		Insert into img VALUES(#{type},#{num})
 	</insert>
-	
+
 	<select id="maemoolNum" resultType="int">
-		SELECT NVL(MAX(num),1) FROM maemool
+		SELECT NVL(MAX(num),1) FROM
+		maemool
+	</select>
+
+
+	<select resultType="MaemoolVO" id="cookie" parameterType="int"> 
+		SELECT * FROM maemool_temp 
+		WHERE num = #{num} 
 	</select>
 	
+	<insert id="insertJjim" parameterType="JjimVO">
+		Insert into jjim(email,num) VALUES(#{email},#{num})
+	</insert>
 	
-	<select id="cookie" resultType="MaemoolVO">
-		SELECT * FROM maemool_temp
-		WHERE num = #{num}
-	</select>
+	<delete id="removeJjim" parameterType="java.util.Map">
+		Delete from (SELECT * FROM jjim where email=#{email}) WHERE num=#{num}
+	</delete>
 </mapper>

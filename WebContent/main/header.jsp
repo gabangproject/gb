@@ -88,7 +88,7 @@ function idcheck()
 								<ul class="fh5co-sub-menu">
 										<li><a href="jjim_list.do" target="_blank">찜한 매물 보기</a></li>
 										<li><a href="#" target="_blank">개인정보 관리</a></li>
-									<c:if test="${sessionScope.grade!='2' }">	
+									<c:if test="${sessionScope.grade!='1' }">	
 										<li><a href="maemul_upload.do" target="_blank">매물등록</a></li>
 									</c:if>
 								</ul>

@@ -43,7 +43,7 @@ public class MemberModel {
 
 		String email=request.getParameter("email").toLowerCase();
 		String pwd=request.getParameter("pwd");
-		
+		System.out.println(email);
 
 		//id 존재 여부 체크
 		int emailCheck=MemberDAO.emailCheck(email);
@@ -326,10 +326,9 @@ public class MemberModel {
 
 			
 		}
-		
 
 		request.setAttribute("main_jsp", "home.jsp");
-		return "main.jsp";
+		return "redirect:main.do";
 	}
 
 }

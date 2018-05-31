@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- header랑 이어진 하단 부분 시작 -->
+	<!-- header랑 이어진 하단 부분 시작 g-->
 	<div class="fh5co-hero" style="background-color: black;">
 		<a href="#fh5co-work-section" class="smoothscroll fh5co-arrow to-animate hero-animate-4"><i class="ti-angle-down"></i></a>
 		<div class="fh5co-cover text-center" style="background-color: black;">

@@ -394,7 +394,7 @@ $(function(){
 					<fieldset id="butt" form="join" >
 					<div class="form-group text-center" >
 						<!-- 가입 버튼은 기본적으로 비활성화(disabled) 시켜놓고 입력값 중복체크를 처리하면 활성화 시킴  -->
-						<input type=submit id="join" name="join" class="btn" value="가입" disabled>
+						<input type=submit id="join" name="join" class="btn" value="가입" >
 						<input type=button id="cencel" name="cencel" class="btn btn-primary" value="취소" onclick="location='main.do'">
 					</div>
 					</fieldset>

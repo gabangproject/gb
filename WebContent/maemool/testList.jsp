@@ -62,9 +62,13 @@ $(function() {
 			data:{'ne_x':ne_x, 'ne_y':ne_y, 'sw_x':sw_x, 'sw_y':sw_y},
 			success:function(res) {
 				$('#list').html(res);
-				var list = '153.111,58.5585';
-				var sList = list.split('^[0-9]+.^[0-9]');
-				alert('sList의 길이 : ' + sList.length + '\nsList의 값 : ' + sList[0]);
+				/* var list = '123.54555, <태그태그태그> </태그닫혀>55.123, <태그태그 속성=123.747></태그닫혀>';
+				var sList = list.match(/\d+.\d+/g);
+				alert('list는 ' + list + '\nsList의 길이 : ' + sList.length + '\nsList의 값 : ' + sList); */
+				var res1 = '13.55 132.55'
+				res1 = res1.match(/[13]+\.\d+/g);
+				//res = res.match(/\d+\.\d+/g);
+				alert(res1);
 			}
 		});
 	});

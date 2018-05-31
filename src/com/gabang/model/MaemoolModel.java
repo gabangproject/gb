@@ -676,116 +676,124 @@ public class MaemoolModel {
 
 		return "../maemool/jjim.jsp";
 	}
-
-	@RequestMapping("main/like.do")
-	public String like(HttpServletRequest req, HttpServletResponse res) {
-		String nums = "";
-		Cookie[] cookies = req.getCookies();
-		System.out.println("현재 저장된 관심목록 갯수 : " + cookies.length);
-		if (cookies != null) {
-			for (int i = 0; i < cookies.length; i++) {
-				nums = cookies[i].getValue();
-			}
-		}
-		MaemoolDAO dao = new MaemoolDAO();
-
-		int num = Integer.parseInt(nums);
-		MapVO vo = dao.cookie(num);
-
-		req.setAttribute("vo", vo);
-
-		req.setAttribute("main_jsp", "../like/like.jsp");
-		return "main.jsp";
-	}
-
 	// by. 한솔
-	@RequestMapping("main/like_add.do")
-	public String LikeAdd(HttpServletRequest request, HttpServletResponse response) {
-		/*
-		 * // 관심목록 by.한솔 String num = request.getParameter("num");
-		 * System.out.println(num); Cookie c = new Cookie("cookNo", num);
-		 * c.setMaxAge(0); // cookie.setPath("C:\\GaBang\\gb"); //쿠키의 범위 설정
-		 * response.addCookie(c); // 쿠키를 저장 System.out.println(c);
-		 */
+	   @RequestMapping("main/like.do")
+	   public String like(HttpServletRequest request, HttpServletResponse response) {
+	      String nums = "";
+	      List<MapVO> list = new ArrayList<MapVO>();
+	      MapVO vo = null;
+	      MaemoolDAO dao = null;
+	      int num = 0;
+	      Cookie[] cookies = request.getCookies();
+	      //System.out.println("현재 저장된 관심목록 갯수 : " + cookies.length);
+	   
+	      if(cookies!=null) {
+	         for(int i=0; i<cookies.length; i++) {
+	            Cookie c = cookies[i];
+	            String cName = c.getName();
+	           // System.out.println(cName);
+	            
+	            if (cName.startsWith("cookNo")) {
+	            nums=c.getValue();
+	            //System.out.println(nums);
+	            dao = new MaemoolDAO();
+	            num = Integer.parseInt(nums);
+	            vo = dao.cookie(num);
+	            list.add(vo);
+	            
+	            }
+	         }
+	      }
+	      request.setAttribute("list", list);
+	      request.setAttribute("main_jsp", "../like/like.jsp");
+	      return "main.jsp";
+	   }
+	   // by. 한솔
+	   @RequestMapping("main/like_add.do")
+	   public String LikeAdd(HttpServletRequest request, HttpServletResponse response) {
+	/*      // 관심목록 by.한솔
+	      String num = request.getParameter("num");
+	      System.out.println(num);
+	      Cookie c = new Cookie("cookNo", num);
+	      c.setMaxAge(0);
+	      // cookie.setPath("C:\\GaBang\\gb"); //쿠키의 범위 설정
+	      response.addCookie(c); // 쿠키를 저장
+	      System.out.println(c);*/
+	      
+	      
+	      String no = request.getParameter("num");
+	      System.out.println("파라미터 num : " + no);
+	      Cookie[] cookies = request.getCookies();
+	      String name = "";
+	      String ss = "";
+	      int num = Integer.parseInt(no);
 
-		String no = request.getParameter("num");
-		System.out.println("파라미터 num : " + no);
-		Cookie[] cookies = request.getCookies();
-		String name = "";
-		String ss = "";
-		int num = Integer.parseInt(no);
-		/*******************************************************/
-		System.out.println("ss 공백 : " + ss);
-		System.out.println("cookies 길이 확인 : " + cookies.length);
-		// System.out.println("cookies[0] 이름 확인 : " + cookies[0].getName());
+	      if (cookies != null) {
+	         System.out.println("쿠키 갯수 : " + cookies.length);
+	         
+	         for (int i = 0; i < cookies.length; i++) {
+	            
+	            Cookie c = cookies[i];
+	            String cName = c.getName();
+	            /*System.out.println("cookies["+i+"] 이름 확인 : " + cookies[i].getName());
+	            System.out.println("cookies["+i+"] 값 확인 : " + cookies[i].getValue());
+	            System.out.println("cookies["+i+"] 시간 확인 : " + cookies[i].getMaxAge());*/
+	            
+	            if (cName.startsWith("cookNo")) {
+	               String cValue = c.getValue();
+	               ss = cName.replaceAll("[^0-9]", "");
+	              // System.out.println("cName.startsWith(\"cookNo\") ss = " + ss);
+	            } else {
+	               name = "cookNo"+ no;
+	               ss = "0";
+	            }
+	         }
+	         
+	        
+	         int a = Integer.parseInt(ss);
+	         //System.out.println("ss=" + ss);
+	       
+	         name ="cookNo"+no;
+	      }
+	      // 쿠키가 null일 경우
+	      else {
+	         name = "cookNo"+ num;
+	      }
+	      Cookie c = new Cookie(name, no);
+	      c.setMaxAge(60 * 60 * 24); // 쿠키 최대 유지시간 설정
+	      response.addCookie(c);
+	      
+	      
+	      return "../like/like.jsp";
 
-		if (cookies != null) {
-
-			for (int i = 0; i < cookies.length; i++) {
-
-				Cookie c = cookies[i];
-				String cName = c.getName();
-				System.out.println("cookies[" + i + "] 이름 확인 : " + cookies[i].getName());
-				System.out.println("cookies[" + i + "] 값 확인 : " + cookies[i].getValue());
-
-				if (cName.startsWith("cookNo")) {
-					String cValue = c.getValue();
-					ss = cName.replaceAll("[^0-9]", "");
-					System.out.println("cName.startsWith(\"cookNo\") ss = " + ss);
-				} else {
-					name = "cookNo" + no;
-					ss = "0";
-				}
-			}
-
-			/*************** 이 부분 한번 확인해주세요 ***************/
-			int a = Integer.parseInt(ss);
-			System.out.println("ss=" + ss);
-			/*******************************************************/
-			name = "cookNo" + no;
-		}
-		// 쿠키가 null일 경우
-		else {
-			name = "cookNo" + num;
-		}
-		Cookie c = new Cookie(name, no);
-		c.setMaxAge(60 * 60 * 24); // 쿠키 최대 유지시간 설정
-		response.addCookie(c);
-
-		return "../like/like.jsp";
-
+	   }
+	   @RequestMapping("main/like_delete.do")
+	   public String LikeDelete(HttpServletRequest request, HttpServletResponse response) {
+		   
+	      String no = request.getParameter("num");
+	      Cookie[] cookies = request.getCookies();
+	      //System.out.println(no);
+	      if(cookies!=null) {
+	         for(int i = 0; i<cookies.length; i++) {
+	            Cookie c = cookies[i]; 
+	            String cName = c.getName();
+	            
+	            //쿠키 이름이 cookNo로 시작
+	            if (cName.equals("cookNo" + no)) {
+	               c.setMaxAge(0);
+	               //System.out.println("쿠키 유지시간 : " + c.getMaxAge());
+	               response.addCookie(c);
+	            }
+	         }
+	      }
+	/*      System.out.println("쿠키 갯수 : " + cookies.length);
+	      for (Cookie c : cookies) {
+	         System.out.println("★쿠키 이름 : " + c.getName());
+	         System.out.println("쿠키 값 : " + c.getValue());
+	         System.out.println("쿠키 유지시간 :" + c.getMaxAge());
+	      }*/
+	      
+	      //request.setAttribute("main_jsp", "../like/like.do");
+	      return "redirect:../main/like.do";
+	   }
 	}
-
-	@RequestMapping("main/like_delete.do")
-	public String LikeDelete(HttpServletRequest request, HttpServletResponse response) {
-		String no = request.getParameter("num");
-		Cookie[] cookies = request.getCookies();
-		String name = "";
-		int Value = 0;
-		String ss = "";
-		System.out.println(no);
-		if (cookies != null) {
-			for (int i = 0; i < cookies.length; i++) {
-				Cookie c = cookies[i];
-				String cName = c.getName();
-
-				// 쿠키 이름이 cookNo로 시작안하면 전부다 삭제
-				if (cName.startsWith("cookNo")) {
-					String cValue = c.getValue();
-					ss = cName.replaceAll("[^0-9]", "");
-					System.out.println("cName.startsWith(\"cookNo\") ss = " + ss);
-				}
-				/////////////////////////////////////
-				if (ss == no) {
-					name = "cookNo" + ss;
-					c = new Cookie(name, no);
-					c.setMaxAge(0); // 쿠키 최대 유지시간 설정
-					response.addCookie(c);
-					System.out.println("cookNo[" + ss + "]삭제완료");
-				}
-			}
-		}
-
-		return "../like/like.jsp";
-	}
-}

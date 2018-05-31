@@ -1,3 +1,6 @@
+	<!-- ///////////////////박한솔 - 쿠키 사용 - 관심목록//////////////////////// -->
+	
+	
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -79,7 +82,7 @@
 <body>
 
 
-
+	<!-- ///////////////////박한솔 - 쿠키 사용 - 관심목록//////////////////////// -->
 	<!-- header랑 연결된 하단 부분 끝 -->
 
 	<div id="fh5co-work-section">
@@ -121,8 +124,9 @@
 										<thead>
 											<tr>
 												<th class="col-text" width="15%">매물번호</th>
-												<th class="col-text" width="20%">보증금</th>
-												<th class="col-text" width="20%">월세</th>
+												<th class="col-text" width="30%">보증금</th>
+												<th class="col-text" width="15%">월세</th>
+												<th class="col-text" width="35%">주소</th>
 												<th class="col-text" width="10%">삭제</th>
 											</tr>
 										</thead>
@@ -134,8 +138,9 @@
 												<tr>
 													
 													<td><a href="../main/maemool_detail.do?num=${vo.num }&X=${vo.x_position }&Y=${vo.y_position}">${vo.num}</a></td>
-													<%-- <td><a href="../main/maemool_detail.do?num=${vo.num }">${vo.deposit }</a></td> --%>
-													<td>${vo.monthly_rent }</td>
+													<td><a href="../main/maemool_detail.do?num=${vo.num }&X=${vo.x_position }&Y=${vo.y_position}">${vo.deposit }</a></td>
+													<td><a href="../main/maemool_detail.do?num=${vo.num }&X=${vo.x_position }&Y=${vo.y_position}">${vo.monthly_rent }</a></td>
+													<td><a href="../main/maemool_detail.do?num=${vo.num }&X=${vo.x_position }&Y=${vo.y_position}">${vo.addr }</a></td>
 													
 													
 													<td>

@@ -92,11 +92,12 @@
 		SELECT NVL(MAX(num),1) FROM maemool
 	</select>
 
-
+	<!-- 박한솔 -->
 	<select resultType="MapVO" id="cookie" parameterType="int"> 
 		SELECT * FROM map
 		WHERE num = #{num} 
 	</select>
+	<!-- 박한솔 -->
 	
 	<insert id="insertJjim" parameterType="JjimVO">
 		Insert into jjim(email,num) VALUES(#{email},#{num})

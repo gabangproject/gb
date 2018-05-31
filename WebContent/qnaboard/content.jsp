@@ -145,7 +145,8 @@
 									</tr>
 									<td class="text-right" id="del" style="display: none">
 										<form action="delete.do">
-											<input type=hidden name=no value="${vo.no}"> <input type=submit value="삭제" class="btn btn-sm btn-danger">
+											<input type=hidden name=no value="${vo.no}"> 
+											<input type=submit value="삭제" class="btn btn-sm btn-danger">
 										</form>
 									</td>
 								</table>

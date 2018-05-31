@@ -662,23 +662,33 @@ public class MaemoolModel {
    }
    
    @RequestMapping("main/like.do")
-   public String like(HttpServletRequest req, HttpServletResponse res) {
+   public String like(HttpServletRequest request, HttpServletResponse response) {
       String nums = "";
-      Cookie[] cookies = req.getCookies();
+      List<MaemoolVO> list = new ArrayList<MaemoolVO>();
+      MaemoolVO vo = null;
+      MaemoolDAO dao = null;
+      int num = 0;
+      Cookie[] cookies = request.getCookies();
       System.out.println("현재 저장된 관심목록 갯수 : " + cookies.length);
+   
       if(cookies!=null) {
          for(int i=0; i<cookies.length; i++) {
-               nums=cookies[i].getValue();
+            Cookie c = cookies[i];
+            String cName = c.getName();
+            System.out.println(cName);
+            
+            if (cName.startsWith("cookNo")) {
+            nums=c.getValue();
+            System.out.println(nums);
+            dao = new MaemoolDAO();
+            num = Integer.parseInt(nums);
+            vo = dao.cookie(num);
+            }
          }
       }
-      MaemoolDAO dao = new MaemoolDAO();
-      
-      int num = Integer.parseInt(nums);
-      MaemoolVO vo = dao.cookie(num);
-      
-      req.setAttribute("vo", vo);
-
-      req.setAttribute("main_jsp", "../like/like.jsp");
+      request.setAttribute("vo", vo);
+      //request.setAttribute("list", list);
+      request.setAttribute("main_jsp", "../like/like.jsp");
       return "main.jsp";
    }
    // by. 한솔
@@ -700,12 +710,6 @@ public class MaemoolModel {
       String name = "";
       String ss = "";
       int num = Integer.parseInt(no);
-      /*******************************************************/
-//      for (Cookie c : cookies) {
-//         System.out.println("★쿠키 이름 : " + c.getName());
-//         System.out.println("쿠키 값 : " + c.getValue());
-//         System.out.println("쿠키 유지시간 :" + c.getMaxAge());
-//      }
 
       if (cookies != null) {
          System.out.println("쿠키 갯수 : " + cookies.length);

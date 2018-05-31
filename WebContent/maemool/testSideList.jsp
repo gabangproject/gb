@@ -92,15 +92,11 @@ function send(input){
 				</a>
 				<div class="media-body pl-3">
 					<div class="price" num='${i.num}'>
-						<a href="maemool_detail.do?num=${i.num}&x=${i.x_position}&y=${i.y_position}">
-							${i.deposit} 
-						</a>
+							${i.deposit} / ${i.monthly_rent}
 						<div class=address>${i.addr}</div>
 					</div>
 					<div class="stats">
-						<%--<input type="hidden" id='listNum' value='◐${i.x_position},${i.y_position}◑'> --%>
-						<span>위도<i class="fa fa-arrows-alt" id='${i.num}x'>${i.x_position}</i></span>
-						<span>경도<i class="fa fa-bath" id='${i.num}y'>${i.y_position}</i></span>
+						
 					</div>
 				</div>
 			</div>

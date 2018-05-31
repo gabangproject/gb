@@ -416,10 +416,10 @@ public class MaemoolModel {
       req.setAttribute("oneImg", oneImg);
       req.setAttribute("geoList", geoList);
       // 공식 페이지
-      req.setAttribute("main_jsp", "../maemool/list.jsp");
+      //req.setAttribute("main_jsp", "../maemool/list.jsp");
 
       // 테스트 페이지
-      //req.setAttribute("main_jsp", "../maemool/testList.jsp");
+      req.setAttribute("main_jsp", "../maemool/testList.jsp");
 
       return "main.jsp";
    }

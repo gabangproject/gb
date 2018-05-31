@@ -8,6 +8,7 @@
 <head>
 <meta charset=EUC-KR>
 <script type="text/javascript">
+
 <%-- by.한 --%>
 $(function() {
    <%

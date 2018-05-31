@@ -7,9 +7,17 @@
 		SELECT * FROM map 
 	</select>
 	
-	<select id="getParkingInfo" resultType="MapVO">
-		SELECT * FROM map WHERE parking_lot=1
+	<select id="getParkingInfo" resultType="MapVO" parameterType="java.util.Map">
+		SELECT m2.* 
+		FROM (SELECT m1.*, rownum as r 
+		FROM (SELECT * FROM map) m1 
+		WHERE rownum <![CDATA[<=]]> #{end}) m2 
+		WHERE m2.r >= #{start} AND parking_lot=1
 	</select>
+	
+	<select id="parkingTotalPage" resultType="int">
+		SELECT (COUNT(*)/30) FROM map WHERE parking_lot=1
+	</select>		
 	
 	<select id="getOneRoomInfo" resultType="MapVO">
 		SELECT * FROM map WHERE rtype=0 OR rtype=1 

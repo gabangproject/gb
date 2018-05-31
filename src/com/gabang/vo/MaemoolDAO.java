@@ -3,6 +3,7 @@ package com.gabang.vo;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -178,13 +179,13 @@ public class MaemoolDAO {
 	}
 	
 	// 주차 가능
-	public static List<MapVO> getParkingInfo() {
+	public static List<MapVO> getParkingInfo(Map<String, Object> map) {
 		List<MapVO> list = new ArrayList<MapVO>();
 		SqlSession session = null;
 		
 		try {
 			session = ssf.openSession();
-			list = session.selectList("getParkingInfo");
+			list = session.selectList("getParkingInfo",map);
 		} catch (Exception e) {
 			System.out.println("MaemoolDAO - getParkingInfo : " + e.getMessage());
 		} finally {
@@ -193,6 +194,22 @@ public class MaemoolDAO {
 			}
 		}		
 		return list;
+	}
+	
+	public static int parkingTotalPage() {		
+		SqlSession session = null;
+		int total = 0;
+		try {
+			session = ssf.openSession();
+			total = session.selectOne("parkingTotalPage");
+		} catch (Exception e) {
+			System.out.println("MaemoolDAO - parkingTotalPage : " + e.getMessage());
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}		
+		return total;
 	}
 	
 	// 원룸

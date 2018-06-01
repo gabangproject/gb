@@ -22,7 +22,7 @@ $(function() {
 <%-- by.준영 --%>
 function jjim(input) {
    var num = $(input).attr("num");
-   alert(num);
+   //alert(num);
    var heart = $(input).attr('class');
    if (heart == "glyphicon glyphicon-heart") {
       $.ajax({
@@ -50,7 +50,7 @@ function jjim(input) {
 <%-- by.한솔 --%>
 function send(input){
    var a = $(input).attr('num');
-   alert(a);
+   //alert(a);
    var eye = $(input).attr('class');
    
    if(eye == "fa fa-eye"){
@@ -59,7 +59,7 @@ function send(input){
          url : "../main/like_add.do",
          data : {num : a},
          success : function(data) {
-            alert("나와라제발 눈깔변신");
+            //alert("나와라제발 눈깔변신");
             $(input).attr('class', "fa fa-eye-slash")
          }
       });    
@@ -71,7 +71,7 @@ function send(input){
          url : "../main/like_delete.do",
          data : {num : a},
          success : function(data) {
-            alert("나와라제발 눈깔 슬래쉬삭제");
+            //alert("나와라제발 눈깔 슬래쉬삭제");
             $(input).attr('class', "fa fa-eye")
          }
       });    

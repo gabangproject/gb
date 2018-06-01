@@ -37,7 +37,7 @@ function Check(input)
         	 
              if(inputed=="") 
              {
-            	 
+            	 $('#join1').attr("disabled",true);
                  $(input).css("background-color", "#FFCECE");
               	 
              } 

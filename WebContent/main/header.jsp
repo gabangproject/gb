@@ -84,24 +84,14 @@ function idcheck()
 						</c:if>
 						
 						<c:if test="${sessionScope.nick!=null }">
-							<li><a class="fh5co-sub-ddown">마이페이지</a>
-								<ul class="fh5co-sub-menu">
-										<li><a href="jjim_list.do" target="_blank">찜한 매물 보기</a></li>
-										<li><a href="#" target="_blank">개인정보 관리</a></li>
-									<c:if test="${sessionScope.grade!='1' }">	
-										<li><a href="maemul_upload.do" target="_blank">매물등록</a></li>
-									</c:if>
-								</ul>
-							</li>
-							<!-- <form method="post" action="logout.do"> -->
-							<li><a href="logout.do">로그아웃
-								<!-- <input id="page" type="hidden" value=""> -->
-								
-								</a></li>
-							</form>
-							<%-- <c:if test="${requestScope!=null }">
-								<c:redirect url="logout.do"/>
-							</c:if> --%>
+	
+							<c:if test="${sessionScope.grade!='1' }">	
+								<li><a href="maemul_upload.do" target="_blank">매물등록</a></li>
+							</c:if>
+
+						<li><a href="logout.do">로그아웃</a></li>
+							
+
 						</c:if>
 							
 						</ul>

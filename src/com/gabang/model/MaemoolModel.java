@@ -381,6 +381,7 @@ public class MaemoolModel {
 		return "main.jsp";
 	}
 
+	
 	// home.jsp에서 검색할 경우 작동 by.한
 	@RequestMapping("main/maemool_search.do")
 	public String maemoolSearch(HttpServletRequest req, HttpServletResponse res) throws Exception {

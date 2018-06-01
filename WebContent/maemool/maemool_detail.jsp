@@ -224,7 +224,6 @@ border-bottom: 1px solid #e6e6e6;
          </div>
          <!-- container 끝 -->
          <div class="form-group text-center" >
-         	<input type=button id="cencel" name="delete" class="btn btn-warning" value="매물 삭제" >
             <input type=button id="cencel" name="cencel" class="btn btn-primary" value="뒤로가기" onClick="history.back()">
          </div>
    </div> 

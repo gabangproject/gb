@@ -676,6 +676,7 @@ public class MaemoolModel {
 
 		return "../maemool/jjim.jsp";
 	}
+	
 	// by. 한솔
 	   @RequestMapping("main/like.do")
 	   public String like(HttpServletRequest request, HttpServletResponse response) {
@@ -708,6 +709,7 @@ public class MaemoolModel {
 	      request.setAttribute("main_jsp", "../like/like.jsp");
 	      return "main.jsp";
 	   }
+	   
 	   // by. 한솔
 	   @RequestMapping("main/like_add.do")
 	   public String LikeAdd(HttpServletRequest request, HttpServletResponse response) {
@@ -767,6 +769,7 @@ public class MaemoolModel {
 	      return "../like/like.jsp";
 
 	   }
+	   
 	   @RequestMapping("main/like_delete.do")
 	   public String LikeDelete(HttpServletRequest request, HttpServletResponse response) {
 		   

@@ -88,9 +88,9 @@
 	</insert>
 	
 	<insert id="insertPropertyAddr">
-		Insert into property_addr
-		VALUES(#{addr},#{x_position},#{y_position},#{num})
+		Insert into property_addr VALUES(#{addr},#{x_position},#{y_position},#{num})
 	</insert>
+	
 	<insert id="insertRoomType">
 		Insert into room_type VALUES(#{type},#{num})
 	</insert>

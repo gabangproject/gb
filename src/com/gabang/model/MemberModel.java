@@ -317,7 +317,7 @@ public class MemberModel {
 		    	f.renameTo(newFile);
 		    	
 		    	
-		    	vo1.setPic("..\\upload\\"+email);
+		    	vo1.setPic("../upload/"+email);
 		    }
 			
 

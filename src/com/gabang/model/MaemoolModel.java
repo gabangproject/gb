@@ -172,7 +172,7 @@ public class MaemoolModel {
 		int maemoolNum = MaemoolDAO.maemoolNum() + 1;
 
 		// fileItem.getString("EUC_KR");
-		int i = 1;
+		
 
 		String option = "";
 		Map map = new HashMap();
@@ -359,22 +359,25 @@ public class MaemoolModel {
 		System.out.println(description);
 
 		MaemoolDAO.insertMaemool(vo1, vo2, vo3, vo4, vo5);
-
+		String realPath="C:\\\\webDev\\\\webStudy\\\\.metadata\\\\.plugins\\\\org.eclipse.wst.server.core\\\\tmp1\\\\wtpwebapps\\\\GaBang\\\\upload\\\\";
 		// 이미지 저장
 		ImgVO vo = new ImgVO();
 		for (String fileName : list) {
 
 			File f = new File(PATH + "\\" + fileName);
-			File file = new File(PATH + "\\" + email + "-" + fileName);
+			File file = new File(realPath + email + "-" + fileName);
 			f.renameTo(file);
-			vo.setImg(file.getName());
+			vo.setImg("../upload/"+file.getName());
 			vo.setNum(maemoolNum);
 			vo.getImg();
 			vo.getNum();
 			MaemoolDAO.insertImage(vo);
 		}
-
-		request.setAttribute("main_jsp", "../maemool/maemool_detail.jsp");
+		
+		request.setAttribute("num", maemoolNum);
+		request.setAttribute("x", x_position);
+		request.setAttribute("y", y_position);
+		request.setAttribute("main_jsp", "../main/complete.jsp");
 		return "main.jsp";
 	}
 

@@ -174,10 +174,7 @@ function loginCheck()
                 <input type="text" class="form-control" id="email" name="email" placeholder="Email"  required autofocus>
                 <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit" >·Î±×ÀÎ</button>
-                <label class="checkbox pull-left">
-                    <input type="checkbox" value="remember-me">Remember me
-                </label>
-                <a href="#" class="pull-right need-help">Need help? </a>
+                
                 <span class="clearfix"></span>
                 	
                 </form>

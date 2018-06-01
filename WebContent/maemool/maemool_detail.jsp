@@ -122,7 +122,7 @@ border-bottom: 1px solid #e6e6e6;
                            <tr>
                               <td class="col-md-2 h">등록자 아이디</td>
                               <td >${vo.email}</td>
-                              <td class="h">입주 가능일</td>
+                              <td class="col-md-2 h">입주 가능일</td>
                               <td>${vo.moving_date}</td>
                            </tr>
                            <tr>

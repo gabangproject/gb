@@ -9,6 +9,6 @@
 	location.href = "main.do";
 </script>
 <body>
-<!-- ししし ししし-->
+<!-- ししし いしぉいしぉいしし-->
 </body>
 </html>   

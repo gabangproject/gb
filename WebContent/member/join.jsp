@@ -37,22 +37,23 @@ function Check(input)
         	 
              if(inputed=="") 
              {
-            	 $("#join").prop("disabled", true);
+            	 
                  $(input).css("background-color", "#FFCECE");
               	 
              } 
              else if (count == '0') 
-             {
-            	 $("#join").prop("disabled", false);
+             {		
+            	 //$('#join').removeAttr('disabled');
+            	 $('#join1').attr("disabled", false);
                  $(input).css("background-color", "#B0F6AC");
-       			           
+       			 
              }  
              else if (count == '1') 
              {	
-       
+            	 $('#join1').attr("disabled", true);
             	 $(input).css("background-color", "#FFCECE");
-            	 $("#join").prop("disabled", true);
-   
+            	 
+   					
              }  
          }
      });
@@ -90,7 +91,7 @@ function pCheck(input)
 	if(numberCheck.test(inputed)==false)
 		{
 		input.setCustomValidity(checker+" 형식이 잘못되었습니다.");
-		$("#join").prop("disabled", true);
+		$("#join").attr("disabled", true);
 		}
 	else{
 		input.setCustomValidity("");
@@ -103,8 +104,8 @@ function pCheck(input)
 $(function(){
 
 	//가입버튼 비활성화
-	//$('#join').prop("disabled",true);
-	//$('.ncs').attr("required",true);
+	$('#join1').attr("disabled",true);
+	
 	
 	//비밀번호 재입력시 일치여부 확인
 	var password = document.getElementById("password");
@@ -132,32 +133,20 @@ $(function(){
 	$('#seller').click(function(){
 		$('#sellerform').toggle();
 		
-		//alert($("#id").css("background-color"));
-		//alert($("input[style='background-color:rgb(176, 246, 172)']").length);
+		
 		
 		var check=$('#seller').prop( "checked" );
 		if(check==true)
 			{
 			$('#sellerform .sri').attr("required",true);
 				
-				/* if($("input[background-color='#B0F6AC']")>=5)
-				{
-				$("#join").prop("disabled", false);
-				} */
+				
 			}
 		else
 			{
 			$('#sellerform input').attr("required",false);
 				
-				
-						
-					
-					/* 	$("input").css("background-color")=='')
-					{
-					
-					} */
-			
-				
+
 			}
 	});
 
@@ -394,7 +383,7 @@ $(function(){
 					<fieldset id="butt" form="join" >
 					<div class="form-group text-center" >
 						<!-- 가입 버튼은 기본적으로 비활성화(disabled) 시켜놓고 입력값 중복체크를 처리하면 활성화 시킴  -->
-						<input type=submit id="join" name="join" class="btn" value="가입" >
+						<input type=submit id="join1" name="join" class="btn" value="가입" >
 						<input type=button id="cencel" name="cencel" class="btn btn-primary" value="취소" onclick="location='main.do'">
 					</div>
 					</fieldset>

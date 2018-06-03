@@ -713,6 +713,28 @@ public class MaemoolModel {
 
 		
 	}
+	
+	/* by.준영 */
+	@RequestMapping("main/jjimlist_delete.do")
+	public String delete_jjimList(HttpServletRequest req, HttpServletResponse res) {
+		// id는 session에 저장되어있다.
+		HttpSession session = req.getSession();
+
+		// 찜에 필요한 데이터 (id하고 매물번호)
+		String email = (String) session.getAttribute("id");
+		String num = req.getParameter("num");
+
+		Map map = new HashMap();
+
+		map.put("email", email);
+		map.put("num", num);
+		System.out.println(map.get("email"));
+		System.out.println(map.get("num"));
+
+		JjimDAO.removeJjim(map);
+
+		return "redirect:../main/jjim_list.do";
+	}
 
 	@RequestMapping("main/jjim_list.do")
 	public String jjim_detail(HttpServletRequest req, HttpServletResponse res) {
@@ -746,7 +768,8 @@ public class MaemoolModel {
 		}
 		//3.jjim.jsp에 map뷰에서 가져온 데이터를 list 타입으로 넘겨준다.
 		req.setAttribute("list", jjimDetail);
-		return "../maemool/jjim.jsp";
+		req.setAttribute("main_jsp", "../maemool/jjim.jsp");
+		return "main.jsp";
 	}
 	
 	// by. 한솔

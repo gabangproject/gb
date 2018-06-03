@@ -89,8 +89,7 @@ function idcheck()
 										<li><a href="jjim_list.do">찜한 매물 보기</a></li>
 									<c:if test="${sessionScope.grade!='1' }">	
 										<li><a href="maemul_upload.do" target="_blank">매물등록</a></li>
-										<li><a href="maemul_upload.do" target="_blank">등록한 매물 관리</a></li>
-									
+																		
 								</c:if>
 									</ul>
 								</li>

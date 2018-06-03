@@ -18,11 +18,11 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script type="text/javascript">
-function deleteJjim(num) {
-	   var number = num
+function deleteJjim(input) {
+	   var number = input.attr('num');
+	   alert(number);
 	   
-	   
-		   $.ajax({
+		   /* $.ajax({
 		         type : 'post',
 		         data : {
 		            maemool_num : num
@@ -31,7 +31,7 @@ function deleteJjim(num) {
 		         success : function(data) {
 		        	 $('#delete').html().hide();
 		         }
-		      });
+		      }); */
 	   
 	}
 </script>
@@ -107,12 +107,14 @@ function deleteJjim(num) {
 			<div class="row">
 				<div
 					class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-					<h3>관심목록</h3>
+					<h3>찜 목록</h3>
 				</div>
 			</div>
+		</div>
+	</div>
 		
 
-	<div class="row" style="width: 80%;">
+	<div class="container" style="width: 80%;">
 		<table class="table">
 			<tr>
 				<td class="col-md-2"><img src="../qnaboard/icon1.jpg"
@@ -161,10 +163,10 @@ function deleteJjim(num) {
 													
 													<td>
 													
-														<form action="../main/like_delete.do" method="post">
-															<div id="delete">
-															<input type=submit  value="삭제" class="btn btn-sm btn-danger" onclick="deleteJjim(${vo.num})">
-															</div>
+														<form action="../main/jjimlist_delete.do" method="post">
+															
+															<input type=submit  value="삭제" class="btn btn-sm btn-danger">
+															
 															<input type="hidden" name="num" value="${vo.num }">
 														</form>
 													</td>
@@ -187,6 +189,5 @@ function deleteJjim(num) {
 	
 	</div>
 	
-	</div>
-	</div>
+	
 </body>

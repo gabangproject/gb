@@ -305,8 +305,7 @@ height:500px;
 											
 										<!-- 중개 상세 정보보기 버튼 -->
 											<div style="height:100px;">
-													<button type="button" class="btn btn-lg" style=" width:100%; background-color:#202020" 
-													onclick="sellerInfo(this);">
+													<button type="button" class="btn btn-lg" style=" width:100%; background-color:#202020">
 													<font size="2"><span class="glyphicon glyphicon-user" style="color:white"> 중개사무소 정보 보기</span></font>
 												</button>
 											</div>

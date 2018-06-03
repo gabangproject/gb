@@ -84,11 +84,16 @@ function idcheck()
 						</c:if>
 						
 						<c:if test="${sessionScope.nick!=null }">
-	
-							<c:if test="${sessionScope.grade!='1' }">	
-								<li><a href="maemul_upload.do" target="_blank">매물등록</a></li>
-							</c:if>
-
+								<li><a class="fh5co-sub-ddown">마이 페이지</a>
+									<ul class="fh5co-sub-menu">
+										<li><a href="jjim_list.do">찜한 매물 보기</a></li>
+									<c:if test="${sessionScope.grade!='1' }">	
+										<li><a href="maemul_upload.do" target="_blank">매물등록</a></li>
+										<li><a href="maemul_upload.do" target="_blank">등록한 매물 관리</a></li>
+									
+								</c:if>
+									</ul>
+								</li>
 						<li><a href="logout.do">로그아웃</a></li>
 							
 

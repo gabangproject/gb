@@ -135,7 +135,7 @@ public class MaemoolModel {
 		String num = request.getParameter("num"); // 이미지랑 이미지에 해당하는 상세정보를 매물번호에 맞게 출력
 		String x = request.getParameter("x");
 		String y = request.getParameter("y");
-
+		String addr = request.getParameter("addr");
 		if (num == null)
 			num = "7";
 
@@ -146,6 +146,64 @@ public class MaemoolModel {
 		String email = MemberDAO.sellerEmail(Integer.parseInt(num));
 		SellerVO seller = MemberDAO.sellerData(email);
 
+		//deal_type 데이터 가져오기
+		DealTypeVO dealvo=MaemoolDAO.getDealType(Integer.parseInt(num));
+		String deal_type="";
+		if(dealvo.getType()==0)
+		{
+			deal_type="전세";
+		}
+		else
+		{
+			deal_type="월세";
+		}
+		
+		//room_type 데이터 가져오기
+		RoomTypeVO roomvo=MaemoolDAO.getRoomType(Integer.parseInt(num));
+		String room_type="";
+		if(roomvo.getType()==0)
+		{
+			room_type="원룸";
+		}
+		else if(roomvo.getType()==1)
+		{
+			room_type="투룸";	
+		}
+		else if(roomvo.getType()==2)
+		{
+			room_type="복층형";	
+		}
+		else if(roomvo.getType()==3)
+		{
+			room_type="분리형원룸";	
+		}
+		else
+		{
+			room_type="쓰리룸+";	
+		}
+		
+		//찜 되어 있는 매물 확인하기
+		HttpSession session = request.getSession();
+
+		// 찜에 필요한 데이터 (id하고 매물번호)
+		String member = (String) session.getAttribute("id");
+		JjimVO jjim=null;
+		if(member!=null)
+		{
+			Map map = new HashMap();
+	
+			map.put("email", member);
+			map.put("num", num);
+			
+			jjim=JjimDAO.checkJjim(map);
+			System.out.println("jjimCheck:"+vo.getNum());
+		};
+		
+		request.setAttribute("jjim", jjim);
+		request.setAttribute("num", num);
+		request.setAttribute("addr", addr);
+		request.setAttribute("deal_type", deal_type);
+		request.setAttribute("room_type", room_type);
 		request.setAttribute("x", x);
 		request.setAttribute("y", y);
 		request.setAttribute("imgList", imgList);
@@ -611,7 +669,7 @@ public class MaemoolModel {
 
 	/* by.준영 */
 	@RequestMapping("main/add_jjim.do")
-	public String real_jjim(HttpServletRequest req, HttpServletResponse res) {
+	public void real_jjim(HttpServletRequest req, HttpServletResponse res) {
 		// id는 session에 저장되어있다.
 		HttpSession session = req.getSession();
 
@@ -631,12 +689,12 @@ public class MaemoolModel {
 		JjimDAO.insertJjim(vo);
 		System.out.println("dao 완료");
 
-		return "../maemool/jjim.jsp";
+		
 	}
 
 	/* by.준영 */
 	@RequestMapping("main/remove_jjim.do")
-	public String remove_jjim(HttpServletRequest req, HttpServletResponse res) {
+	public void remove_jjim(HttpServletRequest req, HttpServletResponse res) {
 		// id는 session에 저장되어있다.
 		HttpSession session = req.getSession();
 
@@ -653,10 +711,10 @@ public class MaemoolModel {
 
 		JjimDAO.removeJjim(map);
 
-		return "../maemool/jjim.jsp";
+		
 	}
 
-	@RequestMapping("main/jjim_detail.do")
+	@RequestMapping("main/jjim_list.do")
 	public String jjim_detail(HttpServletRequest req, HttpServletResponse res) {
 		// id는 session에 저장되어있다.
 		HttpSession session = req.getSession();
@@ -664,16 +722,27 @@ public class MaemoolModel {
 		// 찜에 필요한 데이터 (id하고 매물번호)
 		String email = (String) session.getAttribute("id");
 		String num = req.getParameter("maemool_num");
-
+		
 		Map map = new HashMap();
-
 		map.put("email", email);
-		map.put("num", num);
-		System.out.println(map.get("email"));
-		System.out.println(map.get("num"));
-
-		JjimDAO.removeJjim(map);
-
+		//매물번호
+		List<JjimVO> list=JjimDAO.jjimList(map);
+		//매물 정보
+		List<MaemoolVO> maemoolInfo=null;
+		List<JjimVO> jjimProperty=null;
+		List<MapVO> jjimDetail=null;
+		System.out.println("여기까진 뜰거아냐");
+		for(JjimVO vo:list)
+		{
+			//maemoolInfo.add(MaemoolDAO.infoMaemool(vo.getNum()));
+			MapVO vo1=JjimDAO.jjimDetail(Integer.parseInt(num));
+			System.out.println(vo1.getAddr());
+			
+			System.out.println("여기는 받아오니?");
+		}
+		
+		//req.setAttribute("jjimDetail", jjimDetail);
+		req.setAttribute("list", maemoolInfo);
 		return "../maemool/jjim.jsp";
 	}
 	

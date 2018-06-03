@@ -143,15 +143,17 @@ public class MaemoolDAO {
 		MaemoolVO vo = new MaemoolVO();
 
 		SqlSession session = null;
-
+		
 		try
 		{	
+			
 			session=ssf.openSession();
 			vo=session.selectOne("infoFind",num);
+			System.out.println("여기 문제구만");
 		}
 		catch (Exception ex)
 		{
-	System.out.println(ex.getMessage());
+			System.out.println(ex.getMessage());
 		} finally {
 			if (session != null)
 				session.close();
@@ -265,4 +267,41 @@ public class MaemoolDAO {
 		}
 		return list;
 	}
+	
+	//deal_type 데이터 가져오기
+	public static DealTypeVO getDealType(int num) {
+		DealTypeVO vo=null;
+		SqlSession session = null;
+
+		try {
+			session = ssf.openSession();
+			vo = session.selectOne("getDealType",num);
+		} catch (Exception e) {
+			System.out.println("MaemoolDAO - getDealType : " + e.getMessage());
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return vo;
+	}
+	
+	//room_type 데이터 가져오기
+	public static RoomTypeVO getRoomType(int num) {
+		RoomTypeVO vo=null;
+		SqlSession session = null;
+
+		try {
+			session = ssf.openSession();
+			vo = session.selectOne("getRoomType",num);
+		} catch (Exception e) {
+			System.out.println("MaemoolDAO - getRoomType : " + e.getMessage());
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return vo;
+	}
+	
 }

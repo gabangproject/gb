@@ -19,34 +19,8 @@ $(function() {
 	   %>
 	   <%--alert('testSideList.jsp에서 출력\n매물 개수 : ' + <%=list.size()%> + '개');--%>
 	});
-<%-- by.준영 --%>
-function jjim(input) {
-   var num = $(input).attr("num");
-   //alert(num);
-   var heart = $(input).attr('class');
-   if (heart == "glyphicon glyphicon-heart") {
-      $.ajax({
-         type : 'post',
-         data : {
-            maemool_num : num
-         },
-         url : "../main/remove_jjim.do",
-         success : function(data) {
-            $(input).attr('class', "glyphicon glyphicon-heart-empty");
-         }
-      });
-   }
-   else {
-      $.ajax({
-         type : 'post',
-         data : {maemool_num : num},
-         url : "../main/add_jjim.do",
-         success : function(data) {
-            $(input).attr('class', "glyphicon glyphicon-heart");
-         }
-      });
-   }
-}
+	
+
 <%-- by.한솔 --%>
 function send(input){
    var a = $(input).attr('num');
@@ -78,6 +52,7 @@ function send(input){
       
    }
 };
+
 </script>
 <style type="text/css">
 	table{
@@ -103,7 +78,7 @@ function send(input){
 					<a><span class="glyphicon glyphicon-heart-empty" onclick="jjim(this)" num=${i.num}></span></a>
 					<i class="fa fa-eye" id='like' aria-hidden="true" num='${i.num}' onclick="send(this)"></i>
 				</div>
-				<a href="maemool_detail.do?num=${i.num}&x=${i.x_position}&y=${i.y_position}">
+				<a href="maemool_detail.do?num=${i.num}&x=${i.x_position}&y=${i.y_position}&addr=${i.addr}">
 					<img class="d-flex align-self-start maemool-list-img" src="${oneImg.get(i.num)}">
 				</a>
 				<div class="media-body pl-3">

@@ -113,4 +113,24 @@
 	<delete id="removeJjim" parameterType="java.util.Map">
 		Delete from (SELECT * FROM jjim where email=#{email}) WHERE num=#{num}
 	</delete>
+	
+	<select id="checkJjim" parameterType="java.util.Map" resultType="JjimVO">
+		SELECT num FROM (SELECT * FROM jjim where email=#{email}) where num=#{num}
+	</select>
+	
+	<select id="jjimList" parameterType="java.util.Map" resultType="JjimVO">
+		SELECT num FROM (SELECT * FROM jjim where email=#{email})
+	</select>
+	
+	<select id="jjimDetail" parameterType="int" resultType="MapVO">
+		select * from map where num=#{num}
+	</select>
+	
+	<select id="getDealType" parameterType="int" resultType="DealTypeVO">
+		SELECT * FROM deal_type where num=#{num}	
+	</select>
+	
+	<select id="getRoomType" parameterType="int" resultType="RoomTypeVO">
+		SELECT * FROM room_type where num=#{num}	
+	</select>
 </mapper>

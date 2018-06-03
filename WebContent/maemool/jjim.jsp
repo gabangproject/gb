@@ -1,275 +1,173 @@
-<%@page import="com.gabang.vo.MapVO"%>
-<%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+	<!-- ///////////////////ë°•í•œì†” - ì¿ í‚¤ ì‚¬ìš© - ê´€ì‹¬ëª©ë¡//////////////////////// -->
+	
+	
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=EUC-KR>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
 
-<!-- ´ÙÀ½ Áöµµ api¸¦ »ç¿ëÇÏ±â À§ÇÑ ºÎºĞ -->
-<!-- ÇØ´ç Å°´Â ±ÇÇÑ Å° -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0414b62e66e43f9fc50e0f6dfd64b93f&libraries=clusterer,services"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-<script type="text/javascript">
-<%-- by.ÇÑ --%>
-$(function() {
-	var keyword = '<%=request.getParameter("keyword")%>';
-	var bound;
-	
-	/*
-	ÆäÀÌÁö°¡ ·ÎµùµÇ¸é ajax·Î È­¸é ¿ìÃø ¸Å¹°¸ñ·ÏÀ» ºÒ·¯¿Â´Ù.
-	ÀÌ¶§ keyword¸¦ °°ÀÌ Àü¼ÛÇÏ¿© ¸Å¹°¸ñ·Ï¿¡¼­ ¾Ë¸ÂÀº ¸Å¹°À» Ãâ·ÂÇÏ°Ô²û ÇÑ´Ù.
-	*/
-	$.ajax({
-		type:'post',
-		url:'testSideList.do',
-		data:{'keyword': keyword},
-		success:function(res) {
-			$('#list').html(res);
-		}
-	});
-	
-	// ¸Ê µå·¡±×°¡ ³¡³­ ÈÄ ½ÇÇà
-	daum.maps.event.addListener(map, 'dragend', function() {
-		// ÁöµµÀÇ °¢ ³¡Á¡À» ±¸ÇÑ´Ù.
-		bound = map.getBounds();
-		
-		// Áöµµ ºÏµ¿ÂÊ ³¡ À§µµ¿Í °æµµ
-		// ajax·Î Àü´ŞÇÒ¶§´Â ¹®ÀÚ¿­¸¸ °¡´É
-		var ne = bound.getNorthEast();
-		var ne_x = ne.getLat();
-		var ne_y = ne.getLng();
-		
-		// Áöµµ ³²¼­ÂÊ ³¡ À§µµ¿Í °æµµ
-		var sw = bound.getSouthWest();
-		var sw_x = sw.getLat();
-		var sw_y = sw.getLng();
-		
-		// °ªÀÌ Á¤»óÀûÀ¸·Î µé¾î¿À´ÂÁö È®ÀÎ
-		//alert(ne_x + "  " + ne_y + "\n" + sw_x + "   " + sw_y);
-		
-		// ajax·Î sideList¿¡ °ªÀ» Àü´ŞÇÏ°í °á°ú¸¦ ¹Ş´Â´Ù.
-		$.ajax({
-			type:'post',
-			url:'testSideList.do',
-			data:{'ne_x':ne_x, 'ne_y':ne_y, 'sw_x':sw_x, 'sw_y':sw_y},
-			success:function(res) {
-				$('#list').html(res);
-				var list = '153.111,58.5585';
-				var sList = list.split('^[0-9]+.^[0-9]');
-				alert('sListÀÇ ±æÀÌ : ' + sList.length + '\nsListÀÇ °ª : ' + sList[0]);
-			}
-		});
-	});
-});
-</script>
-<style>
-@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
-@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700');
-
-h2 {
-	float: left;
-	width: 100%;
-	color: #fff;
-	margin-bottom: 40px;
-	font-size: 14px;
-	position: relartive;
-	z-index: 3;
-	margin-top: 30px
+<style type="text/css">
+.btn-group .btn {
+	transition: background-color .3s ease;
 }
 
-h2 span {
-	font-family: 'Libre Baskerville', serif;
-	display: block;
-	font-size: 45px;
-	text-transform: none;
-	margin-bottom: 20px;
-	margin-top: 30px;
-	font-weight: 700
+.panel-table .panel-body {
+	padding: 0;
 }
 
-h2 a {
-	color: #fff;
-	font-weight: bold;
+.table>thead>tr>th {
+	border-bottom: none;
 }
 
-.head {
-	float: left;
-	width: 100%;
-}
-
-.search-box {
-	width: 95%;
-	margin: 0 auto 40px;
-	border: 1px solid black;
-}
-
-.listing-block {
-	background: #fff;
-	height: 500px;
-	padding-top: 20px;
-	overflow-y: scroll;
-}
-
-.media {
-	background: #fff;
-	position: relative;
-	margin-bottom: 15px;
-}
-
-.media img {
-	width: 200px;
+.panel-footer, .panel-table .panel-body .table-bordered {
+	border-style: none;
 	margin: 0;
-	height: 136px;
 }
 
-.media-body {
-	border: 1px solid #bcbcbc;
+.panel-table .panel-body .table-bordered>thead>tr>th:first-of-type {
+	text-align: center;
+	width: 50px;
+}
+
+.panel-table .panel-body .table-bordered>thead>tr>th.col-tools {
+	text-align: center;
+	width: 120px;
+}
+
+.panel-table .panel-body .table-bordered>thead>tr>th:last-of-type,
+	.panel-table .panel-body .table-bordered>tbody>tr>td:last-of-type {
+	border-right: 0;
+}
+
+.panel-table .panel-body .table-bordered>thead>tr>th:first-of-type,
+	.panel-table .panel-body .table-bordered>tbody>tr>td:first-of-type {
 	border-left: 0;
-	height: 136px;
 }
 
-.media .price {
-	float: left;
-	width: 100%;
-	font-size: 30px;
-	font-weight: 600;
-	color: #4765AB;
+.panel-table .panel-body .table-bordered>tbody>tr:first-of-type>td {
+	border-bottom: 0;
 }
 
-.media .price small {
-	display: block;
-	font-size: 17px;
-	color: #232323;
+.panel-table .panel-body .table-bordered>thead>tr:first-of-type>th {
+	border-top: 0;
 }
 
-.media .stats {
-	float: left;
-	width: 100%;
-	margin-top: 10px;
+.pagination>li>a, .pagination>li>span {
+	border-radius: 50% !important;
+	margin: 0 5px;
 }
 
-.media .stats span {
-	float: left;
-	margin-right: 10px;
-	font-size: 15px;
+.pagination {
+	margin: 0;
 }
 
-.media .stats span i {
-	margin-right: 7px;
-	color: #4765AB;
-}
-
-.media .address {
-	float: left;
-	width: 100%;
-	font-size: 14px;
-	margin-top: 5px;
-	color: #888;
-}
-
-.media .fav-box {
-	position: absolute;
-	right: 10px;
-	font-size: 20px;
-	top: 4px;
-	color: #E74C3C;
-}
-
-.map-box {
-	background-color: #A3CCFF;
+.navbar-header {
+	margin-left: 0px;
 }
 </style>
+
 </head>
 <body>
-	<div id="fh5co-work-section" style="padding: 98px">
+
+
+	<!-- ///////////////////ë°•í•œì†” - ì¿ í‚¤ ì‚¬ìš© - ê´€ì‹¬ëª©ë¡//////////////////////// -->
+	<!-- headerë‘ ì—°ê²°ëœ í•˜ë‹¨ ë¶€ë¶„ ë -->
+
+	<div id="fh5co-work-section">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-					<h3>¸Å¹° ¸ñ·Ï</h3>
+				<div
+					class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+					<h3>ê´€ì‹¬ëª©ë¡</h3>
 				</div>
 			</div>
-		</div>
+		
 
-		<div>
-			<section class="search-box">
-				<div class="container-fluid">
+	<div class="row" style="width: 80%;">
+		<table class="table">
+			<tr>
+				<td class="col-md-2"><img src="../qnaboard/icon1.jpg"
+					width="278" height="623" /></td>
+				<td class="col-md-8" style="margin: auto;">
+
 					<div class="row">
-						<!-- Áöµµ -->
-						<div id=map style="width: 50%; height: 250px%; display: inline-block" class="col-md-7"></div>
-						<script>
-							<%-- by.ÇÑ --%>
-							var mapContainer = document.getElementById('map'), // Áöµµ¸¦ Ç¥½ÃÇÒ div 
-							mapOption = {
-								center : new daum.maps.LatLng(37.563228970425506, 126.97727242618686), // ÁöµµÀÇ Áß½ÉÁÂÇ¥
-								level : 5
-							};
+						<div class="col-md-10 col-md-offset-1">
+							<div class="panel panel-default panel-table">
 
-							// Áöµµ¸¦ Ç¥½ÃÇÒ div¿Í Áöµµ ¿É¼ÇÀ¸·Î Áöµµ¸¦ »ı¼ºÇÕ´Ï´Ù
-							var map = new daum.maps.Map(mapContainer, mapOption);
+								<!-- ê²Œì‹œê¸€ëª©ë¡ í…Œë§ˆë³„ ë³´ê¸°?? ì‹œì‘ -->
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col col-xs-6">
+											<h3 class="panel-title">ë§¤ë¬¼ëª©ë¡</h3>
+										</div>
+									</div>
+								</div>
 
-							// ¸¶Ä¿ Å¬·¯½ºÅÍ·¯
-							var clusterer = new daum.maps.MarkerClusterer({
-								map : map, // ¸¶Ä¿µéÀ» Å¬·¯½ºÅÍ·Î °ü¸®ÇÏ°í Ç¥½ÃÇÒ Áöµµ °´Ã¼ 
-								averageCenter : true, // Å¬·¯½ºÅÍ¿¡ Æ÷ÇÔµÈ ¸¶Ä¿µéÀÇ Æò±Õ À§Ä¡¸¦ Å¬·¯½ºÅÍ ¸¶Ä¿ À§Ä¡·Î ¼³Á¤ 
-								gridSize : 100,
-								clickable : false
-							});
+								<!-- ê²Œì‹œê¸€ëª©ë¡ í…Œë§ˆë³„ ë³´ê¸°?? ë-->
 
-							var markers = new Array();
-							var x;
-							var y;
-							
-						<%
-							List<MapVO> list = (List<MapVO>) request.getAttribute("geoList");
-							System.out.println(list.size());
-							String x, y;
-							for (int i = 0; i < list.size(); i++) {
-						%>
-								x = <%=list.get(i).getX_position()%>
-								y = <%=list.get(i).getY_position()%>
-								
-								markers.push(new daum.maps.Marker({
-									position : new daum.maps.LatLng(x, y)
-								}))
-						<%
-							}
-						%>
-							panTo(x, y); // °¡Àå ¸¶Áö¸· ¸Å¹°ÀÇ À§Ä¡·Î ÀÌµ¿
-							clusterer.addMarkers(markers);
+								<div class="panel-body">
+									<table id="mytable"
+										class="table table-striped table-bordered table-list">
+										<thead>
+											<tr>
+												<th class="col-text" width="15%">ë§¤ë¬¼ë²ˆí˜¸</th>
+												<th class="col-text" width="30%">ë³´ì¦ê¸ˆ</th>
+												<th class="col-text" width="15%">ì›”ì„¸</th>
+												<th class="col-text" width="35%">ì£¼ì†Œ</th>
+												<th class="col-text" width="10%">ì‚­ì œ</th>
+											</tr>
+										</thead>
+										<tbody>
 
-							// Áöµµ ÀÌµ¿ ÇÔ¼ö
-							function panTo(x, y) {
-								// ÀÌµ¿ÇÒ À§µµ °æµµ À§Ä¡¸¦ »ı¼ºÇÕ´Ï´Ù 
-								var moveLatLon = new daum.maps.LatLng(x, y);
+											<!-- table ê²Œì‹œê¸€ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ ì‹œì‘-->
+											<%-- <c:forEach var="vo" items="${vo }"> --%>
+											<c:forEach var="vo" items="${list }" end="10">
+												<tr>
+													
+													<td><a href="../main/maemool_detail.do?num=${vo.num }&X=${vo.x_position }&Y=${vo.y_position}">${vo.num}</a></td>
+													<td><a href="../main/maemool_detail.do?num=${vo.num }&X=${vo.x_position }&Y=${vo.y_position}">${vo.deposit }</a></td>
+													<td><a href="../main/maemool_detail.do?num=${vo.num }&X=${vo.x_position }&Y=${vo.y_position}">${vo.monthly_rent }</a></td>
+													<td><a href="../main/maemool_detail.do?num=${vo.num }&X=${vo.x_position }&Y=${vo.y_position}"></a></td>
+													
+													
+													<td>
+													
+														<form action="../main/like_delete.do" method="post">
+															<input type=submit value="ì‚­ì œ" class="btn btn-sm btn-danger">
+															<input type="hidden" name="num" value="${vo.num }">
+														</form>
+													</td>
+												</tr>
+											</c:forEach>
+											<%-- </c:forEach> --%>
+											<!-- table ê²Œì‹œê¸€ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ ë-->
+										</tbody>
+									</table>
+								</div>
 
-								// Áöµµ Áß½ÉÀ» ºÎµå·´°Ô ÀÌµ¿½ÃÅµ´Ï´Ù
-								// ¸¸¾à ÀÌµ¿ÇÒ °Å¸®°¡ Áöµµ È­¸éº¸´Ù Å©¸é ºÎµå·¯¿î È¿°ú ¾øÀÌ ÀÌµ¿ÇÕ´Ï´Ù
-								map.panTo(moveLatLon);
-							};
-							var mNum = markers.length;
-							
-							alert('mNumÀº ' + mNum);
-							
-						</script>
-						<!-- ¸Å¹°µéÀÇ ¸®½ºÆ® Ãâ·Â ºÎºĞ -->
-						<div class="col-md-5 listing-block" id=list style="width: 50%; display: inline-block">
+							</div>
 						</div>
 					</div>
-				</div>
-			</section>
-			<div style="width: 300px; height: 30px; background-color:yellow;" align="center">
-				<h3 id=info>${fn:length(geoList)} °³ ¸Å¹°</h3>
-			</div>
-		</div>
+				</td>
+				<td class="col-md-2"><img src="../qnaboard/icon1.jpg"
+					width="278" height="623" /></td>
+			</tr>
+		</table>
+	
+	</div>
+	
+	</div>
 	</div>
 </body>
-</html>
-

@@ -75,4 +75,22 @@ public class PropertyAddrDAO {
 		
 		return list;
 	}
+	
+	public static PropertyAddrVO jjimProperty(int num) {
+		PropertyAddrVO vo = null;
+		SqlSession session = null;
+		
+		try {
+			session = ssf.openSession();
+			vo = session.selectOne("jjimListProperty", num);
+		} catch (Exception e) {
+			System.out.println("PropertyAddrDAO - jjimListProperty : " + e.getMessage());
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		
+		return vo;
+	}
 }

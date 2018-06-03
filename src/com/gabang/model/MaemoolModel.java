@@ -727,22 +727,25 @@ public class MaemoolModel {
 		map.put("email", email);
 		//매물번호
 		List<JjimVO> list=JjimDAO.jjimList(map);
+		//1.디비 찜 테이블에서 해당 이메일이 갖고 있는 찜 매물 번호를 가져온다.
+
 		//매물 정보
 		List<MaemoolVO> maemoolInfo=null;
 		List<JjimVO> jjimProperty=null;
-		List<MapVO> jjimDetail=null;
+		List<MapVO> jjimDetail=new ArrayList<MapVO>();
 		System.out.println("여기까진 뜰거아냐");
+		//2.해당 매물 번호에 대한 필요한 데이터를 디비 map뷰에서 가져온다.
 		for(JjimVO vo:list)
 		{
 			//maemoolInfo.add(MaemoolDAO.infoMaemool(vo.getNum()));
-			MapVO vo1=JjimDAO.jjimDetail(Integer.parseInt(num));
-			System.out.println(vo1.getAddr());
+			Map map1=new HashMap();
+			map1.put("num", vo.getNum());
+			MapVO vo1=JjimDAO.jjimDetail(map1);
+			jjimDetail.add(vo1);
 			
-			System.out.println("여기는 받아오니?");
 		}
-		
-		//req.setAttribute("jjimDetail", jjimDetail);
-		req.setAttribute("list", maemoolInfo);
+		//3.jjim.jsp에 map뷰에서 가져온 데이터를 list 타입으로 넘겨준다.
+		req.setAttribute("list", jjimDetail);
 		return "../maemool/jjim.jsp";
 	}
 	

@@ -17,7 +17,24 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
+<script type="text/javascript">
+function deleteJjim(num) {
+	   var number = num
+	   
+	   
+		   $.ajax({
+		         type : 'post',
+		         data : {
+		            maemool_num : num
+		         },
+		         url : "../main/remove_jjim.do",
+		         success : function(data) {
+		        	 $('#delete').html().hide();
+		         }
+		      });
+	   
+	}
+</script>
 <style type="text/css">
 .btn-group .btn {
 	transition: background-color .3s ease;
@@ -139,13 +156,15 @@
 													<td><a href="../main/maemool_detail.do?num=${vo.num }&X=${vo.x_position }&Y=${vo.y_position}">${vo.num}</a></td>
 													<td><a href="../main/maemool_detail.do?num=${vo.num }&X=${vo.x_position }&Y=${vo.y_position}">${vo.deposit }</a></td>
 													<td><a href="../main/maemool_detail.do?num=${vo.num }&X=${vo.x_position }&Y=${vo.y_position}">${vo.monthly_rent }</a></td>
-													<td><a href="../main/maemool_detail.do?num=${vo.num }&X=${vo.x_position }&Y=${vo.y_position}"></a></td>
+													<td><a href="../main/maemool_detail.do?num=${vo.num }&X=${vo.x_position }&Y=${vo.y_position}">${vo.addr }</a></td>
 													
 													
 													<td>
 													
 														<form action="../main/like_delete.do" method="post">
-															<input type=submit value="삭제" class="btn btn-sm btn-danger">
+															<div id="delete">
+															<input type=submit  value="삭제" class="btn btn-sm btn-danger" onclick="deleteJjim(${vo.num})">
+															</div>
 															<input type="hidden" name="num" value="${vo.num }">
 														</form>
 													</td>

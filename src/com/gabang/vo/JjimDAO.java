@@ -91,13 +91,13 @@ public class JjimDAO {
 		return list;
 	}
 	
-	public static MapVO jjimDetail(int num) {
+	public static MapVO jjimDetail(Map map) {
 		SqlSession session = null;
 		MapVO vo=null;
 		try {
 			// map의 키는 id, num이다.
 			session = ssf.openSession();
-			vo=session.selectOne("jjimDetail", num);
+			vo=session.selectOne("jjimDetail", map);
 			System.out.println("여긴 안뜨는듯");
 		} catch (Exception e) {
 			System.out.println("jjimDAO jjimList : " + e.getMessage());

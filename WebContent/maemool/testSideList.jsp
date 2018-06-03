@@ -75,7 +75,7 @@ function send(input){
 		<c:forEach var="i" items="${geoList}" varStatus="s">
 			<div class="media">
 				<div class="fav-box">
-					<a><span class="glyphicon glyphicon-heart-empty" onclick="jjim(this)" num=${i.num}></span></a>
+					
 					<i class="fa fa-eye" id='like' aria-hidden="true" num='${i.num}' onclick="send(this)"></i>
 				</div>
 				<a href="maemool_detail.do?num=${i.num}&x=${i.x_position}&y=${i.y_position}&addr=${i.addr}">

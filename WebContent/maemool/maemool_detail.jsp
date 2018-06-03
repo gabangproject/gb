@@ -166,7 +166,7 @@ height:500px;
 
    <!-- end:header-top -->
    <div id="fh5co-work-section" >
-      <div class="container" style="margin-right:20%;margin-left:20%">
+      <div class="container" style="margin-right:25%;margin-left:25%">
 
          <div class="row">
             <div class="col-md-8 col-md-offset-1 text-center heading-section animate-box">
@@ -207,7 +207,7 @@ height:500px;
 		                  	<c:if test="${n.index!=0 }">
 		                     <div class="item">
 		                 	</c:if> 
-		                      <img src="${image.img }" class="img-responsive">
+		                      <img src="${image.img }" class="img-responsive" height="90%">
 	  						</div>
 	                 </c:forEach>
 	                 
@@ -298,7 +298,6 @@ height:500px;
 												<font size="3" ><strong>${seller.comp_name }</strong></font><br><br>
 												<font size="2" >${seller.addr }</font><br>
 												<font size="2" >중개 등록 번호 ${seller.license }</font><br>
-												<font size="2" >중개사 평점: ${seller.eval_score }</font><br>
 												<font size="2" >중개사 소개: ${seller.intro}</font><br><br>
 											
 											</div>
